@@ -45,20 +45,20 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
             common.spinner(false)
         } else {
             var RowId = -1;
-            var data = {
+            var dto = {
                 workOrderId: data.workOrderId,
                 jobRowId: RowId,
                 LoadWOAttachmentData: ""
             }
             if (data.item) {
-                data.RowId = data.item.RowId;
+                dto.jobRowId = data.item.RowId;
             } else {
-                data.LoadWOAttachmentData = "true";
+                dto.LoadWOAttachmentData = "true";
             }
 
             common.spinner(true);
 
-            WorkOrderService.getPhoto(data).then(function (res) {
+            WorkOrderService.getPhoto(dto).then(function (res) {
                 // console.log(res);
                 angular.forEach(res.data, function (v, k) {
                     var obj = jobAttachments();

@@ -361,7 +361,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         });
     }
 
-    function gotoDateMonth(goDate){
+    function gotoDateMonth(goDate) {
         common.spinner(true);
         var endDate = moment(goDate).add(1, 'M');
 
@@ -602,16 +602,30 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-                location.reload();
+            if (params) {
+                console.log(params);
+                $state.transitionTo($state.current, params, {
+                    reload: false, inherit: false, notify: false, location: "replace"
+                });
             } else {
-                // $state.go('app.main.workdetail', {
-                //     'locale': $rootScope.lang,
-                //     'id': res.data.WorkOrderId,
-                //     'type': $stateParams.type,
-                //     'tab': "planning"
-                // }, {reload: true});
+
+                if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+                    location.reload();
+                } else {
+                   
+                }
+                // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
             }
+            // if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+            //     location.reload();
+            // } else {
+            //     // $state.go('app.main.workdetail', {
+            //     //     'locale': $rootScope.lang,
+            //     //     'id': res.data.WorkOrderId,
+            //     //     'type': $stateParams.type,
+            //     //     'tab': "planning"
+            //     // }, {reload: true});
+            // }
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
             console.log(err);
@@ -626,7 +640,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         $scope.onSubmitForm();
     });
 
-    $scope.afterRender = function(){
+    $scope.afterRender = function () {
         console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }

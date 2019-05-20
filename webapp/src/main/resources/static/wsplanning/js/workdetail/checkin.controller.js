@@ -6,7 +6,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.VehiId = ($scope.WorkOrder && $scope.WorkOrder.WOVehicle && $scope.WorkOrder.WOVehicle.VehiId) ? $scope.WorkOrder.WOVehicle.VehiId : 0;
     $scope.template = "1";
-    $scope.templateSelected = {"Id": "01"};
+    $scope.templateSelected = { "Id": "01" };
     $scope.templateName = {};
     $scope.lstTemplate = [];
 
@@ -27,7 +27,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.$watch("color", function (newValue, oldValue) {
         if (newValue != oldValue) {
             console.log(newValue);
-            $timeout(function() {
+            $timeout(function () {
                 angular.element('#btnUpdateColor').triggerHandler('click');
             });
         }
@@ -37,11 +37,11 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.listTemplateType = function () {
         $scope.base64Encode = "";
         common.spinner(true);
-        HttpService.postData('/checkin/template-type', {VehiId: $scope.VehiId}).then(function (response) {
+        HttpService.postData('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
             $scope.lstTemplate = response;
-            if($scope.lstTemplate.length > 0){
+            if ($scope.lstTemplate.length > 0) {
                 $scope.templateSelected = $scope.lstTemplate[0];
-            }else{
+            } else {
                 $scope.templateSelected = {};
                 $scope.data.legalText = "";
                 $scope.templateName = "";
@@ -70,7 +70,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             for (var i = 0; i < $scope.templateSelected.Items.length; i++) {
                 if ($scope.templateSelected.Items[i].Id == "Image") {
                     $scope.templateName = $scope.templateSelected.Items[i].Value;
-                }else if ($scope.templateSelected.Items[i].Id == "LegacyText") {
+                } else if ($scope.templateSelected.Items[i].Id == "LegacyText") {
                     $scope.data.legalText = $scope.templateSelected.Items[i].Value;
                 }
             }
@@ -78,7 +78,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         $scope.base64Encode = "";
         common.spinner(true);
         if ($scope.templateName != "") {
-            HttpService.postData('/checkin/template', {name: $scope.templateName}).then(function (response) {
+            HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {
@@ -101,12 +101,12 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
 
     //<editor-fold desc="onSubmitForm">
-    function createListWOAttachment(){
+    function createListWOAttachment() {
         var list = [];
         var i = 0;
         //template da danh dau
         var template = $scope.acceptTemplate();
-        if(!template.isEmpty) {
+        if (!template.isEmpty) {
             var templateMark = {};
             templateMark.FileId = 0;
             templateMark.FileName = $scope.templateName;
@@ -118,8 +118,8 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             list[i++] = templateMark;
         }
 
-        var signCanvas  = $scope.accept();
-        if(!signCanvas.isEmpty) {
+        var signCanvas = $scope.accept();
+        if (!signCanvas.isEmpty) {
             var sign = {};
             sign.FileId = 0;
             sign.FileName = "Signature_of_customer.png";
@@ -131,7 +131,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             list[i++] = sign;
         }
 
-        if($scope.listImage && $scope.listImage.length > 0) {
+        if ($scope.listImage && $scope.listImage.length > 0) {
             Array.prototype.push.apply(list, $scope.listImage);
         }
 
@@ -160,10 +160,20 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-                location.reload();
+            if (params) {
+                console.log(params);
+                $state.transitionTo($state.current, params, {
+                    reload: false, inherit: false, notify: false, location: "replace"
+                });
             } else {
+                if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+                    location.reload();
+                }
             }
+            // if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+            //     location.reload();
+            // } else {
+            // }
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
             console.log(err);

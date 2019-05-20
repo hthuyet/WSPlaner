@@ -22,10 +22,6 @@ public class WOJobDTO {
     public String SubGroupId;
 	public String DiagnosticInfo ;
     public String SolutionInfo;
-    public String ContactLName ;
-    public String ContactFName ;
-    public String ContactPhone ;
-    public String ContactEmail ;
     public List<ServiceItemDTO> Items;
     public List<WOAttachmentDTO> JobAttachments;
     public List<DynamicDataDTO> AdditionalData;

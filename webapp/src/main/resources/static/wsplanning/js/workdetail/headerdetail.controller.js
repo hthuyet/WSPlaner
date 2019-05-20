@@ -130,7 +130,17 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
         } else {
           common.notifySuccess("Success!!!");
         }
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+
+        if (params) {
+          console.log(params);
+          $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+          });
+        } else {
+          $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+        }
+        // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+
         
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
@@ -151,7 +161,16 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
         } else {
           common.notifySuccess("Success!!!");
         }
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+
+        if (params) {
+          console.log(params);
+          $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+          });
+        } else {
+          $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+        }
+        // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
         
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);

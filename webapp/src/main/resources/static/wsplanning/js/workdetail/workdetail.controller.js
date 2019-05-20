@@ -206,25 +206,43 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         // console.log("angular.equals($scope.WorkOrderOrg, $scope.WorkOrder: " + angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder));
         if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
             console.log("Khong thay doi");
+
+            $scope.tabActive = tabActive;
+
+            var params = {
+                locale: $stateParams.locale,
+                type: $stateParams.type,
+                id: $stateParams.id,
+                tab: $scope.tabActive
+            };
+
+            console.log(params);
+
+            $state.transitionTo($state.current, params, {
+                reload: false, inherit: false, notify: false, location: "replace"
+            });
         } else {
+            // $scope.tabActive = tabActive;ss
             // console.log("--------thay doi");
             // alert("DDax thay doi ---> return");
-            openConfirmSaveTab($scope.tabActive);
+            openConfirmSaveTab($scope.tabActive, tabActive);
+
+          
+
+            // var params = {
+            //     locale: $stateParams.locale,
+            //     type: $stateParams.type,
+            //     id: $stateParams.id,
+            //     tab: $scope.tabActive
+            // };
+
+            // console.log(params);
+
+            // $state.transitionTo($state.current, params, {
+            //     reload: false, inherit: false, notify: false, location: "replace"
+            // });
         }
-        $scope.tabActive = tabActive;
 
-        var params = {
-            locale: $stateParams.locale,
-            type: $stateParams.type,
-            id: $stateParams.id,
-            tab: $scope.tabActive
-        };
-
-        console.log(params);
-
-        $state.transitionTo($state.current, params, {
-            reload: false, inherit: false, notify: false, location: "replace"
-        });
 
         // $state.go('app.main.workdetail', {
         //     'locale': $rootScope.lang,
@@ -324,8 +342,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         });
     };
 
-    var openConfirmSaveTab = function (item) {
-        console.log("------contact-----");
+    var openConfirmSaveTab = function (currentTab, tabActive) {
+        console.log("------confirmTab-----");
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             templateUrl: '/wsplanning/templates/pages/common/confirm-form.html',
@@ -339,7 +357,20 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         modalInstance.result.then(function (selectedItem) {
             console.log(selectedItem);
             if (selectedItem) {
-                $scope.saveForm(item);
+                //$scope.tabActive = tabActive;
+
+                var params = {
+                    locale: $stateParams.locale,
+                    type: $stateParams.type,
+                    id: $stateParams.id,
+                    tab: tabActive
+                };
+    
+                $scope.saveForm(currentTab, params);
+    
+                // $state.transitionTo($state.current, params, {
+                //     reload: false, inherit: false, notify: false, location: "replace"
+                // });
             }
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
@@ -347,16 +378,16 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     };
 
     //Submit tren header
-    $scope.saveForm = function (type) {
+    $scope.saveForm = function (type, params) {
         console.log("-----saveForm: " + type);
         if (type == "header") {
-            $rootScope.$broadcast("saveHeader", { "item": {} });
+            $rootScope.$broadcast("saveHeader", { "item": params });
         } else if (type == "job") {
-            $rootScope.$broadcast("saveJob", { "item": {} });
+            $rootScope.$broadcast("saveJob", { "item": params });
         } else if (type == "planning") {
-            $rootScope.$broadcast("savePlanning", { "item": {} });
+            $rootScope.$broadcast("savePlanning", { "item": params });
         } else if (type == "checkin") {
-            $rootScope.$broadcast("saveCheckin", { "item": {} });
+            $rootScope.$broadcast("saveCheckin", { "item": params });
         }
     }
 

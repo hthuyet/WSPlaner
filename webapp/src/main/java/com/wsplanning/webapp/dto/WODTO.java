@@ -8,22 +8,17 @@ public class WODTO {
 
     public Integer WorkOrderNo;
     public Integer WorkOrderId;
-    // public Date ServiceDate;
+    
     public String ServiceDate;
 
-    // public Date ExecutionDate;
     public String ExecutionDate;
 
-    // public Date CheckInDate;
     public String CheckInDate;
 
-    // public Date CheckOutDate;
     public String CheckOutDate;
 
-    // public Date BookMOTDate;
     public String BookMOTDate;
 
-    // public Date BookTireDate;
     public String BookTireDate;
 
     public String ServiceAdvisorId;
@@ -32,13 +27,13 @@ public class WODTO {
     public String DeptId;
     public String StampStatus;
     public String WorkReadyDate;
-    // public Date WorkReadyDate;
 
     public String WorkReadyForInvoiceDate;
-    // public Date WorkReadyForInvoiceDate;
-
+    public String ContactLName ;
+    public String ContactFName ;
+    public String ContactPhone ;
+    public String ContactEmail ;
     public Integer IsCustomerWaiting;
-    // public Integer IsRework;
     public String TimeBarText;
     public String SiteId;
     public Integer IsTimeReservation;
@@ -62,73 +57,5 @@ public class WODTO {
     public List<WOResourceDTO> BookedResources;
     public List<WOResourcePoolDTO> BookedResourcePools;
     public List<WOJobDTO> WOJobs;
-    public TokenDTO Token;
-
-
-
-    // public WOVehicleDTO getWOVehicle() {
-    //     return this.WOVehicle;
-    // }
-
-    // public void setWOVehicle(WOVehicleDTO WOVehicle) {
-    //     this.WOVehicle = WOVehicle;
-    // }
-
-    // public WOCustomerDTO getWOCustomer() {
-    //     return this.WOCustomer;
-    // }
-
-    // public void setWOCustomer(WOCustomerDTO WOCustomer) {
-    //     this.WOCustomer = WOCustomer;
-    // }
-
-    // public WOCustomerDTO getWOContact() {
-    //     return this.WOContact;
-    // }
-
-    // public void setWOContact(WOCustomerDTO WOContact) {
-    //     this.WOContact = WOContact;
-    // }
-
-    // public List<WOAttachmentDTO> getWOAttachments() {
-    //     return this.WOAttachments;
-    // }
-
-    // public void setWOAttachments(List<WOAttachmentDTO> WOAttachments) {
-    //     this.WOAttachments = WOAttachments;
-    // }
-
-    // public List<WOResourceDTO> getBookedResources() {
-    //     return this.BookedResources;
-    // }
-
-    // public void setBookedResources(List<WOResourceDTO> BookedResources) {
-    //     this.BookedResources = BookedResources;
-    // }
-
-    // public List<WOResourcePoolDTO> getBookedResourcePools() {
-    //     return this.BookedResourcePools;
-    // }
-
-    // public void setBookedResourcePools(List<WOResourcePoolDTO> BookedResourcePools) {
-    //     this.BookedResourcePools = BookedResourcePools;
-    // }
-
-    // public List<WOJobDTO> getWOJobs() {
-    //     return this.WOJobs;
-    // }
-
-    // public void setWOJobs(List<WOJobDTO> WOJobs) {
-    //     this.WOJobs = WOJobs;
-    // }
-
-    // public TokenDTO getToken() {
-    //     return this.Token;
-    // }
-
-    // public void setToken(TokenDTO Token) {
-    //     this.Token = Token;
-    // }
-
-   
+    public TokenDTO Token;   
 }

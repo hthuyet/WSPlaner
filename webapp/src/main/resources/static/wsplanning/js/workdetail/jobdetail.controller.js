@@ -529,7 +529,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   });
 
 
-  $scope.onSubmitForm = function () {
+  $scope.onSubmitForm = function (params) {
 
     if ($scope.actTypeJob === "new") {
 
@@ -549,7 +549,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         } else {
           common.notifySuccess("Success!!!");
         }
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+        if (params) {
+          console.log(params);
+          $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+          });
+        } else {
+          $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+        }
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
@@ -582,7 +589,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         } else {
           common.notifySuccess("Success!!!");
         }
-        $state.reload();
+        if (params) {
+          console.log(params);
+          $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+          });
+        } else {          
+          $state.reload();
+        }
+       
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
@@ -593,7 +608,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
   //Save from button header
   $scope.$on('saveJob', function (event, obj) {
-    $scope.onSubmitForm();
+    console.log(obj);
+    $scope.onSubmitForm(obj.item);
   });
 
   $scope.afterRender = function () {
@@ -794,13 +810,13 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $uibModalInstance)
   };
 })
 
-UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance,$timeout) {
+UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance, $timeout) {
 
   $scope.colorPhoto = "rgb(255, 0, 0)";
   $scope.$watch("colorPhoto", function (newValue, oldValue) {
     if (newValue != oldValue) {
       console.log(newValue);
-      $timeout(function() {
+      $timeout(function () {
         angular.element('#btnUpdateColorPhoto').triggerHandler('click');
       });
     }
@@ -818,11 +834,11 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
   });
 
   $ctrl.onSubmit = function () {
-    var photoCanvas  = $scope.accept();
+    var photoCanvas = $scope.accept();
     console.log(photoCanvas);
-    if(!photoCanvas.isEmpty){
+    if (!photoCanvas.isEmpty) {
       $uibModalInstance.close(photoCanvas.dataurl);
-    }else{
+    } else {
       $uibModalInstance.close($scope.lstphoto);
     }
   }
