@@ -78,17 +78,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         $scope.base64Encode = "";
         common.spinner(true);
         if ($scope.templateName != "") {
-            $scope.imgTemplate = "";
-            // HttpService.postData('/checkin/template', {name: $scope.templateName}).then(function (response) {
-            //     $scope.imgTemplate = "data:image/png;base64," + response.base64;
-            //     common.spinner(false);
-            // }, function error(response) {
-            //     $scope.imgTemplate = "";
-            //     console.log(response);
-            //     common.spinner(false);
-            // });
-        } else {
-            HttpService.postData('/checkin/template', {type: $scope.template}).then(function (response) {
+            HttpService.postData('/checkin/template', {name: $scope.templateName}).then(function (response) {
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {
@@ -96,6 +86,15 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 console.log(response);
                 common.spinner(false);
             });
+        } else {
+            // HttpService.postData('/checkin/template', {type: $scope.template}).then(function (response) {
+            //     $scope.imgTemplate = "data:image/png;base64," + response.base64;
+            //     common.spinner(false);
+            // }, function error(response) {
+            //     $scope.imgTemplate = "";
+            //     console.log(response);
+            //     common.spinner(false);
+            // });
         }
     }
     //</editor-fold>
