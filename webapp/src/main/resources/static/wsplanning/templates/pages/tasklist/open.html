@@ -45,7 +45,7 @@
                     <td>{{item.Body}}</td>
                     <td>
                         <button ng-click="markDone(item,'markDone')" title="{{'markDone' | translate }}" >{{'markDone' | translate }}</button>
-                        <button ng-show="item.TaskSeriesFlag > 0" ng-click="markSeriesDone(item,'markSeriesDone')" title="{{'markSeriesDone' | translate }}">{{'markSeriesDone' | translate }}</button>
+                        <button ng-show="item.TaskSeriesFlag > 0" ng-click="markDone(item,'markSeriesDone')" title="{{'markSeriesDone' | translate }}">{{'markSeriesDone' | translate }}</button>
                     </td>
                 </tr>
                 <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">

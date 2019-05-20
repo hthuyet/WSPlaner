@@ -11,8 +11,8 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.lstTemplate = [];
 
     $scope.boundingBox = {
-        "width": 581,
-        "height": 216,
+        "width": 900,
+        "height": 336,
     };
 
     $scope.data = {
@@ -145,6 +145,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
         $scope.WorkOrder.WOAttachments = list;
         $scope.WorkOrder.CustomerComplaint = $scope.data.Remark;
+        $scope.WorkOrder.Mileage = $scope.data.Mileage;
 
         console.log($scope.WorkOrder);
         var data = JSON.stringify($scope.WorkOrder);

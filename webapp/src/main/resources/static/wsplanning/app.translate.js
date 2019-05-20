@@ -346,6 +346,7 @@ var translationsEN = {
   green: "Green",
   red: "Red",
   orange: "Orange",
+  clear: "Clear",
 };
 
 

@@ -41,7 +41,7 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
 
     $scope.markDone = function(item,action){
         common.spinner(true);
-        item.action = action,
+        item.action = action;
         HttpService.postData('/tasklist/saveTask', item).then(function (response) {
             common.spinner(false);
             common.notifySuccess($translate.instant('saveSuccessfully'));
