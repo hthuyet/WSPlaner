@@ -343,6 +343,9 @@ var translationsEN = {
   taskStarted2: "Started",
   markDone: "Mark Done",
   markSeriesDone: "Mark Series Done",
+  green: "Green",
+  red: "Red",
+  orange: "Orange",
 };
 
 

@@ -779,12 +779,17 @@ function signaturePad($interval, $timeout, $window) {
         };
 
         $scope.clear = function () {
+          console.log("-----clear: "  + $scope.$parent.dataUrlOriginal);
+          if($scope.dataurl === EMPTY_IMAGE){
+            return;
+          }
           $scope.signaturePad.clear();
           // $scope.dataurl = EMPTY_IMAGE;
           if ($scope.$parent.dataUrlOriginal) {
             $scope.dataurl = $scope.$parent.dataUrlOriginal;
           } else {
             $scope.dataurl = EMPTY_IMAGE;
+            $scope.signaturePad.fromDataURL(EMPTY_IMAGE);
           }
         };
 

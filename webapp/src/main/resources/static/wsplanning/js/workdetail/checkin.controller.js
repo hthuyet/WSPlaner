@@ -21,7 +21,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         "legalText": "",
     };
 
-    $scope.color = "rgb(255, 0, 0)";
+    $scope.color = "green";
     //</editor-fold>
 
     $scope.$watch("color", function (newValue, oldValue) {

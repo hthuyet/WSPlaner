@@ -12,7 +12,7 @@
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6" id="checkinTemplate">
+                        <div class="col-xs-4" id="checkinTemplate">
                             <div class="form-group">
                                 <label class="control-label col-xs-4">{{ 'checkinTemplate' | translate }}</label>
                                 <div class="col-xs-8">
@@ -21,11 +21,17 @@
                                                 ng-options="item as item.Name for item in lstTemplate">
                                         </select>
                                         <span class="input-group-btn">
-                                            <button colorpicker ng-model="color" type="button" class="btn btn-default">
-                                                <i class="icon-eyedropper"></i>
-                                            </button>
+                                            <button ng-click="clear()">Clear</button>
                                         </span>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="clear: both;">
+                                <div class="col-xs-8 col-xs-offset-4">
+                                <label class="radio-inline"><input type="radio" value="green" ng-model="color">{{ 'green' | translate }}</label>
+                                <label class="radio-inline"><input type="radio" value="red" ng-model="color">{{ 'red' | translate }}</label>
+                                <label class="radio-inline"><input type="radio" value="orange" ng-model="color">{{ 'orange' | translate }}</label>
                                 </div>
                             </div>
 
@@ -47,8 +53,6 @@
                                             </button>
                                         </span>
                                     </div>
-
-
                                 </div>
                             </div>
 
@@ -60,9 +64,9 @@
 
                         </div>
 
-                        <div class="col-xs-6">
-                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="250"
-                                           width="465" color="{{color}}"
+                        <div class="col-xs-8">
+                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="350"
+                                           width="665" color="{{color}}"
                                            dataurl="imgTemplate"></signature-pad>
                         </div>
 
@@ -72,7 +76,7 @@
                                 <div class="col-xs-8 col-xs-offset-4">
                                     <div class="container"
                                          ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                                        <signature-pad id="signature-canvas" accept="accept" clear="clear" color="#0000FF"
+                                        <signature-pad id="signature-canvas" accept="accept" clear="clearSign" color="#0000FF"
                                                        height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
                                                        dataurl="dataurl"></signature-pad>
 
