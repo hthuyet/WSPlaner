@@ -217,12 +217,12 @@ function inputType($compile) {
   }
 }
 
-function autoComplete($compile) {
+function autoComplete($compile, $timeout) {
 
   var html_input = '<input type="text" id="autocomplete" class="form-control"  ng-model="complaint" ng-keyup="complete(complaint)">'
   var html_append = '<ul class="list-group" id="autocomplete-dropdown" ng-hide="hideCombo"><li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li></ul>'
 
-  var controller = ['$scope', 'WorkOrderService', function ($scope, WorkOrderService) {
+  var controller = ['$scope', 'WorkOrderService','AutoCompleteService', function ($scope, WorkOrderService, AutoCompleteService) {
     $scope.complaint = $scope.$parent.jobTabList[$scope.index].Complaint;
 
     $scope.filterText = [];
@@ -243,19 +243,44 @@ function autoComplete($compile) {
         skey: string
       };
 
-      WorkOrderService.getTextPredict(dto).then(function (res) {
-        console.log(res)
-        // lstData = res.data;
-        angular.forEach(res.data, function (v) {
-          if (v.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
-            $scope.filterText.push(v);
-          }
-        });
+      console.log(AutoCompleteService);
 
-        // $scope.filterText = JSON.parse(lstData);
-      }, function (err) {
-        console.log(err)
-      });
+      lstData = AutoCompleteService.getTextPredict(dto);
+
+      lstData.then(function (res) {
+         var data = res;
+		 $scope.filterText = data;
+		console.log(data);
+      })
+
+	  // $timeout(function(data){
+		    
+      // WorkOrderService.getTextPredict(dto).then(function (res) {
+        // console.log(res)
+        // angular.forEach(res.data, function (v) {
+          // if (v.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+            // $scope.filterText.push(v);
+          // }
+        // });
+      // }, function (err) {
+        // console.log(err)
+      // });
+	  // }, 1000);
+	
+	  
+      // WorkOrderService.getTextPredict(dto).then(function (res) {
+        // console.log(res)
+        // // lstData = res.data;
+        // angular.forEach(res.data, function (v) {
+          // if (v.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+            // $scope.filterText.push(v);
+          // }
+        // });
+
+        // // $scope.filterText = JSON.parse(lstData);
+      // }, function (err) {
+        // console.log(err)
+      // });
       // return $scope.filterText;
     }
 
