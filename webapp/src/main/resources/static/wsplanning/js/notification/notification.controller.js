@@ -128,6 +128,12 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
     });
   }
 
+
+  $rootScope.$on('reload', function () {
+    loadData(true);
+  });
+
+
   $scope.markRead = function (item, index) {
     WorkOrderService.markNotification(item).then(function (res) {
       if (EmployeeData) {

@@ -222,36 +222,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 reload: false, inherit: false, notify: false, location: "replace"
             });
         } else {
-            // $scope.tabActive = tabActive;ss
-            // console.log("--------thay doi");
-            // alert("DDax thay doi ---> return");
             openConfirmSaveTab($scope.tabActive, tabActive);
-
-          
-
-            // var params = {
-            //     locale: $stateParams.locale,
-            //     type: $stateParams.type,
-            //     id: $stateParams.id,
-            //     tab: $scope.tabActive
-            // };
-
-            // console.log(params);
-
-            // $state.transitionTo($state.current, params, {
-            //     reload: false, inherit: false, notify: false, location: "replace"
-            // });
         }
-
-
-        // $state.go('app.main.workdetail', {
-        //     'locale': $rootScope.lang,
-        //     'id': $scope.WorkOrder.WorkOrderId,
-        //     'type': $stateParams.type,
-        //     'tab': scope.tabActive
-        // }, {reload: false});
-
-        // $state.go('app.main.workdetail', {parm1: 1}, {notify: false});
     }
 
 
@@ -351,7 +323,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             controllerAs: '$ctrl',
             size: 'sm',
             backdrop: 'static',
-
         });
 
         modalInstance.result.then(function (selectedItem) {

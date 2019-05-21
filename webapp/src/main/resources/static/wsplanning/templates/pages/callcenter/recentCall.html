@@ -39,7 +39,7 @@
 
                 <!--BODY-->
                 <tbody>
-                <tr ng-repeat-start="(key, item) in lstData" ng-dblclick="createTask(item)" ios-dblclick="createTask(item)">
+                <tr ng-repeat-start="(key, item) in lstData">
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Event}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Created}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}"><a href="tel:{{item.CallerId}}">{{item.CallerId}}</a></td>

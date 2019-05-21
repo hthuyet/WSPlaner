@@ -30,7 +30,7 @@
 
                 <!--BODY-->
                 <tbody>
-                <tr ng-repeat="item in lstData" ng-dblclick="createTask(item)" ios-dblclick="createTask(item)">
+                <tr ng-repeat="item in lstData">
                     <td>{{item.Started | date:'dd-MMMM-yyyy HH:mm:ss'}}</td>
                     <td>{{item.Header}}</td>
                     <td>
