@@ -394,6 +394,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
 
   $scope.openImage = function (item, id) {
+    console.log("--openImage:" + id);
+    console.log(item);
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/photo-form.html',

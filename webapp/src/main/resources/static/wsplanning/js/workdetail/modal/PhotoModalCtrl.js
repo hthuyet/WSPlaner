@@ -35,15 +35,16 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
     loadPhoto(data)
 
     function loadPhoto(data) {
-        if (data.jobAttachments && data.jobAttachments[0].ImageData) {
+        if (data.jobAttachments && data.jobAttachments.length > 0 && data.jobAttachments[0].ImageData) {
             common.spinner(true);
             angular.forEach(data.jobAttachments, function (v, k) {
-                var dataUrl = "data:image/webp;base64," + v.ImageData;
-                $scope.lstphoto.push(dataUrl);
+                if(v.ImageData) {
+                    var dataUrl = "data:image/webp;base64," + v.ImageData;
+                    $scope.lstphoto.push(dataUrl);
+                }
             })
-
-            common.spinner(false)
-        } else {
+            common.spinner(false);
+        }else {
             var RowId = -1;
             var dto = {
                 workOrderId: data.workOrderId,
