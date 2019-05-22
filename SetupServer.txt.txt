@@ -1,0 +1,12 @@
+1. Tạo key
+keytool -genkey -alias tomcat -keystore /opt/apache-tomcat-8.5.41/bin/keystore -storetype PKCS12 -keyalg RSA -storepass amaster123 -validity 730 -keysize 2048 
+
+2. Cấu hình server.xml	
+	   
+<Connector port="8443" 
+maxThreads="150" 
+scheme="https" 
+secure="true" 
+SSLEnabled="true" 
+keystoreFile="/opt/apache-tomcat-8.5.41/bin/keystore" keystorePass="amaster123" clientAuth="false" keyAlias="tomcat" sslProtocol="TLS"/>
+
