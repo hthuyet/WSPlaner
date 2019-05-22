@@ -110,6 +110,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
 
   $scope.onSubmitForm = function (params) {
+    console.log("----onSubmitForm-----" + $scope.actTypeHeader);
 
     var data = JSON.stringify($scope.WorkOrder);
     var postAction = "";
@@ -156,18 +157,22 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
+        console.log("------1--------");
         if (res.data.Token && res.data.Token.ErrorDesc) {
-          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc);
         } else {
           common.notifySuccess("Success!!!");
         }
 
+        console.log("------2-------");
+        console.log(params);
         if (params) {
-          console.log(params);
+          console.log("------3-------");
           $state.transitionTo($state.current, params, {
-            reload: false, inherit: false, notify: false, location: "replace"
+            reload: true, inherit: true, notify: true, location: "replace"
           });
         } else {
+          console.log("------4-------");
           $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
         }
         // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });

@@ -197,27 +197,14 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
-
-        // console.log($rootScope.WorkOrderOrg);
-        // console.log($scope.WorkOrder);
-
-        // console.log(JSON.stringify($rootScope.WorkOrderOrg));
-        // console.log(JSON.stringify($scope.WorkOrder));
-        // console.log("angular.equals($scope.WorkOrderOrg, $scope.WorkOrder: " + angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder));
         if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
-            console.log("Khong thay doi");
-
             $scope.tabActive = tabActive;
-
             var params = {
                 locale: $stateParams.locale,
                 type: $stateParams.type,
                 id: $stateParams.id,
                 tab: $scope.tabActive
             };
-
-            console.log(params);
-
             $state.transitionTo($state.current, params, {
                 reload: false, inherit: false, notify: false, location: "replace"
             });
@@ -315,7 +302,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     };
 
     var openConfirmSaveTab = function (currentTab, tabActive) {
-        console.log("------confirmTab-----");
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             templateUrl: '/wsplanning/templates/pages/common/confirm-form.html',
@@ -335,14 +321,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             };
 
             if (selectedItem) {
-                //$scope.tabActive = tabActive;
-
-
                 $scope.saveForm(currentTab, params);
-
-                // $state.transitionTo($state.current, params, {
-                //     reload: false, inherit: false, notify: false, location: "replace"
-                // });
             } else {
                 $scope.tabActive = tabActive;
                 $state.transitionTo($state.current, params, {

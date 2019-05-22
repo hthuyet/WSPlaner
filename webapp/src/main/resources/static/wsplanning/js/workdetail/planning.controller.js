@@ -583,8 +583,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     }
 
     $scope.onSubmitForm = function (params) {
-        console.log("-----savePlanning-------");
-
         var postAction = "saveResource";
 
         console.log($scope.WorkOrder.BookedResources);
@@ -614,18 +612,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 } else {
                    
                 }
-                // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
             }
-            // if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-            //     location.reload();
-            // } else {
-            //     // $state.go('app.main.workdetail', {
-            //     //     'locale': $rootScope.lang,
-            //     //     'id': res.data.WorkOrderId,
-            //     //     'type': $stateParams.type,
-            //     //     'tab': "planning"
-            //     // }, {reload: true});
-            // }
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
             console.log(err);
