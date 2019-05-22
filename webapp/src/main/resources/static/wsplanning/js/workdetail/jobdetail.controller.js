@@ -1047,5 +1047,4 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
 
   });
 
-})
-
+});

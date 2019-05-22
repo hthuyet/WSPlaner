@@ -109,7 +109,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   });
 
 
-  $scope.onSubmitForm = function () {
+  $scope.onSubmitForm = function (params) {
 
     var data = JSON.stringify($scope.WorkOrder);
     var postAction = "";
@@ -183,7 +183,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
   //Save from button header
   $scope.$on('saveHeader', function (event, obj) {
-    $scope.onSubmitForm();
+    $scope.onSubmitForm(obj.item);
   });
 
   $scope.afterRender = function(){

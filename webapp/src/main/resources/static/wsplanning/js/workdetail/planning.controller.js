@@ -582,7 +582,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         });
     }
 
-    $scope.onSubmitForm = function () {
+    $scope.onSubmitForm = function (params) {
         console.log("-----savePlanning-------");
 
         var postAction = "saveResource";
@@ -637,7 +637,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     //Save from button header
     $rootScope.$on('savePlanning', function (event, obj) {
         console.log("-----on savePlanning: ");
-        $scope.onSubmitForm();
+        $scope.onSubmitForm(obj.item);
     });
 
     $scope.afterRender = function () {

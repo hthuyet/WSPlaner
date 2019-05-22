@@ -327,21 +327,27 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
         modalInstance.result.then(function (selectedItem) {
             console.log(selectedItem);
+            var params = {
+                locale: $stateParams.locale,
+                type: $stateParams.type,
+                id: $stateParams.id,
+                tab: tabActive
+            };
+
             if (selectedItem) {
                 //$scope.tabActive = tabActive;
 
-                var params = {
-                    locale: $stateParams.locale,
-                    type: $stateParams.type,
-                    id: $stateParams.id,
-                    tab: tabActive
-                };
-    
+
                 $scope.saveForm(currentTab, params);
-    
+
                 // $state.transitionTo($state.current, params, {
                 //     reload: false, inherit: false, notify: false, location: "replace"
                 // });
+            } else {
+                $scope.tabActive = tabActive;
+                $state.transitionTo($state.current, params, {
+                    reload: false, inherit: false, notify: false, location: "replace"
+                });
             }
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
@@ -380,7 +386,7 @@ UserWebApp.controller('ConfirmSaveTabCtrl', function ($scope, $uibModalInstance)
     }
 
     $ctrl.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
+        $uibModalInstance.close(false);
     }
 
 })
