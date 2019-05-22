@@ -608,7 +608,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
   //Save from button header
   $scope.$on('saveJob', function (event, obj) {
-    console.log(obj);
     $scope.onSubmitForm(obj.item);
   });
 

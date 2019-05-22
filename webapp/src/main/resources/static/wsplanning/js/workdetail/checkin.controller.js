@@ -6,7 +6,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.VehiId = ($scope.WorkOrder && $scope.WorkOrder.WOVehicle && $scope.WorkOrder.WOVehicle.VehiId) ? $scope.WorkOrder.WOVehicle.VehiId : 0;
     $scope.template = "1";
-    $scope.templateSelected = { "Id": "01" };
+    $scope.templateSelected = {"Id": "01"};
     $scope.templateName = {};
     $scope.lstTemplate = [];
 
@@ -37,15 +37,14 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.listTemplateType = function () {
         $scope.base64Encode = "";
         common.spinner(true);
-        HttpService.postData('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
+        HttpService.postDataWithCache('/checkin/template-type', {VehiId: $scope.VehiId}).then(function (response) {
             $scope.lstTemplate = response;
             if ($scope.lstTemplate.length > 0) {
                 $scope.templateSelected = $scope.lstTemplate[0];
-            } else {
-                $scope.templateSelected = {};
-                $scope.data.legalText = "";
-                $scope.templateName = "";
             }
+            $scope.templateSelected = {};
+            $scope.data.legalText = "";
+            $scope.templateName = "";
             $scope.changeTemplate();
             common.spinner(false);
         }, function error(response) {
@@ -78,7 +77,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         $scope.base64Encode = "";
         common.spinner(true);
         if ($scope.templateName != "") {
-            HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
+            HttpService.postData('/checkin/template', {name: $scope.templateName}).then(function (response) {
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {
@@ -138,7 +137,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         return list;
     }
 
-    $scope.onSubmitForm = function () {
+    $scope.onSubmitForm = function (params) {
         var list = createListWOAttachment();
 
         var postAction = "checkIn";
@@ -184,7 +183,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     //Save from button header
     $rootScope.$on('saveCheckin', function (event, obj) {
-        $scope.onSubmitForm();
+        $scope.onSubmitForm(obj.item);
     });
     //</editor-fold>
 

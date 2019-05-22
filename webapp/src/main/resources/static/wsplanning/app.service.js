@@ -68,6 +68,42 @@ UserWebApp
 
                 return deferred.promise;
             },
+            'postDataWithCache': function (url, param, _btnElement) {
+                var deferred = $q.defer();
+                if (typeof _btnElement !== 'undefined') {
+                    common.btnLoading(_btnElement, true);
+                }
+
+                $http({
+                    cache: true,
+                    method: 'POST',
+                    url: url,
+                    data: param
+                }).then(function successCallback(response) {
+                    if (response.status === 200) {
+                        deferred.resolve(response.data);
+                    } else {
+                        deferred.reject(response);
+                        common.notifyError(response.data.error, response.status);
+                    }
+                    if (typeof _btnElement !== 'undefined') {
+                        common.btnLoading(_btnElement, false);
+                    }
+
+                }, function errorCallback(response) {
+                    deferred.reject(response);
+                    if (response.status === 405) {
+                        common.notifyError($translate.instant('accessDenied'), '403');
+                    } else {
+                        common.notifyError(response.data.error, response.status);
+                    }
+                    if (typeof _btnElement !== 'undefined') {
+                        common.btnLoading(_btnElement, false);
+                    }
+                });
+
+                return deferred.promise;
+            },
             'postDataWithFile': function (url, param, file) {
                 var deferred = $q.defer();
 
