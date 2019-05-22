@@ -772,6 +772,19 @@ table td {
     vertical-align: middle;
   }
 
+  #template-canvas {
+    padding: 10px;
+    width: 470px !important;
+    margin: 0 0 0 246px;
+  }
+
+  /* #legalText {
+    max-width: 470px;
+    max-height: 336px;
+    margin: 0 0 0 246px;
+  }
+   */
+
 }
 
 @media (max-width: 1024px) {
@@ -838,6 +851,11 @@ table td {
   cursor: move;
   position: relative;
   top: -20px;
+}
+
+#template-canvas {
+  padding: 10px;
+  margin: 0px 10px !important;
 }
 
 }

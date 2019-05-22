@@ -13,37 +13,106 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4 col-xs-12" id="checkinTemplate">
+
                             <div class="form-group">
                                 <label class="control-label col-xs-4">{{ 'checkinTemplate' | translate }}</label>
                                 <div class="col-xs-8">
                                     <div class="input-group">
-                                        <select ui-select2 ng-model="templateSelected" ng-required="true" ng-change="changeTemplate()"
-                                                ng-options="item as item.Name for item in lstTemplate">
+                                        <select ui-select2 ng-model="templateSelected" ng-required="true"
+                                            ng-change="changeTemplate()"
+                                            ng-options="item as item.Name for item in lstTemplate">
                                         </select>
                                         <span class="input-group-btn">
                                             <button ng-click="clear()" title="{{ 'clear' | translate }}">
                                                 <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
-                                            </button>
+                                        </button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
+
                             <div class="form-group" style="clear: both;">
                                 <div class="col-xs-8 col-xs-offset-4">
-                                <label class="radio-inline" style='color: green;'><input type="radio" value="green" ng-model="color">{{ 'green' | translate }}</label>
-                                <label class="radio-inline" style='color: red;'><input type="radio" value="red" ng-model="color">{{ 'red' | translate }}</label>
-                                <label class="radio-inline" style='color: orange;'><input type="radio" value="orange" ng-model="color">{{ 'orange' | translate }}</label>
+                                    <label class="radio-inline" style='color: green;'><input type="radio" value="green"
+                                            ng-model="color">{{ 'green' | translate }}</label>
+                                    <label class="radio-inline" style='color: red;'><input type="radio" value="red"
+                                            ng-model="color">{{ 'red' | translate }}</label>
+                                    <label class="radio-inline" style='color: orange;'><input type="radio"
+                                            value="orange" ng-model="color">{{ 'orange' | translate }}</label>
                                 </div>
                             </div>
 
+                            <!-- <div class="form-group">
+                                <div class="col-md-8 col-xs-12">
+                                    <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear"
+                                        height="450" width="865" color="{{color}}" dataurl="imgTemplate">
+                                    </signature-pad>
+                                </div>
+                            </div> -->
+                            <!-- 
+                            <div class="col-md-8 col-xs-12">
+                                <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="450"
+                                    width="865" color="{{color}}" dataurl="imgTemplate"></signature-pad>
+                            </div> -->
+
+                            <!-- <div class="form-group" style="clear: both;">
+                                <label class="control-label col-xs-4">{{ 'checkinMileage' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <input type="number" class="form-control" ng-model="data.Mileage">
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'checkinRemark' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <textarea type="text" class="form-control" ng-model="data.Remark"></textarea>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openImage()">
+                                                <i class="icon-camera"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="form-group">
+                                <div class="col-xs-8 col-xs-offset-4">
+                                    <textarea ng-disabled="true" type="text" style="height: 150px;" class="form-control"
+                                        ng-model="data.legalText"></textarea>
+                                </div>
+                            </div> -->
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-8 col-xs-12">
+                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="450"
+                                width="865" color="{{color}}" dataurl="imgTemplate"></signature-pad>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-4 col-xs-12">
                             <div class="form-group" style="clear: both;">
                                 <label class="control-label col-xs-4">{{ 'checkinMileage' | translate }}</label>
                                 <div class="col-xs-8">
                                     <input type="number" class="form-control" ng-model="data.Mileage">
                                 </div>
                             </div>
+                        </div>
 
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label col-xs-4">{{ 'checkinRemark' | translate }}</label>
                                 <div class="col-xs-8">
@@ -57,29 +126,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 col-xs-12">
                             <div class="form-group">
-                                <div class="col-xs-8 col-xs-offset-4">
-                                    <textarea ng-disabled="true" type="text" style="height: 150px;" class="form-control" ng-model="data.legalText"></textarea>
-                                </div>
+                                <!-- <div class="col-md-4 col-xs-12"> -->
+                                    <textarea id="legalText" ng-disabled="true" rows="2" type="text" class="form-control"
+                                        ng-model="data.legalText"></textarea>
+                                <!-- </div> -->
                             </div>
-
                         </div>
 
-                        <div class="col-md-8 col-xs-12">
-                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="450"
-                                           width="865" color="{{color}}"
-                                           dataurl="imgTemplate"></signature-pad>
-                        </div>
+                    </div>
 
-                        <div class="col-md-6 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4 col-xs-12">
                                     <div class="container"
-                                         ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                                        <signature-pad id="signature-canvas" accept="accept" clear="clearSign" color="#0000FF"
-                                                       height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
-                                                       dataurl="dataurl"></signature-pad>
+                                        ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
+                                        <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
+                                            color="#0000FF" height="{{boundingBox.height - 20 }}"
+                                            width="{{boundingBox.width - 30}}" dataurl="dataurl"></signature-pad>
 
 
                                         <div class="sizes">
@@ -91,7 +164,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -99,7 +171,7 @@
                 <div class="panel-footer">
                     <div class="pull-right">
                         <button type="button" class="btn btn-icon btn-primary btnSubmit"
-                                ng-click="signature = accept();templateDraw = acceptTemplate();onSubmitForm()">
+                            ng-click="signature = accept();templateDraw = acceptTemplate();onSubmitForm()">
                             <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                         </button>
                         <button type="button" class="btn btn-link" data-ng-click="onCancel()">{{ 'btnCancel' |
@@ -120,9 +192,9 @@
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function () {
-//    console.log($("#checkinTemplate").width());
-//    $("#template-canvas_ctn").width($("#checkinTemplate").width());
-//    console.log($("#template-canvas_ctn").width());
-  });
+    $(document).ready(function () {
+        //    console.log($("#checkinTemplate").width());
+        //    $("#template-canvas_ctn").width($("#checkinTemplate").width());
+        //    console.log($("#template-canvas_ctn").width());
+    });
 </script>
