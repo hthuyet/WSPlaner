@@ -23,7 +23,7 @@ UserWebApp.controller('NotificationCtrl', function ($scope, $rootScope, $locale,
 
 });
 
-UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderService,
+UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, WorkOrderService,
   $uibModal, HttpService) {
 
   var typeWO = $scope.$parent.typeWO;
