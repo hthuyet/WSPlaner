@@ -181,7 +181,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   // toggle for single row
   this.isShow = false;
   $scope.toggleJobRow = function (param) {
-    console.log(param)
+    // console.log(param)
     this.isShow = !this.isShow;
   }
 
@@ -213,7 +213,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
   $scope.openNewTab = function (params) {
     $window.open($scope.jobParams.VHCLink);
-    // $window.open('https://www.google.com', '_blank');
   }
 
   // modal
@@ -256,10 +255,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
           $scope.jobTabList[id].Items.push(charactersObject);
         }
         else {
-          // var newArray = $scope.jobTabList[id].Items.filter(function (v, i) {
-          //   return (v.ItemType !== 8);
-          // })
-          // $scope.jobTabList[id].Items = newArray;
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;

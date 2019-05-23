@@ -194,9 +194,26 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         }
     }
 
+    // $scope.$on("isSave", function (evt, obj) {
+    //     console.log(obj);
+    //     if (obj.item) {
+    //         openConfirmSaveTab(obj.item, $stateParams.tab);
+    //         break;
+    //     }
+    // })
+
 
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
+
+        $rootScope.$on('isSave', function (evt, obj) {
+            console.log(obj);
+            if (obj.item) {
+                openConfirmSaveTab(obj.item, $stateParams.tab);
+                break;
+            }
+        });
+
         if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
             $scope.tabActive = tabActive;
             var params = {
@@ -366,6 +383,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
+
+    
 
 });
 
