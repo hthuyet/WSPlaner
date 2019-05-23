@@ -600,7 +600,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            if (params) {
+            if (params.id) {
                 console.log(params);
                 $state.transitionTo($state.current, params, {
                     reload: false, inherit: false, notify: false, location: "replace"

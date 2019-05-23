@@ -873,6 +873,12 @@ table td {
   }
 
   
+#template-canvas {
+  padding: 10px;
+  margin: 0px 10px !important;
+}
+
+  
 
   
 }
@@ -917,6 +923,20 @@ table td {
   }
   
   
+#template-canvas {
+  padding: 10px;
+  margin: 0px 10px !important;
+}
+
+#clearSign {
+	position: relative;
+    left: -4px;
+    transition: none 0s ease 0s;
+    cursor: move;
+    top: 2px;
+}
+	
+}
 
 }
 
