@@ -41,7 +41,8 @@
 
                     <form name="jobTabFrm">
                         <div class="table-responsive main-content">
-                            <div ng-repeat="item in jobTabList track by $index" style="border-bottom: solid red; border-bottom-style:dotted; font-size: 15px !important">
+                            <div ng-repeat="item in jobTabList track by $index"
+                                style="border-bottom: solid red; border-bottom-style:dotted; font-size: 15px !important">
                                 <span ng-show="!isShow">
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
@@ -117,7 +118,8 @@
                                                                 <ul class="list-group" ng-hide="hideCombo">
                                                                     <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($parent.$index, obj)">{{obj}}</li>
                                                                 </ul> -->
-                                                                <auto-complete string="item.Complaint" index="$index"></auto-complete>
+                                                            <auto-complete string="item.Complaint" index="$index">
+                                                            </auto-complete>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,7 +248,8 @@
                                                             <!-- <input type="text" class="form-control"
                                                                 ng-change="getTextPredict(item.Complaint)"
                                                                 ng-model="item.Complaint"> -->
-                                                                <auto-complete string="item.Complaint" index="$index"></auto-complete>
+                                                            <auto-complete string="item.Complaint" index="$index">
+                                                            </auto-complete>
                                                         </div>
 
                                                     </div>

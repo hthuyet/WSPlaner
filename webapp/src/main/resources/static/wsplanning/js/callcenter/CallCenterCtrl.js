@@ -1,8 +1,6 @@
 angular.module('UserWebApp').controller('CallCenterCtrl', function ($scope, $rootScope, $state, $timeout, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
     $scope.code = "";
 
-    var timeout = JSON.parse(localStorage.getItem('info_timeout'));
-
     var EmployeeData = $("#EmployeeData").data("employee");
     if (EmployeeData) {
         $scope.SmanId = EmployeeData.SmanId;
@@ -29,11 +27,17 @@ angular.module('UserWebApp').controller('CallCenterCtrl', function ($scope, $roo
         $rootScope.$broadcast("reload", { "item": {} });
         $timeout(function () {
             $scope.reload();
-            console.log(timeout.value);
-        }, 1000 * 60 * timeout.value);
+        }, 30000);
 
     };
     $scope.reload();
+
+    $scope.onRefresh = function(){
+        common.spinner(true);
+        $rootScope.cancelReload = false;
+        $rootScope.$broadcast("reload", {"item": {}});
+        $timeout(common.spinner(false),1000);
+    }
 
 
 });

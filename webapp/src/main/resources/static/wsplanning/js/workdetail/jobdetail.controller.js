@@ -551,14 +551,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         } else {
           common.notifySuccess("Success!!!");
         }
-        if (params.id) {
-          console.log(params);
-          $state.transitionTo($state.current, params, {
-            reload: false, inherit: false, notify: false, location: "replace"
-          });
+        if(params) {
+          if (params.id) {
+            $state.transitionTo($state.current, params, {
+              reload: false, inherit: false, notify: false, location: "replace"
+            });
+          } else {
+            $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+          }
         } else {
           $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
         }
+       
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);

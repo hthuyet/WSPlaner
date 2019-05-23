@@ -209,7 +209,20 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 reload: false, inherit: false, notify: false, location: "replace"
             });
         } else {
-            openConfirmSaveTab($scope.tabActive, tabActive);
+            if ($scope.tabActive == "header") {
+                $scope.tabActive = tabActive;
+                var params = {
+                    locale: $stateParams.locale,
+                    type: $stateParams.type,
+                    id: $stateParams.id,
+                    tab: $scope.tabActive
+                };
+                $state.transitionTo($state.current, params, {
+                    reload: false, inherit: false, notify: false, location: "replace"
+                });
+            } else {
+                openConfirmSaveTab($scope.tabActive, tabActive);
+            }
         }
     }
 
@@ -321,6 +334,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             };
 
             if (selectedItem) {
+
                 $scope.saveForm(currentTab, params);
             } else {
                 $scope.tabActive = tabActive;

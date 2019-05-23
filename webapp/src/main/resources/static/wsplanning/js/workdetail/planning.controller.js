@@ -600,19 +600,23 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            if (params.id) {
-                console.log(params);
-                $state.transitionTo($state.current, params, {
-                    reload: false, inherit: false, notify: false, location: "replace"
-                });
+            if (params) {
+                if (params.id) {
+                    console.log(params);
+                    $state.transitionTo($state.current, params, {
+                        reload: false, inherit: false, notify: false, location: "replace"
+                    });
+                } else {
+                    if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+                        location.reload();
+                    }
+                }
             } else {
-
                 if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
                     location.reload();
-                } else {
-                   
                 }
             }
+
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
             console.log(err);

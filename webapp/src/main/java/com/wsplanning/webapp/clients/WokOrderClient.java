@@ -254,6 +254,20 @@ public class WokOrderClient {
       //   wodto. = new  ArrayList<>();;
       // }
     }
+
+    if(StringUtils.isEmpty(wodto.ContactPhone)) {
+      wodto.ContactPhone = "";
+    }
+    if(StringUtils.isEmpty(wodto.ContactEmail)) {
+      wodto.ContactEmail = "";
+    }
+    if(StringUtils.isEmpty(wodto.ContactFName)) {
+      wodto.ContactFName = "";
+    }
+    if(StringUtils.isEmpty(wodto.ContactLName)) {
+      wodto.ContactLName = "";
+    }
+    
     HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
