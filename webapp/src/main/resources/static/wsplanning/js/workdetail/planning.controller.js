@@ -58,7 +58,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     $scope.lstPlanning = [];
     $scope.loadData = function () {
-        getCalendarWeek($scope.viewDate);
+        if($scope.viewDate) {
+            getCalendarWeek($scope.viewDate);
+        }
     }
 
     $scope.WoResourcePoolDuration = [];
@@ -176,11 +178,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         });
     }
 
-    //Test
-    console.log($scope.WorkOrderData);
-    console.log($scope.WorkOrderData.BookedResourcePools);
-    console.log($scope.WorkOrderData.BookedResources);
-
     $scope.events = [];
     if ($scope.WorkOrderData.BookedResourcePools) {
         var itemEvent = {};
@@ -230,9 +227,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         }
     }
 
-    console.log($scope.events);
-
-
     $scope.cellIsOpen = false;
 
     $scope.dayClicked = function ($event, field, event) {
@@ -240,36 +234,19 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     };
 
     $scope.timespanClicked = function (date, cell) {
-        console.log(cell);
         cell.cssClass = 'cal-day-selected';
-        console.log("---timespanClicked: " + date + " " + $scope.viewDate.getMonth() + " - " + date.getMonth());
         if ($scope.viewDate.getMonth() != date.getMonth()) {
             gotoDateMonth(date);
             $scope.viewDate = date;
-            console.log($scope.viewDate);
-            // getCalendarMonth();
         } else {
             $scope.viewDate = date;
             getCalendarWeek($scope.viewDate);
         }
     };
 
-    // $scope.$on('$destroy', function() {
-    //   console.log("-$destroy-----");
-    //   // calendarConfig.templates.calendarMonthCell = 'mwl/calendarMonthCell.html';
-    // });
-
     //Gen CSS cho cell (day in month)
     $scope.cellModifier = function (cell) {
         cell.id = "cell_" + cell.date._d.getDate() + "_" + cell.date._d.getMonth();
-        // console.log(cell);
-        // console.log($scope.lstMonth);
-        // console.log("----cellModifier----------" + $scope.viewDate.getMonth() + " - " + $scope.viewDate.getDate());
-        // if (cell.date._d.getMonth() == $scope.viewDate.getMonth() && cell.date._d.getDate() == $scope.viewDate.getDate()) {
-        //     cell.cssClass = 'cal-day-selected';
-        //     return;
-        // }
-
         var length = $scope.lstMonth.length;
         var WorkDay = null;
         var date = new Date();
@@ -277,13 +254,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             WorkDay = $scope.lstMonth[i];
             date = new Date(WorkDay.WorkDay);
             if (date.getMonth() == cell.date._d.getMonth() && date.getDate() == cell.date._d.getDate()) {
-                // console.log(date);
-                // console.log(WorkDay);
-                // if (WorkDay.FreeCapacity > 100) {
-                //     cell.cssClass = 'booked';
-                // } else if (WorkDay.FreeCapacity == 100) {
-                //     cell.cssClass = 'free';
-                // } else
                 if (WorkDay.FreeCapacity >= 75) {
                     cell.cssClass = 'cap75';
                 } else if (WorkDay.FreeCapacity > 25 && WorkDay.FreeCapacity < 75) {
@@ -291,7 +261,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 } else if (WorkDay.FreeCapacity <= 25) {
                     cell.cssClass = 'cap25';
                 }
-                // cell.label = '-' + cell.label + '-' + WorkDay.FreeCapacity + cell.cssClass;
                 return;
             }
         }
@@ -299,19 +268,12 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
 
     $scope.onClickCal = function (item) {
-        console.log("---onClickCal---");
-        console.log(item);
     }
 
     $scope.dateClicked = function (item) {
-        console.log("---dateClicked---");
-        console.log(item);
     }
 
     $scope.detailBooking = function (item) {
-        console.log(item);
-        // var preDate = moment(item.WorkDay).add('days', -1).toDate();
-        // console.log(preDate);
         $rootScope.$broadcast("bookingClick", {
             "date": item.WorkDay,
             "DeptId": $scope.DeptId,
@@ -356,7 +318,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             getCalendarWeek($scope.viewDate);
         }, function error(response) {
             $scope.lstMonth = [];
-            console.log(response);
             common.spinner(false);
         });
     }
@@ -383,7 +344,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
         }, function error(response) {
             $scope.lstMonth = [];
-            console.log(response);
             common.spinner(false);
 
             $timeout(function () {
@@ -431,14 +391,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             getCalendarMonth2(tmpDate);
         });
 
-        console.log("--------");
-
-
         // var oldMonth = $scope.viewDate.getMonth();
         var lastDateOfMonth = moment($scope.viewDate).endOf('month').toDate().getDate();
-
-        console.log("$scope.viewDate.getDate(): " + $scope.viewDate.getDate());
-        console.log("lastDateOfMonth: " + lastDateOfMonth);
 
         if ($scope.viewDate.getDate() == lastDateOfMonth) {
             $timeout(function () {
@@ -484,11 +438,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     }
 
 
-    // $timeout(function () {
-    //   $(".cal-day-today").click();
-    // }, 1000);
-
-
     //Right click
     $scope.menuOptions =
         [
@@ -504,7 +453,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
 
     function menuAdd($event) {
-        console.log($event);
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_pool.html',
@@ -526,7 +474,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         });
 
         modalInstance.result.then(function (value) {
-            console.log(value);
             if (!$scope.WorkOrder.BookedResourcePools) {
                 $scope.WorkOrder.BookedResourcePools = [];
             }
@@ -538,16 +485,12 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 "ShiftId": $scope.ShiftId,
             });
 
-
-            console.log($scope.WorkOrder.BookedResourcePools);
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
 
     }
 
     function menuEdit($event) {
-        console.log($event);
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/list_pool.html',
@@ -559,7 +502,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                     return $event.dataContext;
                 },
                 listData: function () {
-                    console.log($scope.WorkOrder.BookedResourcePools);
                     if (!$scope.WorkOrder.BookedResourcePools) {
                         $scope.WorkOrder.BookedResourcePools = [];
                     }
@@ -578,31 +520,23 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         modalInstance.result.then(function (listPool) {
             $scope.WorkOrder.BookedResourcePools = listPool;
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
     }
 
     $scope.onSubmitForm = function (params) {
         var postAction = "saveResource";
-
-        console.log($scope.WorkOrder.BookedResources);
         var data = JSON.stringify($scope.WorkOrder);
 
         common.btnLoading($(".btnSubmit"), true);
         WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
             common.btnLoading($(".btnSubmit"), false);
-            console.log(res);
-            // common.notifySuccess("Success!!!");
-
             if (res.data.Token && res.data.Token.ErrorDesc) {
                 common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
             } else {
                 common.notifySuccess("Success!!!");
             }
-            console.log($scope.WorkOrder);
             if (params) {
                 if (params.id) {
-                    console.log(params);
                     $state.transitionTo($state.current, params, {
                         reload: false, inherit: false, notify: false, location: "replace"
                     });
@@ -619,7 +553,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
-            console.log(err);
             common.notifyError("Error!!!", err.status);
         });
 
@@ -627,12 +560,10 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     //Save from button header
     $rootScope.$on('savePlanning', function (event, obj) {
-        console.log("-----on savePlanning: ");
         $scope.onSubmitForm(obj.item);
     });
 
     $scope.afterRender = function () {
-        console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
 

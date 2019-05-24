@@ -38,7 +38,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
             $scope.lstDepartmentSearch = $scope.lstDepartment.slice();
             $scope.lstDepartmentSearch.shift();
-            $scope.lstDepartmentSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
+            $scope.lstDepartmentSearch.unshift({"Id": "", "Name": $translate.instant('all')});
         });
         CommonServices.getVisitReasons().then(function (data) {
             $scope.lstVisitReason = data;
@@ -66,7 +66,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
             $scope.lstShiftSearch = $scope.lstShifts.slice();
             $scope.lstShiftSearch.shift();
-            $scope.lstShiftSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
+            $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
         });
 
     }
@@ -193,70 +193,50 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             return $scope.tabActive = "job";
         }
     }
-	
-	var isSave = false;
+
+    var isSave = false;
 
     $scope.$on("isSave", function (evt, obj) {
         console.log(obj);
         isSave = obj.modified;
     })
 
-	function changeTab(tabActive) {
-		$scope.tabActive = tabActive;
-            var params = {
-                locale: $stateParams.locale,
-                type: $stateParams.type,
-                id: $stateParams.id,
-                tab: $scope.tabActive
-            };
-            $state.transitionTo($state.current, params, {
-                reload: false, inherit: false, notify: false, location: "replace"
-            });
-	}
+    function changeTab(tabActive) {
+        $scope.tabActive = tabActive;
+        var params = {
+            locale: $stateParams.locale,
+            type: $stateParams.type,
+            id: $stateParams.id,
+            tab: $scope.tabActive
+        };
+        if ($state.current.name == "app.main.wo") {
+            params.action = $stateParams.action;
+        }
+        $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+        });
+    }
 
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
-        
+
         if ($scope.tabActive == "checkin") {
-			if(isSave == true) {
-				 openConfirmSaveTab($scope.tabActive, tabActive);
-			} else {
-				changeTab(tabActive);
-			}
-			
+            if (isSave == true) {
+                openConfirmSaveTab($scope.tabActive, tabActive);
+            } else {
+                changeTab(tabActive);
+            }
+
         } else if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
-            // $scope.tabActive = tabActive;
-            // var params = {
-                // locale: $stateParams.locale,
-                // type: $stateParams.type,
-                // id: $stateParams.id,
-                // tab: $scope.tabActive
-            // };
-            // $state.transitionTo($state.current, params, {
-                // reload: false, inherit: false, notify: false, location: "replace"
-            // });
-			changeTab(tabActive);
+            changeTab(tabActive);
         } else {
             if ($scope.tabActive == "header") {
-                // $scope.tabActive = tabActive;
-                // var params = {
-                    // locale: $stateParams.locale,
-                    // type: $stateParams.type,
-                    // id: $stateParams.id,
-                    // tab: $scope.tabActive
-                // };
-                // $state.transitionTo($state.current, params, {
-                    // reload: false, inherit: false, notify: false, location: "replace"
-                // });
-				changeTab(tabActive);
-            } 
-            else {
+                changeTab(tabActive);
+            } else {
                 openConfirmSaveTab($scope.tabActive, tabActive);
             }
         }
     }
-
-
 
 
     //Modal
@@ -280,19 +260,17 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
 
             if (selectedItem.PayerCustomer != null) {
-                $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
+                $rootScope.$broadcast("choosePayerCustomer", {"item": selectedItem.PayerCustomer});
                 $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
             }
 
             if (selectedItem.UserCustomer != null) {
-                $rootScope.$broadcast("chooseUserCustomer", { "item": selectedItem.UserCustomer });
+                $rootScope.$broadcast("chooseUserCustomer", {"item": selectedItem.UserCustomer});
                 // $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
             }
-            console.log($scope.jobObject.VehiId);
-            $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
+            $rootScope.$broadcast("chooseVehicle", {"item": selectedItem});
 
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
     };
 
@@ -311,14 +289,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.WOCustomer = selectedItem;
             $scope.jobObject.CustNo = selectedItem.CustNo
 
-            $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
+            $rootScope.$broadcast("chooseCustomer", {"item": selectedItem});
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
     };
 
     $ctrl.openSearchContact = function (size, item) {
-        console.log("------contact-----");
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             templateUrl: '/wsplanning/templates/pages/common/customer-form.html',
@@ -335,12 +311,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         });
 
         modalInstance.result.then(function (selectedItem) {
-            console.log(selectedItem);
-
             $scope.WOContact = selectedItem;
-            $rootScope.$broadcast("chooseContact", { "item": selectedItem });
+            $rootScope.$broadcast("chooseContact", {"item": selectedItem});
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
     };
 
@@ -355,7 +328,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         });
 
         modalInstance.result.then(function (selectedItem) {
-            console.log(selectedItem);
             var params = {
                 locale: $stateParams.locale,
                 type: $stateParams.type,
@@ -363,8 +335,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 tab: tabActive
             };
 
+            if ($state.current == "app.main.wo") {
+                params.action = $stateParams.action;
+            }
             if (selectedItem) {
-
                 $scope.saveForm(currentTab, params);
             } else {
                 $scope.tabActive = tabActive;
@@ -373,30 +347,26 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 });
             }
         }, function () {
-            console.log('Modal dismissed at: ' + new Date());
         });
     };
 
     //Submit tren header
     $scope.saveForm = function (type, params) {
-        console.log("-----saveForm: " + type);
         if (type == "header") {
-            $rootScope.$broadcast("saveHeader", { "item": params });
+            $rootScope.$broadcast("saveHeader", {"item": params});
         } else if (type == "job") {
-            $rootScope.$broadcast("saveJob", { "item": params });
+            $rootScope.$broadcast("saveJob", {"item": params});
         } else if (type == "planning") {
-            $rootScope.$broadcast("savePlanning", { "item": params });
+            $rootScope.$broadcast("savePlanning", {"item": params});
         } else if (type == "checkin") {
-            $rootScope.$broadcast("saveCheckin", { "item": params });
+            $rootScope.$broadcast("saveCheckin", {"item": params});
         }
     }
 
 
     $scope.afterRender = function () {
-        console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
-
 
 
 });
@@ -404,7 +374,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 UserWebApp.controller('ConfirmSaveTabCtrl', function ($scope, $uibModalInstance) {
 
     var $ctrl = this;
-    // console.log(data);
 
     $ctrl.save = function () {
         $uibModalInstance.close(true);
