@@ -210,7 +210,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             console.log(obj);
             if (obj.item) {
                 openConfirmSaveTab(obj.item, $stateParams.tab);
-                break;
             }
         });
 

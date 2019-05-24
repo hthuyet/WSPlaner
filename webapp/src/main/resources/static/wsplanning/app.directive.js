@@ -286,6 +286,7 @@ function autoComplete($compile, $timeout) {
                     var e = $compile(html_input + html_append)(scope)
                     element.replaceWith(e);
                 } else {
+                    scope.$parent.jobTabList[scope.index].Complaint = scope.complaint;
                     if (scope.string == "") {
                         var e = $compile(html_input)(scope)
                         element.replaceWith(e);

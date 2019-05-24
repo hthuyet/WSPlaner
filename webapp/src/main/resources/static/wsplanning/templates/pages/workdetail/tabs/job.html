@@ -118,7 +118,7 @@
                                                                 <ul class="list-group" ng-hide="hideCombo">
                                                                     <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($parent.$index, obj)">{{obj}}</li>
                                                                 </ul> -->
-                                                            <auto-complete string="item.Complaint" index="$index">
+                                                            <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
                                                             </auto-complete>
                                                         </div>
                                                     </div>
@@ -248,7 +248,7 @@
                                                             <!-- <input type="text" class="form-control"
                                                                 ng-change="getTextPredict(item.Complaint)"
                                                                 ng-model="item.Complaint"> -->
-                                                            <auto-complete string="item.Complaint" index="$index">
+                                                            <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
                                                             </auto-complete>
                                                         </div>
 
