@@ -51,14 +51,12 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 angular.element('#btnUpdateColor').triggerHandler('click');
             });
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: true,
             }
             );
 
         } else {
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: false,
             }
             );
@@ -66,15 +64,13 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     });
 	
 	 $scope.$watch("templateSelected", function (newValue, oldValue) {
-        if (angular.equals($scope.originalTemplateSelected, newValue)) {
+        if (angular.equals($scope.originalTemplateSelected, oldValue) || angular.equals($scope.originalTemplateSelected, newValue)) {
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: false,
             }
             );
         } else {
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: true,
             }
             );
@@ -82,31 +78,18 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     });
 
     $scope.$watch("data", function (newValue, oldValue) {
-       if (angular.equals($scope.originalData, newValue)) {
+       if (angular.equals($scope.originalData, oldValue) || angular.equals($scope.originalData, newValue) ) {
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: true,
             }
             );
         } else {
             $scope.$emit('isSave', {
-                // item: "checkin",
                 modified: false,
             }
             );
         }
     });
-
-    //if the form is modified => using $emit to send data
-     // $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-     // console.log(formCtrl.$name);
-     // console.log($scope.CheckIn);
-     // $scope.$emit('isSave', {
-     // item: "checkin",
-     // modified: modified,
-     // }
-     // );
-    // });
 
 
     //<editor-fold desc="listTemplateType">
