@@ -193,23 +193,16 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             return $scope.tabActive = "job";
         }
     }
+	
+	var isSave = false;
 
-    // $scope.$on("isSave", function (evt, obj) {
-    //     console.log(obj);
-    //     if (obj.item) {
-    //         openConfirmSaveTab(obj.item, $stateParams.tab);
-    //         break;
-    //     }
-    // })
+    $scope.$on("isSave", function (evt, obj) {
+        console.log(obj);
+        isSave = obj.modified;
+    })
 
-
-    $rootScope.WorkOrderOrg = {};
-    $scope.changeTab = function (tabActive, abc) {
-
-
-
-        if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
-            $scope.tabActive = tabActive;
+	function changeTab(tabActive) {
+		$scope.tabActive = tabActive;
             var params = {
                 locale: $stateParams.locale,
                 type: $stateParams.type,
@@ -219,37 +212,44 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $state.transitionTo($state.current, params, {
                 reload: false, inherit: false, notify: false, location: "replace"
             });
+	}
+
+    $rootScope.WorkOrderOrg = {};
+    $scope.changeTab = function (tabActive, abc) {
+        
+        if ($scope.tabActive == "checkin") {
+			if(isSave == true) {
+				 openConfirmSaveTab($scope.tabActive, tabActive);
+			} else {
+				changeTab(tabActive);
+			}
+			
+        } else if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
+            // $scope.tabActive = tabActive;
+            // var params = {
+                // locale: $stateParams.locale,
+                // type: $stateParams.type,
+                // id: $stateParams.id,
+                // tab: $scope.tabActive
+            // };
+            // $state.transitionTo($state.current, params, {
+                // reload: false, inherit: false, notify: false, location: "replace"
+            // });
+			changeTab(tabActive);
         } else {
             if ($scope.tabActive == "header") {
-                $scope.tabActive = tabActive;
-                var params = {
-                    locale: $stateParams.locale,
-                    type: $stateParams.type,
-                    id: $stateParams.id,
-                    tab: $scope.tabActive
-                };
-                $state.transitionTo($state.current, params, {
-                    reload: false, inherit: false, notify: false, location: "replace"
-                });
-            } else if ($scope.tabActive == "checkin") {
-                $rootScope.$on('isSave', function (evt, obj) {
-                    console.log(obj);
-                    if (obj.modified) {
-                        openConfirmSaveTab(obj.item, $stateParams.tab);
-                    } else {
-                        $scope.tabActive = tabActive;
-                        var params = {
-                            locale: $stateParams.locale,
-                            type: $stateParams.type,
-                            id: $stateParams.id,
-                            tab: $scope.tabActive
-                        };
-                        $state.transitionTo($state.current, params, {
-                            reload: false, inherit: false, notify: false, location: "replace"
-                        });
-                    }
-                });
-            }
+                // $scope.tabActive = tabActive;
+                // var params = {
+                    // locale: $stateParams.locale,
+                    // type: $stateParams.type,
+                    // id: $stateParams.id,
+                    // tab: $scope.tabActive
+                // };
+                // $state.transitionTo($state.current, params, {
+                    // reload: false, inherit: false, notify: false, location: "replace"
+                // });
+				changeTab(tabActive);
+            } 
             else {
                 openConfirmSaveTab($scope.tabActive, tabActive);
             }

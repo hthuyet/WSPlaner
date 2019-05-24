@@ -10,6 +10,17 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.templateName = {};
     $scope.lstTemplate = [];
 
+    $scope.CheckIn = {
+        'templateSelected': { "Id": "01" },
+        'data': {
+            'Mileage': ($scope.WorkOrder && $scope.WorkOrder.Mileage) ? $scope.WorkOrder.Mileage : 0,
+            'Remark': "",
+            'legalText': "",
+        },
+        'color': "green"
+    }
+
+    
     $scope.boundingBox = {
         "width": 900,
         "height": 336,
@@ -23,25 +34,79 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.color = "green";
     //</editor-fold>
+	
+	copyObject();
+
+    function copyObject() {
+        $scope.originalTemplateSelected = angular.copy($scope.templateSelected);
+        $scope.originalData = angular.copy($scope.data);
+        $scope.originalColor = angular.copy($scope.color);
+    }
+
 
     $scope.$watch("color", function (newValue, oldValue) {
-        if (newValue != oldValue) {
+        if (newValue != oldValue || newValue != "green") {
             console.log(newValue);
             $timeout(function () {
                 angular.element('#btnUpdateColor').triggerHandler('click');
             });
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: true,
+            }
+            );
+
+        } else {
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: false,
+            }
+            );
+        }
+    });
+	
+	 $scope.$watch("templateSelected", function (newValue, oldValue) {
+        if (angular.equals($scope.originalTemplateSelected, newValue)) {
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: false,
+            }
+            );
+        } else {
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: true,
+            }
+            );
+        }
+    });
+
+    $scope.$watch("data", function (newValue, oldValue) {
+       if (angular.equals($scope.originalData, newValue)) {
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: true,
+            }
+            );
+        } else {
+            $scope.$emit('isSave', {
+                // item: "checkin",
+                modified: false,
+            }
+            );
         }
     });
 
     //if the form is modified => using $emit to send data
-    $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-        $scope.$emit('isSave', {
-            item: "checkin",
-            modified: modified,
-            data: formCtrl.$name
-        }
-        );
-    });
+     // $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+     // console.log(formCtrl.$name);
+     // console.log($scope.CheckIn);
+     // $scope.$emit('isSave', {
+     // item: "checkin",
+     // modified: modified,
+     // }
+     // );
+    // });
 
 
     //<editor-fold desc="listTemplateType">
@@ -170,6 +235,11 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
+            $scope.$emit('isSave', {
+                      
+                modified: false,
+            }
+            );
             if (params) {
                 console.log(params);
                 $state.transitionTo($state.current, params, {
@@ -177,7 +247,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 });
             } else {
                 if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-                    location.reload();
+                    location.reload();                
                 }
             }
             // if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
