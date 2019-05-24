@@ -331,7 +331,7 @@ var translationsEN = {
   taskList: "Task List",
   taskOpen: "Task Open",
   taskClose: "Task Close",
-  taskStarted: "Schedule",
+  taskStarted: "Dued",
   taskHeader: "Subject",
   taskType: "Type",
   taskCustomer: "Customer",
@@ -347,6 +347,8 @@ var translationsEN = {
   red: "Red",
   orange: "Orange",
   clear: "Clear",
+  AssignedMe: "Assigned to me",
+  AssignedByMe: "Assigned by me",
 };
 
 

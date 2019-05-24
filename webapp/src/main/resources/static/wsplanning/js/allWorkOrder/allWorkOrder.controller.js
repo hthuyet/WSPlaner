@@ -1,6 +1,11 @@
 UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO) {
   $scope.typeWO = typeWO;
 
+
+  var EmployeeData = $("#EmployeeData").data("employee");
+
+
+
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -19,14 +24,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
 
   $scope.params = {
-    "department": "",
+    "department": EmployeeData.DeptId,
     "trans": "",
     "visitReason": "",
     "receiver": "",
     "from": "",
     "to": "",
     "myWo": false,
-    "shiftId": "",
+    "shiftId": EmployeeData.ShiftId,
     "skey": "",
   };
 
@@ -35,14 +40,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   function reset() {
     $scope.params = {
-      "department": "",
+      "department": EmployeeData.DeptId,
       "trans": "",
       "visitReason": "",
       "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": "",
+      "shiftId": EmployeeData.ShiftId,
       "skey": "",
     };
     $scope.limit = 20;
