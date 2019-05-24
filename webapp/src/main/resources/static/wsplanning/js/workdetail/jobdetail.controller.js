@@ -763,6 +763,8 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
       // console.log(res);
     }, function (err) {
       console.log(err);
+      common.notifyError("System error!");
+      common.spinner(false);
     })
   }
 

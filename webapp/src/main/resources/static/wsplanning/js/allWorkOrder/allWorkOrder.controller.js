@@ -15,7 +15,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   $scope.buttonType = function (name) {
     var string = "app.main." + name;
-    $state.go(string, { 'type': typeWO, 'action': name });
+    $state.go(string, {'locale': $rootScope.lang, 'type': typeWO, 'action': name });
   }
 
   $scope.params = {
