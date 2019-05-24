@@ -1,5 +1,7 @@
 UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout, $state) {
     //JOB
+    //Config
+    moment()._locale._week.dow = 1;
     //$scope.jobTabList = $scope.$parent.WOJobs;
 
     $scope.jobTabList = $scope.WorkOrder.WOJobs;

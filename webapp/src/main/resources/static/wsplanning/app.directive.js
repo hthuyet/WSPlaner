@@ -226,6 +226,7 @@ function autoComplete($compile, $timeout) {
         $scope.filterText = [];
         $scope.hideCombo = true;
         $scope.complete = function (string) {
+            console.log(string);
             if (string.trim().length  < 3) {
                 $scope.filterText = [];
                 $scope.fillTextBox($scope.complaint);
@@ -253,7 +254,8 @@ function autoComplete($compile, $timeout) {
         }
 
         $scope.checkKeyPress = function(event){
-            if(event.keyCode === 27){
+            console.log(event.keyCode);
+            if(event.keyCode === 27 || event.keyCode === 13){
                 //ESC
                 $scope.fillTextBox($scope.complaint);
             }
