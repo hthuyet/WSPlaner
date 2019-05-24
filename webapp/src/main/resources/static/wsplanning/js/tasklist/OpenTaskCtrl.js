@@ -1,6 +1,13 @@
 angular.module('UserWebApp').controller('OpenTaskCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.isShow = true;
 
+  $scope.assignTome = true;
+  $scope.assignByme = false;
+
+  $scope.changeAssign = function(){
+    loadData(true);
+  }
+
   $rootScope.$on('toogleOpenTask', function () {
     $scope.isShow = !$scope.isShow;
   });
@@ -30,6 +37,8 @@ angular.module('UserWebApp').controller('OpenTaskCtrl', function ($scope, $rootS
       "limit": $scope.limit,
       "SmanId": $scope.SmanId,
       "bIsOpen": "true",
+      "AssignToMe": $scope.assignTome,
+      "AssignByMe": $scope.assignByme,
     };
 
     HttpService.postData('/tasklist/getdata', params).then(function (response) {

@@ -37,6 +37,8 @@ public class TaskClient {
 
         String page = params.get("page");
         String limit = params.get("limit");
+        String AssignToMe = params.get("AssignToMe");
+        String AssignByMe = params.get("AssignByMe");
 
         HttpHeaders headers = new HttpHeaders();
         if (StringUtils.isNotBlank(limit)) {
@@ -44,6 +46,14 @@ public class TaskClient {
         }
         if (StringUtils.isNotBlank(page)) {
             headers.set("Page", page);
+        }
+
+        if (StringUtils.isNotBlank(AssignToMe) && "true".equalsIgnoreCase(AssignToMe)) {
+            headers.set("AssignToMe", AssignToMe);
+        }
+
+        if (StringUtils.isNotBlank(AssignByMe) && "true".equalsIgnoreCase(AssignByMe)) {
+            headers.set("AssignByMe", AssignByMe);
         }
 
 

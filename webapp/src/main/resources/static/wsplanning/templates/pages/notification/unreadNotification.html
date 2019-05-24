@@ -16,11 +16,11 @@
         <div class="table-responsive">
             <table class="table table-striped table-hover nowhitespace tableModal">
                 <thead>
-                    <tr>
-                        <th class="text-center col-xs-1">{{'timestamp' | translate }}</th>
+                    <tr class="d-flex">
+                        <th class="text-center col-xs-2">{{'timestamp' | translate }}</th>
                         <th class="text-center col-xs-1">{{'from' | translate }}</th>
-                        <th class="text-center col-xs-1">{{'workOrder' | translate }}</th>
-                        <th class="text-center col-xs-1">{{'message' | translate }}</th>
+<!--                        <th class="text-center col-xs-1">{{'workOrder' | translate }}</th>-->
+                        <th class="text-center col-xs-3">{{'message' | translate }}</th>
                         <th class="text-center col-xs-1">{{'action' | translate }}</th>
                     </tr>
                 </thead>
@@ -28,13 +28,13 @@
                 <!--BODY-->
                 <tbody>
                     <tr ng-repeat="item in UnRead track by $index">
-                        <td style="white-space: nowrap" class="text-center">
+                        <td style="white-space: nowrap" class="text-left">
                             {{item.Created | date:'dd-MMMM-yyyy'}}<br/>
                             {{item.Created | date:'HH:mm:ss'}}
                         </td>
-                        <td class="text-center">{{item.CreatedBy}}</td>
-                        <td class="text-center">{{item.WorkOrderId}}</td>
-                        <td class="">{{item.Note}}</td>
+                        <td class="text-left">{{item.SmanName}}</td>
+<!--                        <td class="text-center">{{item.WorkOrderId}}</td>-->
+                        <td class="text-left">{{item.Note}}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <button class="btn btn-primary" id="btnReply" type="button"

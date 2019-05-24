@@ -9,6 +9,12 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
         loadData(true);
     });
 
+    $scope.assignTome = true;
+    $scope.assignByme = false;
+
+    $scope.changeAssign = function(){
+        loadData(true);
+    }
 
     //Paging
     $scope.params = {};
@@ -29,6 +35,8 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
             "limit": $scope.limit,
             "SmanId": $scope.SmanId,
             "bIsOpen": "false",
+            "AssignToMe": $scope.assignTome,
+            "AssignByMe": $scope.assignByme,
         };
 
         HttpService.postData('/tasklist/getdata', params).then(function (response) {
