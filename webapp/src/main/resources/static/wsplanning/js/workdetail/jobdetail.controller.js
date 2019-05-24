@@ -527,7 +527,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
 
   $scope.onSubmitForm = function (params) {
-
     if ($scope.actTypeJob === "new") {
 
       var postAction = "createNew";
