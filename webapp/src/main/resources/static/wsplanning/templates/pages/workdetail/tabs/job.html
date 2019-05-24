@@ -27,6 +27,9 @@
                         <div class="pull-right">
                             <div class="heading-elements">
                                 <ul class="icons-list">
+                                    <li ng-click="toggleAllJobs()"><a ng-class="{'rotate-180': isShow == true}"
+                                            data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                    </li>
                                     <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add"
                                             ng-click="addJob()"><span class="icon-plus3"></span></a>
                                     </li>
@@ -43,7 +46,7 @@
                         <div class="table-responsive main-content">
                             <div ng-repeat="item in jobTabList track by $index"
                                 style="border-bottom: solid red; border-bottom-style:dotted; font-size: 15px !important">
-                                <span ng-show="!isShow">
+                                <span ng-show="!item.collapse">
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
 
@@ -63,8 +66,8 @@
                                                             ng-class="btn.icon"></span></a>
                                                 </li>
 
-                                                <li ng-click="toggleJobRow(item.RowId)"><a
-                                                        ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                <li ng-click="toggleJobRow(item)"><a
+                                                        ng-class="{'rotate-180': item.collapse == true}" data-action="collapse"
                                                         data-popup="tooltip" title="Collapse"></a>
                                                 </li>
                                             </ul>
@@ -113,12 +116,8 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <!-- <input type="text" class="form-control"
-                                                                ng-model="item.Complaint" ng-keyup="complete(this, item.Complaint)"> 
-                                                                <ul class="list-group" ng-hide="hideCombo">
-                                                                    <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($parent.$index, obj)">{{obj}}</li>
-                                                                </ul> -->
-                                                            <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
+                                                            <auto-complete ng-model="item.Complaint"
+                                                                string="item.Complaint" index="$index">
                                                             </auto-complete>
                                                         </div>
                                                     </div>
@@ -165,7 +164,7 @@
 
                                 </span>
 
-                                <span ng-show="isShow">
+                                <span ng-show="item.collapse">
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
 
@@ -186,8 +185,8 @@
 
 
 
-                                                <li ng-click="toggleJobRow()"><a
-                                                        ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                <li ng-click="toggleJobRow(item)"><a
+                                                        ng-class="{'rotate-180': item.collapse == true}" data-action="collapse"
                                                         data-popup="tooltip" title="Collapse"></a>
                                                 </li>
 
@@ -245,13 +244,10 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <!-- <input type="text" class="form-control"
-                                                                ng-change="getTextPredict(item.Complaint)"
-                                                                ng-model="item.Complaint"> -->
-                                                            <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
+                                                            <auto-complete ng-model="item.Complaint"
+                                                                string="item.Complaint" index="$index">
                                                             </auto-complete>
                                                         </div>
-
                                                     </div>
 
                                                 </div>

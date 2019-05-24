@@ -7,11 +7,33 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   $scope.jobTabList = $scope.$parent.WOJobs;
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
+  var lstIndex = [];
 
   var jobsList = [];
   $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
+  $scope.isShow = false;
 
+  $scope.toggleAllJobs = function () {
+    if ($scope.isShow == true) {
+        $scope.isShow = false;
+        angular.forEach($scope.jobTabList, function (v, k) {
+            v.collapse = false;
+          // $scope.toggleJobRow(v);
+        });
+    } else {
+      angular.forEach($scope.jobTabList, function (v, k) {
+        $scope.toggleJobRow(v);
+      });
+    }
+  }
+
+  // toggle for single row
+  // this.isShow = false;
+  $scope.toggleJobRow = function (item) {
+    // console.log(index);
+    item.collapse = !item.collapse;
+  }
 
   loadCommon();
   $scope.lstDepartment = [];
@@ -100,6 +122,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     }, function (err) {
       console.log(err);
     });
+
+    $scope.jobTabList.map((item) => {
+      item.collapse = false;
+    });
+    console.log($scope.jobTabList);
   }
 
   $scope.getClass = function (param, mechanicId) {
@@ -154,11 +181,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   $scope.markAll = function (jobId) {
     var data = $scope.jobTabList[jobId].Items;
     angular.forEach(data, function (v, k) {
-      v.checked = true;
-      if (v.MechanicId == "" || v.MechanicId == null || v.MechanicId == undefined) {
-        $scope.getCheckRow(jobId, k, true);
+      if (v.ItemType == 7 || v.ItemType == 8) {
+        v.checked = true;
+        if (v.MechanicId == "" || v.MechanicId == null || v.MechanicId == undefined) {
+          $scope.getCheckRow(jobId, k, true);
+        }
       }
     });
+    $scope.jobTabList[jobId].collapse = true;
   }
 
   $scope.changeValueCheckBox = function (mechanicId, checked) {
@@ -178,12 +208,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
   // end
 
-  // toggle for single row
-  this.isShow = false;
-  $scope.toggleJobRow = function (param) {
-    // console.log(param)
-    this.isShow = !this.isShow;
-  }
 
 
   $scope.openTypeModal = function (name, item, id) {
@@ -545,7 +569,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         } else {
           common.notifySuccess("Success!!!");
         }
-        if(params) {
+        if (params) {
           if (params.id) {
             $state.transitionTo($state.current, params, {
               reload: false, inherit: false, notify: false, location: "replace"
@@ -556,7 +580,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         } else {
           $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
         }
-       
+
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
@@ -594,10 +618,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
           $state.transitionTo($state.current, params, {
             reload: false, inherit: false, notify: false, location: "replace"
           });
-        } else {          
+        } else {
           $state.reload();
         }
-       
+
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
