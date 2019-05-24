@@ -6,7 +6,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.VehiId = ($scope.WorkOrder && $scope.WorkOrder.WOVehicle && $scope.WorkOrder.WOVehicle.VehiId) ? $scope.WorkOrder.WOVehicle.VehiId : 0;
     $scope.template = "1";
-    $scope.templateSelected = {"Id": "01"};
+    $scope.templateSelected = { "Id": "01" };
     $scope.templateName = {};
     $scope.lstTemplate = [];
 
@@ -33,11 +33,22 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         }
     });
 
+    //if the form is modified => using $emit to send data
+    $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+        $scope.$emit('isSave', {
+            item: "checkin",
+            modified: modified,
+            data: formCtrl.$name
+        }
+        );
+    });
+
+
     //<editor-fold desc="listTemplateType">
     $scope.listTemplateType = function () {
         $scope.base64Encode = "";
         common.spinner(true);
-        HttpService.postDataWithCache('/checkin/template-type', {VehiId: $scope.VehiId}).then(function (response) {
+        HttpService.postDataWithCache('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
             $scope.lstTemplate = response;
             if ($scope.lstTemplate.length > 0) {
                 $scope.templateSelected = $scope.lstTemplate[0];
@@ -77,7 +88,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         $scope.base64Encode = "";
         common.spinner(true);
         if ($scope.templateName != "") {
-            HttpService.postData('/checkin/template', {name: $scope.templateName}).then(function (response) {
+            HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {

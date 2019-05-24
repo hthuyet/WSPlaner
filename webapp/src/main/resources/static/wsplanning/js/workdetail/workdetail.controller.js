@@ -205,7 +205,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
-
         $rootScope.$on('isSave', function (evt, obj) {
             console.log(obj);
             if (obj.item) {
@@ -236,7 +235,26 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 $state.transitionTo($state.current, params, {
                     reload: false, inherit: false, notify: false, location: "replace"
                 });
-            } else {
+            } else if ($scope.tabActive == "checkin") {
+                $rootScope.$on('isSave', function (evt, obj) {
+                    console.log(obj);
+                    if (obj.modified) {
+                        openConfirmSaveTab(obj.item, $stateParams.tab);
+                    } else {
+                        $scope.tabActive = tabActive;
+                        var params = {
+                            locale: $stateParams.locale,
+                            type: $stateParams.type,
+                            id: $stateParams.id,
+                            tab: $scope.tabActive
+                        };
+                        $state.transitionTo($state.current, params, {
+                            reload: false, inherit: false, notify: false, location: "replace"
+                        });
+                    }
+                });
+            }
+            else {
                 openConfirmSaveTab($scope.tabActive, tabActive);
             }
         }
@@ -383,7 +401,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
 
-    
+
 
 });
 
