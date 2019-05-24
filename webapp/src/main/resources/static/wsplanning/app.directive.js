@@ -232,6 +232,8 @@ function autoComplete($compile, $timeout) {
                 return;
             }
 
+            $scope.$parent.jobTabList[$scope.index].Complaint = $scope.complaint;
+
             $scope.hideCombo = false;
 
             // var data = getTextPredict(string);
