@@ -10,17 +10,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     $scope.templateName = {};
     $scope.lstTemplate = [];
 
-    $scope.CheckIn = {
-        'templateSelected': { "Id": "01" },
-        'data': {
-            'Mileage': ($scope.WorkOrder && $scope.WorkOrder.Mileage) ? $scope.WorkOrder.Mileage : 0,
-            'Remark': "",
-            'legalText': "",
-        },
-        'color': "green"
-    }
-
-
     $scope.boundingBox = {
         "width": 900,
         "height": 336,
@@ -45,7 +34,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
 
     $scope.$watch("color", function (newValue, oldValue) {
-        if (newValue != oldValue || newValue != "green") {
+        if (newValue != oldValue) {
             console.log(newValue);
             $timeout(function () {
                 angular.element('#btnUpdateColor').triggerHandler('click');
@@ -55,6 +44,11 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             }
             );
 
+        } else if (newValue != "green") {
+            $scope.$emit('isSave', {
+                modified: true,
+            }
+            );
         } else {
             $scope.$emit('isSave', {
                 modified: false,
@@ -64,59 +58,46 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     });
 
     $scope.$watch("templateSelected", function (newValue, oldValue) {
-        if (angular.equals($scope.originalTemplateSelected, oldValue) || angular.equals($scope.originalTemplateSelected, newValue)) {
-            $scope.$emit('isSave', {
-                modified: false,
-            }
-            );
-        } else {
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
-        }
+        compareValue(newValue, oldValue, $scope.originalData.Mileage);
     });
 
     $scope.$watch("data.Mileage", function (newValue, oldValue) {
-        if (angular.equals($scope.originalData.Mileage, oldValue) || angular.equals($scope.originalData.Mileage, newValue)) {
-            $scope.$emit('isSave', {
-                modified: false,
-            }
-            );
-        } else {
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
-        }
+        compareValue(newValue, oldValue, $scope.originalData.Mileage);
     });
 
-    $scope.$watch("data.Remark", function (newValue, oldValue) {
-        if (angular.equals($scope.originalData.Remark, oldValue) || angular.equals($scope.originalData.Remark, newValue)) {
-            $scope.$emit('isSave', {
-                modified: false,
-            }
-            );
-        } else {
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
+    function compareValue(newValue, oldValue, originalValue) {
+
+        switch (originalValue) {
+            case (originalValue != newValue):
+                $scope.$emit('isSave', {
+                    modified: true,
+                }
+                );
+                break;
+            case (originalValue != oldValue):
+                $scope.$emit('isSave', {
+                    modified: true,
+                }
+                );
+                break;
+            default:
+                $scope.$emit('isSave', {
+                    modified: false,
+                }
+                );
+                break;
         }
+
+    }
+
+    $scope.$watch("data.Remark", function (newValue, oldValue) {
+        compareValue(newValue, oldValue, $scope.originalData.Remark);
+       
     });
 
     $scope.$watch("data.legalText", function (newValue, oldValue) {
-        if (angular.equals($scope.originalData.legalText, oldValue) || angular.equals($scope.originalData.legalText, newValue)) {
-            $scope.$emit('isSave', {
-                modified: false,
-            }
-            );
-        } else {
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
-        }
+        compareValue(newValue, oldValue, $scope.originalData.legalText);
+     
     });
 
 
