@@ -12,4 +12,14 @@ UserWebApp.controller('SearchVehicleModalCtrl', function ($scope, $rootScope, Ht
     $uibModalInstance.dismiss('cancel');
   };
 
+  //ThuyetLV
+  $rootScope.$on('openSearchVehicle', function () {
+    try {
+      $(".firstFocus").focus();
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
+
 });

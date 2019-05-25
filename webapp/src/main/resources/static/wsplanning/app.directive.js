@@ -250,6 +250,7 @@ function autoComplete($compile, $timeout) {
             lstData.then(function (res) {
                 var data = res;
                 $scope.filterText = data;
+                console.log($scope.filterText);
             })
         }
 
