@@ -28,13 +28,13 @@
                 <!--BODY-->
                 <tbody>
                     <tr ng-repeat="item in Read track by $index">
-                        <td class="text-center" style="white-space: nowrap">
+                        <td class="text-center col-xs-2" style="white-space: nowrap">
                             {{item.Created | date:'dd-MMMM-yyyy'}}<br />
                             {{item.Created | date:'HH:mm:ss'}}
                         </td>
-                        <td class="text-center">{{item.SmanName}}</td>
+                        <td class="text-center col-xs-1">{{item.SmanName}}</td>
 <!--                        <td class="text-center">{{item.WorkOrderId}}</td>-->
-                        <td class="text-center">{{item.Note}}</td>
+                        <td class="text-center col-xs-3">{{item.Note}}</td>
                         <!-- <td class="text-center" style="width: 10%">
                             <span>
                                 <a class="btn btn-primary"

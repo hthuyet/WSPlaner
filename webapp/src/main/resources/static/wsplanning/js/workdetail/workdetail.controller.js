@@ -15,7 +15,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.WorkOrderData = WorkOrder.data;
     $scope.WorkOrder = WorkOrder.data;
 
-
+  
     console.log($scope.WorkOrder);
 
     loadCommon();
@@ -69,6 +69,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
         });
 
+       
     }
 
 

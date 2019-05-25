@@ -21,22 +21,22 @@
                         <th class="text-center col-xs-1">{{'from' | translate }}</th>
 <!--                        <th class="text-center col-xs-1">{{'workOrder' | translate }}</th>-->
                         <th class="text-center col-xs-3">{{'message' | translate }}</th>
-                        <th class="text-center col-xs-1">{{'action' | translate }}</th>
+                        <th class="text-center col-xs-2">{{'action' | translate }}</th>
                     </tr>
                 </thead>
 
                 <!--BODY-->
                 <tbody>
                     <tr ng-repeat="item in UnRead track by $index">
-                        <td style="white-space: nowrap" class="text-left">
+                        <td style="white-space: nowrap" class="text-left col-xs-2">
                             {{item.Created | date:'dd-MMMM-yyyy'}}<br/>
                             {{item.Created | date:'HH:mm:ss'}}
                         </td>
-                        <td class="text-left">{{item.SmanName}}</td>
+                        <td class="text-left col-xs-1">{{item.SmanName}}</td>
 <!--                        <td class="text-center">{{item.WorkOrderId}}</td>-->
-                        <td class="text-left">{{item.Note}}</td>
-                        <td class="text-center">
-                            <div class="btn-group">
+                        <td class="text-left col-xs-3">{{item.Note}}</td>
+                        <td class="text-center col-xs-2">
+                            <div class="btn-notification btn-group">
                                 <button class="btn btn-primary" id="btnReply" type="button"
                                     ng-click="openReplyNotification($index)">{{'btnReply' | translate}}</button>
                                 <button class="btn btn-primary" id="btnMarkRead" type="button" ng-click="markRead(item, $index)" data-popup="tooltip"

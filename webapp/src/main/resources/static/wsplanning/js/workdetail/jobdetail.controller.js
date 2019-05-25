@@ -8,7 +8,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
   var lstIndex = [];
-
+  var suppliers = [];
   var jobsList = [];
   $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
@@ -16,12 +16,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
 
   $scope.toggleAllJobs = function () {
     if ($scope.isShow == true) {
-        $scope.isShow = false;
-        angular.forEach($scope.jobTabList, function (v, k) {
-            v.collapse = false;
-          // $scope.toggleJobRow(v);
-        });
+      $scope.isShow = false;
+      angular.forEach($scope.jobTabList, function (v, k) {
+        console.log(k);
+        v.collapse = false;
+        console.log(v.collapse)
+        // $scope.toggleJobRow(v);
+      });
     } else {
+      $scope.isShow = !$scope.isShow;
       angular.forEach($scope.jobTabList, function (v, k) {
         $scope.toggleJobRow(v);
       });
@@ -115,6 +118,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     CommonServices.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
     });
+    
+    CommonServices.getSuppliers().then(function (res) {
+      console.log(res);
+      suppliers = res;
+    });
+
 
     WorkOrderService.getStamping().then(function (res) {
 
@@ -127,6 +136,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
       item.collapse = false;
     });
     console.log($scope.jobTabList);
+
   }
 
   $scope.getClass = function (param, mechanicId) {
@@ -188,7 +198,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
         }
       }
     });
-    $scope.jobTabList[jobId].collapse = true;
+    $scope.jobTabList[jobId].collapse = false;
   }
 
   $scope.changeValueCheckBox = function (mechanicId, checked) {
@@ -257,6 +267,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
             vehiId: $scope.jobParams.VehiId,
             itemType: item
           };
+        },
+        suppliers:function () {
+          return suppliers;
         }
       }
     });

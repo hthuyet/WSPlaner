@@ -4,8 +4,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   var EmployeeData = $("#EmployeeData").data("employee");
 
-
-
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];

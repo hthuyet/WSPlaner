@@ -26,6 +26,26 @@ UserWebApp
     this.taskType = [];
     this.taskSeries = [];
 
+    this.lstSuppliers = [];
+
+    this.getSuppliers = function () {
+      var d = $q.defer();
+      if(!this.lstSuppliers || this.lstSuppliers.length <= 0) {
+        HttpService.getData('/site/getSuppliers', {}).then(function (response) {
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+          this.lstSuppliers = response;
+          d.resolve(response);
+        }, function error (response) {
+           d.reject();
+        })
+      } else {
+        d.resolve(this.lstSuppliers);
+      }
+      return d.promise;
+    }
+
+
+
     this.getTaskTypes = function () {
       var d = $q.defer();
       if (!this.taskType || this.taskType.length <= 0) {

@@ -1,14 +1,19 @@
-UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, WorkOrderService, $uibModalInstance, item, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, suppliers, CommonServices, WorkOrderService, $uibModalInstance, item, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
   // $scope.WorkOrderId = $stateParams.id;
   // $scope.type = $stateParams.type;
 
   var $ctrl = this;
-
+  console.log(suppliers);
+  $scope.suppliers = [];
+  $scope.suplNo = "";
+  $scope.itemType = item.itemType;
   $scope.textTreeList = [];
 
   checkTitle(item.itemType);
 
+
   function checkTitle(itemType) {
+    $scope.suppliers = suppliers;
     switch (itemType) {
       case 1:
         $translate('Spare').then(function (spare) {
@@ -27,9 +32,10 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
       case 4:
         $translate('SubContractors').then(function (subContractors) {
           $scope.title = subContractors;
+
         }, function (translationId) {
           $scope.title = translationId;
-        })
+        });
         return $scope.title;
       case 7:
         $translate('Labour').then(function (labour) {
@@ -50,6 +56,13 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     }
   }
 
+  $scope.chooseSub = function () {
+    if ($scope.listItem) {
+      angular.forEach($scope.lstData, function (v, k) {
+        v.SuplNo = $scope.suplNo;
+      });
+    }
+  }
 
   $scope.hide = item.itemType;
 
@@ -61,6 +74,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   };
 
   $scope.isChecked = function (item, checked) {
+
     console.log(checked);
     var index = 0;
     var lengthList = $scope.listItem.length;
@@ -213,7 +227,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     }, function (err) {
       console.log(err);
       common.spinner(false);
-    })
+    });
   }
 
   $scope.strItem = "";
@@ -228,9 +242,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   //ThuyetLV
   $rootScope.$on('openServiceItem_' + item.itemType, function () {
-    try{
+    try {
       $(".firstFocus").focus();
-    }catch (e) {
+    } catch (e) {
       console.error(e);
     }
 

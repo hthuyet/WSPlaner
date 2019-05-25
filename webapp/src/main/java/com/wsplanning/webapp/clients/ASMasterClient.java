@@ -298,6 +298,12 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getSuppliers
+    public String getSuppliers() {
+        String url = String.format("%s?command=getSuppliers", this.endpointUrl);
+        return restTemplate.getForObject(url, String.class);
+    }
+
     //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getVHCTemplates&param1=102&param2=3222
     public String getVHCTemplates(String siteId, String vehiId) {
         String url = String.format("%s?command=getVHCTemplates&param1=%s&param2=%s", this.endpointUrl, siteId, vehiId);

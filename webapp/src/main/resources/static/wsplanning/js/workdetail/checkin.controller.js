@@ -20,7 +20,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         'color': "green"
     }
 
-    
+
     $scope.boundingBox = {
         "width": 900,
         "height": 336,
@@ -34,8 +34,8 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.color = "green";
     //</editor-fold>
-	
-	copyObject();
+
+    copyObject();
 
     function copyObject() {
         $scope.originalTemplateSelected = angular.copy($scope.templateSelected);
@@ -62,8 +62,8 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             );
         }
     });
-	
-	 $scope.$watch("templateSelected", function (newValue, oldValue) {
+
+    $scope.$watch("templateSelected", function (newValue, oldValue) {
         if (angular.equals($scope.originalTemplateSelected, oldValue) || angular.equals($scope.originalTemplateSelected, newValue)) {
             $scope.$emit('isSave', {
                 modified: false,
@@ -77,15 +77,43 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         }
     });
 
-    $scope.$watch("data", function (newValue, oldValue) {
-       if (angular.equals($scope.originalData, oldValue) || angular.equals($scope.originalData, newValue) ) {
+    $scope.$watch("data.Mileage", function (newValue, oldValue) {
+        if (angular.equals($scope.originalData.Mileage, oldValue) || angular.equals($scope.originalData.Mileage, newValue)) {
             $scope.$emit('isSave', {
-                modified: true,
+                modified: false,
             }
             );
         } else {
             $scope.$emit('isSave', {
+                modified: true,
+            }
+            );
+        }
+    });
+
+    $scope.$watch("data.Remark", function (newValue, oldValue) {
+        if (angular.equals($scope.originalData.Remark, oldValue) || angular.equals($scope.originalData.Remark, newValue)) {
+            $scope.$emit('isSave', {
                 modified: false,
+            }
+            );
+        } else {
+            $scope.$emit('isSave', {
+                modified: true,
+            }
+            );
+        }
+    });
+
+    $scope.$watch("data.legalText", function (newValue, oldValue) {
+        if (angular.equals($scope.originalData.legalText, oldValue) || angular.equals($scope.originalData.legalText, newValue)) {
+            $scope.$emit('isSave', {
+                modified: false,
+            }
+            );
+        } else {
+            $scope.$emit('isSave', {
+                modified: true,
             }
             );
         }
@@ -219,7 +247,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             }
             console.log($scope.WorkOrder);
             $scope.$emit('isSave', {
-                      
+
                 modified: false,
             }
             );
@@ -230,13 +258,10 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 });
             } else {
                 if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-                    location.reload();                
+                    location.reload();
                 }
             }
-            // if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-            //     location.reload();
-            // } else {
-            // }
+
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
             console.log(err);

@@ -473,4 +473,15 @@ public class CommonController extends BaseController {
       return parseException(e);
     }
   }
+
+  @GetMapping("/site/getSuppliers")
+  public ResponseEntity getSuppliers() {
+    try {
+      String rtn = asMasterClient.getSuppliers();
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
 }

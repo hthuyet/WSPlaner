@@ -78,6 +78,16 @@
                         <button type="submit" ng-click="doSearch()" class="btn btn-icon btn-default"><i
                                 class="icon-search4"></i></button>
                     </div>
+                    <div ng-show="itemType == 4" class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">{{ 'serv' | translate }}</label>
+                            <div class="col-xs-8">
+                                <select class="form-control" ui-select2 ng-model="suplNo" ng-click="chooseSub()"
+                                    ng-options="item.Id as item.Name for item in suppliers">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
