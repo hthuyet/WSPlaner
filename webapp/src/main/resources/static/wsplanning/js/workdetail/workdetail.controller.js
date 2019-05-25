@@ -255,6 +255,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
         });
 
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("openSearchVehicle", {});
+        });
+
         modalInstance.result.then(function (selectedItem) {
             // $scope.WOVehicle = selectedItem;
             $scope.jobObject.VehiId = selectedItem.VehiId
@@ -286,6 +290,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
         });
 
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("openSearchCustomer", {});
+        });
+
         modalInstance.result.then(function (selectedItem) {
             $scope.WOCustomer = selectedItem;
             $scope.jobObject.CustNo = selectedItem.CustNo
@@ -309,6 +317,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 }
             }
 
+        });
+
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("openSearchContact", {});
         });
 
         modalInstance.result.then(function (selectedItem) {

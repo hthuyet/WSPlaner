@@ -6,8 +6,10 @@
             <small>{{ 'taskOpen' | translate }}</small>
 
             <span style="width: 350px; margin-left: 100px;">
-                  <label><input type="checkbox" ng-model="assignTome" ng-change="changeAssign()" style="margin-right: 5px;">{{'AssignedMe' | translate }}</label>
-                  <label><input type="checkbox" ng-model="assignByme" ng-change="changeAssign()" style="margin-right: 5px;margin-left: 30px;">{{'AssignedByMe' | translate }}</label>
+                  <label><input type="checkbox" ng-model="assignTome" ng-change="changeAssign()"
+                                style="margin-right: 5px;">{{'AssignedMe' | translate }}</label>
+                  <label><input type="checkbox" ng-model="assignByme" ng-change="changeAssign()"
+                                style="margin-right: 5px;margin-left: 30px;">{{'AssignedByMe' | translate }}</label>
             </span>
         </h6>
         <div class="heading-elements">
@@ -38,13 +40,13 @@
                 <tbody>
                 <tr ng-repeat="item in lstData">
                     <td>
-                        {{item.Started | date:'dd-MMMM-yyyy HH:mm:ss'}}
+                        {{item.Started | date:'dd-MMMM-yyyy HH:mm:ss'}}<br/>
                         {{item.SmanName }}
                     </td>
                     <td>{{item.Header}}</td>
                     <td>
-                        {{item.TaskType}}
-                        {{item.TaskTypeDescription}}
+                        {{item.TaskType}}<br/>
+                        {{item.TaskTypeDescription}}<br/>
                         {{item.CreatedByName }}
                     </td>
                     <td>{{item.TaskCustomer.FName}} {{item.TaskCustomer.LName}}</td>
@@ -53,8 +55,14 @@
                     <td>{{item.WorkOrderNo}}</td>
                     <td>{{item.Body}}</td>
                     <td>
-                        <button ng-click="markDone(item,'markDone')" title="{{'markDone' | translate }}" >{{'markDone' | translate }}</button>
-                        <button ng-show="item.TaskSeriesFlag > 0" ng-click="markDone(item,'markSeriesDone')" title="{{'markSeriesDone' | translate }}">{{'markSeriesDone' | translate }}</button>
+                        <div class="btn-notification btn-group">
+                            <button class="btn btn-primary" type="button" ng-click="markDone(item,'markDone')"
+                                    data-popup="tooltip"
+                                    title="{{'markDone' | translate }}"><i class=" icon-file-check"></i></button>
+                            <button ng-show="item.TaskSeriesFlag > 0" class="btn btn-danger" type="button"
+                                    ng-click="markDone(item,'markSeriesDone')" data-popup="tooltip"
+                                    title="{{'markSeriesDone' | translate }}"><i class=" icon-file-check"></i></button>
+                        </div>
                     </td>
                 </tr>
                 <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">

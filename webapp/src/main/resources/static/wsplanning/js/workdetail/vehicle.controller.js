@@ -34,6 +34,10 @@ UserWebApp.controller('VehicleCtrl', function ($scope, $rootScope, HttpService, 
       }
     });
 
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openSearchVehicle", {});
+    });
+
     modalInstance.result.then(function (selectedItem) {
       $ctrl.selected = selectedItem;
     }, function () {

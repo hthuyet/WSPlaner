@@ -124,4 +124,14 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
         $uibModalInstance.close(selectedItem);
     }
 
+    //ThuyetLV
+    $rootScope.$on('openSearchCustomer', function () {
+        try {
+            $(".firstFocus").focus();
+        } catch (e) {
+            console.error(e);
+        }
+
+    });
+
 })

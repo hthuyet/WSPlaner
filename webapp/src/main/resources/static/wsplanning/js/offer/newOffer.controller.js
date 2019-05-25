@@ -243,6 +243,16 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
     $uibModalInstance.close(selectedItem);
   }
 
+  //ThuyetLV
+  $rootScope.$on('openSearchVehicle', function () {
+    try {
+      $(".firstFocus").focus();
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
+
 })
 
 
@@ -279,6 +289,16 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
   $scope.doPick = function (selectedItem) {
     $uibModalInstance.close(selectedItem);
   }
+
+  //ThuyetLV
+  $rootScope.$on('openSearchCustomer', function () {
+    try {
+      $(".firstFocus").focus();
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
 
 })
 
@@ -323,6 +343,16 @@ UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale,
   $scope.doPick = function (selectedItem) {
     $uibModalInstance.close(selectedItem);
   }
+
+  //ThuyetLV
+  $rootScope.$on('openSearchContact', function () {
+    try {
+      $(".firstFocus").focus();
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
 
 })
 
