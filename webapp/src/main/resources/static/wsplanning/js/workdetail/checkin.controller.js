@@ -1,4 +1,4 @@
-UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout, $window, $element) {
+UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout, $window, $element) {
 
     //<editor-fold desc="Variable">
     $scope.imgTemplate = "";
@@ -213,7 +213,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            
+
             if (params) {
                 $scope.$emit('isSave', {
 
