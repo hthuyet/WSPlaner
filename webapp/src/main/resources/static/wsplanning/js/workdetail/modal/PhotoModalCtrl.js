@@ -98,7 +98,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                 $scope.$apply(function () {
                     var obj = jobAttachments();
                     var dataUrl = ""
-                    obj.AttachType = "PIC";
+                    obj.AttachType = "Picture";
                     obj.AttachTypeDescription = "";
                     obj.FileDescription = "";
 
@@ -134,7 +134,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
             // $scope.lstphoto = $scope.lstphoto.concat(selectedItem)
             angular.forEach(selectedItem, function (v, k) {
                 var obj = jobAttachments();
-                obj.AttachType = "PIC";
+                obj.AttachType = "Picture";
                 obj.dataUrl = v;
                 var dataUrl = v.split(',');
                 obj.ImageData = dataUrl[1];
