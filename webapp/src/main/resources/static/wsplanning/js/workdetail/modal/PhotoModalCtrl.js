@@ -95,7 +95,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                 $scope.$apply(function () {
                     var obj = jobAttachments();
                     var dataUrl = ""
-                    obj.AttachType = "PIC";
+                    obj.AttachType = "Picture";
                     obj.AttachTypeDescription = "";
                     obj.FileDescription = "";
 

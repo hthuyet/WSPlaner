@@ -179,7 +179,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             templateMark.FileName = $scope.templateName;
             templateMark.dataUrl = template.dataUrl;
             templateMark.ImageData = template.dataUrl.replace("data:image/png;base64,", "");
-            templateMark.AttachType = "PIC";
+            templateMark.AttachType = "ConditionReport";
             templateMark.AttachTypeDescription = "";
             templateMark.FileDescription = "";
             list[i++] = templateMark;
@@ -192,7 +192,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
             sign.FileName = "Signature_of_customer.png";
             sign.dataUrl = signCanvas.dataUrl;
             sign.ImageData = signCanvas.dataUrl.replace("data:image/png;base64,", "");
-            sign.AttachType = "PIC";
+            sign.AttachType = "Signature";
             sign.AttachTypeDescription = "";
             sign.FileDescription = "";
             list[i++] = sign;
