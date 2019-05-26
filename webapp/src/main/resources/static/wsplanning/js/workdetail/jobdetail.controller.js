@@ -118,7 +118,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     CommonServices.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
     });
-    
+
     CommonServices.getSuppliers().then(function (res) {
       console.log(res);
       suppliers = res;
@@ -268,7 +268,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
             itemType: item
           };
         },
-        suppliers:function () {
+        suppliers: function () {
           return suppliers;
         }
       }
@@ -972,7 +972,7 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
 });
 
 UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderService,
-  $uibModalInstance, CommonServices, $rootScope, HttpService) {
+  $uibModalInstance, CommonServices, $rootScope, $timeout, HttpService) {
 
   var $ctrl = this;
   // console.log(data);
@@ -1042,12 +1042,16 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
 
   $scope.strItem = "";
 
+  $scope.setFocus = function () {
+
+  }
+
   $scope.addTextLine = function (sub, mainGroup) {
-    // var textLine = sub.Name;
     $scope.jobChecked.SubGroup = sub.Name;
     $scope.jobChecked.MainGroup = mainGroup;
-    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name + "\n";
-  }
+    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name + "\n" ;
+    angular.element('#text-message').focus();
+  };
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');

@@ -36,6 +36,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
 
     function loadPhoto(data) {
         if (data.jobAttachments && data.jobAttachments.length > 0 && data.jobAttachments[0].ImageData) {
+
             common.spinner(true);
             angular.forEach(data.jobAttachments, function (v, k) {
                 if(v.ImageData) {
@@ -43,6 +44,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                     $scope.lstphoto.push(dataUrl);
                 }
             })
+            console.log( $scope.lstphoto);
             common.spinner(false);
         }else {
             var RowId = -1;
@@ -72,7 +74,8 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                     obj.dataUrl = "data:image/webp;base64," + v.ImageData;
                     $scope.lstphoto.push(obj.dataUrl);
                     $scope.lstAttachment.push(obj);
-                })
+                });
+                console.log( $scope.lstphoto);
                 common.spinner(false)
             }, function (err) {
                 console.log(err);

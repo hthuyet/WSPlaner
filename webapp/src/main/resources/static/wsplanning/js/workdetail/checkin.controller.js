@@ -213,13 +213,15 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
                 common.notifySuccess("Success!!!");
             }
             console.log($scope.WorkOrder);
-            $scope.$emit('isSave', {
-
-                modified: false,
-            }
-            );
+            
             if (params) {
+                $scope.$emit('isSave', {
+
+                    modified: false,
+                }
+                );
                 console.log(params);
+                console.log($state.current);
                 $state.transitionTo($state.current, params, {
                     reload: false, inherit: false, notify: false, location: "replace"
                 });
@@ -238,7 +240,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
 
     //Save from button header
-    $rootScope.$on('saveCheckin', function (event, obj) {
+    $scope.$on('saveCheckin', function (event, obj) {
         $scope.onSubmitForm(obj.item);
     });
     //</editor-fold>

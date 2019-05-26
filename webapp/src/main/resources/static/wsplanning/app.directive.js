@@ -20,17 +20,17 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
     .directive('ngCamera', ngCamera)
     .directive('checkboxDirective', checkboxDirective)
     .directive('afterRender', ['$timeout', function ($timeout) {
-            var def = {
-                restrict: 'A',
-                terminal: false,
-                transclude: false,
-                link: function (scope, element, attrs) {
-                    $timeout(scope.$eval(attrs.afterRender), 0);
-                }
+        var def = {
+            restrict: 'A',
+            terminal: false,
+            transclude: false,
+            link: function (scope, element, attrs) {
+                $timeout(scope.$eval(attrs.afterRender), 0);
             }
-            return def;
+        }
+        return def;
 
-        }]
+    }]
     ).directive('autoComplete', autoComplete);
 
 convertToNumberDirective.$inject = [];
@@ -59,7 +59,7 @@ function dlKeyCode() {
 
                 if (keyCode == $attrs.code) {
                     $scope.$apply(function () {
-                        $scope.$eval($attrs.dlKeyCode, {$event: event});
+                        $scope.$eval($attrs.dlKeyCode, { $event: event });
                     });
 
                 }
@@ -75,7 +75,7 @@ function ngFiles($parse) {
         link: function (scope, element, attrs) {
             var onchange = $parse(attrs.ngFiles);
             element.on('change', function (eve) {
-                onchange(scope, {$files: eve.target.files})
+                onchange(scope, { $files: eve.target.files })
             })
         }
     }
@@ -141,7 +141,7 @@ function ngCamera() {
                 var constraints = {
                     audio: false,
                     video: {
-                        optional: [{sourceId: videoSources[cameraIndex]}]
+                        optional: [{ sourceId: videoSources[cameraIndex] }]
                     }
                 };
 
@@ -187,6 +187,7 @@ function checkboxDirective($compile) {
     }
 }
 
+
 function inputType($compile) {
     return {
         restrict: 'EA',
@@ -227,7 +228,7 @@ function autoComplete($compile, $timeout) {
         $scope.hideCombo = true;
         $scope.complete = function (string) {
             console.log(string);
-            if (string.trim().length  < 3) {
+            if (string.trim().length < 3) {
                 $scope.filterText = [];
                 $scope.fillTextBox($scope.complaint);
                 return;
@@ -254,9 +255,9 @@ function autoComplete($compile, $timeout) {
             })
         }
 
-        $scope.checkKeyPress = function(event){
+        $scope.checkKeyPress = function (event) {
             console.log(event.keyCode);
-            if(event.keyCode === 27 || event.keyCode === 13){
+            if (event.keyCode === 27 || event.keyCode === 13) {
                 //ESC
                 $scope.fillTextBox($scope.complaint);
             }
@@ -506,7 +507,7 @@ function drawing2() {
 
             // some variables we'll need ..
             var drawing = false;
-            var mousePos = {x: 0, y: 0};
+            var mousePos = { x: 0, y: 0 };
             var lastPos = mousePos;
 
             // helper functions ..
@@ -760,7 +761,7 @@ function signaturePad($interval, $timeout, $window) {
                     $scope.updateModel();
 
                     // notify that drawing has ended
-                    $scope.notifyDrawing({drawing: false});
+                    $scope.notifyDrawing({ drawing: false });
                 };
 
                 $scope.updateModel = function () {
@@ -831,7 +832,7 @@ function signaturePad($interval, $timeout, $window) {
             canvas.height = height;
 
             if (scope.color) {
-                scope.signaturePad = new SignaturePad(canvas, {penColor: scope.color});
+                scope.signaturePad = new SignaturePad(canvas, { penColor: scope.color });
             } else {
                 scope.signaturePad = new SignaturePad(canvas);
             }
@@ -901,7 +902,7 @@ function signaturePad($interval, $timeout, $window) {
             function onTouchstart(event) {
                 scope.$apply(function () {
                     // notify that drawing has started
-                    scope.notifyDrawing({drawing: true});
+                    scope.notifyDrawing({ drawing: true });
                 });
                 event.preventDefault();
             }
@@ -912,7 +913,7 @@ function signaturePad($interval, $timeout, $window) {
                     scope.updateModel();
 
                     // notify that drawing has ended
-                    scope.notifyDrawing({drawing: false});
+                    scope.notifyDrawing({ drawing: false });
 
 
                 });
