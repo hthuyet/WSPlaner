@@ -34,31 +34,26 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
 
     $scope.$watch("color", function (newValue, oldValue) {
+        var modified = false;
         if (newValue != oldValue) {
             console.log(newValue);
             $timeout(function () {
                 angular.element('#btnUpdateColor').triggerHandler('click');
             });
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
-
+            modified = true;
         } else if (newValue != "green") {
-            $scope.$emit('isSave', {
-                modified: true,
-            }
-            );
+            modified = true;
         } else {
-            $scope.$emit('isSave', {
-                modified: false,
-            }
-            );
+            modified = false;
         }
+        $scope.$emit('isSave', {
+            modified: modified,
+        }
+        );
     });
 
     $scope.$watch("templateSelected", function (newValue, oldValue) {
-        compareValue(newValue, oldValue, $scope.originalData.Mileage);
+        compareValue(newValue, oldValue, $scope.originalTemplateSelected);
     });
 
     $scope.$watch("data.Mileage", function (newValue, oldValue) {
@@ -66,38 +61,29 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     });
 
     function compareValue(newValue, oldValue, originalValue) {
-
-        switch (originalValue) {
-            case (originalValue != newValue):
-                $scope.$emit('isSave', {
-                    modified: true,
-                }
-                );
-                break;
-            case (originalValue != oldValue):
-                $scope.$emit('isSave', {
-                    modified: true,
-                }
-                );
-                break;
-            default:
-                $scope.$emit('isSave', {
-                    modified: false,
-                }
-                );
-                break;
+        console.log(typeof newValue);
+        var modified = false;
+        if (angular.equals(newValue, {}) && !angular.equals(newValue, originalValue)) {
+            modified = false;
+        } else if (!angular.equals(newValue, originalValue)) {
+            modified = true;
+        } else {
+            modified = false;
         }
-
+        $scope.$emit('isSave', {
+            modified: modified,
+        }
+        );
     }
 
     $scope.$watch("data.Remark", function (newValue, oldValue) {
         compareValue(newValue, oldValue, $scope.originalData.Remark);
-       
+
     });
 
     $scope.$watch("data.legalText", function (newValue, oldValue) {
         compareValue(newValue, oldValue, $scope.originalData.legalText);
-     
+
     });
 
 
