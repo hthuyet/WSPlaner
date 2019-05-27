@@ -9,10 +9,23 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
         loadData(true);
     });
 
-    $scope.assignTome = true;
-    $scope.assignByme = false;
+    $scope.lstType = [
+        {
+            Id: '01',
+            Name: 'Assign To Me'
+        },
+        {
+            Id: '02',
+            Name: 'Assign By Me'
+        },
+    ]
 
-    $scope.changeAssign = function(){
+    $scope.assign = "01";
+
+    // $scope.assignTome = true;
+    // $scope.assignByme = false;
+
+    $scope.changeAssign = function () {
         loadData(true);
     }
 
@@ -29,14 +42,25 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
     }
 
     function loadData(count) {
+        var toMe = true;
+        var byMy = false;
+        if ($scope.assign) {
+            if ($scope.assign == "01") {
+                toMe = true;
+                byMy = false;
+            } else {
+                toMe = false;
+                byMy = true;
+            }
+        }
         common.spinner(true);
         var params = {
             "page": $scope.page,
             "limit": $scope.limit,
             "SmanId": $scope.SmanId,
-            "bIsOpen": "false",
-            "AssignToMe": $scope.assignTome,
-            "AssignByMe": $scope.assignByme,
+            "bIsOpen": "true",
+            "AssignToMe": toMe,
+            "AssignByMe": byMy,
         };
 
         HttpService.postData('/tasklist/getdata', params).then(function (response) {
@@ -97,7 +121,7 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
     //</editor-fold>
 
 
-    $scope.createTask = function (call,vehicle) {
+    $scope.createTask = function (call, vehicle) {
         $rootScope.cancelReload = true;
         var modalInstance = $uibModal.open({
             animation: true,

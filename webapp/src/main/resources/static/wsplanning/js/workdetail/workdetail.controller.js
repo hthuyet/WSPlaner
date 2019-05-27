@@ -210,8 +210,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             id: $stateParams.id,
             tab: $scope.tabActive
         };
-        if ($state.current.name == "app.main.wo") {
-            params.action = $stateParams.action;
+        if ($state.current.name == "app.main.newwo") {
+            // params.action = $stateParams.action;
         }
         $state.transitionTo($state.current, params, {
             reload: false, inherit: false, notify: false, location: "replace"

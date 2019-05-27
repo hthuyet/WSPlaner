@@ -1,4 +1,4 @@
-angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootScope, $state,$timeout, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootScope, $state, $timeout, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
     $scope.code = "";
 
     var EmployeeData = $("#EmployeeData").data("employee");
@@ -7,24 +7,24 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
     }
 
     $scope.toogleOpenTask = function () {
-        $rootScope.$broadcast("toogleOpenTask", {"item": {}});
+        $rootScope.$broadcast("toogleOpenTask", { "item": {} });
     }
 
     $scope.toogleCloseTask = function () {
-        $rootScope.$broadcast("toogleCloseTask", {"item": {}});
+        $rootScope.$broadcast("toogleCloseTask", { "item": {} });
     }
 
     $rootScope.cancelReload = false;
     $scope.reload = function () {
         console.log($state.current);
-        if($state.current.name != "app.main.tasklist"){
+        if ($state.current.name != "app.main.tasklist") {
             $rootScope.cancelReload = true;
             return;
         }
         if ($rootScope.cancelReload) {
             return;
         }
-        $rootScope.$broadcast("reload", {"item": {}});
+        $rootScope.$broadcast("reload", { "item": {} });
         $timeout(function () {
             $scope.reload();
         }, 30000);
@@ -32,14 +32,14 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
     };
     $scope.reload();
 
-    $scope.onRefresh = function(){
+    $scope.onRefresh = function () {
         common.spinner(true);
         $rootScope.cancelReload = false;
-        $rootScope.$broadcast("reload", {"item": {}});
-        $timeout(common.spinner(false),1000);
+        $rootScope.$broadcast("reload", { "item": {} });
+        $timeout(common.spinner(false), 1000);
     }
 
-    $scope.markDone = function(item,action){
+    $scope.markDone = function (item, action) {
         common.spinner(true);
         item.action = action;
         HttpService.postData('/tasklist/saveTask', item).then(function (response) {

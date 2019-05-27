@@ -184,8 +184,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
         })
 
-        .state('app.main.wo', {
-            url: 'workdetail/wo/:type/:action/:tab',
+        .state('app.main.newwo', {
+            url: 'workdetail/newwo/:type/:action/:tab',
             params: {
                 tab: "header",
             },

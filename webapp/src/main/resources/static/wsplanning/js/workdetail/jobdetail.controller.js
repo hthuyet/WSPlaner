@@ -132,11 +132,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
       console.log(err);
     });
 
-    $scope.jobTabList.map((item) => {
-      item.collapse = false;
-    });
-    console.log($scope.jobTabList);
-
+    if ($scope.jobTabList) {
+      $scope.jobTabList.map((item) => {
+        item.collapse = false;
+      });
+      console.log($scope.jobTabList);
+    }
   }
 
   $scope.getClass = function (param, mechanicId) {
@@ -1049,7 +1050,7 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
   $scope.addTextLine = function (sub, mainGroup) {
     $scope.jobChecked.SubGroup = sub.Name;
     $scope.jobChecked.MainGroup = mainGroup;
-    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name + "\n" ;
+    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name + "\n";
     angular.element('#text-message').focus();
   };
 
