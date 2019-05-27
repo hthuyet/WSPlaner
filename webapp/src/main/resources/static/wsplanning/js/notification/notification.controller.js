@@ -162,6 +162,10 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, Wo
       }
     });
 
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openNotify", {});
+    });
+
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
       $scope.UnRead[id].Note = $scope.UnRead[id].Note + "\n" + selectedItem.text;
@@ -294,5 +298,14 @@ UserWebApp.controller('ReplyNotificationCtrl', function ($scope,
     $uibModalInstance.close($scope.target);
   }
 
+  //ThuyetLV
+  $rootScope.$on('openNotify', function () {
+    try {
+      $(".firstFocus").focus();
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
 
 });

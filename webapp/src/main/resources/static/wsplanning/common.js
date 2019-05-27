@@ -515,10 +515,14 @@ function formatDateToApi(date) {
 }
 
 function dateFromStringWithTimeZone(input) {
+  var date;
   if (input.endsWith("Z")) {
-    return new Date(input.substring(0, input.length - 1));
+    date =  new Date(input.substring(0, input.length - 1));
   }
-  return new Date(input);
+  date = new Date(input);
+  var timezone = 0 - new Date().getTimezoneOffset();
+  var rtn = moment(date).add(0-timezone, 'minutes').toDate();
+  return rtn;
 }
 
 function formatDateToYYYYMMDD000000(date) {
