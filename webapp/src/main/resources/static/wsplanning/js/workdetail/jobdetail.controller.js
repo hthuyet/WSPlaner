@@ -132,9 +132,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
       console.log(err);
     });
 
-    $scope.jobTabList.map((item) => {
-      item.collapse = false;
-    });
+    if($scope.jobTabList) {
+      $scope.jobTabList.map((item) => {
+          item.collapse = false;
+        })
+      ;
+    }
     console.log($scope.jobTabList);
 
   }
