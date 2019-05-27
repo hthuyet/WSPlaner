@@ -282,7 +282,7 @@ UserWebApp.controller('ReplyNotificationCtrl', function ($scope,
   // console.log(item);
 
   $scope.target = {
-    'employee': item.CreatedBy,
+    'employee': item.SmanName,
     'smanId': item.SmanId
   }
 

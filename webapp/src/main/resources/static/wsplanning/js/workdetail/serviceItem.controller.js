@@ -58,7 +58,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
 
   $scope.chooseSub = function () {
     if ($scope.listItem) {
-      angular.forEach($scope.lstData, function (v, k) {
+      angular.forEach($scope.listItem, function (v, k) {
         v.SuplNo = $scope.suplNo;
       });
     }
@@ -102,6 +102,11 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
     if ($scope.hide === 8) {
       $uibModalInstance.close($scope.strItem);
     } else {
+      if ($scope.listItem) {
+        angular.forEach($scope.listItem, function (v, k) {
+          v.SuplNo = $scope.suplNo;
+        });
+      }
       $uibModalInstance.close($scope.listItem);
     }
   }
