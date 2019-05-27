@@ -69,6 +69,11 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
             selectable: true,
             select: function (selectionInfo) {
                 console.log(selectionInfo);
+
+                // $timeout(function () {
+
+
+                // return;
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_resource.html',
@@ -139,6 +144,9 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
                     }
                 }, function () {
                 });
+
+                // });
+
             },
             eventClick: function (info) {
                 evenClick(info);
