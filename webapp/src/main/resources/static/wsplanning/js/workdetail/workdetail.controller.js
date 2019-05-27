@@ -223,6 +223,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
+        $scope.$broadcast('isCollapsed');
 
         if ($scope.tabActive == "checkin") {
             if (isSave == true) {
