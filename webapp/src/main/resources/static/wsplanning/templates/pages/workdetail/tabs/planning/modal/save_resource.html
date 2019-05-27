@@ -18,22 +18,46 @@
         <div class="panel-body">
             <form class="form-horizontal form-search row">
                 <div class="row">
-                    <div class="col-xs-6 col-md-6" style="display: none;">
+                    <div class="col-xs-12 col-md-6"  style="display: none;">
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'startTimeBookPool' | translate }}</label>
                             <div class="col-xs-8">
-                                <input type="text" class="form-control" ng-model="$ctrl.data.sStart"
-                                       placeholder="{{ 'startTimeBookPool' | translate }}" id="startTimeBookPool2">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend"
+                                         ng-disabled="$ctrl.data.sStart=='00:00'"
+                                         ng-click="$ctrl.data.sStart = $ctrl.minus($ctrl.data.sStart)">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="text" class="form-control" ng-model="$ctrl.data.sStart"
+                                           placeholder="{{ 'startTimeBookPool' | translate }}" id="startTimeBookPool2">
+                                    <div class="input-group-append"
+                                         ng-disabled="$ctrl.data.sStart=='23:59'"
+                                         ng-click="$ctrl.data.sStart=$ctrl.plus($ctrl.data.sStart)">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-6 col-md-6" style="display: none;">
+                    <div class="col-xs-12 col-md-6" style="display: none;">
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'endTimeBookPool' | translate }}</label>
                             <div class="col-xs-8">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend"
+                                         ng-disabled="$ctrl.data.sEnd=='00:00'"
+                                         ng-click="$ctrl.data.sEnd = $ctrl.minus($ctrl.data.sEnd)">
+                                        <span class="input-group-text">$</span>
+                                    </div>
                                 <input type="text" class="form-control" ng-model="$ctrl.data.sEnd"
                                        placeholder="{{ 'endTimeBookPool' | translate }}">
+                                    <div class="input-group-append"
+                                         ng-disabled="$ctrl.data.sEnd=='23:59'"
+                                         ng-click="$ctrl.data.sEnd=$ctrl.plus($ctrl.data.sEnd)">
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,6 +66,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'startTimeBookPool' | translate }}</label>
                             <div class="col-xs-8">
+
                                 <input type="time" class="form-control"  ng-model="$ctrl.data.StartTime" pattern="[0-9]{2}:[0-9]{2}"
                                        placeholder="{{ 'startTimeBookPool' | translate }}" step="900" id="startTimeBookPool">
                             </div>
