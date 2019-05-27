@@ -210,12 +210,15 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             id: $stateParams.id,
             tab: $scope.tabActive
         };
+        console.log($state.current.name);
+        console.log($stateParams.action);
         if ($state.current.name == "app.main.newwo") {
-            // params.action = $stateParams.action;
+            params.action = $stateParams.action;
+        }else {
+            $state.transitionTo($state.current, params, {
+                reload: false, inherit: false, notify: false, location: "replace"
+            });
         }
-        $state.transitionTo($state.current, params, {
-            reload: false, inherit: false, notify: false, location: "replace"
-        });
     }
 
     $rootScope.WorkOrderOrg = {};
