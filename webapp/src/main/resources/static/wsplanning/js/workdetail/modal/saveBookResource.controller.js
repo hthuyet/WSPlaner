@@ -38,4 +38,63 @@ UserWebApp.controller('SaveBookPoolResourceCtrl', function ($scope, $rootScope, 
     $uibModalInstance.dismiss('cancel');
   };
 
+  var constPlus = 15;
+  $ctrl.minus = function (value) {
+    var tmp = value.split(":");
+    if(tmp.length === 2){
+      var hh = parseInt(tmp[0]);
+      var mm = parseInt(tmp[1]);
+      mm = parseInt(mm) - constPlus;
+      if(mm < 0){
+        if(hh > 0){
+          hh--;
+          mm = 60 + mm;
+        }else{
+          $ctrl.data.sStart = "00:00";
+          return;
+        }
+      }
+      var rtn = "";
+      if(hh < 10){
+        rtn += "0" + hh;
+      }else{
+        rtn += hh;
+      }
+      if(mm < 10){
+        rtn += ":0" + mm;
+      }else{
+        rtn += ":" + mm;
+      }
+      return rtn;
+    }
+  }
+  $ctrl.plus = function (value) {
+    var tmp = value.split(":");
+    if(tmp.length === 2){
+      var hh = parseInt(tmp[0]);
+      var mm = parseInt(tmp[1]);
+      mm = parseInt(mm)  + constPlus;
+      if(mm >= 60){
+        if(hh <=22){
+          hh++;
+          mm = mm-60;
+        }else{
+          $ctrl.data.sStart = "23:59";
+          return;
+        }
+      }
+      var rtn = "";
+      if(hh < 10){
+        rtn += "0" + hh;
+      }else{
+        rtn += hh;
+      }
+      if(mm < 10){
+        rtn += ":0" + mm;
+      }else{
+        rtn += ":" + mm;
+      }
+      return rtn;
+    }
+  }
 });
