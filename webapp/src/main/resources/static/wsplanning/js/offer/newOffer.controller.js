@@ -55,6 +55,10 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
       }
     });
 
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openSearchCustomer", {});
+    });
+
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
       $scope.WOCustomer = selectedItem;
