@@ -78,6 +78,10 @@ angular.module('UserWebApp').controller('CreateTaskModalCtrl', function ($scope,
             backdrop: 'static',
         });
 
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("openSearchCustomer", {});
+        });
+
         modalInstance.result.then(function (selectedItem) {
             console.log(selectedItem);
             $ctrl.TaskCustomer = selectedItem;
