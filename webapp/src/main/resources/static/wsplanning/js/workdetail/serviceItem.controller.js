@@ -102,11 +102,16 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
     if ($scope.hide === 8) {
       $uibModalInstance.close($scope.strItem);
     } else {
-      if ($scope.listItem) {
+      if($scope.hide === 4 && $scope.listItem) {
         angular.forEach($scope.listItem, function (v, k) {
           v.SuplNo = $scope.suplNo;
         });
       }
+      // if ($scope.listItem) {
+      //   angular.forEach($scope.listItem, function (v, k) {
+      //     v.SuplNo = $scope.suplNo;
+      //   });
+      // }
       $uibModalInstance.close($scope.listItem);
     }
   }
