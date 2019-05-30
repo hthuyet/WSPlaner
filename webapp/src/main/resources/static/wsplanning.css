@@ -686,6 +686,14 @@ div .btn-notification.btn-group {
   font-size: 16px !important;
 }
 
+#external {
+	position: relative;
+	left: 191px;
+    top: -45px;
+    transition: none 0s ease 0s;
+    cursor: pointer;
+}
+
 @media (min-width: 769px) {
   .main-content {
      max-height: 600px;
@@ -709,6 +717,14 @@ div .btn-notification.btn-group {
 div .btn-notification.btn-group {
   display: inline-flex;
   text-align: center;
+}
+
+#external {
+	position: relative;
+	left: 191px;
+    top: -45px;
+    transition: none 0s ease 0s;
+    cursor: pointer;
 }
 
 
@@ -768,6 +784,8 @@ div .btn-notification.btn-group {
   font-size: 19px;
 }
 
+
+
 /* end */
 
   .form-inline .form-group {
@@ -799,6 +817,14 @@ div .btn-notification.btn-group {
    div .btn-notification.btn-group {
     display: inline-flex;
     text-align: center;
+}
+
+#external {
+	position: relative;
+	left: 191px;
+    top: -45px;
+    transition: none 0s ease 0s;
+    cursor: pointer;
 }
 
 
@@ -879,6 +905,14 @@ div .btn-notification.btn-group {
 #template-canvas {
   padding: 10px;
   margin: 0px 10px !important;
+}
+
+#external {
+	position: relative;
+	left: 191px;
+    top: -45px;
+    transition: none 0s ease 0s;
+    cursor: pointer;
 }
 
 }
@@ -963,6 +997,15 @@ div .btn-notification.btn-group {
   display: inline-flex;
   text-align: center;
 }
+
+#external {
+	position: relative;
+	left: 191px;
+    top: -45px;
+    transition: none 0s ease 0s;
+    cursor: pointer;
+}
+
 }
 
 

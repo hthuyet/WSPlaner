@@ -1,4 +1,4 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
@@ -7,6 +7,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
   $scope.jobTabList = $scope.$parent.WOJobs;
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
+  $scope.externalUrl = [];
+
   var lstIndex = [];
   var suppliers = [];
   var jobsList = [];
@@ -98,12 +100,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     return initData;
   }
 
-  $scope.$on('isCollapsed', function(evt, obj) {
-    if($scope.jobTabList) {
+  $scope.$on('isCollapsed', function (evt, obj) {
+    if ($scope.jobTabList) {
       $scope.jobTabList.map((item) => {
-          item.collapse = false;
-        })
-      ;
+        item.collapse = false;
+      })
+        ;
     }
   })
 
@@ -140,14 +142,17 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
       console.log(err);
     });
 
-    if($scope.jobTabList) {
+    if ($scope.jobTabList) {
       $scope.jobTabList.map((item) => {
-          item.collapse = false;
-        })
-      ;
+        item.collapse = false;
+      })
+        ;
     }
     console.log($scope.jobTabList);
 
+    $scope.externalUrl = $scope.WorkOrder.ExternalURL;
+    console.log($scope.externalUrl);
+    $scope.externalUrl.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
   }
 
   $scope.getClass = function (param, mechanicId) {
@@ -217,6 +222,13 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
       checked = true;
       return checked;
     }
+  }
+
+  $scope.changeExternalUrl = function (item) {
+    if ($window.confirm('Do you really want to leave ?')) {
+      $window.open(item.URL);
+    }
+
   }
 
   //<editor-fold desc="Paging & Search Port">
