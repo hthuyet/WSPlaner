@@ -224,9 +224,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     }
   }
 
-  $scope.changeExternalUrl = function (item) {
+  $scope.changeExternalUrl = function (v) {
     if ($window.confirm('Do you really want to leave ?')) {
-      $window.open(item.URL);
+      if ($scope.externalUrl) {
+        var data = $scope.externalUrl.find(item => item.Id == v);
+        $window.open(data.URL);
+      }
     }
 
   }
