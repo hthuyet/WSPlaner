@@ -23,6 +23,7 @@ public class ServiceItemDTO {
     public Integer IGROUPID;
     public String VATCD;
     public String WorkGroupId;
+    public String Reference;
     public Number RecmTime;
     public Number SaleTime;
     public Number FactTime;

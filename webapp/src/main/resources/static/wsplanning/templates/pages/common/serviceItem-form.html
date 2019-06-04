@@ -165,7 +165,22 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary"
-        ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
-    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+    <div class="row">
+        <div class="col-xs-6">
+
+        </div>
+        <div class="col-xs-3" ng-show="isReference == true">
+            <div class="form-group">
+                <label class="control-label col-xs-4">{{ 'reference' | translate }}</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control" ng-model="reference">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 offset-xs-3">
+            <a class="btn btn-primary" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
+            <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+        </div>
+    </div>
+
 </div>

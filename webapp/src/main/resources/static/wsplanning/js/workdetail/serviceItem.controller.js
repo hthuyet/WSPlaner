@@ -3,11 +3,14 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
   // $scope.type = $stateParams.type;
 
   var $ctrl = this;
-  console.log(suppliers);
+  // console.log(suppliers);
   $scope.suppliers = [];
   $scope.suplNo = "";
   $scope.itemType = item.itemType;
   $scope.textTreeList = [];
+  $scope.isReference = false;
+  $scope.reference = "";
+
 
   checkTitle(item.itemType);
 
@@ -20,7 +23,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
           $scope.title = spare;
         }, function (translationId) {
           $scope.title = translationId;
-        })
+        });
+        $scope.isReference = true;
+        console.log($scope.reference);
         return $scope.title;
       case 2:
         $translate('NonStockItems').then(function (nonStockItems) {
@@ -36,13 +41,15 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
         }, function (translationId) {
           $scope.title = translationId;
         });
+        $scope.isReference = true;
         return $scope.title;
       case 7:
         $translate('Labour').then(function (labour) {
           $scope.title = labour;
         }, function (translationId) {
           $scope.title = translationId;
-        })
+        });
+        $scope.isReference = true;        
         return $scope.title;
 
       case 8:
@@ -50,7 +57,8 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
           $scope.title = textRows;
         }, function (translationId) {
           $scope.title = translationId;
-        })
+        });
+        $scope.isReference = true;
         return $scope.title;
 
     }
@@ -99,6 +107,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
   }
 
   $ctrl.save = function () {
+    if($scope.reference) {
+     $scope.$emit('reference', {'item': $scope.reference});
+    }
     if ($scope.hide === 8) {
       $uibModalInstance.close($scope.strItem);
     } else {
@@ -107,11 +118,6 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
           v.SuplNo = $scope.suplNo;
         });
       }
-      // if ($scope.listItem) {
-      //   angular.forEach($scope.listItem, function (v, k) {
-      //     v.SuplNo = $scope.suplNo;
-      //   });
-      // }
       $uibModalInstance.close($scope.listItem);
     }
   }

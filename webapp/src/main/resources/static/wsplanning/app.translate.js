@@ -349,6 +349,9 @@ var translationsEN = {
   clear: "Clear",
   AssignedMe: "Assigned to me",
   AssignedByMe: "Assigned by me",
+
+  //04062019
+  reference: 'Reference'
 };
 
 

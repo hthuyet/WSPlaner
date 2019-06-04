@@ -91,7 +91,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       UNITPR: 0,
       VATCD: null,
       WorkGroupId: null,
-      WorkType: ""
+      WorkType: "",
+      Reference:""
     }
     return item;
   }
@@ -130,7 +131,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     CommonServices.getSuppliers().then(function (res) {
-      console.log(res);
+      // console.log(res);
       suppliers = res;
     });
 
@@ -310,6 +311,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     modalInstance.result.then(function (selectedItem) {
       console.log($scope.jobTabList);
       console.log(id);
+      var reference = "";
+      $scope.$on('reference', function (event, obj) {
+         reference = obj.item;
+      })
       if (typeof (selectedItem) === "string") {
         if ($scope.jobTabList[id].Items == null) {
           var charactersObject = createItem();
@@ -317,6 +322,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
           charactersObject.ItemType = item;
           charactersObject.MechanicId = "";
           charactersObject.RowId = 0;
+          charactersObject.Reference = reference;
           $scope.jobTabList[id].Items = [];
           $scope.jobTabList[id].Items.push(charactersObject);
         }
@@ -326,6 +332,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
           charactersObject.ItemType = item;
           charactersObject.MechanicId = "";
           charactersObject.RowId = 0;
+          charactersObject.Reference = reference;
           $scope.jobTabList[id].Items.push(charactersObject);
         }
 
