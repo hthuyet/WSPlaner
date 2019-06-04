@@ -46,7 +46,7 @@ angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoa
                 name: 'workorderDetail',
                 files:
                     [
-                        '/assets/js/core/libraries/angularjs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js',
+                        '/assets/js/core/libraries/angularjs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js'
                     ]
             },{
                 name: 'modaltasklist',

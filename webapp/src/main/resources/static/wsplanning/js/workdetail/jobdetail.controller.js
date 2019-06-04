@@ -14,6 +14,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   var jobsList = [];
   $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
+  console.log($scope.lstButtonDetail);
+
+  angular.forEach($scope.lstButtonDetail, function (item) {
+    item.translate = $translate.instant(item.name);
+  });
+
   $scope.isShow = false;
 
   $scope.toggleAllJobs = function () {
@@ -268,6 +274,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       case "subcontractor": $scope.openServiceItem(4, id);
         break;
       case "nonstockitem": $scope.openServiceItem(2, id);
+        break;
+      case "package": $scope.openServiceItem(500, id);
         break;
       default:
         break;

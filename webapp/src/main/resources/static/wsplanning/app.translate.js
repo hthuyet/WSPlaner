@@ -80,6 +80,8 @@ var translationsEN = {
   btnAdd: "Add",
   btnAddWO: "+WO",
   btnAddOffer: "+Offer",
+  btnPackage: "Package",
+  btnAddTask: "Task",
   btnAddBook: "+Booking",
   btnDelete: "Delete",
   btnRefresh: "Refresh",

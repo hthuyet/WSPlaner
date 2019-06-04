@@ -16,42 +16,23 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
     $scope.suppliers = suppliers;
     switch (itemType) {
       case 1:
-        $translate('Spare').then(function (spare) {
-          $scope.title = spare;
-        }, function (translationId) {
-          $scope.title = translationId;
-        })
-        return $scope.title;
+        $scope.title = $translate.instant("Spare");
+        break;
       case 2:
-        $translate('NonStockItems').then(function (nonStockItems) {
-          $scope.title = nonStockItems;
-        }, function (translationId) {
-          $scope.title = translationId;
-        })
-        return $scope.title;
+        $scope.title = $translate.instant("NonStockItems");
+        break;
       case 4:
-        $translate('SubContractors').then(function (subContractors) {
-          $scope.title = subContractors;
-
-        }, function (translationId) {
-          $scope.title = translationId;
-        });
-        return $scope.title;
+        $scope.title = $translate.instant("SubContractors");
+        break;
       case 7:
-        $translate('Labour').then(function (labour) {
-          $scope.title = labour;
-        }, function (translationId) {
-          $scope.title = translationId;
-        })
-        return $scope.title;
-
+        $scope.title = $translate.instant("Labour");
+        break;
       case 8:
-        $translate('TextRows').then(function (textRows) {
-          $scope.title = textRows;
-        }, function (translationId) {
-          $scope.title = translationId;
-        })
-        return $scope.title;
+        $scope.title = $translate.instant("TextRows");
+        break;
+      case 500:
+        $scope.title = $translate.instant("package");
+        break;
 
     }
   }

@@ -65,8 +65,8 @@
                                                 <a class="btn btn-lg" ng-hide="!item.JobNo && btn.name == 'stamping'"
                                                     ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
                                                         data-popup="tooltip" data-placement="top"
-                                                        title="{{btn.text | translate}}"
-                                                        ng-attr-title=" {{btn.text | translate}} "
+                                                        title="{{btn.translate}}"
+                                                        ng-attr-title=" {{btn.translate}} "
                                                         ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
                                                         ng-class="btn.icon"></span></a>
                                             </li>

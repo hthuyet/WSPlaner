@@ -27,8 +27,8 @@
 
         <div class="heading-elements">
             <div class="heading-btn-group">
-                <button class="btn btn-link btn-float has-text text-size-small btnAdd" ng-click="openModalTasklist()">
-                    <i class="icon-plus2 text-indigo-400"></i><span>{{ 'btnAdd' | translate }}</span>
+                <button class="btn btn-icon btn-danger" ng-click="openModalTasklist()">
+                    <i class="icon-plus2"></i><span>{{ 'btnAddTask' | translate }}</span>
                 </button>
 
                 <button type="button" ng-show="tabActive == 'header'" ng-disabled="pristine == false && headerFrm.modified == false"
