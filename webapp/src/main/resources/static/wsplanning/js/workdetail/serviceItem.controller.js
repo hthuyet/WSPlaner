@@ -87,15 +87,24 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
   }
 
   $ctrl.save = function () {
-    if($scope.reference) {
-     $scope.$emit('reference', {'item': $scope.reference});
-    }
+
     if ($scope.hide === 8) {
+      if ($scope.reference) {
+        $scope.$emit('reference', { 'item': $scope.reference });
+      }
       $uibModalInstance.close($scope.strItem);
     } else {
-      if($scope.hide === 4 && $scope.listItem) {
+      if ($scope.hide === 4 && $scope.listItem) {
         angular.forEach($scope.listItem, function (v, k) {
           v.SuplNo = $scope.suplNo;
+          if ($scope.reference) {
+            v.Reference = $scope.reference;
+          }
+        });
+      }
+      if ($scope.hide == 1 && $scope.reference || $scope.hide == 7 && $scope.reference) {
+        angular.forEach($scope.listItem, function (v, k) {
+          v.Reference = $scope.reference;
         });
       }
       $uibModalInstance.close($scope.listItem);
