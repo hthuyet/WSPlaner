@@ -48,6 +48,12 @@ angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoa
                     [
                         '/assets/js/core/libraries/angularjs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js',
                     ]
+            },{
+                name: 'modaltasklist',
+                files:
+                    [
+                        '/wsplanning/js/tasklist/CreateTaskModalCtrl.js'
+                    ]
             }]
     });
 

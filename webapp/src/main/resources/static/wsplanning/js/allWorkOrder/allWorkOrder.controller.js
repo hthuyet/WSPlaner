@@ -275,6 +275,9 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
         $scope.doSearch();
       }
     }, function () {
+      if (Quagga){
+        Quagga.stop();
+      }
       console.log('Modal dismissed at: ' + new Date());
     });
   }

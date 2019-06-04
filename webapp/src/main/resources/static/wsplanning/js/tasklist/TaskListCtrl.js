@@ -61,6 +61,12 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
             controllerAs: '$ctrl',
             size: "full",
             resolve: {
+                TaskCustomer: function () {
+                    return {};
+                },
+                WorkOrderNo: function () {
+                    return null;
+                }
             }
         });
 

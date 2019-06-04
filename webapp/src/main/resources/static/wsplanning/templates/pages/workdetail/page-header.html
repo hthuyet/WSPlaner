@@ -27,6 +27,10 @@
 
         <div class="heading-elements">
             <div class="heading-btn-group">
+                <button class="btn btn-link btn-float has-text text-size-small btnAdd" ng-click="openModalTasklist()">
+                    <i class="icon-plus2 text-indigo-400"></i><span>{{ 'btnAdd' | translate }}</span>
+                </button>
+
                 <button type="button" ng-show="tabActive == 'header'" ng-disabled="pristine == false && headerFrm.modified == false"
                         id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="saveForm(tabActive)">
                     <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>

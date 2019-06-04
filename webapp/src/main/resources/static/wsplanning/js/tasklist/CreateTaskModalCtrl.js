@@ -1,9 +1,10 @@
 angular.module('UserWebApp').controller('CreateTaskModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal,
-                                                                    $uibModalInstance, $timeout, CommonServices) {
+                                                                    $uibModalInstance, $timeout, CommonServices,TaskCustomer,WorkOrderNo) {
     $scope.data = {};
     $scope.data.Id = "0";
     $scope.data.action = "insert";
     $scope.data.Started = new Date();
+    $scope.data.WorkOrderNo = WorkOrderNo;
 
     $scope.lstTaskType = [];
     $scope.lstTaskSeries = [];
@@ -65,7 +66,8 @@ angular.module('UserWebApp').controller('CreateTaskModalCtrl', function ($scope,
 
     //Modal
     var $ctrl = this;
-    $ctrl.TaskCustomer = null;
+    $ctrl.TaskCustomer = TaskCustomer;
+    $scope.data.TaskCustomer = $ctrl.TaskCustomer ;
     $ctrl.animationsEnabled = true;
 
     $ctrl.openSearchCustomer = function (size, item) {

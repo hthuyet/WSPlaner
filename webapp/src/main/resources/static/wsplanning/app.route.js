@@ -193,7 +193,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load("workorderDetail");
+                    return $ocLazyLoad.load(["workorderDetail","modaltasklist"]);
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     return {data: {}};
@@ -222,7 +222,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load("workorderDetail");
+                    return $ocLazyLoad.load(["workorderDetail","modaltasklist"]);
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     common.spinnerFirstLoad(true);

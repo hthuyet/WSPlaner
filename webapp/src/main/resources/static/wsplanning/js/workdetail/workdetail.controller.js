@@ -386,6 +386,38 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
 
+    $scope.openModalTasklist = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/wsplanning/templates/pages/common/create-task.html',
+            controller: 'CreateTaskModalCtrl',
+            controllerAs: '$ctrl',
+            size: "full",
+            resolve: {
+                TaskCustomer: function () {
+                    if($scope.WorkOrder.WOCustomer){
+                        return $scope.WorkOrder.WOCustomer;
+                    }else{
+                        return {};
+                    }
+                },
+                WorkOrderNo: function () {
+                    if($scope.WorkOrder.WorkOrderNo){
+                        return $scope.WorkOrder.WorkOrderNo;
+                    }else{
+                        return null;
+                    }
+                }
+            }
+        });
+
+        modalInstance.result.then(function (value) {
+            console.log(value);
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    }
+
 });
 
 UserWebApp.controller('ConfirmSaveTabCtrl', function ($scope, $uibModalInstance) {
