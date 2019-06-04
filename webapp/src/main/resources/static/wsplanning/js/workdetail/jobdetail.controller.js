@@ -150,9 +150,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     }
     console.log($scope.jobTabList);
 
-    $scope.externalUrl = $scope.WorkOrder.ExternalURL;
-    console.log($scope.externalUrl);
-    $scope.externalUrl.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+    if ($scope.WorkOrder.ExternalURL) {
+      $scope.externalUrl = $scope.WorkOrder.ExternalURL;
+      console.log($scope.externalUrl);
+      $scope.externalUrl.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+    }
+
   }
 
   $scope.getClass = function (param, mechanicId) {

@@ -18,7 +18,7 @@
                                 <h5 ng-show="jobParams.VHCLink"><b><a
                                             ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h5>
 
-                                <select class="form-control" id="external" ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
+                                <select class="form-control" id="external" ng-show="externalUrl.length > 0" ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
                                     ng-options="o.Id as o.Name for o in externalUrl"></select>
 
                             </div>
