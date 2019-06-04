@@ -15,7 +15,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.WorkOrderData = WorkOrder.data;
     $scope.WorkOrder = WorkOrder.data;
 
-  
+
     console.log($scope.WorkOrder);
 
     loadCommon();
@@ -69,7 +69,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
         });
 
-       
+
     }
 
 
@@ -214,7 +214,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         console.log($stateParams.action);
         if ($state.current.name == "app.main.newwo") {
             params.action = $stateParams.action;
-        }else {
+        } else {
             $state.transitionTo($state.current, params, {
                 reload: false, inherit: false, notify: false, location: "replace"
             });
@@ -395,18 +395,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             size: "full",
             resolve: {
                 TaskCustomer: function () {
-                    if($scope.WorkOrder.WOCustomer){
-                        return $scope.WorkOrder.WOCustomer;
-                    }else{
-                        return {};
-                    }
+                    return $scope.WorkOrder.WOCustomer ? $scope.WorkOrder.WOCustomer : {};
                 },
                 WorkOrderNo: function () {
-                    if($scope.WorkOrder.WorkOrderNo){
-                        return $scope.WorkOrder.WorkOrderNo;
-                    }else{
-                        return null;
-                    }
+                    return $scope.WorkOrder.WorkOrderNo ? $scope.WorkOrder.WorkOrderNo : null;
                 }
             }
         });
