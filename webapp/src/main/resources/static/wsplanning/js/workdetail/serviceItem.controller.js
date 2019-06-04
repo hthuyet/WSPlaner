@@ -19,47 +19,27 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
     $scope.suppliers = suppliers;
     switch (itemType) {
       case 1:
-        $translate('Spare').then(function (spare) {
-          $scope.title = spare;
-        }, function (translationId) {
-          $scope.title = translationId;
-        });
+        $scope.title = $translate.instant("Spare");
         $scope.isReference = true;
-        console.log($scope.reference);
-        return $scope.title;
+        break;
       case 2:
-        $translate('NonStockItems').then(function (nonStockItems) {
-          $scope.title = nonStockItems;
-        }, function (translationId) {
-          $scope.title = translationId;
-        })
-        return $scope.title;
+        $scope.title = $translate.instant("NonStockItems");
+        break;
       case 4:
-        $translate('SubContractors').then(function (subContractors) {
-          $scope.title = subContractors;
-
-        }, function (translationId) {
-          $scope.title = translationId;
-        });
+        $scope.title = $translate.instant("SubContractors");
         $scope.isReference = true;
-        return $scope.title;
+        break;
       case 7:
-        $translate('Labour').then(function (labour) {
-          $scope.title = labour;
-        }, function (translationId) {
-          $scope.title = translationId;
-        });
-        $scope.isReference = true;        
-        return $scope.title;
-
-      case 8:
-        $translate('TextRows').then(function (textRows) {
-          $scope.title = textRows;
-        }, function (translationId) {
-          $scope.title = translationId;
-        });
+        $scope.title = $translate.instant("Labour");
         $scope.isReference = true;
-        return $scope.title;
+        break;
+      case 8:
+        $scope.title = $translate.instant("TextRows");
+        $scope.isReference = true;
+        break;
+      case 500:
+        $scope.title = $translate.instant("package");
+        break;
 
     }
   }

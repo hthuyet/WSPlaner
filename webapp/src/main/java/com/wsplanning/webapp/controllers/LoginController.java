@@ -25,9 +25,6 @@ public class LoginController {
         if (token != null && !StringUtils.isBlank(token)) {
             return "redirect:/";
         }
-        //String listSite = siteClient.getSites();
-//        String referrer = request.getHeader("Referer");
-//        request.getSession().setAttribute("url_prior_login", referrer);
         return "login";
     }
 }

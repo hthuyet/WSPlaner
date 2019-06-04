@@ -12,7 +12,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-//        return "redirect:/mechanic";
         return "layouts/layout";
     }
 
