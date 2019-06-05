@@ -165,6 +165,7 @@
 </div>
 
 <div class="modal-footer position-right">
+
     <div class="row">
         <div class="col-xs-6">
 
@@ -177,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3 offset-xs-3">
+        <div ng-class="isReference ? 'col-xs-3' : 'col-xs-6'">
             <a class="btn btn-primary" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
             <a class="btn btn-default" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
         </div>

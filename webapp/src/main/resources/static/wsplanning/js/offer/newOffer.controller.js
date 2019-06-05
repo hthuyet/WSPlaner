@@ -1,7 +1,7 @@
 UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window, CommonServices) {
 
 
- 
+
   console.log($scope.typeWO);
 
   $scope.lstDepartment = [];
@@ -201,6 +201,7 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout,
   $state, $uibModal, $uibModalInstance, CommonServices) {
 
+  var type = '';
   var $ctrl = this;
   // console.log(item);
 
@@ -258,18 +259,19 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
   }
 
   $scope.reLoadWithWO = function (obj) {
+    $uibModalInstance.dismiss('cancel');
     $timeout(function () {
       $state.go('app.main.workdetail', {
         'locale': $rootScope.lang,
         'id': obj.WorkOrderId,
-        'type': "",
+        'type': 'allWO',
         'tab': 'job'
       });
     });
   }
 
   //ThuyetLV
-  $rootScope.$on('openSearchVehicle', function () {
+  $rootScope.$on('openSearchVehicle', function () {   
     try {
       $(".firstFocus").focus();
     } catch (e) {
