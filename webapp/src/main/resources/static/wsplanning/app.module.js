@@ -24,6 +24,12 @@ var UserWebApp = angular.module('UserWebApp', [
 angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
         modules: [{
+            name: 'scancode',
+            files:
+                [
+                    '/wsplanning/js/qrcode/html5-qrcode-master/lib/jsqrcode-combined.min.js',
+                ]
+        },{
             name: 'callCenter',
             files:
                 [

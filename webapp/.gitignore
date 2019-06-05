@@ -5,3 +5,5 @@ target
 .classpath
 .project
 .vscode/
+bower_components
+node_modules

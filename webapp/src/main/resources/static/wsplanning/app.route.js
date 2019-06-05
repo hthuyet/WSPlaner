@@ -41,6 +41,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             controller: "AllWorkOrdersCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
             resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["scancode"]);
+                }],
                 typeWO: function ($stateParams) {
                     return "todayWO";
                 }
@@ -53,6 +56,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             controller: "AllWorkOrdersCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
             resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["scancode"]);
+                }],
                 typeWO: function ($stateParams) {
                     return "unScheduledWO";
                 }
@@ -64,6 +70,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             controller: "AllWorkOrdersCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
             resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["scancode"]);
+                }],
                 typeWO: function ($stateParams) {
                     return "allWO";
                 }
