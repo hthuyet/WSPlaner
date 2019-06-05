@@ -15,8 +15,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="col-md-12">
-                        <input type="text" class="form-control firstFocus" autofocus ng-model="skey" placeholder="{{ 'search' | translate }}"
-                            code="13">
+                        <input type="text" class="form-control firstFocus" autofocus ng-model="skey"
+                            placeholder="{{ 'search' | translate }}" code="13">
                     </div>
                 </div>
 
@@ -43,26 +43,32 @@
                     <tr>
                         <th class="text-center">{{'LicenseNo' | translate}}</th>
                         <th class="text-center">{{'VIN' | translate}}</th>
-                        
+
                         <th class="text-center">{{'Model' | translate}}</th>
-                       
+
                         <th class="text-center">{{'CustNo' | translate}}</th>
                         <th class="text-center">{{'Name' | translate}}</th>
-                        
+
                         <th class="text-center">{{'Action' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in lstVehicles">
                         <td>{{item.LicenseNo}}</td>
-                        <td>{{item.VIN}}</td>
+                        <td>
+                            {{item.VIN}}<br />
+                            <span class="inline-WO" ng-show="item.OpenWorkOrders.length > 0">(</span> <a ng-click="reLoadWithWO(obj)"
+                                ng-repeat="obj in item.OpenWorkOrders track by $index">{{obj.WorkOrderNo}}&nbsp;<span>,</span>&nbsp;</a>
+                            <span class="inline-WO"  ng-show="item.OpenWorkOrders.length > 0">)</span>
+                        </td>
                         <td class="text-wrap">{{item.Make}}&nbsp;{{item.Model}} &nbsp;{{item.SubModel}}</td>
-                       
+
                         <td class="">{{item.PayerCustomer.CustNo}}</td>
                         <td class="text-wrap">{{item.PayerCustomer.FName}}&nbsp;{{item.PayerCustomer.LName}}</td>
 
                         <td class="text-center">
-                            <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i> {{'Pick' | translate}}</button>
+                            <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i>
+                                {{'Pick' | translate}}</button>
                         </td>
                     </tr>
 

@@ -39,6 +39,7 @@ UserWebApp.controller('VehicleCtrl', function ($scope, $rootScope, HttpService, 
     });
 
     modalInstance.result.then(function (selectedItem) {
+      // console.log(selectedItem);
       $ctrl.selected = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -47,6 +48,7 @@ UserWebApp.controller('VehicleCtrl', function ($scope, $rootScope, HttpService, 
 
 
   $rootScope.$on('chooseVehicle', function (event, obj) {
+    console.log(obj.item);
     $scope.WOVehicle = obj.item;
     $scope.WorkOrder.WOVehicle = $scope.WOVehicle;
   });

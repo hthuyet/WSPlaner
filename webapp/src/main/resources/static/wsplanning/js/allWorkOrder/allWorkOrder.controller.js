@@ -231,18 +231,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     });
   }
 
-  // $scope.newWorkorder = function () {
-  //   $state.go('app.main.newwo', { 'type': typeWO, 'action': "wo" });
-  // }
-
-  // $scope.newOffer = function () {
-  //   $state.go('app.main.newoffer', { 'type': typeWO, 'action': "offer" });
-  // }
-
-  // $scope.newBooking = function () {
-  //   $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
-  // }
-
   $scope.onRefresh = function () {
     $state.reload();
   }

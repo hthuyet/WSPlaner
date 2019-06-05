@@ -694,6 +694,10 @@ div .btn-notification.btn-group {
     cursor: pointer;
 }
 
+.inline-WO {
+  display: inline;
+}
+
 @media (min-width: 769px) {
   .main-content {
      max-height: 600px;

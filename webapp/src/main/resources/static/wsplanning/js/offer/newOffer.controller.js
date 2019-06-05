@@ -1,5 +1,9 @@
 UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window, CommonServices) {
 
+
+ 
+  console.log($scope.typeWO);
+
   $scope.lstDepartment = [];
   $scope.lstVisitReason = [];
   $scope.lstChargeCats = [];
@@ -19,7 +23,7 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 
   $ctrl.vehicle = function (size, item) {
     var modalInstance = $uibModal.open({
-      animation:  $ctrl.animationsEnabled ,
+      animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/newWO/modal/vehicle-form.html',
       controller: 'VehicleModalCtrl',
       controllerAs: '$ctrl',
@@ -27,8 +31,12 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.WOVehicle;
+          return $scope.typeWO;
+          // return $scope.WOVehicle;
         }
+        // typeWO: function (params) {
+        //   return $scope.typeWO;
+        // }
       }
     });
 
@@ -92,7 +100,7 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 
 
 
- 
+
   console.log($locale);
 
   $scope.dateOptions = {
@@ -114,7 +122,7 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
   }
 
 
-  
+
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'dd-MMMM-yyyy HH:mm:ss'];
   $scope.format = $scope.formats[4];
   console.log($scope.format);
@@ -190,10 +198,11 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 });
 
 
-UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
+UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout,
+  $state, $uibModal, $uibModalInstance, CommonServices) {
 
   var $ctrl = this;
+  // console.log(item);
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -204,8 +213,9 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
   function loadData(skey) {
     console.log(skey);
     CommonServices.getVehicles(skey).then(function (data) {
-      console.log(data);
+      // console.log(data);
       $scope.lstVehicles = data;
+
     }, function (error) {
       console.log(error);
     });
@@ -229,12 +239,12 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
       }
     });
 
-    modalInstance.rendered.then(function(){
+    modalInstance.rendered.then(function () {
       $rootScope.$broadcast("modalOpen", {});
     });
 
     modalInstance.result.then(function (value) {
-      if(value){
+      if (value) {
         $scope.params.skey = value;
         $scope.doSearch();
       }
@@ -245,6 +255,17 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
 
   $scope.doPick = function (selectedItem) {
     $uibModalInstance.close(selectedItem);
+  }
+
+  $scope.reLoadWithWO = function (obj) {
+    $timeout(function () {
+      $state.go('app.main.workdetail', {
+        'locale': $rootScope.lang,
+        'id': obj.WorkOrderId,
+        'type': "",
+        'tab': 'job'
+      });
+    });
   }
 
   //ThuyetLV
@@ -308,7 +329,7 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 
 
 UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, WorkOrderService ,item) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, WorkOrderService, item) {
 
 
 
