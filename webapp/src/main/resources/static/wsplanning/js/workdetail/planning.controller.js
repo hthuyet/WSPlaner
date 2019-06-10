@@ -133,6 +133,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 for (var i = 0; i < response.length; i++) {
                     date = new Date(response[i].WorkDay);
                     if (date.getDate() == startDate.getDate()) {
+                        response[i].Day = moment(startDate).format('ddd');
                         $scope.lstPlanning.push(response[i]);
                         found = true;
                         break;
@@ -143,6 +144,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                         "FreeCapacity": 0,
                         "FreeHour": 0,
                         "WorkDay": formatDateToYYYYMMDD000000(startDate),
+                        "Day": moment(startDate).format('ddd'),
                     });
                 }
                 startDate = moment(startDate).add('days', 1).toDate();

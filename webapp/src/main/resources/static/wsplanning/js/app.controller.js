@@ -43,6 +43,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
       var temp = value.CultureInfo.split("-");
       if (temp[0] === lang) {
         cultureInfo = value.CultureInfo;
+        moment.locale(cultureInfo.toLowerCase());
         tmhDynamicLocale.set(cultureInfo.toLowerCase());
       }
     });
@@ -130,6 +131,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
           $rootScope.currFlag = "/assets/images/flags/" + item.Flag;
           $rootScope.currName = item.Name;
           $rootScope.currLang = item.lang;
+          moment.locale(item.lang);
         } else {
           item.class = "";
         }
@@ -146,8 +148,6 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
   //
   $rootScope.$on("changeLanguage", function (event, data) {
     var newLang = data.lang;
-    console.log("-------On changeLanguage: " + newLang);
-
     angular.forEach($scope.lstLang, function (item) {
       var CultureInfo = item.CultureInfo;
       var tmp = CultureInfo.split("-");
@@ -160,6 +160,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
         $rootScope.currFlag = "/assets/images/flags/" + item.Flag;
         $rootScope.currName = item.Name;
         $rootScope.currLang = item.lang;
+        moment.locale(item.lang);
       } else {
         item.class = "";
       }

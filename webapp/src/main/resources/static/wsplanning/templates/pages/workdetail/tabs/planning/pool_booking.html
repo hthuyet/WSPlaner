@@ -14,7 +14,14 @@
                                 onclick="clickBooking(this)" ng-dblclick="detailBooking(item)"
                                 ng-click="detailBooking(item)">
                                 <div class="tablea" style="min-width: 130px;">
-                                    <div class="tr text-center">{{item.WorkDay | dateFormat}}</div>
+                                    <div class="tr text-center">
+                                        <div style="width: 25%;float: left;color:red;font-weight: bold;" class="tr text-left">
+                                         {{item.Day}}
+                                        </div>
+                                        <div style="width: 75%;float: left;" class="tr text-right">
+                                            {{item.WorkDay | dateFormat}}
+                                        </div>
+                                    </div>
                                     <div class="tr text-center">
                                         <div class="c100 p{{100 - item.FreeCapacity}} center">
                                             <span ng-show="item.FreeHour !== 0">{{100 - item.FreeCapacity}}%</span>

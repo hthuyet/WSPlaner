@@ -333,8 +333,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
           charactersObject.Reference = reference;
           $scope.jobTabList[id].Items = [];
           $scope.jobTabList[id].Items.push(charactersObject);
-        }
-        else {
+        } else {
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
