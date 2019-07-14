@@ -22,6 +22,7 @@ public class WOJobDTO {
     public String SubGroupId;
 	public String DiagnosticInfo ;
     public String SolutionInfo;
+    public Boolean PostPoned;
     public List<ServiceItemDTO> Items;
     public List<WOAttachmentDTO> JobAttachments;
     public List<DynamicDataDTO> AdditionalData;

@@ -5,6 +5,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
+  console.log($scope.jobTabList)
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
   $scope.externalUrl = [];
@@ -98,7 +99,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       VATCD: null,
       WorkGroupId: null,
       WorkType: "",
-      Reference:""
+      Reference: ""
     }
     return item;
   }
@@ -278,6 +279,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
         break;
       case "package": $scope.openServiceItem(500, id);
         break;
+      case "postponed": $scope.postponed(item, id);
+        break;
       default:
         break;
     }
@@ -286,6 +289,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.openNewTab = function (params) {
     $window.open($scope.jobParams.VHCLink);
   }
+
 
   // modal
   $ctrl.animationsEnabled = true;
@@ -321,7 +325,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       console.log(id);
       var reference = "";
       $scope.$on('reference', function (event, obj) {
-         reference = obj.item;
+        reference = obj.item;
       })
       if (typeof (selectedItem) === "string") {
         if ($scope.jobTabList[id].Items == null) {
@@ -694,6 +698,36 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.afterRender = function () {
     console.log("afterRender");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+  }
+
+  $scope.postponed = function (item, id) {
+    if (item.PostPoned == false) {
+      var postAction = "postPoneJob";
+      $scope.jobTabList[id].PostPoned = true;
+      $scope.WorkOrder.WOJobs = $scope.jobTabList;
+      var data = JSON.stringify($scope.WorkOrder)
+      common.btnLoading($(".btnSubmit"), true);
+      console.log($scope.WorkOrder);
+
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        common.btnLoading($(".btnSubmit"), false);
+        console.log(res);
+        if (res.data.Token && res.data.Token.ErrorDesc) {
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+        } else {
+          common.notifySuccess("Success!!!");
+        }
+        // $state.reload();
+
+      }, function (err) {
+        common.btnLoading($(".btnSubmit"), false);
+        console.log(err);
+        common.notifyError("Error!!!", err.status);
+      });
+    } else {
+      common.notifyWithMessage("This job was updated!!!")
+    }
+
   }
 
 

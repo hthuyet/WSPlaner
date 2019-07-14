@@ -136,6 +136,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $scope.WorkOrder.Token.EmployeeData = EmployeeData;
     }
     $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
+    $scope.cusInfo = {
+        custNo: WorkOrder.data.WOCustomer.CustNo,
+        lastName: WorkOrder.data.WOCustomer.LName,
+    }
 
     if ($scope.WorkOrder.ServiceDate == "" || $scope.WorkOrder.ServiceDate == "0001-01-01T00:00:00") {
         $scope.WorkOrder.ServiceDate = "";

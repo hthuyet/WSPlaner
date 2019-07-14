@@ -58,7 +58,7 @@
                         <td>
                             {{item.VIN}}<br />
                             <span class="inline-WO" ng-show="item.OpenWorkOrders.length > 0">(</span> <a ng-click="reLoadWithWO(obj)"
-                                ng-repeat="obj in item.OpenWorkOrders track by $index">{{obj.WorkOrderNo}}&nbsp;<span>,</span>&nbsp;</a>
+                                ng-repeat="obj in item.OpenWorkOrders track by $index" ng-show="siteId == obj.SiteId">{{obj.WorkOrderNo}}&nbsp;-&nbsp;{{obj.Reference}} <span>,</span>&nbsp;</a>
                             <span class="inline-WO"  ng-show="item.OpenWorkOrders.length > 0">)</span>
                         </td>
                         <td class="text-wrap">{{item.Make}}&nbsp;{{item.Model}} &nbsp;{{item.SubModel}}</td>

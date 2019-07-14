@@ -199,11 +199,13 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 
 
 UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout,
-  $state, $uibModal, $uibModalInstance, CommonServices) {
+  $state, $uibModal, $uibModalInstance, CommonServices, $cookies) {
 
   var type = '';
   var $ctrl = this;
   // console.log(item);
+
+  $scope.siteId = $cookies.get('siteId');
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -214,9 +216,18 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
   function loadData(skey) {
     console.log(skey);
     CommonServices.getVehicles(skey).then(function (data) {
-      // console.log(data);
+      console.log(data);
       $scope.lstVehicles = data;
-
+      angular.forEach(data, function (v, k) {
+        angular.forEach(v.OpenWorkOrders, function (value, key) {
+          console.log({
+            license: v.LicenseNo,
+            id: value.SiteId,
+            no: value.WorkOrderNo,
+            ref: value.Reference
+          });
+        });
+      });
     }, function (error) {
       console.log(error);
     });
@@ -271,7 +282,7 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
   }
 
   //ThuyetLV
-  $rootScope.$on('openSearchVehicle', function () {   
+  $rootScope.$on('openSearchVehicle', function () {
     try {
       $(".firstFocus").focus();
     } catch (e) {
