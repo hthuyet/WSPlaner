@@ -1,4 +1,4 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope, $window, $timeout, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
@@ -695,6 +695,23 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     console.log("afterRender");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
   }
+
+
+
+  //
+  JsBarcode("#barcode", "1234", {
+    format: "CODE39",
+    displayValue: true
+  });
+
+  $timeout(function () {
+    console.log("----change---");
+    JsBarcode("#barcode", "lethuyet1234567", {
+      format: "CODE39",
+      displayValue: true
+    });
+  },5000);
+
 
 
 });
