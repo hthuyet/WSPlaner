@@ -38,7 +38,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
             $scope.lstDepartmentSearch = $scope.lstDepartment.slice();
             $scope.lstDepartmentSearch.shift();
-            $scope.lstDepartmentSearch.unshift({"Id": "", "Name": $translate.instant('all')});
+            $scope.lstDepartmentSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
         });
         CommonServices.getVisitReasons().then(function (data) {
             $scope.lstVisitReason = data;
@@ -66,7 +66,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
             $scope.lstShiftSearch = $scope.lstShifts.slice();
             $scope.lstShiftSearch.shift();
-            $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
+            $scope.lstShiftSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
         });
 
 
@@ -134,12 +134,17 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $scope.WorkOrder.DeptId = EmployeeData.DeptId;
         $scope.WorkOrder.Token = tokenObject();
         $scope.WorkOrder.Token.EmployeeData = EmployeeData;
+        $scope.cusInfo = '';
+    }
+    else {
+        $scope.cusInfo = {
+            custNo: WorkOrder.data.WOCustomer.CustNo,
+            lastName: WorkOrder.data.WOCustomer.LName,
+        }
     }
     $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
-    $scope.cusInfo = {
-        custNo: WorkOrder.data.WOCustomer.CustNo,
-        lastName: WorkOrder.data.WOCustomer.LName,
-    }
+
+
 
     if ($scope.WorkOrder.ServiceDate == "" || $scope.WorkOrder.ServiceDate == "0001-01-01T00:00:00") {
         $scope.WorkOrder.ServiceDate = "";
@@ -273,15 +278,15 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
 
             if (selectedItem.PayerCustomer != null) {
-                $rootScope.$broadcast("choosePayerCustomer", {"item": selectedItem.PayerCustomer});
+                $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
                 $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
             }
 
             if (selectedItem.UserCustomer != null) {
-                $rootScope.$broadcast("chooseUserCustomer", {"item": selectedItem.UserCustomer});
+                $rootScope.$broadcast("chooseUserCustomer", { "item": selectedItem.UserCustomer });
                 // $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
             }
-            $rootScope.$broadcast("chooseVehicle", {"item": selectedItem});
+            $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
 
         }, function () {
         });
@@ -306,7 +311,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.WOCustomer = selectedItem;
             $scope.jobObject.CustNo = selectedItem.CustNo
 
-            $rootScope.$broadcast("chooseCustomer", {"item": selectedItem});
+            $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
         }, function () {
         });
     };
@@ -333,7 +338,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
         modalInstance.result.then(function (selectedItem) {
             $scope.WOContact = selectedItem;
-            $rootScope.$broadcast("chooseContact", {"item": selectedItem});
+            $rootScope.$broadcast("chooseContact", { "item": selectedItem });
         }, function () {
         });
     };
@@ -374,13 +379,13 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     //Submit tren header
     $scope.saveForm = function (type, params) {
         if (type == "header") {
-            $rootScope.$broadcast("saveHeader", {"item": params});
+            $rootScope.$broadcast("saveHeader", { "item": params });
         } else if (type == "job") {
-            $rootScope.$broadcast("saveJob", {"item": params});
+            $rootScope.$broadcast("saveJob", { "item": params });
         } else if (type == "planning") {
-            $rootScope.$broadcast("savePlanning", {"item": params});
+            $rootScope.$broadcast("savePlanning", { "item": params });
         } else if (type == "checkin") {
-            $rootScope.$broadcast("saveCheckin", {"item": params});
+            $rootScope.$broadcast("saveCheckin", { "item": params });
         }
     }
 
