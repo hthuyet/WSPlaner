@@ -63,13 +63,13 @@ public class BaseController {
 
   public String getSiteId() {
     String site = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_SITEID);
-    System.out.println("---site: " + site);
+//    System.out.println("---site: " + site);
     return site;
   }
 
   public String getToken() {
     String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
-    System.out.println("---token: " + token);
+//    System.out.println("---token: " + token);
     return token;
   }
 

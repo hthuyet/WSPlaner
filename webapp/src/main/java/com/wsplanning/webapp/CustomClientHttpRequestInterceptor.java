@@ -27,9 +27,7 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
             String token = getToken();
             if(StringUtils.isNotBlank(token)) {
                 HttpHeaders headers = httpRequest.getHeaders();
-                System.out.println("---------containsKey : "+ headers.containsKey("Token"));
                 if(!headers.containsKey("Token")) {
-                    System.out.println("--------Add token : " + token);
                     headers.set("Token", token);
                 }
             }
@@ -41,7 +39,6 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
 
     private String getToken() {
         String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
-        System.out.println("---token: " + token);
         return token;
     }
 }

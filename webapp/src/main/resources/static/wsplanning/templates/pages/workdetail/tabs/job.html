@@ -47,10 +47,6 @@
             </div>
 
             <div class="panel-body">
-
-                <svg id="barcode"></svg>
-                <br/><br/><br/>
-
                 <form name="jobTabFrm">
                     <div class="table-responsive main-content">
                         <div ng-repeat="item in jobTabList track by $index"
@@ -58,7 +54,7 @@
                             <span ng-show="!item.collapse">
                                 <div class="panel-heading">
                                     <h6 class="panel-title">
-
+                                        <svg id="barcode_{{item.RowId}}"></svg>
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
@@ -174,7 +170,7 @@
                             <span ng-show="item.collapse">
                                 <div class="panel-heading">
                                     <h6 class="panel-title">
-
+                                        <svg id="barcode_{{item.RowId}}"></svg>
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">

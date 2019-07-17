@@ -696,11 +696,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   });
 
   $scope.afterRender = function () {
-    console.log("afterRender");
+    console.log("------afterRender--------");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+    generateBarcode();
   }
 
   $scope.postponed = function (item, id) {
+
+    console.log("-------post----");
     if (item.PostPoned == false) {
       var postAction = "postPoneJob";
       $scope.jobTabList[id].PostPoned = true;
@@ -732,20 +735,26 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
 
 
-  //
-  JsBarcode("#barcode", "1234", {
-    format: "CODE39",
-    displayValue: true
-  });
+
+  //Barcode generate
+  function generateBarcode() {
+    if($scope.jobTabList && $scope.jobTabList.length > 0) {
+      var item = {};
+      for (var i = 0; i < $scope.jobTabList.length; i++) {
+        item = $scope.jobTabList[i];
+        JsBarcode("#barcode_" + item.RowId, item.JobBarCode, {
+          format: "CODE39",
+          displayValue: true
+        });
+
+      }
+    }
+  }
+
 
   $timeout(function () {
-    console.log("----change---");
-    JsBarcode("#barcode", "lethuyet1234567", {
-      format: "CODE39",
-      displayValue: true
-    });
-  },5000);
-
+    generateBarcode();
+  },0);
 
 
 });
