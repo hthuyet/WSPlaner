@@ -7,6 +7,8 @@
   /*background: #000000;*/
 /*}*/
 
+.icon-sort:before{content:"\ee45";}
+
 .haveWO{
   background-color: #93b6d2 !important;
 }

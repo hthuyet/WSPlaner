@@ -1,5 +1,11 @@
-UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO) {
-  $scope.typeWO = typeWO;
+UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, listField) {
+  $scope.typeWO = "allWO";
+  $scope.listField = listField;
+  $scope.sortable = {
+    name: "WorkOrderId",
+    direction: "asc",
+  };
+
 
   var EmployeeData = $("#EmployeeData").data("employee");
 
@@ -8,12 +14,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.lstSearch = [];
   $scope.totalElements = 0;
   $scope.lstbtnCommon = JSON.parse(localStorage.getItem('info_common'));
-  // $scope.params = {
-  //   "department": "300",
-  //   "trans": "W",
-  //   "visitReason": "03",
-  //   "serv": "",
-  // };
 
   $scope.buttonType = function (name) {
     var string = "app.main." + name;
@@ -110,7 +110,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
     var params = {
-      "ViewName": typeWO,
+      "ViewName": $scope.typeWO,
       "skey": $scope.params.skey,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -124,7 +124,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "ToDate": $scope.params.to,
     };
 
-    HttpService.postData('/wo/getWO', params).then(function (response) {
+    HttpService.postData('/wo/getGridWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
@@ -170,6 +170,22 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
   //</editor-fold>
 
+  $scope.sort = function(field){
+    if(field == $scope.sortable.name){
+      if($scope.sortable.direction == "desc"){
+        $scope.sortable.direction = "asc";
+      }else{
+        $scope.sortable.direction = "desc";
+      }
+    }else{
+      $scope.sortable = {
+        name: field,
+        direction: "desc",
+      };
+    }
+    loadData(false);
+  }
+
   $scope.onRefresh = function () {
     $scope.limit = '20';
     $scope.page = '1';
@@ -195,28 +211,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   //Modal
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
-
-  $ctrl.open = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/allWorkOrder/modal-form.html',
-      controller: 'AllWorkOrderModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      resolve: {
-        item: function () {
-          return item;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
 
   //function viewDetail
   $scope.viewDetail = function (item) {
@@ -332,24 +326,3 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
 
 });
-
-
-// Modal controller
-
-UserWebApp.controller('AllWorkOrderModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
-
-  var $ctrl = this;
-  $ctrl.item = item;
-  $ctrl.selected = item;
-
-  $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected);
-  };
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-});
-
-//end

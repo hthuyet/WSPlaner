@@ -163,7 +163,6 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     // you can lazy load files for an existing module
-                    console.log("----$ocLazyLoad----");
                     return $ocLazyLoad.load(
                         [
                             '/wsplanning/js/callcenter/CallCenterCtrl.js',
@@ -202,7 +201,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(["workorderDetail","modaltasklist"]);
+                    return $ocLazyLoad.load(["workorderDetail", "modaltasklist"]);
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     return {data: {}};
@@ -231,7 +230,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(["workorderDetail","modaltasklist"]);
+                    return $ocLazyLoad.load(["workorderDetail", "modaltasklist"]);
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     common.spinnerFirstLoad(true);
@@ -330,6 +329,37 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load("tasklist");
                 }]
+            }
+        })
+
+        //Grid List
+        .state('app.main.gridWO', {
+            url: 'gridWO',
+            controller: "GridWorkOrderCtrl",
+            templateUrl: '/wsplanning/templates/pages/gridWorkOrder/index.html',
+            resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load(["scancode", "gridWorkOrder"]);
+                }], listField: function () {
+                    return [{
+                        key: "WorkOrderId",
+                        name: "WorkOrder Id",
+                        order: true
+                    }, {
+                        key: "WorkOrderNo",
+                        name: "WorkOrder No",
+                        order: true
+                    }, {
+                        key: "Reference",
+                        name: "Reference"
+                    }, {
+                        key: "DeptId",
+                        name: "DeptId"
+                    }, {
+                        key: "TimeBarText",
+                        name: "TimeBar Text"
+                    }];
+                }
             }
         })
 

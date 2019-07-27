@@ -352,4 +352,15 @@ public class WOController extends BaseController {
             //TODO: handle exception
         }
     }
+
+    @PostMapping("/wo/getGridWO")
+    @ResponseBody
+    public ResponseEntity getGridWO(@RequestBody Map<String, String> params) {
+        try {
+            String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
+        } catch (Exception ex) {
+            return parseException(ex);
+        }
+    }
 }

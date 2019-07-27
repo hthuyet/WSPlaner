@@ -60,6 +60,14 @@ angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoa
                     [
                         '/wsplanning/js/tasklist/CreateTaskModalCtrl.js'
                     ]
+            },{
+                name: 'gridWorkOrder',
+                files:
+                    [
+                        '/wsplanning/js/allWorkOrder/ScanBarcodeModalCtrl.js',
+                        '/wsplanning/js/allWorkOrder/ScanQRcodeModalCtrl.js',
+                        '/wsplanning/js/gridWorkOrder/GridWorkOrderCtrl.js'
+                    ]
             }]
     });
 

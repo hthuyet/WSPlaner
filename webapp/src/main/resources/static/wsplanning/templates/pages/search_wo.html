@@ -1,9 +1,9 @@
 <!--SEARCH-->
 <div class="panel panel-white">
-    <div class="panel-heading" ng-click="toogleSearch()">
-        <h6 class="panel-title">
+    <div class="panel-heading">
+        <h6 class="panel-title"  ng-click="toogleSearch()">
             <i class="icon-search4 position-left" ng-click="toogleSearch()"></i>
-            <small>{{ 'search' | translate }}</small>
+            <small>{{ 'search' | translate }}</small> {{testObj[testName]}}
         </h6>
         <div class="heading-elements">
             <ul class="icons-list">
@@ -11,7 +11,7 @@
                     <i class="icon icon-cross" ng-click="resetSearch()"></i>
                 </li>
                 <li ng-click="toogleSearch()" title="{{ 'toogleSearch' | translate }}">
-                    <i class="icon icon-ctrl" ng-class="{'rotate-180': isShow == false}" ng-click="toogleSearch()"></i>
+                    <i class="icon icon-ctrl" ng-class="{'rotate-180': isShow == false}"></i>
                 </li>
             </ul>
         </div>
