@@ -65,6 +65,16 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         }
     }
 
+    $scope.totalColor = function(){
+        var totalHours = $filter('number')($scope.totalHours, 2);
+        var totalDurationPool = $filter('number')($scope.totalDurationPool, 2);
+        var totalDurationBooking = $filter('number')($scope.totalDurationBooking / 60, 2);
+        if(totalHours <= (totalDurationPool + totalDurationBooking)){
+            return "green";
+        }
+        return "black";
+    }
+
     $scope.WoResourcePoolDuration = [];
     $scope.BookedResourcesDuration = [];
 
@@ -250,13 +260,19 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     //Gen CSS cho cell (day in month)
     $scope.cellModifier = function (cell) {
+        $scope.setCss();
         cell.id = "cell_" + cell.date._d.getDate() + "_" + cell.date._d.getMonth();
         var length = $scope.lstMonth.length;
         var WorkDay = null;
         var date = new Date();
+        var now = new Date();
         for (var i = 0; i < length; i++) {
             WorkDay = $scope.lstMonth[i];
             date = new Date(WorkDay.WorkDay);
+            if (now.getMonth() == cell.date._d.getMonth() && now.getDate() == cell.date._d.getDate()) {
+                cell.cssClass = 'cal-day-today';
+                return;
+            }
             if (date.getMonth() == cell.date._d.getMonth() && date.getDate() == cell.date._d.getDate()) {
                 if (WorkDay.FreeCapacity >= 75) {
                     cell.cssClass = 'cap75';
@@ -264,11 +280,35 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                     cell.cssClass = 'cap50';
                 } else if (WorkDay.FreeCapacity <= 25) {
                     cell.cssClass = 'cap25';
+                }else{
+                    cell.cssClass = 'inherit';
                 }
                 return;
+            }else{
+                cell.cssClass = 'inherit';
             }
         }
     };
+
+    $scope.setCss = function(){
+        $('.cap25').css('background-color', "inherit");
+        $('.cap50').css('background-color', "inherit");
+        $('.cap75').css('background-color', "inherit");
+        $('.inherit').css('background-color', "inherit");
+        $('.cal-day-today').css('background-color', "#e8fde7");
+
+        var cssJobHeader = JSON.parse(localStorage.getItem("info_css_jobHeader"));
+        if(cssJobHeader && cssJobHeader.length > 0) {
+            var item;
+            for (var i = 0; i < cssJobHeader.length; i++) {
+                item = cssJobHeader[i];
+                $('.'+item.name).css('background-color', "inherit");
+                $('.'+item.name).css('background-color', item.value);
+            }
+        }
+
+
+    }
 
 
     $scope.onClickCal = function (item) {

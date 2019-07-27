@@ -164,8 +164,29 @@ public class ASMasterClient {
         JSONArray arrBtnDetail = new JSONArray();
         // JSONArray properties = new JSONArray();
         JSONObject obj = new JSONObject();
+
+        //ThuyetLV
+        JSONArray objJobHeader = new JSONArray();
         if (input == null) {
             System.out.println("not found");
+            JSONObject jsonItem = new JSONObject();
+            jsonItem.put("name", "free");
+            jsonItem.put("value", "white");
+            objJobHeader.put(jsonItem);
+
+            jsonItem.put("name", "booked");
+            jsonItem.put("value", "gray");
+            objJobHeader.put(jsonItem);
+
+            jsonItem.put("name", "cap50");
+            jsonItem.put("value", "#f2f4f4");
+            objJobHeader.put(jsonItem);
+
+            jsonItem.put("name", "cap25");
+            jsonItem.put("value", "#808b96");
+            objJobHeader.put(jsonItem);
+
+            obj.put("jobHeader", objJobHeader);
         } else {
             try {
                 prop_Auth.load(input);
@@ -199,50 +220,44 @@ public class ASMasterClient {
                 JSONObject objTimeout = new JSONObject();
                 JSONObject objBarcode = new JSONObject();
 
+
                 prop_Auth.forEach((key, value) -> {
-                    JSONObject jsonObject = new JSONObject();
-                    JSONObject objTab = new JSONObject();
+                    JSONObject jsonItem = new JSONObject();
                     String strKey = key.toString();
                     if (StringUtils.isNotBlank(strKey)) {
                         String[] subStr = strKey.split("\\.");
-                        if (subStr[0].contains("app")) {
-
-                            jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
-                            jsonObject.put("value", value.toString());
-                            jsonObject.put("name", subStr[2]);
-                            jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
-                            jsonArray.put(jsonObject);
-                        }
-                        if (subStr[0].contains("tab")) {
-
-                            objTab.put("name", subStr[2]);
-                            objTab.put("value", value.toString());
-                            objTab.put("ordinalNumber", Integer.parseInt(subStr[3]));
-                            arrayTab.put(objTab);
-                        }
-                        if (subStr[0].contains("timeout")) {
-
+                        if (StringUtils.startsWith(subStr[0],"app")) {
+                            jsonItem.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
+                            jsonItem.put("value", value.toString());
+                            jsonItem.put("name", subStr[2]);
+                            jsonItem.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            jsonArray.put(jsonItem);
+                        }else if (StringUtils.startsWith(subStr[0],"tab")) {
+                            jsonItem.put("name", subStr[2]);
+                            jsonItem.put("value", value.toString());
+                            jsonItem.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            arrayTab.put(jsonItem);
+                        }else if (StringUtils.startsWith(subStr[0],"timeout")) {
                             objTimeout.put("name", subStr[0]);
                             objTimeout.put("value", value.toString());
-                        }
-                        if (subStr[0].contains("common")) {
-                            JSONObject objBtn = new JSONObject();
-                            objBtn.put("text", subStr[1]);
-                            objBtn.put("name", subStr[2]);
-                            objBtn.put("ordinalNumber", Integer.parseInt(subStr[3]));
-                            objBtn.put("value", value.toString());
-                            arrBtnCommon.put(objBtn);
-                        }
-                        if (subStr[0].contains("detail")) {
-                            JSONObject objBtn = new JSONObject();
-                            objBtn.put("name", subStr[2]);
-                            objBtn.put("ordinalNumber", Integer.parseInt(subStr[3]));
-                            objBtn.put("value", value.toString());
-                            arrBtnDetail.put(objBtn);
-                        }
-                        if (subStr[0].contains("barcode")) {
+                        }else if (StringUtils.startsWith(subStr[0],"common")) {
+                            jsonItem.put("text", subStr[1]);
+                            jsonItem.put("name", subStr[2]);
+                            jsonItem.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            jsonItem.put("value", value.toString());
+                            arrBtnCommon.put(jsonItem);
+                        }else if (StringUtils.startsWith(subStr[0],"detail")) {
+                            jsonItem.put("name", subStr[2]);
+                            jsonItem.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            jsonItem.put("value", value.toString());
+                            arrBtnDetail.put(jsonItem);
+                        }else if (StringUtils.startsWith(subStr[0],"barcode")) {
                             objBarcode.put("name", subStr[0]);
                             objBarcode.put("value", value.toString());
+                        }else if (StringUtils.startsWith(subStr[0],"jobHeader")) {
+                            jsonItem.put("name", subStr[1]);
+                            jsonItem.put("value", value.toString());
+                            objJobHeader.put(jsonItem);
                         }
 
                     }
@@ -258,6 +273,7 @@ public class ASMasterClient {
                 obj.put("iconCommon", arrIconBtnCommon);
                 obj.put("iconDetail", arrIconBtnDetail);
                 obj.put("barcode", objBarcode);
+                obj.put("jobHeader", objJobHeader);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block

@@ -41,6 +41,7 @@ function loadAuth() {
       var lst_icon_common = responseData.iconCommon;
       var lst_icon_detail = responseData.iconDetail;
       var barcode = responseData.barcode;
+      var jobHeader = responseData.jobHeader;
 
       lst_auth.forEach(function (element) {
         lst_name.forEach(function (item) {
@@ -74,6 +75,7 @@ function loadAuth() {
       localStorage.setItem('info_common', JSON.stringify(lst_common));
       localStorage.setItem('info_detail', JSON.stringify(lst_detail));
       localStorage.setItem('info_barcode', JSON.stringify(barcode));
+      localStorage.setItem('info_css_jobHeader', JSON.stringify(jobHeader));
 
     },
     error: function (responseData, textStatus, errorThrown) {

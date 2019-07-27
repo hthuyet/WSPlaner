@@ -733,9 +733,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
   }
 
-
-
-
   //Barcode generate
   function generateBarcode() {
     if($scope.jobTabList && $scope.jobTabList.length > 0) {
@@ -744,13 +741,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
         item = $scope.jobTabList[i];
         JsBarcode("#barcode_" + item.RowId, item.JobBarCode, {
           format: "CODE39",
+          width: 1,
+          height: 70,
           displayValue: true
         });
 
       }
     }
   }
-
 
   $timeout(function () {
     generateBarcode();

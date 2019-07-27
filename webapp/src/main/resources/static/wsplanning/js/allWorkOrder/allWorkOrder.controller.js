@@ -240,6 +240,23 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $scope.isShow = !$scope.isShow;
   }
 
+  $scope.resetSearch = function () {
+    $scope.params = {
+      "department": EmployeeData.DeptId,
+      "trans": "",
+      "visitReason": "",
+      "receiver": "",
+      "from": "",
+      "to": "",
+      "myWo": false,
+      "shiftId": EmployeeData.ShiftId,
+      "skey": "",
+    };
+    $scope.page = 1;
+    $scope.pageGo = 1;
+    loadData(true);
+  }
+
   //openCamera
   $scope.openCamera = function () {
     var modalInstance = $uibModal.open({

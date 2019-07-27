@@ -7,7 +7,12 @@
         </h6>
         <div class="heading-elements">
             <ul class="icons-list">
-                <li ng-click="toogleSearch()"><a ng-class="{'rotate-180': isShow == true}"></a></li>
+                <li ng-click="resetSearch()" title="{{ 'resetSearch' | translate }}">
+                    <i class="icon icon-cross" ng-click="resetSearch()"></i>
+                </li>
+                <li ng-click="toogleSearch()" title="{{ 'toogleSearch' | translate }}">
+                    <i class="icon icon-ctrl" ng-class="{'rotate-180': isShow == false}" ng-click="toogleSearch()"></i>
+                </li>
             </ul>
         </div>
     </div>

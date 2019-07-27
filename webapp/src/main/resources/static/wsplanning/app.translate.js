@@ -353,7 +353,9 @@ var translationsEN = {
   AssignedByMe: "Assigned by me",
 
   //04062019
-  reference: 'Reference'
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search',
 };
 
 
@@ -702,6 +704,9 @@ var translationsDE = {
   AssignedMe: "Mir zugeteilt",
   AssignedByMe: "Von mir beauftragte",
 
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search',
 };
 
 var translationsFR = {
@@ -1049,6 +1054,10 @@ var translationsFR = {
   clear: "Effacer",
   AssignedMe: "Assigné à moi",
   AssignedByMe: "Assigné par moi",
+
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search',
 };
 
 var translationsIT = {
@@ -1396,7 +1405,11 @@ var translationsIT = {
   clear: "Cancella",
   AssignedMe: "Assegnato a me",
   AssignedByMe: "Assegnato da me",
-  
+
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search',
+
 };
 
 
@@ -1594,6 +1607,10 @@ var translationsVI = {
   IsClose: "IsClose",
   Text: "Text",
   createTask: "Create new task",
+
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search'
 };
 
 var translationsHU = {
@@ -1939,6 +1956,10 @@ var translationsHU = {
   clear: "Töröl",
   AssignedMe: "Hozzámrendelve",
   AssignedByMe: "Általam delegált",
+
+  reference: 'Reference',
+  resetSearch: 'Clear search',
+  toogleSearch: 'Toogle search',
 };
 
 

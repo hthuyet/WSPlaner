@@ -3,25 +3,6 @@
 <div  class="panel panel-flat">
     <div class="tabbable">
         <ul class="nav nav-tabs nav-tabs-solid deviceTabs">
-            <!-- <li ng-class="{active: tabActive == 'header'}" -->
-                <!-- ng-click="changeTab('header', '')"> -->
-                <!-- <a data-target="#header" data-toggle="tab">Header</a> -->
-            <!-- </li> -->
-
-            <!-- <li ng-class="{active: tabActive == 'job'}" -->
-                <!-- ng-click="changeTab('job', '')"> -->
-                <!-- <a data-target="#job" data-toggle="tab">Job</a> -->
-            <!-- </li> -->
-
-            <!-- <li ng-class="{active: tabActive == 'planning'}" -->
-                <!-- ng-click="changeTab('planning', '')"> -->
-                <!-- <a data-target="#planning" data-toggle="planning">Planning</a> -->
-            <!-- </li> -->
-            <!-- <li ng-class="{active: tabActive == 'checkin'}" -->
-                <!-- ng-click="changeTab('checkin', '')"> -->
-                <!-- <a data-target="#checkin" data-toggle="checkin">{{ 'checkin' | translate }}</a> -->
-            <!-- </li> -->
-			
 			  <li ng-class="{active: tabActive == item.name}" ng-repeat="item in tabs | orderBy : 'ordinalNumber' track by $index"
                 ng-click="changeTab(item.name, '')" ng-if="item.value == 'true'" ui-sref-active="active">
                 <a data-target="#item.name" data-toggle="item.name"><span>{{item.name | translate}}</span></a>
@@ -40,6 +21,9 @@
             </div>
             <div ng-class="{active: tabActive == 'checkin'}" class="tab-pane" id="tab-checkin">
                 <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/checkin.html'"></div>
+            </div>
+            <div ng-class="{active: tabActive == 'booking'}" class="tab-pane" id="tab-booking">
+                <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/booking.html'"></div>
             </div>
         </div>
 
