@@ -6,6 +6,10 @@
   /*background-color: yellow;*/
   /*background: #000000;*/
 /*}*/
+
+.haveWO{
+  background-color: #93b6d2 !important;
+}
 .calendar-month{
   position: absolute;
   margin-left: auto;

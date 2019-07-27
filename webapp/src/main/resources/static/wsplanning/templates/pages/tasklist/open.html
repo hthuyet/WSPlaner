@@ -66,8 +66,12 @@
                         </td>
                         <td>{{item.TaskCustomer.FName}} {{item.TaskCustomer.LName}}</td>
                         <td><a href="tel:{{item.TaskCustomer.Tel1}}">{{item.TaskCustomer.Tel1}}</a></td>
-                        <td>{{item.TaskCustomer.Email}}</td>
-                        <td>{{item.WorkOrderNo}}</td>
+                        <td>
+                            <a href="mailto:{{item.TaskCustomer.Email}}?Subject=Hello%20again">
+                                {{item.TaskCustomer.Email}}
+                            </a>
+                        </td>
+                        <td ng-class="{haveWO: item.WorkOrderNo && item.WorkOrderNo > 0}">{{item.WorkOrderNo}}</td>
                         <td>{{item.Body}}</td>
                         <td>
                             <div class="btn-notification btn-group">

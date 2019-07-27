@@ -257,12 +257,55 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
 
     modalInstance.result.then(function (value) {
       if (value) {
-        $scope.params.skey = value;
+        $scope.skey = value;
         $scope.doSearch();
       }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
+  }
+
+  $scope.openQRCode = function () {
+    console.log("----openQRCode----");
+    Instascan.Camera.getCameras().then(function (cameras) {
+
+      var modalInstance = $uibModal.open({
+        animation: $ctrl.animationsEnabled,
+        templateUrl: '/wsplanning/templates/pages/scan_qrcode.html',
+        controller: 'ScanQRcodeModalCtrl',
+        controllerAs: '$ctrl',
+        size: "lg",
+        resolve: {
+          cameras: function () {
+            return cameras;
+          }
+        }
+      });
+
+      modalInstance.rendered.then(function () {
+        $rootScope.$broadcast("modalOpenQR", {});
+      });
+
+      modalInstance.result.then(function (obj) {
+        console.log(obj);
+
+        if(obj.scanner){
+          obj.scanner.stop();
+        }
+
+        if (obj.code) {
+          $scope.skey = obj.code;
+          $scope.doSearch();
+        }
+      }, function () {
+        console.log('Modal dismissed at: ' + new Date());
+      });
+
+    }).catch(function (e) {
+      common.notifyError("Cannot init camera!")
+      console.error(e);
+    });
+
   }
 
   $scope.doPick = function (selectedItem) {
