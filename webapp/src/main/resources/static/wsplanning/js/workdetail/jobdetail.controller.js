@@ -9,6 +9,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
   $scope.externalUrl = [];
+  $scope.count_Vehi_Notification = $scope.jobParams.length;
+  
 
   var lstIndex = [];
   var suppliers = [];
@@ -288,6 +290,28 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
   $scope.openNewTab = function (params) {
     $window.open($scope.jobParams.VHCLink);
+  }
+
+  $scope.openCampaign = function () {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/workdetail/modal/campaign-form.html',
+      controller: 'CampaignModalCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        item: function () {
+          return $scope.jobParams.VehicleNotifications;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem)
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
   }
 
 

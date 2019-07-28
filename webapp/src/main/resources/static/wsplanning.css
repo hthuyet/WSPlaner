@@ -837,6 +837,20 @@ div .btn-notification.btn-group {
     cursor: pointer;
 }
 
+.campaignCSS {
+  font-size: 30px; 
+  left: 10px; 
+  top: 16px;
+}
+
+.badge_campaign {
+  position: relative; 
+  top: 1px; 
+  transition: none 0s ease 0s; 
+  /* cursor: move;  */
+  left: -14px;
+}
+
 
 }
 
@@ -892,19 +906,19 @@ div .btn-notification.btn-group {
   font-size: 19px;
 }
 
-/* #btnReply {
-  left: 18px; 
-  top: 0px;
+.campaignCSS {
+  font-size: 30px; 
+  left: 10px; 
+  top: 16px;
 }
 
-#btnMarkRead {
-  left: 20px;
-  bottom: auto;
-  transition: none 0s ease 0s;
-  cursor: move;
-  position: relative;
-  top: -20px;
-} */
+.badge_campaign {
+  position: relative; 
+  top: 1px; 
+  transition: none 0s ease 0s; 
+  /* cursor: move;  */
+  left: -14px;
+}
 
 div .btn-notification.btn-group {
   display: inline-flex;
@@ -1014,6 +1028,19 @@ div .btn-notification.btn-group {
     top: -45px;
     transition: none 0s ease 0s;
     cursor: pointer;
+}
+
+.campaignCSS {
+  font-size: 30px; 
+  left: 10px; 
+  top: 16px;
+}
+
+.badge_campaign {
+  position: relative; 
+  left: -1px; 
+  top: 2px; 
+  transition: none 0s ease 0s; cursor: move;
 }
 
 }

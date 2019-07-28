@@ -42,14 +42,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $scope.jobCats = CommonFactory.getJobCats();
         $scope.lstPayer = CommonFactory.getPayers();
         // $scope.lstShifts = CommonFactory.getShifts();
-        //
-        // $scope.lstShiftSearch = $scope.lstShifts.slice();
-        // $scope.lstShiftSearch.shift();
-        // $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
-
-        // CommonServices.getTransactionTypes().then(function (data) {
-        //     $scope.lstTrans = data;
-        // });
+        
         CommonServices.getDepartments().then(function (data) {
             $scope.lstDepartment = data;
 
@@ -57,27 +50,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.lstDepartmentSearch.shift();
             $scope.lstDepartmentSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
         });
-        // CommonServices.getVisitReasons().then(function (data) {
-        //     $scope.lstVisitReason = data;
-        // });
-        // CommonServices.getServiceAdvisors().then(function (data) {
-        //     $scope.lstServ = data;
-        // });
-        //
-        // CommonServices.getJobTypes().then(function (data) {
-        //     $scope.jobTypes = data;
-        // });
-        //
-        // CommonServices.getJobCats().then(function (data) {
-        //     $scope.jobCats = data;
-        // });
-        // CommonServices.getChargeCats().then(function (data) {
-        //     $scope.lstChargeCats = data;
-        // });
-        // CommonServices.getPayers().then(function (data) {
-        //     $scope.lstPayer = data;
-        // });
-
+   
         CommonServices.getShifts().then(function (data) {
             $scope.lstShifts = data;
 
@@ -110,7 +83,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 CustNo: '',
                 VehiId: '',
                 WarrantyInfo: '',
-                VHCLink: ''
+                VHCLink: '',
+                VehicleNotifications: [],
             }
             $scope.actionType = "new";
         } else {
@@ -120,8 +94,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 VehiId: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VehiId) ? WorkOrder.data.WOVehicle.VehiId : "",
                 WarrantyInfo: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.WarrantyInfo) ? WorkOrder.data.WOVehicle.WarrantyInfo : "",
                 VHCLink: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VHCLink) ? WorkOrder.data.WOVehicle.VHCLink : "",
+                VehicleNotifications: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VehicleNotifications) ? WorkOrder.data.WOVehicle.VehicleNotifications: ""
             }
-
             $scope.actionType = "update";
         }
 
