@@ -9,8 +9,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
   $scope.externalUrl = [];
-  $scope.count_Vehi_Notification = $scope.jobParams.length;
-  
+  $scope.count_Vehi_Notification = $scope.jobParams.VehicleNotifications.length;
+  console.log($scope.jobParams)
 
   var lstIndex = [];
   var suppliers = [];
