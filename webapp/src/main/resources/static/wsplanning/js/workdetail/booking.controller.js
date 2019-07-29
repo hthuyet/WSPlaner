@@ -15,7 +15,9 @@ UserWebApp.controller('BookingCtrl', function ($scope, $rootScope, HttpService, 
         calendar = new FullCalendar.Calendar(calendarEl, {
             plugins: ['dayGrid', 'timeGrid', 'interaction', 'resourceTimeline'],
             timeZone: 'UTC',
-            defaultView: 'resourceTimelineDay',
+            // defaultView: 'resourceTimelineWeek',
+            defaultView: 'resourceTimeline', // the name of a generic view
+            duration: { days: 3 },
             aspectRatio: 1.5,
             height: 600,
             scrollTime: '07:00',
