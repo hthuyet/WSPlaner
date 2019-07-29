@@ -18,14 +18,28 @@
                                 <h5 ng-show="jobParams.VHCLink"><b><a
                                             ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h5>
 
-                                <select class="form-control" id="external" ng-show="externalUrl.length > 0" ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
+                                <select class="form-control" id="external" ng-show="externalUrl.length > 0"
+                                    ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
                                     ng-options="o.Id as o.Name for o in externalUrl"></select>
 
                             </div>
                         </div>
 
-                        <div class="text-center">
-                            <h3 style="color:red"><b>{{jobParams.WarrantyInfo}}</b></h3>
+                        <div class="text-left">
+
+                            <a ng-click="openCampaign()" ng-show="count_Vehi_Notification != null" data-popup="tooltip"
+                                data-placement="top" title="Campaign">
+                                <i class="icon-warning campaignCSS"></i>
+                                <span class="visible-xs-inline-block position-right"></span>
+                                <span class="badge bg-warning-400 badge_campaign">{{count_Vehi_Notification}}</span>
+                            </a>
+
+                            <!-- <a ng-click="openCampaign()" class="dropdown-toggle" data-popup="tooltip"
+                                data-placement="top" title="Campaign">
+                                <i class="icon-warning campaignCSS"></i>
+                                <span class="visible-xs-inline-block position-right"></span>
+                                <span class="badge bg-warning-400 badge_campaign">4</span>
+                            </a> -->
 
                         </div>
 
@@ -64,8 +78,7 @@
                                                 <a class="btn btn-lg" ng-hide="!item.JobNo && btn.name == 'stamping'"
                                                     ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
                                                         data-popup="tooltip" data-placement="top"
-                                                        title="{{btn.translate}}"
-                                                        ng-attr-title=" {{btn.translate}} "
+                                                        title="{{btn.translate}}" ng-attr-title=" {{btn.translate}} "
                                                         ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
                                                         ng-class="btn.icon"></span></a>
                                             </li>
@@ -170,7 +183,7 @@
                             <span ng-show="item.collapse">
                                 <div class="panel-heading">
                                     <h6 class="panel-title">
-                                        <svg id="barcode_{{item.RowId}}"  style="width: 250px;"></svg>
+                                        <svg id="barcode_{{item.RowId}}" style="width: 250px;"></svg>
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">

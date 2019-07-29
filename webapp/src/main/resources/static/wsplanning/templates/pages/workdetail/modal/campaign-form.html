@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
+    </button>
+    <h4>{{'VehicleNotifications' | translate}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <div class="panel panel-flat">
+        <div class="table-responsive tableModal nowhitespace">
+            <table class="table able-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{'idVehicleNotification' | translate}}</th>
+                        <th class="text-center">{{'valueVehicleNotification' | translate}}</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in VehicleNotifications">
+                        <td>{{item.Id}}</td>
+                        <td>{{item.Value}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer position-right">
+    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+</div>

@@ -7,7 +7,6 @@
 </div>
 
 <div class="modal-body">
-
     <!--SEARCH-->
     <div class="well well-sm">
         <form class="form-horizontal form-search row" ng-submit="doSearch()">
@@ -60,9 +59,19 @@
                         <td>{{item.LicenseNo}}</td>
                         <td>
                             {{item.VIN}}<br />
-                            <span class="inline-WO" ng-show="item.OpenWorkOrders.length > 0">(</span> <a ng-click="reLoadWithWO(obj)"
-                                ng-repeat="obj in item.OpenWorkOrders track by $index" ng-show="siteId == obj.SiteId">{{obj.WorkOrderNo}}&nbsp;-&nbsp;{{obj.Reference}} <span>,</span>&nbsp;</a>
-                            <span class="inline-WO"  ng-show="item.OpenWorkOrders.length > 0">)</span>
+                            <span class="inline-WO" ng-show="item.OpenWorkOrders.length > 0">(</span>
+                            <!-- <a ng-click="reLoadWithWO(obj)" ng-repeat="obj in item.OpenWorkOrders track by $index"
+                                ng-show="siteId == obj.SiteId">
+                                {{obj.WorkOrderNo}}&nbsp;-&nbsp;{{obj.Reference}} <span>,</span>&nbsp;
+                            </a> -->
+                            <a ng-repeat="obj in item.OpenWorkOrders track by $index">
+                                <span ng-click="reLoadWithWO(obj)"
+                                    ng-show="siteId == obj.SiteId">{{obj.WorkOrderNo}}&nbsp;-&nbsp;{{obj.Reference}}&nbsp;,&nbsp;</span>
+                                <span style="color: red; cursor: auto;"
+                                    ng-show="siteId !== obj.SiteId">{{obj.WorkOrderNo}}&nbsp;-&nbsp;{{obj.Reference}}&nbsp;,&nbsp;</span>
+                            </a>
+
+                            <span class="inline-WO" ng-show="item.OpenWorkOrders.length > 0">)</span>
                         </td>
                         <td class="text-wrap">{{item.Make}}&nbsp;{{item.Model}} &nbsp;{{item.SubModel}}</td>
 
@@ -78,9 +87,7 @@
                 </tbody>
             </table>
         </div>
-
     </div>
-
 </div>
 
 <div class="modal-footer position-right">

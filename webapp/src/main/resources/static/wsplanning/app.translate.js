@@ -15,7 +15,6 @@ var translationsEN = {
   replacementvehicle: "Replacement vehicle planning",
   callcenter: "Call Center",
 
-
   workOrderTitle: "WorkOrder Management",
   todayWorkTitle: "Today Work Management",
   allWorkTitle: "All Work Management",
@@ -356,6 +355,12 @@ var translationsEN = {
   reference: 'Reference',
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Customer waiting',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification : 'Id VehicleNotification',
+  valueVehicleNotification : 'Value VehicleNotification'
 };
 
 
@@ -1058,6 +1063,12 @@ var translationsFR = {
   reference: 'Reference',
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Kunden warten',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification : 'Id VehicleNotification',
+  valueVehicleNotification : 'Value VehicleNotification'
 };
 
 var translationsIT = {
@@ -1410,6 +1421,12 @@ var translationsIT = {
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
 
+  //28072019
+  isCustomerWaiting: 'Cliente in attesa',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification : 'Id VehicleNotification',
+  valueVehicleNotification : 'Value VehicleNotification'
+
 };
 
 
@@ -1610,7 +1627,14 @@ var translationsVI = {
 
   reference: 'Reference',
   resetSearch: 'Clear search',
-  toogleSearch: 'Toogle search'
+  toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Customer waiting',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification : 'Id VehicleNotification',
+  valueVehicleNotification : 'Value VehicleNotification'
+
 };
 
 var translationsHU = {
@@ -1960,6 +1984,12 @@ var translationsHU = {
   reference: 'Reference',
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Vevő vár',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification : 'Id VehicleNotification',
+  valueVehicleNotification : 'Value VehicleNotification'
 };
 
 
