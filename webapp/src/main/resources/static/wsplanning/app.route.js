@@ -340,25 +340,86 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load(["scancode", "gridWorkOrder"]);
-                }], listField: function () {
-                    return [{
-                        key: "WorkOrderId",
-                        name: "WorkOrder Id",
-                        order: true
-                    }, {
-                        key: "WorkOrderNo",
-                        name: "WorkOrder No",
-                        order: true
-                    }, {
-                        key: "Reference",
-                        name: "Reference"
-                    }, {
-                        key: "DeptId",
-                        name: "DeptId"
-                    }, {
-                        key: "TimeBarText",
-                        name: "TimeBar Text"
-                    }];
+                }], listField: function ($http, $q, $translate) {
+                    var listField = [
+                        {Id: "WorkOrderStatus", Name: $translate.instant('WorkOrderStatus'), order: false},
+                        {Id: "SubStatus", Name: $translate.instant('SubStatus'), order: false},
+                        {Id: "DeptId", Name: $translate.instant('DeptId'), order: false},
+                        {Id: "TransactionType", Name: $translate.instant('TransactionType'), order: false},
+                        {Id: "WorkOrderNo", Name: $translate.instant('WorkOrderNo'), order: false},
+                        {Id: "EstimatedTimeTot", Name: $translate.instant('EstimatedTimeTot'), order: false},
+                        {Id: "PoolTimeTot", Name: $translate.instant('PoolTimeTot'), order: false},
+                        {Id: "BookedTimeTot", Name: $translate.instant('BookedTimeTot'), order: false},
+                        {Id: "ServiceAdvisorId", Name: $translate.instant('ServiceAdvisorId'), order: false},
+                        {Id: "ServiceDate", Name: $translate.instant('ServiceDate'), order: false},
+                        {Id: "SubContractorInfo", Name: $translate.instant('SubContractorInfo'), order: false},
+                        {Id: "Mileage", Name: $translate.instant('Mileage'), order: false},
+                        {Id: "Reference", Name: $translate.instant('Reference'), order: false},
+                        {Id: "WorkOrderNote", Name: $translate.instant('WorkOrderNote'), order: false},
+                        {Id: "CheckOutDate", Name: $translate.instant('CheckOutDate'), order: false},
+                        {Id: "DeliveredBy", Name: $translate.instant('DeliveredBy'), order: false},
+                        {Id: "WorkReadyDate", Name: $translate.instant('WorkReadyDate'), order: false},
+                        {Id: "WorkReadyBy", Name: $translate.instant('WorkReadyBy'), order: false},
+                        {Id: "AttachmentFilesCount", Name: $translate.instant('AttachmentFilesCount'), order: false},
+                        {Id: "LicenseNo", Name: $translate.instant('LicenseNo'), order: false},
+                        {Id: "SearchKey", Name: $translate.instant('SearchKey'), order: false},
+                        {Id: "VIN", Name: $translate.instant('VIN'), order: false},
+                        {Id: "FirstRegDate", Name: $translate.instant('FirstRegDate'), order: false},
+                        {Id: "NextServiceDate", Name: $translate.instant('NextServiceDate'), order: false},
+                        {Id: "NextMOTDate", Name: $translate.instant('NextMOTDate'), order: false},
+                        {Id: "PreviousServiceDate", Name: $translate.instant('PreviousServiceDate'), order: false},
+                        {Id: "Make", Name: $translate.instant('Make'), order: false},
+                        {Id: "Model", Name: $translate.instant('Model'), order: false},
+                        {Id: "SubModel", Name: $translate.instant('SubModel'), order: false},
+                        {Id: "CustNo", Name: $translate.instant('CustNo'), order: false},
+                        {Id: "Fname", Name: $translate.instant('Fname'), order: false},
+                        {Id: "Lname", Name: $translate.instant('Lname'), order: false},
+                    ];
+                    var deferred = $q.defer();
+                    $http.get('/site/getWOSort', {}).then(function successCallback(response) {
+                        var lstSort = response.data;
+                        var field, sort;
+                        for (var i = 0; i < listField.length; i++) {
+                            field = listField[i];
+                            for (var j = 0; j < lstSort.length; j++) {
+                                sort = lstSort[j];
+                                if (field.Id == sort.Id
+                                    || field.Id.toUpperCase() == sort.Id.toUpperCase()) {
+                                    console.log(field.Id + "- " + sort.Id);
+                                    field.order = true;
+                                    break;
+                                }
+                            }
+                        }
+
+
+                        console.log(listField);
+
+                        deferred.resolve(listField);
+                    }, function errorCallback(response) {
+                        console.error(response);
+                        deferred.reject([]);
+                    });
+                    return deferred.promise;
+
+                    // return [{
+                    //     key: "WorkOrderId",
+                    //     name: "WorkOrder Id",
+                    //     order: true
+                    // }, {
+                    //     key: "WorkOrderNo",
+                    //     name: "WorkOrder No",
+                    //     order: true
+                    // }, {
+                    //     key: "Reference",
+                    //     name: "Reference"
+                    // }, {
+                    //     key: "DeptId",
+                    //     name: "DeptId"
+                    // }, {
+                    //     key: "TimeBarText",
+                    //     name: "TimeBar Text"
+                    // }];
                 }
             }
         })

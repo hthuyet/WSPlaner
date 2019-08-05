@@ -286,4 +286,82 @@ public class WokOrderClient {
     return restTemplate.getForObject(url, String.class);
   }
 
+  public String getGridWO(String token, String siteId, Map<String, String> params) {
+    String viewName = params.get("ViewName");
+    String skey = params.get("skey");
+    String page = params.get("page");
+    String limit = params.get("limit");
+    String DeptId = params.get("DeptId");
+    String Receiver = params.get("Receiver");
+    String TransactionType = params.get("TransactionType");
+    String VisitReasonCode = params.get("VisitReasonCode");
+    String MyWO = params.get("MyWO");
+    String LoadAttachment = params.get("LoadAttachment");
+    String LoadAttachmentData = params.get("LoadAttachmentData");
+    String ServDateFrom = params.get("FromDate");
+    String ServDateTo = params.get("ToDate");
+    String shiftId = params.get("shiftId");
+    String sortByField = params.get("SortByField");
+    String sortDesc = params.get("SortDesc");
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
+    if (StringUtils.isNotBlank(skey)) {
+      headers.set("skey", Base64.getEncoder().encodeToString(skey.getBytes()));
+    }
+
+    if (StringUtils.isNotBlank(limit)) {
+      headers.set("PageCount", limit);
+    }
+    if (StringUtils.isNotBlank(page)) {
+      headers.set("Page", page);
+    }
+
+    if (StringUtils.isNotBlank(shiftId)) {
+      headers.set("ShiftId", shiftId);
+    }
+
+    if (StringUtils.isNotBlank(DeptId)) {
+      headers.set("DeptId", DeptId);
+    }
+    if (StringUtils.isNotBlank(sortByField)) {
+      headers.set("SortByField", sortByField);
+    }
+    if (StringUtils.isNotBlank(sortDesc)) {
+      headers.set("SortDesc", sortDesc);
+    }
+
+    if (StringUtils.isNotBlank(Receiver)) {
+      headers.set("Receiver", Receiver);
+    }
+    if (StringUtils.isNotBlank(TransactionType)) {
+      headers.set("TransactionType", TransactionType);
+    }
+    if (StringUtils.isNotBlank(VisitReasonCode)) {
+      headers.set("VisitReasonCode", VisitReasonCode);
+    }
+    if (StringUtils.isNotBlank(MyWO) && "true".equalsIgnoreCase(MyWO)) {
+      headers.set("MyWO", "true");
+    }
+    if (StringUtils.isNotBlank(LoadAttachment) && "true".equalsIgnoreCase(LoadAttachment)) {
+      headers.set("LoadAttachment", "true");
+    }
+    if (StringUtils.isNotBlank(LoadAttachmentData) && "true".equalsIgnoreCase(LoadAttachmentData)) {
+      headers.set("LoadAttachmentData", "true");
+    }
+    if (StringUtils.isNotBlank(ServDateFrom)) {
+      headers.set("ServDateFrom", Utils.formateDateAPI(ServDateFrom));
+    }
+    if (StringUtils.isNotBlank(ServDateTo)) {
+      headers.set("ServDateTo", Utils.formateDateAPI(ServDateTo));
+    }
+    headers.set("LoadRows", "true");
+    headers.set("LoadAllResource", "true");
+
+    HttpEntity entity = new HttpEntity(headers);
+    String url = String.format("%s?SiteId=%s&ViewName=%s", this.endpointUrl, siteId, viewName);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+    return response.getBody();
+  }
+
 }

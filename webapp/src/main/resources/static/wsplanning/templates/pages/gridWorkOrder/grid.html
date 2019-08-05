@@ -4,9 +4,9 @@
             <thead>
             <tr class="d-flex">
                 <th ng-repeat="field in listField" class="text-center col-xs-1">
-                    <span ng-if="field.order" ng-click="sort(field.key)">
-                        {{field.name}}
-                        <span ng-if="sortable.name == field.key">
+                    <span ng-if="field.order" ng-click="sort(field.Id)">
+                        {{field.Name}}
+                        <span ng-if="sortable.name == field.Id">
                             <span ng-if="sortable.direction == 'desc'">
                                 <i class="icon icon-eject"></i>
                             </span>
@@ -14,12 +14,12 @@
                                 <i class="icon icon-eject rotate-180"></i>
                             </span>
                         </span>
-                        <span ng-if="sortable.name != field.key">
+                        <span ng-if="sortable.name != field.Id">
                             <i class="icon icon-embed2"></i>
                         </span>
                     </span>
                     <span ng-if="!field.order">
-                        {{field.name}}
+                        {{field.Name}}
                     </span>
                 </th>
             </tr>
@@ -29,7 +29,7 @@
             <tbody>
             <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)" ios-dblclick="viewDetail(item)">
                 <td ng-repeat="field in listField" class="text-center col-xs-1">
-                    {{item[field.key]}}
+                    {{item[field.Id]}}
                 </td>
             </tr>
             <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">

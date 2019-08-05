@@ -357,8 +357,84 @@ public class WOController extends BaseController {
     @ResponseBody
     public ResponseEntity getGridWO(@RequestBody Map<String, String> params) {
         try {
-            String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
-            return new ResponseEntity<>(rtn, HttpStatus.OK);
+            String rtn = wokOrderClient.getGridWO(getToken(), getSiteId(), params);
+
+
+            if (rtn != null && StringUtils.isNotBlank(rtn)) {
+                // JsonParser
+                JsonParser parser = new JsonParser();
+                JsonElement tradeElement = parser.parse(rtn);
+                JsonArray listData = tradeElement.getAsJsonArray();
+
+                // Init list
+                JsonArray listRtn = new JsonArray();
+                JsonObject itemRtn = null;
+
+                // Init variable
+                JsonObject itemObj = null;
+                JsonObject WOVehicle = null;
+                JsonObject WOCustomer = null;
+
+                for (JsonElement item : listData) {
+                    itemObj = item.getAsJsonObject();
+
+                    itemRtn = new JsonObject();
+                    itemRtn.addProperty("WorkOrderStatus", itemObj.get("WorkOrderStatus").getAsString());
+                    if (itemObj.has("SubStatus") && !itemObj.get("SubStatus").isJsonNull()) {
+                        itemRtn.addProperty("SubStatus", itemObj.get("SubStatus").getAsString());
+                    }
+                    itemRtn.addProperty("DeptId", itemObj.get("DeptId").getAsString());
+                    itemRtn.addProperty("TransactionType", itemObj.get("TransactionType").getAsString());
+                    itemRtn.addProperty("WorkOrderNo", itemObj.get("WorkOrderNo").getAsString());
+                    itemRtn.addProperty("EstimatedTimeTot", itemObj.get("EstimatedTimeTot").getAsString());
+                    itemRtn.addProperty("PoolTimeTot", itemObj.get("PoolTimeTot").getAsString());
+                    itemRtn.addProperty("BookedTimeTot", itemObj.get("BookedTimeTot").getAsString());
+                    itemRtn.addProperty("ServiceAdvisorId", itemObj.get("ServiceAdvisorId").getAsString());
+                    itemRtn.addProperty("ServiceDate", itemObj.get("ServiceDate").getAsString());
+                    itemRtn.addProperty("SubContractorInfo", itemObj.get("SubContractorInfo").getAsString());
+                    itemRtn.addProperty("Mileage", itemObj.get("Mileage").getAsString());
+                    itemRtn.addProperty("Reference", itemObj.get("Reference").getAsString());
+                    itemRtn.addProperty("WorkOrderNote", itemObj.get("WorkOrderNote").getAsString());
+                    itemRtn.addProperty("CheckOutDate", itemObj.get("CheckOutDate").getAsString());
+                    itemRtn.addProperty("DeliveredBy", itemObj.get("DeliveredBy").getAsString());
+                    itemRtn.addProperty("WorkReadyDate", itemObj.get("WorkReadyDate").getAsString());
+                    itemRtn.addProperty("WorkReadyBy", itemObj.get("WorkReadyBy").getAsString());
+                    itemRtn.addProperty("AttachmentFilesCount", itemObj.get("AttachmentFilesCount").getAsString());
+
+                    if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
+                        WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
+                        itemRtn.addProperty("LicenseNo", WOVehicle.get("LicenseNo").getAsString());
+                        itemRtn.addProperty("SearchKey", WOVehicle.get("SearchKey").getAsString());
+                        itemRtn.addProperty("VIN", WOVehicle.get("VIN").getAsString());
+                        itemRtn.addProperty("FirstRegDate", WOVehicle.get("FirstRegDate").getAsString());
+                        itemRtn.addProperty("NextServiceDate", WOVehicle.get("NextServiceDate").getAsString());
+                        itemRtn.addProperty("NextMOTDate", WOVehicle.get("NextMOTDate").getAsString());
+                        itemRtn.addProperty("PreviousServiceDate", WOVehicle.get("PreviousServiceDate").getAsString());
+                        itemRtn.addProperty("Make", WOVehicle.get("Make").getAsString());
+                        itemRtn.addProperty("Model", WOVehicle.get("Model").getAsString());
+                        itemRtn.addProperty("SubModel", WOVehicle.get("SubModel").getAsString());
+                    }
+
+                    if (itemObj.has("WOCustomer") && !itemObj.get("WOCustomer").isJsonNull()) {
+                        WOCustomer = itemObj.get("WOCustomer").getAsJsonObject();
+                        itemRtn.addProperty("CustNo", WOCustomer.get("CustNo").getAsString());
+                        if (WOCustomer.has("Fname") && !WOCustomer.get("Fname").isJsonNull()) {
+                            itemRtn.addProperty("Fname", WOCustomer.get("Fname").getAsString());
+                        }
+                        if (WOCustomer.has("Lname") && !WOCustomer.get("Lname").isJsonNull()) {
+                            itemRtn.addProperty("Lname", WOCustomer.get("Lname").getAsString());
+                        }
+                    }
+
+
+                    listRtn.add(itemRtn);
+                }
+
+                return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(rtn, HttpStatus.OK);
+            }
+
         } catch (Exception ex) {
             return parseException(ex);
         }

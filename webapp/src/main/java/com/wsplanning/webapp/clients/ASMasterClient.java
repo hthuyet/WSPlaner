@@ -326,4 +326,9 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getWOSort&param1=102
+    public String getWOSort(String siteId) {
+        String url = String.format("%s?command=getWOSort&param1=%s", this.endpointUrl, siteId);
+        return restTemplate.getForObject(url, String.class);
+    }
 }

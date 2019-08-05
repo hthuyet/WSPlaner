@@ -2,8 +2,8 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
   $scope.typeWO = "allWO";
   $scope.listField = listField;
   $scope.sortable = {
-    name: "WorkOrderId",
-    direction: "asc",
+    name: "",
+    direction: "",
   };
 
 
@@ -14,11 +14,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
   $scope.lstSearch = [];
   $scope.totalElements = 0;
   $scope.lstbtnCommon = JSON.parse(localStorage.getItem('info_common'));
-
-  $scope.buttonType = function (name) {
-    var string = "app.main." + name;
-    $state.go(string, {'locale': $rootScope.lang, 'type': typeWO, 'action': name });
-  }
 
   $scope.params = {
     "department": EmployeeData.DeptId,
@@ -110,7 +105,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
     var params = {
-      "ViewName": $scope.typeWO,
+      "ViewName": "GRIDVIEW",
       "skey": $scope.params.skey,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -122,6 +117,8 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
       "MyWO": $scope.params.myWo,
       "FromDate": $scope.params.from,
       "ToDate": $scope.params.to,
+      "SortByField": $scope.sortable.name,
+      "SortDesc": $scope.sortable.direction,
     };
 
     HttpService.postData('/wo/getGridWO', params).then(function (response) {
@@ -234,6 +231,12 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
   }
 
   $scope.resetSearch = function () {
+    $scope.sortable = {
+      name: "",
+      direction: "",
+    };
+
+
     $scope.params = {
       "department": EmployeeData.DeptId,
       "trans": "",

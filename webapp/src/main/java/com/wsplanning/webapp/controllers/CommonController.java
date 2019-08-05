@@ -484,4 +484,14 @@ public class CommonController extends BaseController {
       return parseException(e);
     }
   }
+
+  @GetMapping("/site/getWOSort")
+  public ResponseEntity getWOSort() {
+    try {
+      String rtn = asMasterClient.getWOSort(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+    }
+  }
 }

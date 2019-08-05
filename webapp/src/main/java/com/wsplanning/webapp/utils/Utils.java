@@ -111,6 +111,20 @@ public class Utils {
   }
 
 
+  public static byte[] readFileInResource(String fileName) throws IOException {
+    ClassLoader classLoader = Utils.class.getClassLoader();
+    InputStream stream = classLoader.getResourceAsStream(fileName);
+    if (stream == null) {
+      logger.warn(String.format("File: %s not exits!", fileName));
+      stream = Utils.class.getResourceAsStream(fileName);
+    }
+    if (stream == null) {
+      logger.error(String.format("File: %s not exits!", fileName));
+      return null;
+    }
+    return IOUtils.toByteArray(classLoader.getResourceAsStream(fileName));
+  }
+
   public static String encodeFileToBase64AtResource2(String fileName) throws IOException {
     ClassLoader classLoader = Utils.class.getClassLoader();
     InputStream stream = classLoader.getResourceAsStream(fileName);
