@@ -197,7 +197,7 @@ var translationsEN = {
   myWo: "Only my workorders",
   WoHeader: "Workorder Header",
   WoJob: "Workorder Job",
-  ServiceDate: "ServiceDate",
+  // ServiceDate: "ServiceDate",
   ExpectedDelivery: "Expected delivery",
   CheckInDate: "Check In Time",
   ExecutionDate: "Execution Time",
@@ -345,7 +345,7 @@ var translationsEN = {
   Template_2: "Template 2",
   Reset: "Reset",
   TakeScreenshot: "Take Screenshot",
-  DoYouSave:' Do you want to save changes',
+  DoYouSave: ' Do you want to save changes',
   //Notification-page
   recentNotification: "Recent Notification",
   unreadNotification: "UnRead Notification",
@@ -393,8 +393,11 @@ var translationsEN = {
   //28072019
   isCustomerWaiting: 'Customer waiting',
   VehicleNotifications: 'Vehicle Notifications',
-  idVehicleNotification : 'Id VehicleNotification',
-  valueVehicleNotification : 'Value VehicleNotification'
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+
+  //31082019
+  receiptionDate: 'Receiption date'
 };
 
 
@@ -704,7 +707,7 @@ var translationsDE = {
   Text: "Text",
   createTask: "Erstellen neuer Task",
 
-  
+
   //the additional text
   Name: "Name",
   StampToWorkorder: "Auftragsstempelung",
@@ -776,9 +779,21 @@ var translationsDE = {
   AssignedMe: "Mir zugeteilt",
   AssignedByMe: "Von mir beauftragte",
 
+  //04062019
   reference: 'Reference',
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Customer waiting',
+  VehicleNotifications: 'Vehicle Notifications',
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+
+  //31082019
+  receiptionDate: 'Receiption date'
+
+
 };
 
 var translationsFR = {
@@ -1089,7 +1104,7 @@ var translationsFR = {
   createTask: "Céer nouvelle tâche",
 
 
-  
+
   //the additional text
   Name: "Nom",
   StampToWorkorder: "Timbre orde de travail",
@@ -1121,7 +1136,7 @@ var translationsFR = {
   Template_2: "Modèle 2",
   Reset: "Remise à zéro",
   TakeScreenshot: "Capture d'écran",
-  DoYouSave:' Sauvegarder les modifications?',
+  DoYouSave: ' Sauvegarder les modifications?',
   //Notification
   recentNotification: "Notification récente",
   unreadNotification: "Notification non-lecture",
@@ -1161,6 +1176,7 @@ var translationsFR = {
   AssignedMe: "Assigné à moi",
   AssignedByMe: "Assigné par moi",
 
+  //04062019
   reference: 'Reference',
   resetSearch: 'Clear search',
   toogleSearch: 'Toogle search',
@@ -1168,8 +1184,10 @@ var translationsFR = {
   //28072019
   isCustomerWaiting: 'Kunden warten',
   VehicleNotifications: 'Vehicle Notifications',
-  idVehicleNotification : 'Id VehicleNotification',
-  valueVehicleNotification : 'Value VehicleNotification'
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+  //31082019
+  receiptionDate: 'Receiption date'
 };
 
 var translationsIT = {
@@ -1480,7 +1498,7 @@ var translationsIT = {
   createTask: "Crea nuovo compito",
 
 
-  
+
   //the additional text
   Name: "Nome",
   StampToWorkorder: "Timbro al Odl",
@@ -1512,7 +1530,7 @@ var translationsIT = {
   Template_2: "Modello 2",
   Reset: "Resettato",
   TakeScreenshot: "Scatta schermata",
-  DoYouSave:' Salvare le modifiche?',
+  DoYouSave: ' Salvare le modifiche?',
   //Notifica
   recentNotification: "Notifica recente",
   unreadNotification: "Notifica non letti",
@@ -1559,8 +1577,11 @@ var translationsIT = {
   //28072019
   isCustomerWaiting: 'Cliente in attesa',
   VehicleNotifications: 'Vehicle Notifications',
-  idVehicleNotification : 'Id VehicleNotification',
-  valueVehicleNotification : 'Value VehicleNotification'
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+  //31082019
+  receiptionDate: 'Receiption date'
+
 
 };
 
@@ -1801,8 +1822,11 @@ var translationsVI = {
   //28072019
   isCustomerWaiting: 'Customer waiting',
   VehicleNotifications: 'Vehicle Notifications',
-  idVehicleNotification : 'Id VehicleNotification',
-  valueVehicleNotification : 'Value VehicleNotification'
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+
+  //31082019
+  receiptionDate: 'Receiption date'
 
 };
 
@@ -2078,7 +2102,7 @@ var translationsHU = {
   Text: "Szöveg",
   createTask: "Új feladat",
 
-  
+
   //the additional text
   Name: "Név",
   StampToWorkorder: "Blokkolás munkalapra",
@@ -2110,7 +2134,7 @@ var translationsHU = {
   Template_2: "Sablon 2",
   Reset: "Visszaállítás",
   TakeScreenshot: "Képernyõkép készítése",
-  DoYouSave:' Menti a módosításokat?',
+  DoYouSave: ' Menti a módosításokat?',
   //Notification-page
   recentNotification: "Legutóbbi értesítések",
   unreadNotification: "Olvasatlan értesítések",
@@ -2157,8 +2181,11 @@ var translationsHU = {
   //28072019
   isCustomerWaiting: 'Vevő vár',
   VehicleNotifications: 'Vehicle Notifications',
-  idVehicleNotification : 'Id VehicleNotification',
-  valueVehicleNotification : 'Value VehicleNotification'
+  idVehicleNotification: 'Id VehicleNotification',
+  valueVehicleNotification: 'Value VehicleNotification',
+
+  //31082019
+  receiptionDate: 'Receiption date'
 };
 
 

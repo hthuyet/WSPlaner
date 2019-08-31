@@ -13,7 +13,7 @@ public class WOJobDTO {
     public String Complaint;
     public Number EstimatedTime;
     public String SmanId;
-    public Integer ChargeCategoryId;
+    public String ChargeCategoryId;
     public String DeptId;
     public String JobType;
     public String JobCategory;

@@ -19,9 +19,7 @@
                 <li ng-if="isNew == 'wo'" class="active">{{ 'breadcrumbWorkNew' | translate }}</li>
 				<li ng-if="isNew == 'newoffer'" class="active">{{ 'breadcrumbNewOffer' | translate }}</li>
 				<li ng-if="isNew == 'booking'" class="active">{{ 'breadcrumbNewBooking' | translate }}</li>
-                <!-- <li ng-if="!isNew" class="active">{{ 'breadcrumbWorkDetail' | translate }}</li> -->
                 <li ng-if="!isNew" class="active">{{workOrderNo}}</li>
-                <li ng-if="!isNew" class="active">{{cusInfo.custNo}}</li>
                 <li ng-if="!isNew" class="active">{{cusInfo.lastName}}</li>
             </ul>
         </div>

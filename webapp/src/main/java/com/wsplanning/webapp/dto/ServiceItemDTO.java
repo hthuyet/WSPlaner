@@ -15,7 +15,7 @@ public class ServiceItemDTO {
     public Integer ItemType;
     public String StockId;
     public String ModelCode;
-    public Integer ChargeCategoryId;
+    public String ChargeCategoryId;
     public String MechanicId;
     public String WorkType;
     public Number UNITPR;

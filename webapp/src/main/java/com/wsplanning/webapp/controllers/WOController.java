@@ -277,7 +277,7 @@ public class WOController extends BaseController {
 
         List<WOJobDTO> WOJobs = new ArrayList<>();
         WOJobDTO job = new WOJobDTO();
-        job.ChargeCategoryId = 10;
+        // job.ChargeCategoryId = 10;
         job.JobType = "1";
         job.JobCategory = "BODY";
         job.DeptId = "A4";

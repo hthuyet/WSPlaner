@@ -122,17 +122,20 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   function loadCommon() {
 
     CommonServices.getChargeCats().then(function (data) {
-      $scope.lstChargeCats = data;
+      $scope.listChargeCats = data;
+      console.log(data)
     });
     CommonServices.getPayers().then(function (data) {
       $scope.lstPayers = data;
+      
     })
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
+      
     });
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-
+      console.log(data)
     });
 
     CommonServices.getJobTypes().then(function (data) {
@@ -299,7 +302,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       controller: 'CampaignModalCtrl',
       backdrop: 'static',
       controllerAs: '$ctrl',
-      size: "full",
+      size: 'lg',
       resolve: {
         item: function () {
           return $scope.jobParams.VehicleNotifications;
