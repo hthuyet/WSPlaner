@@ -250,7 +250,7 @@ UserWebApp
           //   item.Id = parseInt(item.Id);
           // })
           this.lstChargeCats = response;
-          // console.log(response);
+          console.log(response);
           d.resolve(response);
         }, function error(response) {
           d.reject();
@@ -260,6 +260,7 @@ UserWebApp
       }
       return d.promise;
     };
+
 
     this.getTransactionTypes2 = function () {
       console.log("-------getTransactionTypes: " + this.transactionTypes.length);

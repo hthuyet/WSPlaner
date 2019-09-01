@@ -307,29 +307,21 @@
 
                                         <div class="row">
                                             <div class="col-xs-3">
-
                                                 <div class="form-group">
                                                     <label
                                                         class="control-label col-xs-4">{{'ChargeCategory' | translate}}:</label>
-
                                                     <div class="col-xs-8">
-                                                        <select class="form-control" ng-model="item.ChargeCategoryId"
-                                                            
+                                                        <select class="form-control" ng-model="item.ChargeCategoryId"                                                       
                                                             ng-options="o.Id as o.Name for o in listChargeCats">
-                                                        </select>
-                                              
+                                                        </select>                                             
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div class="col-xs-3">
-
                                                 <div class="form-group">
                                                     <label
                                                         class="control-label col-xs-4">{{'department' | translate}}:</label>
                                                     <div class="col-xs-8">
-
-
                                                         <select class="form-control" ng-model="item.DeptId"
                                                             ng-options="o.Id as o.Name for o in lstDepartment">
                                                         </select>

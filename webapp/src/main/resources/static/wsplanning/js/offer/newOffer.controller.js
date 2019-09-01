@@ -216,18 +216,18 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
   function loadData(skey) {
     console.log(skey);
     CommonServices.getVehicles(skey).then(function (data) {
-      console.log(data);
+
       $scope.lstVehicles = data;
-      angular.forEach(data, function (v, k) {
-        angular.forEach(v.OpenWorkOrders, function (value, key) {
-          console.log({
-            license: v.LicenseNo,
-            id: value.SiteId,
-            no: value.WorkOrderNo,
-            ref: value.Reference
-          });
-        });
-      });
+      // angular.forEach(data, function (v, k) {
+      //   angular.forEach(v.OpenWorkOrders, function (value, key) {
+      //     console.log({
+      //       license: v.LicenseNo,
+      //       id: value.SiteId,
+      //       no: value.WorkOrderNo,
+      //       ref: value.Reference
+      //     });
+      //   });
+      // });
     }, function (error) {
       console.log(error);
     });
