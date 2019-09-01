@@ -246,11 +246,7 @@ UserWebApp
         HttpService.getData('/site/getChargeCats', {}).then(function (response) {
 
           response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
-          // angular.forEach(response, function (item) {
-          //   item.Id = parseInt(item.Id);
-          // })
           this.lstChargeCats = response;
-          console.log(response);
           d.resolve(response);
         }, function error(response) {
           d.reject();
