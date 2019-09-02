@@ -60,7 +60,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   function clearObject() {
     var jobObjectFirst = {
       AdditionalData: null,
-      ChargeCategoryId: "",
+      ChargeCategoryId: NaN,
       Complaint: null,
       DeptId: "",
       EstimatedTime: 0,
@@ -82,7 +82,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   function createItem() {
     var item = {
       BUYPR: 0,
-      ChargeCategoryId: 0,
+      ChargeCategoryId: NaN,
       FactTime: 0,
       IGROUPID: 0,
       ItemNo: "",

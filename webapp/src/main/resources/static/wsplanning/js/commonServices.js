@@ -30,13 +30,13 @@ UserWebApp
 
     this.getSuppliers = function () {
       var d = $q.defer();
-      if(!this.lstSuppliers || this.lstSuppliers.length <= 0) {
+      if (!this.lstSuppliers || this.lstSuppliers.length <= 0) {
         HttpService.getData('/site/getSuppliers', {}).then(function (response) {
           response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.lstSuppliers = response;
           d.resolve(response);
-        }, function error (response) {
-           d.reject();
+        }, function error(response) {
+          d.reject();
         })
       } else {
         d.resolve(this.lstSuppliers);
@@ -122,19 +122,19 @@ UserWebApp
     };
 
     this.getTeams = function () {
-        var d = $q.defer();
-        if (!this.lstTeams || this.lstTeams.length <= 0) {
-          HttpService.getData('/site/getTeams', {}).then(function (response) {
-            response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
-            this.lstTeams = response;
-            d.resolve(response);
-          }, function error(response) {
-            d.reject();
-          });
-        } else {
-          d.resolve(this.lstTeams);
-        }
-        return d.promise;
+      var d = $q.defer();
+      if (!this.lstTeams || this.lstTeams.length <= 0) {
+        HttpService.getData('/site/getTeams', {}).then(function (response) {
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+          this.lstTeams = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.lstTeams);
+      }
+      return d.promise;
     }
 
     // getMenuAuth
@@ -247,6 +247,9 @@ UserWebApp
 
           response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.lstChargeCats = response;
+          angular.forEach(response, function (item) {
+            item.Id = parseInt(item.Id);
+          })
           d.resolve(response);
         }, function error(response) {
           d.reject();
@@ -451,7 +454,7 @@ UserWebApp
           this.sites = data;
         });
       }
-      
+
       if (resolve) {
         d.resolve("");
       }
