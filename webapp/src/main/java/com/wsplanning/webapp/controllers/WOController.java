@@ -222,7 +222,7 @@ public class WOController extends BaseController {
     @ResponseBody
     public ResponseEntity getTextLine() {
         try {
-            String rtn = asMasterClient.getTextLine();
+            String rtn = asMasterClient.getTextLine(getSiteId());
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);

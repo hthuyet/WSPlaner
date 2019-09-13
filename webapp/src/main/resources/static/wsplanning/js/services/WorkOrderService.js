@@ -163,7 +163,7 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
   WorkOrderService.getTextLine = function () {
     return $http({
       method: 'GET',
-      url: '/wo/getTextLine'
+      url: '/wo/getTextLine',
       // data: data
     });
   }

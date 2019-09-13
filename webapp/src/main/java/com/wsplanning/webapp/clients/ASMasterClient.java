@@ -129,9 +129,8 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String getTextLine() {
+    public String getTextLine(String SiteId) {
         String CustNo = "1";
-        String SiteId = "102";
         String VehiId = "1";
         String GetText = "true";
         String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&bGetText=%s", this.endpointUrl, SiteId, CustNo,
