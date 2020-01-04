@@ -393,7 +393,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                         }
 
 
-                        console.log(listField);
+                        // console.log(listField);
 
                         deferred.resolve(listField);
                     }, function errorCallback(response) {
