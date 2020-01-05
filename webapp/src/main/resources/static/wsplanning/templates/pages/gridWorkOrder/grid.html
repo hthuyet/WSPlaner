@@ -1,56 +1,46 @@
-
-
-<div class="panel panel-flat" style="margin-bottom: 0px;">
+<div class="panel panel-flat" style="margin-bottom: 0px;" data-ng-init="loadCommon()">
     <div class="table-responsive">
         <table class="table table-striped table-hover ipadpro-responsive">
             <thead>
             <tr class="d-flex">
                 <th ng-repeat="field in listField" class="text-center col-xs-1">
-                    <span ng-if="field.order" ng-click="sort(field.Id)">
+                    <span ng-if="!filters[field.Id].isOpen">
                         {{field.Name}}
 
+                        <!--filter-->
+                        <span ng-if="filters[field.Id] != undefined">
+                            <button ng-class="filters[field.Id].isActive == true ? 'active' : 'inactive' " type="button" ng-click="openFilter(field.Id,true)">
+                                    <span class="glyphicon glyphicon-filter"></span>
+                            </button>
+                        </span>
+                        <!--End filter-->
 
-                        <!--Filter-->
-                        <div ng-if="filters[field.Id] != undefined" class="dropdown" style="float: right">
-                            <button class="dropdown-toggle filterdropdown" ng-class="{active:filters[field.Id].isActive}" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-filter"></span></button>
-                            <div class="dropdown-menu prop" aria-labelledby="btnSearchBatch" style="width: 250px; padding: 15px;">
-                              <div class="text-right">
-                                <span class="filterlink" ng-click="clearAll('Country')">Clear All</span> | <span class="filterlink" data-dismiss="modal">Close(X)</span>
-                              </div>
-                              <form>
-                                <input type="text" class="form-control input-sm" ng-model="XLfilters.dict['Country'].searchText" placeholder="Filter by Country" />
-                                <div>
-                                  <span class="filterlink" ng-click="markAll('Country',true)">Select All</span> | <span class="filterlink" ng-click="markAll('Country',false)">Select None</span>
-                                </div>
-                                <div class="options">
-                                  <ul style="list-style-type: none; padding: 0">
-                                    <li ng-repeat="item in filters[field.Id].options">
-                                      <input id="countryOption{{$index}}" type="checkbox" ng-change="checkChange(field.Id)" ng-model="item.checked" />&nbsp;<label for="countryOption{{$index}}">{{item.id}}</label>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                    <!--End filter-->
-
-
-
-                        <span ng-if="sortable.name == field.Id">
-                            <span ng-if="sortable.direction == 'desc'">
-                                <i class="icon icon-eject"></i>
+                        <!--Order-->
+                        <span ng-if="field.order">
+                            <span ng-if="sortable.name == field.Id">
+                                <span ng-if="sortable.direction == 'desc'">
+                                    <i class="icon icon-eject"></i>
+                                </span>
+                                <span ng-if="sortable.direction == 'asc'">
+                                    <i class="icon icon-eject rotate-180"></i>
+                                </span>
                             </span>
-                            <span ng-if="sortable.direction == 'asc'">
-                                <i class="icon icon-eject rotate-180"></i>
+                            <span ng-if="sortable.name != field.Id">
+                                <i class="icon icon-embed2"></i>
                             </span>
                         </span>
-                        <span ng-if="sortable.name != field.Id">
-                            <i class="icon icon-embed2"></i>
-                        </span>
+                        <!--End order-->
                     </span>
-                    <span ng-if="!field.order">
-                        {{field.Name}}
+
+                    <!--Filter active-->
+                    <span ng-if="filters[field.Id].isOpen">
+                        <div class="form-group">
+                            <select ng-model="searchPr[field.Id]" ng-change="checkChange(field.Id, searchPr[field.Id])"
+                                    ng-options="item.Id as item.Name for item in filters[field.Id].options">
+                            </select>
+                        </div>
                     </span>
+                    <!--End filter active-->
                 </th>
             </tr>
             </thead>
@@ -109,22 +99,11 @@
 
 
 <style type="text/css">
-    .filterdropdown{
-        background: #eee;
-        border: 1px solid #bbb;
-        color: #bbb;
-        border-radius: 2px;
-        font-size: 14px;
-        line-height: 14px;
+    .active{
+        color: black;
     }
-    .filterdropdown.active{
-        color: #005b9c;
-    }
-    a.filterlink{
-        font-size: 12px;
-    }
-    .options {
-        height: 150px;
-        overflow-y: scroll;
+
+    .inactive{
+        color: #c1c1c1;
     }
 </style>
