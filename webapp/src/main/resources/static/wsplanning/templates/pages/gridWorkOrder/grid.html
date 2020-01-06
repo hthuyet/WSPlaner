@@ -5,31 +5,38 @@
             <tr class="d-flex">
                 <th ng-repeat="field in listField" class="text-center col-xs-1">
                     <span ng-if="!filters[field.Id].isOpen">
-                        {{field.Name}}
+                        <span style="float: left;padding: 0;width: 90%;" >
+                            <span ng-if="field.order" class="orderable"
+                                  ng-click="sort(field.Id)" >
+                                {{field.Name}}
 
-                        <!--filter-->
-                        <span ng-if="filters[field.Id] != undefined">
-                            <button ng-class="filters[field.Id].isActive == true ? 'active' : 'inactive' " type="button" ng-click="openFilter(field.Id,true)">
-                                    <span class="glyphicon glyphicon-filter"></span>
-                            </button>
-                        </span>
-                        <!--End filter-->
-
-                        <!--Order-->
-                        <span ng-if="field.order">
-                            <span ng-if="sortable.name == field.Id">
-                                <span ng-if="sortable.direction == 'desc'">
-                                    <i class="icon icon-eject"></i>
+                                <!--Order-->
+                                <span ng-if="sortable.name == field.Id">
+                                    <span ng-if="sortable.direction == 'desc'">
+                                        <i class="icon icon-eject size7"></i>
+                                    </span>
+                                    <span ng-if="sortable.direction == 'asc'">
+                                        <i class="icon icon-eject rotate-180 size7"></i>
+                                    </span>
                                 </span>
-                                <span ng-if="sortable.direction == 'asc'">
-                                    <i class="icon icon-eject rotate-180"></i>
-                                </span>
+                                <!--End -->
                             </span>
-                            <span ng-if="sortable.name != field.Id">
-                                <i class="icon icon-embed2"></i>
+
+                            <span ng-if="!field.order" class="noOrder">
+                                {{field.Name}}
                             </span>
                         </span>
-                        <!--End order-->
+
+
+                        <span style="float: right;padding: 0;width: 5%;">
+                            <!--filter-->
+                            <span ng-if="filters[field.Id] != undefined">
+                                <span ng-class="filters[field.Id].isActive == true ? 'active' : 'inactive' " ng-click="openFilter(field.Id,true)">
+                                    <span class="glyphicon glyphicon-filter size7"></span>
+                                </span>
+                            </span>
+                            <!--End filter-->
+                        </span>
                     </span>
 
                     <!--Filter active-->
@@ -48,7 +55,7 @@
             <!--BODY-->
             <tbody>
             <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)" ios-dblclick="viewDetail(item)">
-                <td ng-repeat="field in listField" class="text-center col-xs-1">
+                <td ng-repeat="field in listField" class="text-left col-xs-1">
                     {{item[field.Id]}}
                 </td>
             </tr>
@@ -105,5 +112,17 @@
 
     .inactive{
         color: #c1c1c1;
+    }
+
+    .size7 {
+        font-size: 13px !important;
+    }
+
+    .orderable{
+        cursor: pointer;
+    }
+
+    .noOrder{
+        cursor: default;
     }
 </style>
