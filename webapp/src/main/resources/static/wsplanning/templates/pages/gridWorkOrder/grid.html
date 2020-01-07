@@ -3,7 +3,7 @@
         <table class="table table-bordered table-condensed table-striped table-hover ipadpro-responsive">
             <thead>
             <tr class="d-flex">
-                <th ng-repeat="field in listField" class="col-width">
+                <th ng-repeat="field in listField" class="text-center col-width">
                     <span ng-if="!filters[field.Id].isOpen">
                         <span style="float: left;padding: 0;width: 90%;" >
                             <span ng-if="field.order" class="orderable"
@@ -55,7 +55,7 @@
             <!--BODY-->
             <tbody>
             <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)" ios-dblclick="viewDetail(item)">
-                <td ng-repeat="field in listField" class="text-left col-xs-1">
+                <td class="text-center col-body" ng-repeat="field in listField" class="text-left col-xs-1">
                     {{item[field.Id]}}
                 </td>
             </tr>

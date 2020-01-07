@@ -709,6 +709,10 @@ div .btn-notification.btn-group {
   white-space: nowrap;
 }
 
+.col-body {
+  white-space: nowrap;	
+}
+
 .icon-filter {
   position: relative;
   left: 8px;
