@@ -141,6 +141,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
 
         HttpService.postData('/wo/getGridWO', params).then(function (response) {
             $scope.lstData = response;
+            console.log(response)
             $scope.pageGo = $scope.page;
             $scope.isShow = false;
             common.spinner(false);
@@ -238,7 +239,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
             $state.go('app.main.workdetail', {
                 'locale': $rootScope.lang,
                 'id': item.WorkOrderId,
-                'type': typeWO,
+                'type': 'allWO',
                 'tab': 'job'
             });
         });
@@ -349,7 +350,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         });
 
     }
-
 
     //Filter
 

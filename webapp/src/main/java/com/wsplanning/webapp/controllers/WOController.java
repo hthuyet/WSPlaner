@@ -380,10 +380,19 @@ public class WOController extends BaseController {
 
                     itemRtn = new JsonObject();
                     itemRtn.addProperty("WorkOrderStatus", itemObj.get("WorkOrderStatus").getAsString());
+                    itemRtn.addProperty("WorkOrderId",  itemObj.get("WorkOrderId").getAsString());
+                    itemRtn.addProperty("VisitReasonCode",  itemObj.get("VisitReasonCode").getAsString());
                     if (itemObj.has("SubStatus") && !itemObj.get("SubStatus").isJsonNull()) {
                         itemRtn.addProperty("SubStatus", itemObj.get("SubStatus").getAsString());
                     }
+                    if (itemObj.has("PlaceOfDamage") && !itemObj.get("PlaceOfDamage").isJsonNull()) {
+                        itemRtn.addProperty("PlaceOfDamage", itemObj.get("PlaceOfDamage").getAsString());
+                    }
                     itemRtn.addProperty("DeptId", itemObj.get("DeptId").getAsString());
+                    itemRtn.addProperty("PayerInfo", itemObj.get("PayerInfo").getAsString());
+                    itemRtn.addProperty("ContactFName", itemObj.get("ContactFName").getAsString());
+                    itemRtn.addProperty("ContactLName", itemObj.get("ContactLName").getAsString());
+                    itemRtn.addProperty("CourtesyCarInfo", itemObj.get("CourtesyCarInfo").getAsString());
                     itemRtn.addProperty("TransactionType", itemObj.get("TransactionType").getAsString());
                     itemRtn.addProperty("WorkOrderNo", itemObj.get("WorkOrderNo").getAsString());
                     itemRtn.addProperty("EstimatedTimeTot", itemObj.get("EstimatedTimeTot").getAsString());
@@ -413,6 +422,7 @@ public class WOController extends BaseController {
                         itemRtn.addProperty("Make", WOVehicle.get("Make").getAsString());
                         itemRtn.addProperty("Model", WOVehicle.get("Model").getAsString());
                         itemRtn.addProperty("SubModel", WOVehicle.get("SubModel").getAsString());
+                        itemRtn.addProperty("VehicleNote", WOVehicle.get("VehicleNote").getAsString());
                     }
 
                     if (itemObj.has("WOCustomer") && !itemObj.get("WOCustomer").isJsonNull()) {
