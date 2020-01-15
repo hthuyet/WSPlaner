@@ -31,7 +31,8 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
         return def;
 
     }]
-    ).directive('autoComplete', autoComplete);
+    ).directive('autoComplete', autoComplete)
+    .directive('formatCeil', formatCeil);
 
 convertToNumberDirective.$inject = [];
 
@@ -307,27 +308,49 @@ function autoComplete($compile, $timeout) {
 }
 
 function formatCeil($compile) {
+    var controller = ['$scope',   function ($scope) {
+        debugger;
+        $scope.rowData = $scope.$parent.$parent.item
+
+    }]
     return {
         restrict: 'EA',
         scope: {
-            ngModel: '=',
+            data: '=',
             format: '=',
-            minLength: '='
+            type: '=',
+            minLength: '=',
+            // listField: '='
+            id: '='
         },
-        // controller: controller,
+        controller: controller,
         replace: true,
         link: function (scope, element, attr, ctrl) {
-            
-            var html = ''
-            
-            if (scope.format == 'date') {
 
+            debugger;
+            var html_tooltip = '<td class="tooltip text-center col-body" >{{' + scope.rowData + '.[$parent.field.Id] | limitTo: $parent.field.minLength}}<span class="tooltiptext">{{' + scope.rowData + '$parent.field.Id]}}</span></td>'
+            var html_not_tooltip = '<td class="text-center col-body" >{{' + scope.rowData + '.[$parent.field.Id]}}</td>'
+            var number = '<td class="text-center col-body" >{{' + scope.rowData + '.[$parent.field.Id] | number:0}}</td>'
+            // var date = "<td>{{$parent.item[" + scope.id + "] | date: ''}}</td>"
+
+
+
+            if (scope.type == 'string' && scope.rowData[scope.id].length > scope.minLength) {
+                var e = $compile(html_tooltip)(scope)
+                element.replaceWith(e);
             }
-            if (scope.format == 'string') {
-
+            else {
+                var e = $compile(html_not_tooltip)(scope)
+                element.replaceWith(e);
             }
-            if (scope.format == 'number') {
-
+            if (scope.type == 'number') {
+                var e = $compile(number)(scope)
+                element.replaceWith(e);
+            }
+            if (scope.type == 'date') {
+                var date = '<td class="text-center col-body" >{{' + scope.data + '.[$parent.field.Id] | date: $parent.field.format}}</td>'
+                var e = $compile(date)(scope)
+                element.replaceWith(e);
             }
 
         },

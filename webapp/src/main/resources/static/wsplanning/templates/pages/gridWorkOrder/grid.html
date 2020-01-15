@@ -2,66 +2,81 @@
     <div class="table-responsive">
         <table class="table table-bordered table-condensed table-striped table-hover ipadpro-responsive">
             <thead>
-            <tr class="d-flex">
-                <th ng-repeat="field in listField" class="text-center col-width">
-                    <span ng-if="!filters[field.Id].isOpen">
-                        <span style="float: left;padding: 0;width: 90%;" >
-                            <span ng-if="field.order" class="orderable"
-                                  ng-click="sort(field.Id)" >
-                                {{field.Name}}
+                <tr class="d-flex">
+                    <th ng-repeat="field in listField" class="text-center col-width">
+                        <span ng-if="!filters[field.Id].isOpen">
+                            <span style="float: left;padding: 0;width: 90%;">
+                                <span ng-if="field.order" class="orderable" ng-click="sort(field.Id)">
+                                    {{field.Name}}
 
-                                <!--Order-->
-                                <span ng-if="sortable.name == field.Id">
-                                    <span ng-if="sortable.direction == 'desc'">
-                                        <i class="icon icon-eject size7"></i>
+                                    <!--Order-->
+                                    <span ng-if="sortable.name == field.Id">
+                                        <span ng-if="sortable.direction == 'desc'">
+                                            <i class="icon icon-eject size7"></i>
+                                        </span>
+                                        <span ng-if="sortable.direction == 'asc'">
+                                            <i class="icon icon-eject rotate-180 size7"></i>
+                                        </span>
                                     </span>
-                                    <span ng-if="sortable.direction == 'asc'">
-                                        <i class="icon icon-eject rotate-180 size7"></i>
-                                    </span>
+                                    <!--End -->
                                 </span>
-                                <!--End -->
+
+                                <span ng-if="!field.order" class="noOrder">
+                                    {{field.Name}}
+                                </span>
                             </span>
 
-                            <span ng-if="!field.order" class="noOrder">
-                                {{field.Name}}
+
+                            <span style="float: right;padding: 0;width: 5%;">
+                                <!--filter-->
+                                <span ng-if="filters[field.Id] != undefined">
+                                    <span ng-class="filters[field.Id].isActive == true ? 'active' : 'inactive' "
+                                        ng-click="openFilter(field.Id,true)">
+                                        <span class="icon-filter glyphicon glyphicon-filter size7"></span>
+                                    </span>
+                                </span>
+                                <!--End filter-->
                             </span>
                         </span>
 
-
-                        <span style="float: right;padding: 0;width: 5%;">
-                            <!--filter-->
-                            <span ng-if="filters[field.Id] != undefined">
-                                <span ng-class="filters[field.Id].isActive == true ? 'active' : 'inactive' " ng-click="openFilter(field.Id,true)">
-                                    <span class="icon-filter glyphicon glyphicon-filter size7"></span>
-                                </span>
-                            </span>
-                            <!--End filter-->
-                        </span>
-                    </span>
-
-                    <!--Filter active-->
-                    <span ng-if="filters[field.Id].isOpen">
-                        <div class="form-group">
-                            <select class="form-control-edit" ng-model="searchPr[field.Id]" ng-change="checkChange(field.Id, searchPr[field.Id])"
+                        <!--Filter active-->
+                        <span ng-if="filters[field.Id].isOpen">
+                            <div class="form-group">
+                                <select class="form-control-edit" ng-model="searchPr[field.Id]"
+                                    ng-change="checkChange(field.Id, searchPr[field.Id])"
                                     ng-options="item.Id as item.Name for item in filters[field.Id].options">
-                            </select>
-                        </div>
-                    </span>
-                    <!--End filter active-->
-                </th>
-            </tr>
+                                </select>
+                            </div>
+                        </span>
+                        <!--End filter active-->
+                    </th>
+                </tr>
             </thead>
 
             <!--BODY-->
             <tbody>
-            <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)" ios-dblclick="viewDetail(item)">
-                <td class="text-center col-body" ng-repeat="field in listField" class="text-left col-xs-1">
-                    {{item[field.Id] }}
-                </td>
-            </tr>
-            <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
-                <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
-            </tr>
+                <tr ng-repeat="item in lstData track by $index" ng-dblclick="viewDetail(item)" ng-style="{color:'item.VisitReasonCode'}"
+                    ios-dblclick="viewDetail(item)">
+
+                    <td class=" text-center col-body" ng-repeat="field in listField" class="text-left col-xs-1">
+                        <span ng-show="field.type == 'string'"  ng-class="{'tooltip-text': item[field.Id].length > 5}">{{item[field.Id] | limitTo:5}}
+                            <span ng-show="field.type == 'string' && item[field.Id].length > 5"
+                                class="tooltip-text-sub">{{item[field.Id]}}
+                            </span>
+                        </span>
+
+                        <span ng-show="field.type == 'number'">{{item[field.Id] | number:0}}</span>
+                        <span ng-show="field.type == 'date'">{{item[field.Id] | date: field.format}}</span>
+
+                    </td>
+
+                    <!-- <div ng-repeat="field in listField">
+                    <format-ceil  data='item' id='field.Id' type='field.type' format='field.format' min-length='field.length'></format-ceil>
+                </div> -->
+                </tr>
+                <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
+                    <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -81,8 +96,8 @@
             </div>
             <div class="form-group">
                 <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
-                       class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
-                       style="width: 55px">
+                    class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
+                    style="width: 55px">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
@@ -106,11 +121,11 @@
 
 
 <style type="text/css">
-    .active{
+    .active {
         color: black;
     }
 
-    .inactive{
+    .inactive {
         color: #c1c1c1;
     }
 
@@ -118,11 +133,11 @@
         font-size: 13px !important;
     }
 
-    .orderable{
+    .orderable {
         cursor: pointer;
     }
 
-    .noOrder{
+    .noOrder {
         cursor: default;
     }
 </style>

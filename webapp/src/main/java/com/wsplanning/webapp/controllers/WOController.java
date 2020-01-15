@@ -359,7 +359,6 @@ public class WOController extends BaseController {
         try {
             String rtn = wokOrderClient.getGridWO(getToken(), getSiteId(), params);
 
-
             if (rtn != null && StringUtils.isNotBlank(rtn)) {
                 // JsonParser
                 JsonParser parser = new JsonParser();
