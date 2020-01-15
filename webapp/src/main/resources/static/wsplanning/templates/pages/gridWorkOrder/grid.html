@@ -56,7 +56,7 @@
             <tbody>
             <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)" ios-dblclick="viewDetail(item)">
                 <td class="text-center col-body" ng-repeat="field in listField" class="text-left col-xs-1">
-                    {{item[field.Id]}}
+                    {{item[field.Id] }}
                 </td>
             </tr>
             <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">

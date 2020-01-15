@@ -388,6 +388,9 @@ public class WOController extends BaseController {
                     if (itemObj.has("PlaceOfDamage") && !itemObj.get("PlaceOfDamage").isJsonNull()) {
                         itemRtn.addProperty("PlaceOfDamage", itemObj.get("PlaceOfDamage").getAsString());
                     }
+                    if (itemObj.has("WorkReadyForInvoiceDate") && !itemObj.get("WorkReadyForInvoiceDate").isJsonNull()) {
+                        itemRtn.addProperty("WorkReadyForInvoiceDate", itemObj.get("WorkReadyForInvoiceDate").getAsString());
+                    }
                     itemRtn.addProperty("DeptId", itemObj.get("DeptId").getAsString());
                     itemRtn.addProperty("PayerInfo", itemObj.get("PayerInfo").getAsString());
                     itemRtn.addProperty("ContactFName", itemObj.get("ContactFName").getAsString());

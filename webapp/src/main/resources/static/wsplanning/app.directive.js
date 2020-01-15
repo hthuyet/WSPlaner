@@ -306,6 +306,34 @@ function autoComplete($compile, $timeout) {
     }
 }
 
+function formatCeil($compile) {
+    return {
+        restrict: 'EA',
+        scope: {
+            ngModel: '=',
+            format: '=',
+            minLength: '='
+        },
+        // controller: controller,
+        replace: true,
+        link: function (scope, element, attr, ctrl) {
+            
+            var html = ''
+            
+            if (scope.format == 'date') {
+
+            }
+            if (scope.format == 'string') {
+
+            }
+            if (scope.format == 'number') {
+
+            }
+
+        },
+    }
+}
+
 
 function formatNumberDecimal($filter) {
     var FLOAT_REGEXP_1 = /^\$?\d+.(\d{3})*(\,\d*)$/; //Numbers like: 1.123,56
