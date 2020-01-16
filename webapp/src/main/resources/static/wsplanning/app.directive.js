@@ -32,6 +32,20 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
 
     }]
     ).directive('autoComplete', autoComplete)
+    .directive('tooltip', function(){
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs){
+                element.hover(function(){
+                    // on mouseenter
+                    element.tooltip('show');
+                }, function(){
+                    // on mouseleave
+                    element.tooltip('hide');
+                });
+            }
+        };
+    })
     .directive('formatCeil', formatCeil);
 
 convertToNumberDirective.$inject = [];
