@@ -1,3 +1,0 @@
-https://github.com/heroku/heroku-cli-deploy
-
-heroku deploy:war <path-file> --app boiling-crag-99514 --webapp-runner 9.0.20
