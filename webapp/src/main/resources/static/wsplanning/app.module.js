@@ -130,6 +130,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
         if (toParams.lang && $translate.use() !== toParams.lang) {
             $translate.use(toParams.lang);
             console.log(toParams.lang);
+
         }
     });
 
@@ -189,6 +190,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
                     $rootScope.$broadcast("changeLanguage", {
                         lang: newLange
                     });
+
                     common.spinner(false);
                 }, function error(response) {
                     console.error(response);

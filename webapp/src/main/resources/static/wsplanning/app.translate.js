@@ -1,6 +1,7 @@
 var translationsEN = {
 
   //Grid
+  gridWO: "Grid WO",
   WorkOrderStatus: "Status",
   SubStatus: "Sub status",
   DeptId: "Department",
@@ -15,23 +16,39 @@ var translationsEN = {
   Mileage: "Mileage",
   Reference: "Reference",
   WorkOrderNote: "Note",
-  CheckOutDate: "Estimated delivery",
-  DeliveredBy: "Delivered By",
-  WorkReadyDate: "WOREADYDATE",
-  WorkReadyBy: "WOREADYUSER",
-  AttachmentFilesCount: "No of Attached files",
-  LicenseNo: "License No",
+  CheckOutDate: "Est. del",
+  DeliveredBy: "Del by",
+  WorkReadyDate: "WO ready",
+  WorkReadyBy: "WO ready user",
+  AttachmentFilesCount: "No attached files",
+  LicenseNo: "Reg. Nr.",
   SearchKey: "Search key",
   VIN: "VIN",
-  FirstRegDate: "First registration",
-  NextServiceDate: "Next service",
-  NextMOTDate: "Next technical inspection",
-  PreviousServiceDate: "Previous service",
+  FirstRegDate: "1.Reg",
+  NextServiceDate: "N. Service",
+  NextMOTDate: "N. Inspect",
+  PreviousServiceDate: "P. Service",
   Model: "Model",
   SubModel: "SubModel",
-  CustNo: "Customer No",
-  Fname: "First name",
-  Lname: "Last name",
+  CustNo: "Cust Nr.",
+  Fname: "Cust Name",
+  Lname: "Cust Lastname",
+
+
+  PayerInfo: "Payer",
+  VisitReasonCode: "Visit Reason",
+  CourtesyCarInfo: "Cortesy Car",
+  VehicleNote:"Note",
+  PlaceOfDamage: "Reference",
+  Make:"Make",
+  // ContactFName:"Cust Name",
+  // ContactLName:"Cust Lastname",
+  //WorkReadyForInvoiceDate: "WO ready",
+
+
+
+
+
   //End
 
   unscheduledwork: "Unscheduled WorkOrders",
@@ -403,38 +420,50 @@ var translationsEN = {
 
 var translationsDE = {
   //Grid
+  gridWO: "Grid WO",
   WorkOrderStatus: "Status",
   SubStatus: "Sub status",
-  DeptId: "Department",
-  TransactionType: "Transaction type",
-  WorkOrderNo: "Workorder No",
+  DeptId: "Abteilung",
+  TransactionType: "Tras.Typ",
+  WorkOrderNo: "Auftr.No.",
   EstimatedTimeTot: "Estimated time",
   PoolTimeTot: "Pool time",
   BookedTimeTot: "Booked time",
-  ServiceAdvisorId: "Service Advisor",
-  ServiceDate: "Service date",
-  SubContractorInfo: "Sub contractor",
-  Mileage: "Mileage",
+  ServiceAdvisorId: "Kd Berater",
+  ServiceDate: "Serv.Dat",
+  SubContractorInfo: "Unter Lieferant",
+  Mileage: "Km Stand",
   Reference: "Reference",
   WorkOrderNote: "Note",
-  CheckOutDate: "Estimated delivery",
-  DeliveredBy: "Delivered By",
-  WorkReadyDate: "WOREADYDATE",
-  WorkReadyBy: "WOREADYUSER",
-  AttachmentFilesCount: "No of Attached files",
-  LicenseNo: "License No",
-  SearchKey: "Search key",
+  CheckOutDate: "Gepl. Ablief.",
+  DeliveredBy: "Ablief. Von",
+  WorkReadyDate: "Auftag Ende",
+  WorkReadyBy: "Auftr. Ende von",
+  AttachmentFilesCount: "Anz. Dateien",
+  LicenseNo: "Pol.Nr",
+  SearchKey: "Such ID",
   VIN: "VIN",
-  FirstRegDate: "First registration",
-  NextServiceDate: "Next service",
-  NextMOTDate: "Next technical inspection",
-  PreviousServiceDate: "Previous service",
-  Model: "Model",
-  SubModel: "SubModel",
-  CustNo: "Customer No",
-  Fname: "First name",
-  Lname: "Last name",
-  //End
+  FirstRegDate: "1.Reg",
+  NextServiceDate: "N.Service",
+  NextMOTDate: "N.MKF",
+  PreviousServiceDate: "L. Besuch",
+  Model: "Modell",
+  SubModel: "SubModell",
+  CustNo: "KdNr.",
+  Fname: "Kd V-Name",
+  Lname: "Kd Name",
+
+
+  PayerInfo: "Zahler",
+  VisitReasonCode: "WO Grund",
+  CourtesyCarInfo: "Cortesy Car",
+  VehicleNote:"Bemerk.",
+  PlaceOfDamage: "Ref.",
+  Make:"Marke",
+  // ContactFName:"Cust Name",
+  // ContactLName:"Cust Lastname",
+  //WorkReadyForInvoiceDate: "WO ready",
+
 
   unscheduledwork: "Ungeplante Aufträge",
   worksub: "Aufträge mit Subunternehmer",
@@ -798,6 +827,7 @@ var translationsDE = {
 
 var translationsFR = {
   //Grid
+  gridWO: "Grid WO",
   WorkOrderStatus: "Status",
   SubStatus: "Sub status",
   DeptId: "Department",
@@ -1192,6 +1222,7 @@ var translationsFR = {
 
 var translationsIT = {
   //Grid
+  gridWO: "Grid WO",
   WorkOrderStatus: "Status",
   SubStatus: "Sub status",
   DeptId: "Department",
@@ -1588,6 +1619,7 @@ var translationsIT = {
 
 var translationsVI = {
   //Grid
+  gridWO: "Grid WO",
   WorkOrderStatus: "Status",
   SubStatus: "Sub status",
   DeptId: "Department",
@@ -1831,7 +1863,7 @@ var translationsVI = {
 };
 
 var translationsHU = {
-
+  gridWO: "Grid WO",
   unscheduledwork: "Nem előjegyzett munkalapok",
   worksub: "Munkalapok alvállalkozóval",
   todaywork: "Mai nap munkalapok",

@@ -1,4 +1,4 @@
-UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $q, $http, $timeout, $location, $state, $filter, $uibModal, CommonFactory, CommonServices, listField,listDataFilter) {
+UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $q, $http, $timeout, $window, $location, $state, $filter, $uibModal, CommonFactory, CommonServices, listField,listDataFilter) {
     $scope.typeWO = "allWO";
     $scope.listField = listField;
     $scope.sortable = {
@@ -112,7 +112,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
 
 
     function loadData(count) {
-        console.log("--load ---");
         common.spinner(true);
         //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
@@ -141,12 +140,10 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
 
         HttpService.postData('/wo/getGridWO', params).then(function (response) {
             $scope.lstData = response;
-            console.log(response)
             $scope.pageGo = $scope.page;
             $scope.isShow = false;
             common.spinner(false);
         }, function error(response) {
-            console.log(response);
             common.spinner(false);
         });
 
@@ -156,7 +153,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
                 $scope.isNoData = ($scope.totalElements <= 0);
                 common.spinner(false);
             }, function error(response) {
-                console.log(response);
                 common.spinner(false);
             });
         }
@@ -166,7 +162,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
 
     //<editor-fold desc="Paging & Search Port">
     $scope.$watch("page", function (newValue, oldValue) {
-        console.log("wwatch");
         if (newValue != oldValue) {
             $scope.page = newValue;
             loadData();
@@ -178,11 +173,9 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     }
 
     $scope.changeLimit = function () {
-        console.log("changeLimit");
         loadData(false);
     }
     $scope.doSearch = function () {
-        console.log("doSearch");
         $scope.page = 1;
         $scope.pageGo = 1;
         loadData(true);
@@ -190,7 +183,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     //</editor-fold>
 
     $scope.sort = function (field) {
-        console.log("sort");
         if (field == $scope.sortable.name) {
             if ($scope.sortable.direction == "desc") {
                 $scope.sortable.direction = "asc";
@@ -207,7 +199,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     }
 
     $scope.onRefresh = function () {
-        console.log("onRefresh");
         $scope.limit = '20';
         $scope.page = '1';
         $scope.name = '';
@@ -255,7 +246,6 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     }
 
     $scope.resetSearch = function () {
-        console.log("resetSearch");
         $scope.sortable = {
             name: "",
             direction: "",
@@ -329,15 +319,12 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
             });
 
             modalInstance.result.then(function (obj) {
-                console.log(obj);
-
                 if (obj.scanner) {
                     obj.scanner.stop();
                 }
 
                 if (obj.code) {
                     $scope.params.skey = obj.code;
-                    console.log("------------$scope.params.skey: " + $scope.params.skey);
                     $scope.doSearch();
                 }
             }, function () {
@@ -366,27 +353,23 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         "SubStatus": {"isActive": false, "isOpen": false,"options": $scope.lstSubState},
     };
 
-    console.log($scope.filters);
-
     $scope.openFilter = function (key,value) {
         $scope.filters[key].isOpen = value;
     }
 
     $scope.checkChange = function (key, value) {
-        console.log(key);
-        console.log(value);
         if (value) {
             $scope.filters[key].isActive = true;
-            console.log($scope.filters[key]);
         } else {
             $scope.filters[key].isActive = false;
         }
 
         $scope.filters[key].isOpen = false;
-        console.log($scope.filters);
-        console.log($scope.searchPr);
         loadData(true);
     }
 
-    // console.log($scope.listField);
+    // $rootScope.$on('routestateChangeSuccess', function (event, data) {
+    //     $window.location.reload();
+    // });
+
 });

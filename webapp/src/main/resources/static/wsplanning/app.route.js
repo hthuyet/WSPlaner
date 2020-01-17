@@ -234,13 +234,11 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     common.spinnerFirstLoad(true);
-                    console.log("---app.main.workdetail: " + $stateParams.tab);
                     var LoadRows = true;
                     var LoadAttachment = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job" || $stateParams.tab == "checkin1";
                     var LoadAttachmentData = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job" || $stateParams.tab == "checkin1";
                     return WorkOrderService.detail($stateParams.id, LoadRows, LoadAttachment, LoadAttachmentData).then(
                         function (response) {
-                            console.log("---app.main.workdetail done--");
                             common.spinnerFirstLoad(false);
                             return response;
                         }
@@ -344,11 +342,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                         CommonFactory.doQuery('getWorkOrderStatuses'),
                         CommonFactory.doQuery('getSubStatuses')
                     ]).then(function (data) {
-                        console.log(data);
                         deferred.resolve(data);
-
-                        // $scope.lstWOStatus = data[0];
-                        // $scope.lstSubState = data[1];
                     });
                     return deferred.promise;
                 },
@@ -389,8 +383,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                         {Id: "Model", Name: $translate.instant('Model'), order: false, length:20,format:'string', type:'string'},
                         {Id: "SubModel", Name: $translate.instant('SubModel'), order: false, length:20,format:'string', type:'string'},
                         {Id: "CustNo", Name: $translate.instant('CustNo'), order: false, length:10,format:'string', type:'string'},
-                        {Id: "Fname", Name: $translate.instant('gridFname'), order: false, length:20,format:'string', type:'string'},
-                        {Id: "Lname", Name: $translate.instant('gridLname'), order: false, length:20,format:'string', type:'string'},
+                        // {Id: "FName", Name: $translate.instant('FName'), order: false, length:20,format:'string', type:'string'},
+                        // {Id: "LName", Name: $translate.instant('LName'), order: false, length:20,format:'string', type:'string'},
                         {Id: "ContactFName", Name: $translate.instant('ContactFName'), order: false, length:20,format:'string', type:'string'},
                         {Id: "ContactLName", Name: $translate.instant('ContactLName'), order: false, length:20,format:'string', type:'string'},
                         {Id: "CourtesyCarInfo", Name: $translate.instant('CourtesyCarInfo'), order: false, length:20,format:'string', type:'string'},
@@ -409,7 +403,6 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                                 sort = lstSort[j];
                                 if (field.Id == sort.Id
                                     || field.Id.toUpperCase() == sort.Id.toUpperCase()) {
-                                    console.log(field.Id + "- " + sort.Id);
                                     field.order = true;
                                     break;
                                 }

@@ -430,11 +430,11 @@ public class WOController extends BaseController {
                     if (itemObj.has("WOCustomer") && !itemObj.get("WOCustomer").isJsonNull()) {
                         WOCustomer = itemObj.get("WOCustomer").getAsJsonObject();
                         itemRtn.addProperty("CustNo", WOCustomer.get("CustNo").getAsString());
-                        if (WOCustomer.has("Fname") && !WOCustomer.get("Fname").isJsonNull()) {
-                            itemRtn.addProperty("Fname", WOCustomer.get("Fname").getAsString());
+                        if (WOCustomer.has("FName") && !WOCustomer.get("FName").isJsonNull()) {
+                            itemRtn.addProperty("FName", WOCustomer.get("FName").getAsString());
                         }
-                        if (WOCustomer.has("Lname") && !WOCustomer.get("Lname").isJsonNull()) {
-                            itemRtn.addProperty("Lname", WOCustomer.get("Lname").getAsString());
+                        if (WOCustomer.has("LName") && !WOCustomer.get("LName").isJsonNull()) {
+                            itemRtn.addProperty("LName", WOCustomer.get("LName").getAsString());
                         }
                     }
 
