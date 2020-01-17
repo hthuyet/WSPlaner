@@ -753,12 +753,13 @@ div .btn-notification.btn-group {
 /* Tooltip text */
 .tooltip-text .tooltip-text-sub {
   visibility: hidden;
-  width: 150px;
+  width: auto;
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px 10px;
   border-radius: 6px;
+  white-space: nowrap;
  
   /* Position the tooltip text - see examples below! */
   position: absolute;
@@ -770,7 +771,13 @@ div .btn-notification.btn-group {
   visibility: visible;
 }
 
+
 @media (min-width: 769px) {
+
+  table[class*=table-grid] > tbody > tr > td {
+    padding: 4px 10px ;
+  }
+
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
@@ -809,6 +816,9 @@ div .btn-notification.btn-group {
 
 @media (max-width: 768px) {
 
+  table[class*=table-grid] > tbody > tr > td {
+    padding: 4px 10px ;
+  }
   .table-responsive > .table > thead > tr > th,
   .table-responsive > .table > tbody > tr > th,
   .table-responsive > .table > tfoot > tr > th,
@@ -828,8 +838,18 @@ div .btn-notification.btn-group {
     display: none;
   }
 
+  
+
   .tableIndex {
     height: 300px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
+  .tableIndex > thead > tr[class*="fixed-header"] {
+    position: fixed;
+	top: 0;
+	width: 100%;
   }
 
   .heading-elements {
@@ -840,10 +860,6 @@ div .btn-notification.btn-group {
   .heading-elements:not(.not-collapsible) {
     display: inline;
     margin-top: -65px;
-  }
-
-  .panel-title {
-    /* width: 80% !important; */
   }
 
   .heading-elements:not(.visible-elements) .icons-list {
@@ -921,11 +937,22 @@ div .btn-notification.btn-group {
 }
 
 @media (max-width: 1024px) {
-  
+
+  table[class*=table-grid] > tbody > tr > td {
+    padding: 4px 10px ;
+  }
+
+
   .tableIndex {
     height: 300px;
     overflow-x: scroll;
     overflow-y: auto;
+  }
+
+  .tableIndex > thead > tr[class*="fixed-header"] {
+    position: fixed;
+	top: 0;
+	width: 100%;
   }
 
   .tableModal {
@@ -1008,10 +1035,23 @@ div .btn-notification.btn-group {
 }
 
 @media (max-width: 1199px) {
+
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
   }
+
+  .tableIndex{
+    max-height: 350px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
+
+  table[class*=table-grid] > tbody > tr > td {
+    padding: 4px 10px ;
+  }
+
 
   .tableModal {
     max-height: 450px;
@@ -1047,11 +1087,28 @@ div .btn-notification.btn-group {
     overflow-x: scroll;
     overflow-y: auto;
   }
+  
+  /* .table-fixed-header tbody {
+	  overflow-x: scroll;
+    overflow-y: auto;
+    height:450px !important;
+    width:100%;
+  } */
+ 
+  /* table[class*=header-fixed] thead {
+      z-index: 0;
+      position: fixed;
+  } */
 
 
   .table[class*="ipadpro-responsive"] > tbody > tr > td {
     padding: 12px 14px;
   }
+
+  .table[class*="table-grid"] > tbody > tr > td {
+    padding: 4px 10px ;
+  }
+
 
   #autocomplete-dropdown {
     position:absolute;

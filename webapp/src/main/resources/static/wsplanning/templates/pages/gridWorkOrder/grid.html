@@ -1,6 +1,6 @@
 <div class="panel panel-flat" style="margin-bottom: 0px;" data-ng-init="loadCommon()">
-    <div class="table-responsive">
-        <table class="table table-bordered table-condensed table-striped table-hover ipadpro-responsive">
+    <div class="table-responsive tableIndex">
+        <table class="table table-bordered table-grid table-condensed table-striped table-hover header-fixed">
             <thead>
                 <tr class="d-flex">
                     <th ng-repeat="field in listField" class="text-center col-width">
@@ -55,12 +55,12 @@
 
             <!--BODY-->
             <tbody>
-                <tr ng-repeat="item in lstData track by $index" ng-dblclick="viewDetail(item)" ng-style="{color:'item.VisitReasonCode'}"
-                    ios-dblclick="viewDetail(item)">
+                <tr ng-repeat="item in lstData track by $index" ng-dblclick="viewDetail(item)"
+                    ng-style="{color:'item.VisitReasonCode'}" ios-dblclick="viewDetail(item)">
 
                     <td class="text-center col-body" ng-repeat="field in listField" class="text-left col-xs-1">
                         <span ng-show="field.type == 'string'"
-                              ng-class="{'tooltip-text': item[field.Id].length > field.length}">
+                            ng-class="{'tooltip-text': item[field.Id].length > field.length}">
                             {{ item[field.Id] | cut:false:field.length:' ...' }}
                             <span ng-show="field.type == 'string' && item[field.Id].length > field.length"
                                 class="tooltip-text-sub">{{item[field.Id]}}

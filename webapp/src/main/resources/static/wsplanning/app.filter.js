@@ -121,9 +121,5 @@ UserWebApp
         return value + (tail || ' …');
       };
     })
-  // .filter('formatCeil', function ($filter) {
-  //     return function (input, format) {
-        
-  //     }
-  // })
+  
   ;
