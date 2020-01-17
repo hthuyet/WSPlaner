@@ -18,7 +18,7 @@ var translationsEN = {
   WorkOrderNote: "Note",
   CheckOutDate: "Est. del",
   DeliveredBy: "Del by",
-  WorkReadyDate: "WO ready",
+  // WorkReadyDate: "WO ready",
   WorkReadyBy: "WO ready user",
   AttachmentFilesCount: "No attached files",
   LicenseNo: "Reg. Nr.",
@@ -26,7 +26,7 @@ var translationsEN = {
   VIN: "VIN",
   FirstRegDate: "1.Reg",
   NextServiceDate: "N. Service",
-  NextMOTDate: "N. Inspect",
+  NextMOTDate_Grid: "N. Inspect",
   PreviousServiceDate: "P. Service",
   Model: "Model",
   SubModel: "SubModel",
@@ -43,7 +43,7 @@ var translationsEN = {
   Make:"Make",
   // ContactFName:"Cust Name",
   // ContactLName:"Cust Lastname",
-  //WorkReadyForInvoiceDate: "WO ready",
+  WorkReadyForInvoiceDate: "WO ready",
 
 
 
@@ -445,7 +445,7 @@ var translationsDE = {
   VIN: "VIN",
   FirstRegDate: "1.Reg",
   NextServiceDate: "N.Service",
-  NextMOTDate: "N.MKF",
+  NextMOTDate_Grid: "N.MKF",
   PreviousServiceDate: "L. Besuch",
   Model: "Modell",
   SubModel: "SubModell",

@@ -783,7 +783,7 @@ div .btn-notification.btn-group {
     position: sticky;   
     position: -webkit-sticky;
     top: 0;
-    z-index: 0;
+    z-index: 2;
     background-color: white;
   }
 
@@ -859,7 +859,7 @@ div .btn-notification.btn-group {
     position: sticky;   
     position: -webkit-sticky;
     top: 0;
-    z-index: 0;
+    z-index: 2;
     background-color: white;
   }
 
@@ -965,7 +965,7 @@ div .btn-notification.btn-group {
     position: sticky;   
     position: -webkit-sticky;
     top: 0;
-    z-index: 0;
+    z-index: 2;
     background-color: white;
   }
 
@@ -1066,7 +1066,7 @@ div .btn-notification.btn-group {
     position: sticky;   
     position: -webkit-sticky;
     top: 0;
-    z-index: 0;
+    z-index: 2;
     background-color: white;
   }
 
@@ -1116,7 +1116,7 @@ div .btn-notification.btn-group {
     position: sticky;   
     position: -webkit-sticky;
     top: 0;
-    z-index: 0;
+    z-index: 2;
     background-color: white;
   }
 

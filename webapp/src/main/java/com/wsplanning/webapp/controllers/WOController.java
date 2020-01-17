@@ -408,7 +408,7 @@ public class WOController extends BaseController {
                     itemRtn.addProperty("WorkOrderNote", itemObj.get("WorkOrderNote").getAsString());
                     itemRtn.addProperty("CheckOutDate", itemObj.get("CheckOutDate").getAsString());
                     itemRtn.addProperty("DeliveredBy", itemObj.get("DeliveredBy").getAsString());
-                    itemRtn.addProperty("WorkReadyDate", itemObj.get("WorkReadyDate").getAsString());
+                    // itemRtn.addProperty("WorkReadyDate", itemObj.get("WorkReadyDate").getAsString());
                     itemRtn.addProperty("WorkReadyBy", itemObj.get("WorkReadyBy").getAsString());
                     itemRtn.addProperty("AttachmentFilesCount", itemObj.get("AttachmentFilesCount").getAsString());
 
