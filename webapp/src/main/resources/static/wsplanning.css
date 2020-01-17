@@ -848,8 +848,8 @@ div .btn-notification.btn-group {
 
   .tableIndex > thead > tr[class*="fixed-header"] {
     position: fixed;
-	top: 0;
-	width: 100%;
+    top: 0;
+    width: 100%;
   }
 
   .heading-elements {
@@ -1095,15 +1095,41 @@ div .btn-notification.btn-group {
     width:100%;
   } */
  
-  /* table[class*=header-fixed] thead {
-      z-index: 0;
-      position: fixed;
-  } */
+  .tableIndex thead th {
+    position: sticky;   
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 0;
+    background-color: white;
+  }
 
 
   .table[class*="ipadpro-responsive"] > tbody > tr > td {
     padding: 12px 14px;
   }
+
+
+  /* .table[class*="table-grid"] tbody {
+    width:100%;
+    height: 300px ;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
+  .table[class*="table-grid"] thead  th{
+    position: sticky;
+    top: 50px; 
+    background: white;
+    
+  } */
+
+  /* .table[class*="table-grid"] thead > tr > th {
+    float: left;
+  }
+
+  .table[class*="table-grid"] tbody td {
+    float: left;
+  } */
 
   .table[class*="table-grid"] > tbody > tr > td {
     padding: 4px 10px ;
