@@ -778,6 +778,15 @@ div .btn-notification.btn-group {
     padding: 4px 10px ;
   }
 
+
+  .tableIndex thead th {
+    position: sticky;   
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 0;
+    background-color: white;
+  }
+
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
@@ -846,11 +855,14 @@ div .btn-notification.btn-group {
     overflow-y: auto;
   }
 
-  .tableIndex > thead > tr[class*="fixed-header"] {
-    position: fixed;
+  .tableIndex thead th {
+    position: sticky;   
+    position: -webkit-sticky;
     top: 0;
-    width: 100%;
+    z-index: 0;
+    background-color: white;
   }
+
 
   .heading-elements {
     float: right !important;
@@ -949,10 +961,12 @@ div .btn-notification.btn-group {
     overflow-y: auto;
   }
 
-  .tableIndex > thead > tr[class*="fixed-header"] {
-    position: fixed;
-	top: 0;
-	width: 100%;
+  .tableIndex thead th {
+    position: sticky;   
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 0;
+    background-color: white;
   }
 
   .tableModal {
@@ -1048,6 +1062,15 @@ div .btn-notification.btn-group {
   }
 
 
+  .tableIndex thead th {
+    position: sticky;   
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 0;
+    background-color: white;
+  }
+
+
   table[class*=table-grid] > tbody > tr > td {
     padding: 4px 10px ;
   }
@@ -1088,12 +1111,6 @@ div .btn-notification.btn-group {
     overflow-y: auto;
   }
   
-  /* .table-fixed-header tbody {
-	  overflow-x: scroll;
-    overflow-y: auto;
-    height:450px !important;
-    width:100%;
-  } */
  
   .tableIndex thead th {
     position: sticky;   
@@ -1108,28 +1125,6 @@ div .btn-notification.btn-group {
     padding: 12px 14px;
   }
 
-
-  /* .table[class*="table-grid"] tbody {
-    width:100%;
-    height: 300px ;
-    overflow-x: scroll;
-    overflow-y: auto;
-  }
-
-  .table[class*="table-grid"] thead  th{
-    position: sticky;
-    top: 50px; 
-    background: white;
-    
-  } */
-
-  /* .table[class*="table-grid"] thead > tr > th {
-    float: left;
-  }
-
-  .table[class*="table-grid"] tbody td {
-    float: left;
-  } */
 
   .table[class*="table-grid"] > tbody > tr > td {
     padding: 4px 10px ;
