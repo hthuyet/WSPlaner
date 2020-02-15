@@ -103,9 +103,11 @@ public class WOController extends BaseController {
 
                     if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
                         WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
-                        sb.append(WOVehicle.get("LicenseNo").getAsString()).append(", ").append(WOVehicle.get("Make").getAsString())
-                                .append(" ").append(WOVehicle.get("Model").getAsString()).append(" ")
-                                .append(WOVehicle.get("SubModel").getAsString()).append(", ").append(WOVehicle.get("VIN").getAsString()).append(" <br />");
+                        sb.append(WOVehicle.get("LicenseNo").getAsString()).append(", ")
+                                .append(WOVehicle.get("Make").getAsString()).append(" ")
+                                .append(WOVehicle.get("Model").getAsString()).append(" ")
+                                .append(WOVehicle.get("SubModel").getAsString()).append(", ")
+                                .append(WOVehicle.get("VIN").getAsString()).append(" <br />");
                         if (WOVehicle.has("HolderCustomer") && !WOVehicle.get("HolderCustomer").isJsonNull()) {
                             HolderCustomer = WOVehicle.get("HolderCustomer").getAsJsonObject();
                         }
@@ -115,22 +117,20 @@ public class WOController extends BaseController {
 
                     if (HolderCustomer != null) {
                         sb.append(HolderCustomer.get("LName").getAsString()).append(" ")
-                                .append(HolderCustomer.get("FName").getAsString()).append(", ")
-                                .append("<a href=\"tel:").append(HolderCustomer.get("Tel1").getAsString()).append("\">")
+                                .append(HolderCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
+                                .append(HolderCustomer.get("Tel1").getAsString()).append("\">")
                                 .append(HolderCustomer.get("Tel1").getAsString()).append("</a> ")
-                                .append("<a href=\"mailto:").append(HolderCustomer.get("Email").getAsString()).append("?Subject=Hello%20again\">")
-                                .append(HolderCustomer.get("Email").getAsString())
-                                .append("</a>")
-                                .append(" <br />");
+                                .append("<a href=\"mailto:").append(HolderCustomer.get("Email").getAsString())
+                                .append("?Subject=Hello%20again\">").append(HolderCustomer.get("Email").getAsString())
+                                .append("</a>").append(" <br />");
                     } else {
-                        sb.append(WOCustomer.get("LName").getAsString()).append(" ").append(WOCustomer.get("FName").getAsString())
-                                .append(", ")
-                                .append("<a href=\"tel:").append(WOCustomer.get("Tel1").getAsString()).append("\">")
+                        sb.append(WOCustomer.get("LName").getAsString()).append(" ")
+                                .append(WOCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
+                                .append(WOCustomer.get("Tel1").getAsString()).append("\">")
                                 .append(WOCustomer.get("Tel1").getAsString()).append("</a> ")
-                                .append("<a href=\"mailto:").append(WOCustomer.get("Email").getAsString()).append("?Subject=Hello%20again\">")
-                                .append(WOCustomer.get("Email").getAsString())
-                                .append("</a>")
-                                .append(" <br />");
+                                .append("<a href=\"mailto:").append(WOCustomer.get("Email").getAsString())
+                                .append("?Subject=Hello%20again\">").append(WOCustomer.get("Email").getAsString())
+                                .append("</a>").append(" <br />");
                     }
                     sb.append(jobTitle.replaceAll("\r\n", "<br />"));
 
@@ -217,7 +217,6 @@ public class WOController extends BaseController {
         }
     }
 
-
     @GetMapping("/wo/getTextLine")
     @ResponseBody
     public ResponseEntity getTextLine() {
@@ -229,7 +228,6 @@ public class WOController extends BaseController {
             // TODO: handle exception
         }
     }
-
 
     @PostMapping("/wo/workOrder")
     @ResponseBody
@@ -244,7 +242,8 @@ public class WOController extends BaseController {
 
     @PostMapping("/wo/workOrderTest")
     @ResponseBody
-    public ResponseEntity workOrderTest(@RequestBody WODTO data, @RequestHeader(name = "postAction") String postAction) {
+    public ResponseEntity workOrderTest(@RequestBody WODTO data,
+            @RequestHeader(name = "postAction") String postAction) {
         try {
             String rtn = wokOrderClient.postWO(getToken(), postAction, data);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -252,7 +251,6 @@ public class WOController extends BaseController {
             return parseException(ex);
         }
     }
-
 
     @PostMapping("/wo/workOrderTest2")
     @ResponseBody
@@ -265,9 +263,9 @@ public class WOController extends BaseController {
         }
     }
 
-    //FOR TEST
+    // FOR TEST
     private WODTO testData() {
-        //init
+        // init
         WOVehicleDTO WOVehicle = new WOVehicleDTO();
         WOVehicle.VehiId = 306422;
         WOCustomerDTO WOCustomer = new WOCustomerDTO();
@@ -284,7 +282,7 @@ public class WOController extends BaseController {
         job.Payer = "DC_ISP";
         WOJobs.add(job);
 
-        //WODTO
+        // WODTO
         WODTO objWO = new WODTO();
         objWO.SiteId = "102";
         objWO.DeptId = "A4";
@@ -315,7 +313,6 @@ public class WOController extends BaseController {
         }
         return "wo/index";
     }
-
 
     @GetMapping("/wo/test2")
     public String test2(Model model) {
@@ -349,7 +346,7 @@ public class WOController extends BaseController {
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception e) {
             return parseException(e);
-            //TODO: handle exception
+            // TODO: handle exception
         }
     }
 
@@ -379,18 +376,27 @@ public class WOController extends BaseController {
 
                     itemRtn = new JsonObject();
                     itemRtn.addProperty("WorkOrderStatus", itemObj.get("WorkOrderStatus").getAsString());
-                    itemRtn.addProperty("WorkOrderId",  itemObj.get("WorkOrderId").getAsString());
-                    itemRtn.addProperty("VisitReasonCode",  itemObj.get("VisitReasonCode").getAsString());
+                    itemRtn.addProperty("WorkOrderId", itemObj.get("WorkOrderId").getAsString());
+                    itemRtn.addProperty("VisitReasonCode", itemObj.get("VisitReasonCode").getAsString());
+                    // if(itemObj.has("Description") && !itemObj.get("Description").isJsonNull()) {
+                    //     itemRtn.addProperty("VisitReason", itemObj.get("VisitReasonCode").getAsString() + "="
+                    //     + itemObj.get("Description").getAsString());
+                    // }
+                    // itemRtn.addProperty("Description", itemObj.get("VisitReasonCode").getAsString());
+                  
                     if (itemObj.has("SubStatus") && !itemObj.get("SubStatus").isJsonNull()) {
                         itemRtn.addProperty("SubStatus", itemObj.get("SubStatus").getAsString());
                     }
                     if (itemObj.has("PlaceOfDamage") && !itemObj.get("PlaceOfDamage").isJsonNull()) {
                         itemRtn.addProperty("PlaceOfDamage", itemObj.get("PlaceOfDamage").getAsString());
                     }
-                    if (itemObj.has("WorkReadyForInvoiceDate") && !itemObj.get("WorkReadyForInvoiceDate").isJsonNull()) {
-                        itemRtn.addProperty("WorkReadyForInvoiceDate", itemObj.get("WorkReadyForInvoiceDate").getAsString());
+                    if (itemObj.has("WorkReadyForInvoiceDate")
+                            && !itemObj.get("WorkReadyForInvoiceDate").isJsonNull()) {
+                        itemRtn.addProperty("WorkReadyForInvoiceDate",
+                                itemObj.get("WorkReadyForInvoiceDate").getAsString());
                     }
                     itemRtn.addProperty("DeptId", itemObj.get("DeptId").getAsString());
+                    // itemRtn.addProperty("Department", itemObj.get("DeptId").getAsString() + "=" + itemObj.get("Description").getAsString());
                     itemRtn.addProperty("PayerInfo", itemObj.get("PayerInfo").getAsString());
                     itemRtn.addProperty("ContactFName", itemObj.get("ContactFName").getAsString());
                     itemRtn.addProperty("ContactLName", itemObj.get("ContactLName").getAsString());
@@ -408,7 +414,8 @@ public class WOController extends BaseController {
                     itemRtn.addProperty("WorkOrderNote", itemObj.get("WorkOrderNote").getAsString());
                     itemRtn.addProperty("CheckOutDate", itemObj.get("CheckOutDate").getAsString());
                     itemRtn.addProperty("DeliveredBy", itemObj.get("DeliveredBy").getAsString());
-                    // itemRtn.addProperty("WorkReadyDate", itemObj.get("WorkReadyDate").getAsString());
+                    // itemRtn.addProperty("WorkReadyDate",
+                    // itemObj.get("WorkReadyDate").getAsString());
                     itemRtn.addProperty("WorkReadyBy", itemObj.get("WorkReadyBy").getAsString());
                     itemRtn.addProperty("AttachmentFilesCount", itemObj.get("AttachmentFilesCount").getAsString());
 
@@ -437,7 +444,6 @@ public class WOController extends BaseController {
                             itemRtn.addProperty("LName", WOCustomer.get("LName").getAsString());
                         }
                     }
-
 
                     listRtn.add(itemRtn);
                 }
