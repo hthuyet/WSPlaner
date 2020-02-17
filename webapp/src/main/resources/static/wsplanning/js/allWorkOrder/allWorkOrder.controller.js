@@ -96,6 +96,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     });
     CommonServices.getVisitReasons().then(function (data) {
       $scope.lstVisitReason = data;
+      // console.log(data)
     });
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;

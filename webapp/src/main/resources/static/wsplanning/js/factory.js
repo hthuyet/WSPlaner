@@ -204,10 +204,10 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
                     return data.data;
                 })
                 .catch(function (reason) {
+                    console.log('error')
                     throw new Error(reason.message);
                 });
         }
-
         return visitReasons;
 
         // if (!visitReasons || visitReasons.length <= 0) {
