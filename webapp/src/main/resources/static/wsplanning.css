@@ -954,6 +954,11 @@ div .btn-notification.btn-group {
     padding: 4px 10px ;
   }
 
+  .tableGrid {
+    max-height: 700px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
 
   .tableIndex {
     height: 300px;
@@ -1106,12 +1111,18 @@ div .btn-notification.btn-group {
   } 
 
   .tableIndex {
-    max-height: 450px;
+    max-height: 350px;
     overflow-x: scroll;
     overflow-y: auto;
   }
-  
- 
+
+  .tableGrid {
+    max-height: 600px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
+
   .tableIndex thead th {
     position: sticky;   
     position: -webkit-sticky;

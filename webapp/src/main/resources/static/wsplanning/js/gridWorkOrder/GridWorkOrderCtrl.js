@@ -34,7 +34,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         "OnlyToday": ""
     };
 
-    $scope.limit = 20;
+    $scope.limit = 50;
     $scope.page = 1;
 
     function reset() {
@@ -151,6 +151,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         if (count) {
             HttpService.postData('/wo/countWO', params).then(function (response) {
                 $scope.totalElements = response;
+                console.log(response);
                 $scope.isNoData = ($scope.totalElements <= 0);
                 common.spinner(false);
             }, function error(response) {
@@ -200,7 +201,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     }
 
     $scope.onRefresh = function () {
-        $scope.limit = '20';
+        $scope.limit = '50';
         $scope.page = '1';
         $scope.name = '';
 
@@ -368,9 +369,5 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         $scope.filters[key].isOpen = false;
         loadData(true);
     }
-
-    // $rootScope.$on('routestateChangeSuccess', function (event, data) {
-    //     $window.location.reload();
-    // });
 
 });
