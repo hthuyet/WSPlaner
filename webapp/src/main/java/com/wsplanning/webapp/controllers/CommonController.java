@@ -89,20 +89,20 @@ public class CommonController extends BaseController {
 
         itemLang = new JSONObject();
         jsonObj = jsonArray.getJSONObject(i);
-        Items = jsonObj.getJSONArray("Items");
+        Items = jsonObj.getJSONArray("items");
         for (int j = 0; j < Items.length(); j++) {
           itemObj = Items.getJSONObject(j);
-          keyItem = itemObj.getString("Id");
+          keyItem = itemObj.getString("id");
           if ("IsDefault".equalsIgnoreCase(keyItem)) {
-            IsDefault = itemObj.getInt("Value");
+            IsDefault = itemObj.getInt("value");
           } else if ("CultureInfo".equalsIgnoreCase(keyItem)) {
-            CultureInfo = itemObj.getString("Value");
+            CultureInfo = itemObj.getString("value");
           } else if ("Flag".equalsIgnoreCase(keyItem)) {
-            Flag = itemObj.getString("Value");
+            Flag = itemObj.getString("value");
           }
         }
-        itemLang.put("Id", jsonObj.getString("Id"));
-        itemLang.put("Name", jsonObj.getString("Name"));
+        itemLang.put("Id", jsonObj.getString("id"));
+        itemLang.put("Name", jsonObj.getString("name"));
         itemLang.put("IsDefault", IsDefault);
         itemLang.put("CultureInfo", CultureInfo);
         itemLang.put("Flag", Flag);

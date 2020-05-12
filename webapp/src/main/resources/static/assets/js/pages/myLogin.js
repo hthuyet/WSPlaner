@@ -6,8 +6,8 @@ function loadSite() {
     success: function (responseData, textStatus, jqXHR) {
       $.each(responseData, function (i, item) {
         $('#siteId').append($('<option>', {
-          value: item.Id,
-          text: item.Name
+          value: item.id,
+          text: item.name
         }));
       });
 
