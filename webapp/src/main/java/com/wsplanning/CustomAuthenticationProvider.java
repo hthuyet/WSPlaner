@@ -87,18 +87,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       String loginResponse = authClient.login(siteId, language, authentication.getName(), (String) authentication.getCredentials());
       if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
         JSONObject userInfo = new JSONObject(loginResponse);
-        String Token = userInfo.optString("Token", "");
-        String siteName = asMasterClient.getSiteName(userInfo.optString("SiteId", ""));
+        String Token = userInfo.optString("token", "");
+        String siteName = asMasterClient.getSiteName(userInfo.optString("siteId", ""));
         if (Token != null && !StringUtils.isBlank(Token)) {
-          JSONObject EmployeeData = userInfo.optJSONObject("EmployeeData");
+          JSONObject EmployeeData = userInfo.optJSONObject("employeeData");
 //          JSONObject EmployeeData = userInfo.optJSONObject("Employee");
 
           if (EmployeeData != null) {
             session.setAttribute(SESSION_EMPLOYEEDATA, EmployeeData.toString());
             if (siteName != null && !StringUtils.isBlank(siteName)) {
-              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", "") + "@" + siteName);
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("name", "") + "@" + siteName);
             } else {
-              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", ""));
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("name", ""));
             }
           }
           System.out.println("------Token: " + Token);

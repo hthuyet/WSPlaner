@@ -67,7 +67,7 @@ public class ASMasterClient {
             for (int i = 0; i < jsonArray.length(); i++) {
                 itemObj = jsonArray.getJSONObject(i);
                 hsmSite.put(itemObj.getString("id"), itemObj.getString("name"));
-
+                // hsmSite.put(itemObj.getString("Id"), itemObj.getString("Name"));
             }
         }
         return response;

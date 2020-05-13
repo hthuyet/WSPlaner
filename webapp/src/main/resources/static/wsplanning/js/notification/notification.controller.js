@@ -101,7 +101,7 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, Wo
   function loadData(count) {
     common.spinner(true);
     var dataUnRead = {
-      smanId: EmployeeData.SmanId,
+      smanId: EmployeeData.smanId,
       notificationType: "UnRead"
     }
     if (count) {

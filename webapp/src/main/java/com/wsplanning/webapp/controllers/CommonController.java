@@ -90,19 +90,33 @@ public class CommonController extends BaseController {
         itemLang = new JSONObject();
         jsonObj = jsonArray.getJSONObject(i);
         Items = jsonObj.getJSONArray("items");
+        // Items = jsonObj.getJSONArray("Items");
+
         for (int j = 0; j < Items.length(); j++) {
           itemObj = Items.getJSONObject(j);
           keyItem = itemObj.getString("id");
+          // keyItem = itemObj.getString("Id");
+
           if ("IsDefault".equalsIgnoreCase(keyItem)) {
             IsDefault = itemObj.getInt("value");
+            // IsDefault = itemObj.getInt("Value");
+
           } else if ("CultureInfo".equalsIgnoreCase(keyItem)) {
             CultureInfo = itemObj.getString("value");
+            // CultureInfo = itemObj.getString("Value");
+
           } else if ("Flag".equalsIgnoreCase(keyItem)) {
             Flag = itemObj.getString("value");
+            // Flag = itemObj.getString("Value");
+
           }
         }
         itemLang.put("Id", jsonObj.getString("id"));
+        // itemLang.put("Id", jsonObj.getString("Id"));
+
         itemLang.put("Name", jsonObj.getString("name"));
+        // itemLang.put("Name", jsonObj.getString("Name"));
+
         itemLang.put("IsDefault", IsDefault);
         itemLang.put("CultureInfo", CultureInfo);
         itemLang.put("Flag", Flag);
@@ -338,7 +352,7 @@ public class CommonController extends BaseController {
 
   // notification
   @GetMapping("/site/getNotification")
-  public ResponseEntity getNotification(@RequestParam(name = "smanid") String params) {
+  public ResponseEntity getNotification(@RequestParam(name = "Smanid") String params) {
     try {
       String rtn = notificationClient.getListNotification(params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -349,7 +363,7 @@ public class CommonController extends BaseController {
   }
 
   @GetMapping("/site/getCountNotification")
-  public ResponseEntity getCountNotification(@RequestParam(name = "smanid") String params) {
+  public ResponseEntity getCountNotification(@RequestParam(name = "Smanid") String params) {
     try {
       String rtn = notificationClient.getCount(params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);

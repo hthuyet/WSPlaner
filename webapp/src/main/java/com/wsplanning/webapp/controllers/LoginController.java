@@ -27,16 +27,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(HttpServletRequest request) {
-        // String SiteId = request.getParameter("siteId");
-        // String SiteId = request.getParameter("siteId");
-        // String UserId = request.get("username");
-        // String user_encoded = Base64.encodeBase64String(UserId.getBytes());
-        // String pass_encoded = Base64.encodeBase64String(Password.getBytes());
-        // request.removeAttribute("username");
-        // request.removeAttribute("password");
-        // request.setAttribute("username", user_encoded);
-        // request.setAttribute("password", pass_encoded);
-
 
         String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
         if (token != null && !StringUtils.isBlank(token)) {

@@ -148,7 +148,7 @@ public class WokOrderClient {
 
   public String getWO(String token, String siteId, Map<String, String> params) {
 
-    String viewName = params.get("ViewName");
+    String viewName = params.get("ViewName").toUpperCase();
 
     HttpHeaders headers = generateHearderWO(token,params);
 

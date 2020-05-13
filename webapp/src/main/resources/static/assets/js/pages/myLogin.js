@@ -8,6 +8,8 @@ function loadSite() {
         $('#siteId').append($('<option>', {
           value: item.id,
           text: item.name
+          // value: item.Id,
+          // text: item.Name
         }));
       });
 

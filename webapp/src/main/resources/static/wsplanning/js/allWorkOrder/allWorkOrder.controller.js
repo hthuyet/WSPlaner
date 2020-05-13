@@ -1,8 +1,8 @@
 UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO) {
   $scope.typeWO = typeWO;
-
+  
   var EmployeeData = $("#EmployeeData").data("employee");
-
+  console.log(EmployeeData)
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -17,18 +17,18 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   $scope.buttonType = function (name) {
     var string = "app.main." + name;
-    $state.go(string, {'locale': $rootScope.lang, 'type': typeWO, 'action': name });
+    $state.go(string, {'locale': $rootScope.lang, 'type': $scope.typeWO, 'action': name });
   }
 
   $scope.params = {
-    "department": EmployeeData.DeptId,
+    "department": EmployeeData.depId,
     "trans": "",
     "visitReason": "",
     "receiver": "",
     "from": "",
     "to": "",
     "myWo": false,
-    "shiftId": EmployeeData.ShiftId,
+    "shiftId": EmployeeData.shiftId,
     "skey": "",
   };
 
@@ -37,14 +37,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   function reset() {
     $scope.params = {
-      "department": EmployeeData.DeptId,
+      "department": EmployeeData.deptId,
       "trans": "",
       "visitReason": "",
       "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": EmployeeData.ShiftId,
+      "shiftId": EmployeeData.shiftId,
       "skey": "",
     };
     $scope.limit = 20;
@@ -111,14 +111,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
     var params = {
-      "ViewName": typeWO,
+      "ViewName": $scope.typeWO,
       "skey": $scope.params.skey,
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
-      "shiftId": $scope.params.shiftId,
+      "ShiftId": $scope.params.shiftId,
       "Receiver": $scope.params.receiver,
       "MyWO": $scope.params.myWo,
       "FromDate": $scope.params.from,
@@ -225,7 +225,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       $state.go('app.main.workdetail', {
         'locale': $rootScope.lang,
         'id': item.WorkOrderId,
-        'type': typeWO,
+        'type': $scope.typeWO,
         'tab': 'job'
       });
     });
@@ -242,14 +242,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   $scope.resetSearch = function () {
     $scope.params = {
-      "department": EmployeeData.DeptId,
+      "department": EmployeeData.deptId,
       "trans": "",
       "visitReason": "",
       "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": EmployeeData.ShiftId,
+      "shiftId": EmployeeData.shiftId,
       "skey": "",
     };
     $scope.page = 1;
