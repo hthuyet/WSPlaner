@@ -6,10 +6,15 @@ function loadSite() {
     success: function (responseData, textStatus, jqXHR) {
       $.each(responseData, function (i, item) {
         $('#siteId').append($('<option>', {
+<<<<<<< HEAD
           value: item.id,
           text: item.name
           // value: item.Id,
           // text: item.Name
+=======
+          value: item.Id,
+          text: item.Name
+>>>>>>> parent of d6ca6c8... changing in commonController and AsmaterClient: attribute of jsonobject
         }));
       });
 
