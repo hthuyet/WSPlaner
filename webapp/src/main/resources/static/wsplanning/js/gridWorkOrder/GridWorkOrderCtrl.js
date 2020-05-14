@@ -34,7 +34,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
         "OnlyToday": ""
     };
 
-    $scope.limit = 20;
+    $scope.limit = 50;
     $scope.page = 1;
 
     function reset() {
@@ -200,7 +200,7 @@ UserWebApp.controller('GridWorkOrderCtrl', function ($scope, $rootScope, $locale
     }
 
     $scope.onRefresh = function () {
-        $scope.limit = '20';
+        $scope.limit = '50';
         $scope.page = '1';
         $scope.name = '';
 
