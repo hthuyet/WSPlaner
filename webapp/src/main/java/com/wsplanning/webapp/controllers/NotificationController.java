@@ -54,7 +54,7 @@ public class NotificationController extends BaseController {
   @PostMapping("/notification/getCountNotificationType")
   public ResponseEntity getCountNotificationType(@RequestBody Map<String, String> params) {
     try {
-      String rtn = notificationClient.getCountNotificationType(params);
+      String rtn = notificationClient.getCountNotificationType(params, getToken());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -64,7 +64,7 @@ public class NotificationController extends BaseController {
   @PostMapping("/notification/getNotificationType")
   public ResponseEntity getNotificationType(@RequestBody Map<String, String> params) {
     try {
-      String rtn = notificationClient.getNotificationType(params);
+      String rtn = notificationClient.getNotificationType(params, getToken());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

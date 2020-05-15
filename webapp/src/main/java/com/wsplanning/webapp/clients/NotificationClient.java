@@ -39,15 +39,19 @@ public class NotificationClient {
     this.endpointUrl = apiEndpointUrl + "/api/Notification";
   }
 
-  public String getCount(String params) {
+  public String getCount(String params, String token) {
     String SmanId = params;
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
     String GetCountOnly = "true";
     String url = String.format("%s?SmanId=%s&bGetCountOnly=%s", this.endpointUrl, SmanId, GetCountOnly);
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String getListNotification(String params) {
+  public String getListNotification(String params, String token) {
     String SmanId = params;
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
     String url = String.format("%s?SmanId=%s", this.endpointUrl, SmanId);
     return restTemplate.getForObject(url, String.class);
   }
@@ -75,15 +79,19 @@ public class NotificationClient {
     return response.getBody();
   }
 
-  public String getCountNotificationType(Map<String, String> params) {
+  public String getCountNotificationType(Map<String, String> params, String token) {
     String notificationType = params.get("notificationType");
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
     String smanId = params.get("smanId");
     String url =  String.format("%s?SmanId=%s&bGetCountOnly=true&NotificationType=%s", this.endpointUrl, smanId, notificationType);
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String getNotificationType(Map<String, String> params) {
+  public String getNotificationType(Map<String, String> params, String token) {
     String notificationType = params.get("notificationType");
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
     String smanId = params.get("smanId");
     String url =  String.format("%s?SmanId=%s&NotificationType=%s", this.endpointUrl, smanId, notificationType);
     return restTemplate.getForObject(url, String.class);

@@ -338,9 +338,9 @@ public class CommonController extends BaseController {
 
   // notification
   @GetMapping("/site/getNotification")
-  public ResponseEntity getNotification(@RequestParam(name = "Smanid") String params) {
+  public ResponseEntity getNotification(@RequestParam(name = "smanid") String params) {
     try {
-      String rtn = notificationClient.getListNotification(params);
+      String rtn = notificationClient.getListNotification(params, getToken());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
@@ -349,9 +349,9 @@ public class CommonController extends BaseController {
   }
 
   @GetMapping("/site/getCountNotification")
-  public ResponseEntity getCountNotification(@RequestParam(name = "Smanid") String params) {
+  public ResponseEntity getCountNotification(@RequestParam(name = "smanid") String params) {
     try {
-      String rtn = notificationClient.getCount(params);
+      String rtn = notificationClient.getCount(params, getToken());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);

@@ -163,6 +163,7 @@ public class ASMasterClient {
         JSONArray arrBtnDetail = new JSONArray();
         // JSONArray properties = new JSONArray();
         JSONObject obj = new JSONObject();
+        // Properties apikey = new Properties();
 
         //ThuyetLV
         JSONArray objJobHeader = new JSONArray();

@@ -34,10 +34,11 @@ public class AuthClient {
     this.endpointUrl = apiEndpointUrl + "/api/Auth";
   }
 
-  public String login(String siteId, String LangId, String user, String pass) {
+  public String login(String siteId, String LangId, String user, String pass, String apikey) {
     HttpHeaders headers = new HttpHeaders();
     headers.set("UserId", Base64.getEncoder().encodeToString(user.getBytes()));
     headers.set("Password", Base64.getEncoder().encodeToString(pass.getBytes()));
+    headers.set("APIKey", apikey);
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s?SiteId=%s&LangId=%s", this.endpointUrl, siteId, LangId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());

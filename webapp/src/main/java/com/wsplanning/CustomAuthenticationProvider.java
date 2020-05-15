@@ -15,12 +15,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-
+import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -73,6 +74,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     String siteId = (String) request.getParameter("siteId");
     String language = (String) request.getParameter("language");
+    Properties apiKey = new Properties();
+    String APIKey = "";
+    String path = "messages/config.properties";
+    InputStream input = getClass().getClassLoader().getResourceAsStream(path);
+    if(input == null) {
+        System.out.println("not found");
+    } else {
+          try {
+            apiKey.load(input);  
+            APIKey = apiKey.getProperty("api.key");
+            System.out.println(APIKey);
+          } catch (Exception e) {
+             System.out.println(e);
+          }
+            
+    }
+
     if (language == null || StringUtils.isBlank(language)) {
       language = hsmLang.get(siteId);
       if (language == null || StringUtils.isBlank(language)) {
@@ -84,21 +102,21 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     boolean loginSuccess = false;
     try {
-      String loginResponse = authClient.login(siteId, language, authentication.getName(), (String) authentication.getCredentials());
+      String loginResponse = authClient.login(siteId, language, authentication.getName(), (String) authentication.getCredentials(), APIKey);
       if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
         JSONObject userInfo = new JSONObject(loginResponse);
-        String Token = userInfo.optString("token", "");
-        String siteName = asMasterClient.getSiteName(userInfo.optString("siteId", ""));
+        String Token = userInfo.optString("Token", "");
+        String siteName = asMasterClient.getSiteName(userInfo.optString("SiteId", ""));
         if (Token != null && !StringUtils.isBlank(Token)) {
-          JSONObject EmployeeData = userInfo.optJSONObject("employeeData");
+          JSONObject EmployeeData = userInfo.optJSONObject("EmployeeData");
 //          JSONObject EmployeeData = userInfo.optJSONObject("Employee");
 
           if (EmployeeData != null) {
             session.setAttribute(SESSION_EMPLOYEEDATA, EmployeeData.toString());
             if (siteName != null && !StringUtils.isBlank(siteName)) {
-              session.setAttribute(SESSION_SMANID, EmployeeData.optString("name", "") + "@" + siteName);
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", "") + "@" + siteName);
             } else {
-              session.setAttribute(SESSION_SMANID, EmployeeData.optString("name", ""));
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", ""));
             }
           }
           System.out.println("------Token: " + Token);
