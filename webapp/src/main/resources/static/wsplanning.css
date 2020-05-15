@@ -7,6 +7,10 @@
   /*background: #000000;*/
 /*}*/
 
+.left{
+  float: left;
+}
+
 .icon-sort:before{content:"\ee45";}
 
 .haveWO{
