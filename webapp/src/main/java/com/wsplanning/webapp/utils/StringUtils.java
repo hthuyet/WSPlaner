@@ -114,4 +114,19 @@ public class StringUtils {
     public static String convertStringToTr069Parameter(String path) {
         return path.replaceAll("\\.(\\d+)\\.", ".{i}.");
     }
+
+    public static String upperCaseFirstLetter(String str){
+         if (str == null || str.trim().length() == 0 || "0".equalsIgnoreCase(str))
+         {
+             return str;
+         } 
+
+         if (str.length() > 1 && Character.isUpperCase(str.charAt(0))) {
+             return str;
+         }
+
+         char chars[] = str.toCharArray();
+         chars[0] = Character.toUpperCase(chars[0]);
+         return new String(chars);
+    }
 }

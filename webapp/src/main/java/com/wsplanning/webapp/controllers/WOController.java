@@ -1,5 +1,10 @@
 package com.wsplanning.webapp.controllers;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.AnnotationIntrospector.ReferenceProperty.Type;
 import com.google.gson.*;
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.SearchServiceItemClient;
@@ -100,6 +105,7 @@ public class WOController extends BaseController {
 
                     itemObj = item.getAsJsonObject();
                     jobTitle = itemObj.get("JobTitle").getAsString();
+                    jobTitle = itemObj.get("jobTitle").getAsString();
 
                     if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
                         WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
@@ -252,16 +258,44 @@ public class WOController extends BaseController {
         }
     }
 
-    @PostMapping("/wo/workOrderTest2")
+    // test mapping json object with pojo class
+    @PostMapping("/wo/getWorkOrdersByView")
     @ResponseBody
-    public ResponseEntity workOrderTest2(@RequestBody Map<String, String> params) {
+    public ResponseEntity getWorkOrders(@RequestBody Map<String, String> params){
         try {
-            String rtn = wokOrderClient.postWO2(getToken(), params);
-            return new ResponseEntity<>(rtn, HttpStatus.OK);
-        } catch (Exception ex) {
-            return parseException(ex);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            long startTime = System.currentTimeMillis();
+            String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
+            
+            List<WODTO> listWO = new ArrayList<>();
+            
+            if(rtn != null && StringUtils.isNotBlank(rtn)) {
+                JsonParser parser = new JsonParser();
+                JsonElement tradeElement = parser.parse(rtn);
+                JsonObject itemObj = null;
+                JsonArray listData = tradeElement.getAsJsonArray();
+                // listWO = gson.fromJson(json, typeOfT)
+                // listWO = objectMapper.readValue(listData.toString(), listWO);
+                for (JsonElement item : listData) {
+                    itemObj = item.getAsJsonObject();                  
+                    WODTO wodto = objectMapper.readValue(itemObj.toString(), WODTO.class);;
+                    listWO.add(wodto);
+                }
+            };
+           
+            logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
+            startTime = System.currentTimeMillis();
+            return new ResponseEntity<>(listWO, HttpStatus.OK);
+        } catch (Exception e) {
+            //TODO: handle exception
+            return parseException(e);
         }
     }
+
 
     // FOR TEST
     private WODTO testData() {
@@ -314,19 +348,6 @@ public class WOController extends BaseController {
         return "wo/index";
     }
 
-    @GetMapping("/wo/test2")
-    public String test2(Model model) {
-        try {
-            Map<String, String> params = new HashMap<>();
-            params.put("postAction", "createNew");
-            params.put("wodto", new Gson().toJson(testData()));
-            String rtn = wokOrderClient.postWO2(getToken(), params);
-            logger.info("----------postWO: " + rtn);
-        } catch (Exception ex) {
-            logger.error("ERROR test2: ", ex);
-        }
-        return "wo/index";
-    }
 
     @GetMapping("/wo/encode")
     public String encode(Model model) {

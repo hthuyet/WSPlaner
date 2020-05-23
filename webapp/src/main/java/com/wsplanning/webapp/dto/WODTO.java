@@ -7,27 +7,19 @@ import java.util.List;
 public class WODTO {
 
     public Integer WorkOrderNo;
-    public Integer WorkOrderId;
-    
+    public Integer WorkOrderId; 
     public String ServiceDate;
-
     public String ExecutionDate;
-
     public String CheckInDate;
-
     public String CheckOutDate;
-
     public String BookMOTDate;
-
     public String BookTireDate;
-
     public String ServiceAdvisorId;
     public String DeliveredBy;
     public String TransactionType;
     public String DeptId;
     public String StampStatus;
     public String WorkReadyDate;
-
     public String WorkReadyForInvoiceDate;
     public String ContactLName ;
     public String ContactFName ;
@@ -50,6 +42,16 @@ public class WODTO {
     public String ReturnSmanId;
     public String ReturnNote;
     public String Vehicle;
+    public String SubContractorInfo;
+    public String PayerInfo;
+    public String CourtesyCarInfo;
+    public String WorkOrderNote;
+    public String Reference;
+    public Integer EstimatedTimeTot;
+    public Integer PoolTimeTot;
+    public Integer BookedTimeTot;
+    public Integer AttachmentFilesCount;
+    public ExternalURLDTO ExternalURL;
     public WOVehicleDTO WOVehicle;
     public WOCustomerDTO WOCustomer;
     public WOCustomerDTO WOContact;
@@ -57,5 +59,6 @@ public class WODTO {
     public List<WOResourceDTO> BookedResources;
     public List<WOResourcePoolDTO> BookedResourcePools;
     public List<WOJobDTO> WOJobs;
-    public TokenDTO Token;   
+    public TokenDTO Token;  
+    public List<MasterDataDTO> WOAddInf; 
 }
