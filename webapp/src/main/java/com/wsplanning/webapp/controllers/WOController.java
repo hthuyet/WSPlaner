@@ -1,19 +1,20 @@
 package com.wsplanning.webapp.controllers;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.AnnotationIntrospector.ReferenceProperty.Type;
+
 import com.google.gson.*;
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.SearchServiceItemClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
+import com.wsplanning.webapp.dto.ExternalURLDTO;
 import com.wsplanning.webapp.dto.WOCustomerDTO;
 import com.wsplanning.webapp.dto.WODTO;
 import com.wsplanning.webapp.dto.WOJobDTO;
 import com.wsplanning.webapp.dto.WOVehicleDTO;
+import com.wsplanning.webapp.dto.WOViewsDTO;
 import com.wsplanning.webapp.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -105,7 +106,7 @@ public class WOController extends BaseController {
 
                     itemObj = item.getAsJsonObject();
                     jobTitle = itemObj.get("JobTitle").getAsString();
-                    jobTitle = itemObj.get("jobTitle").getAsString();
+                    // jobTitle = itemObj.get("jobTitle").getAsString();
 
                     if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
                         WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
@@ -162,12 +163,67 @@ public class WOController extends BaseController {
         }
     }
 
+
     @PostMapping("/wo/detail")
     @ResponseBody
     public ResponseEntity detail(@RequestBody Map<String, String> params) {
         try {
-            String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);
+            String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);      
             return new ResponseEntity<>(rtn, HttpStatus.OK);
+        } catch (Exception ex) {
+            return parseException(ex);
+        }
+    }
+
+
+    @PostMapping("/wo/detail_mapping")
+    @ResponseBody
+    public ResponseEntity detail_mapping(@RequestBody Map<String, String> params) {
+        try {
+            String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            long startTime = System.currentTimeMillis();
+            WODTO wodto = objectMapper.readValue(rtn, WODTO.class);
+            
+            
+            if(rtn != null && StringUtils.isNotBlank(rtn)) {
+                JsonParser parser = new JsonParser();
+                JsonElement tradeElement = parser.parse(rtn);
+                JsonObject itemObj = tradeElement.getAsJsonObject();
+               
+                if (itemObj.has("ExternalUrl") && !itemObj.get("ExternalUrl").isJsonNull()) {
+                    for (JsonElement item : itemObj.get("ExternalUrl").getAsJsonArray()) {
+                        ExternalURLDTO ExternalUrl = objectMapper.readValue(item.toString(), ExternalURLDTO.class);
+                        wodto.ExternalURL.add(ExternalUrl);
+                    }
+                }
+                
+                WOVehicleDTO Vehicle = objectMapper.readValue(itemObj.get("WOVehicle").toString(), WOVehicleDTO.class);
+                WOCustomerDTO Customer = objectMapper.readValue(itemObj.get("WOCustomer").toString(), WOCustomerDTO.class);
+                WOCustomerDTO Contact = objectMapper.readValue(itemObj.get("WOContact").toString(), WOCustomerDTO.class);
+                // WODTO OpenWorkOrders = objectMapper.readValue(itemObj.get("OpenWorkOrders").toString(), WODTO.class);
+                // WOCustomerDTO HolderCustomer = objectMapper.readValue(itemObj.get("HolderCustomer").toString(), WOCustomerDTO.class);
+                // WOCustomerDTO PayerCustomer = objectMapper.readValue(itemObj.get("PayerCustomer").toString(), WOCustomerDTO.class);
+                // WOCustomerDTO UserCustomer = objectMapper.readValue(itemObj.get("UserCustomer").toString(), WOCustomerDTO.class);
+                if(itemObj.has("WOJobs") && !itemObj.get("WOJobs").isJsonNull() ) {
+                    for (JsonElement item : itemObj.get("WOJobs").getAsJsonArray()) {
+                        WOJobDTO Jobs = objectMapper.readValue(item.toString(), WOJobDTO.class);
+                        wodto.WOJobs.add(Jobs);
+                    }
+                }
+
+                wodto.WOVehicle = Vehicle;
+                wodto.WOCustomer = Customer;
+                wodto.WOContact = Contact;
+             
+            };
+           
+            logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
+            startTime = System.currentTimeMillis();
+            return new ResponseEntity<>(wodto, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
         }
@@ -271,19 +327,46 @@ public class WOController extends BaseController {
             long startTime = System.currentTimeMillis();
             String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
             
-            List<WODTO> listWO = new ArrayList<>();
+            List<WOViewsDTO> listWO = new ArrayList<>();
             
             if(rtn != null && StringUtils.isNotBlank(rtn)) {
                 JsonParser parser = new JsonParser();
                 JsonElement tradeElement = parser.parse(rtn);
                 JsonObject itemObj = null;
                 JsonArray listData = tradeElement.getAsJsonArray();
-                // listWO = gson.fromJson(json, typeOfT)
-                // listWO = objectMapper.readValue(listData.toString(), listWO);
                 for (JsonElement item : listData) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.setLength(0);
                     itemObj = item.getAsJsonObject();                  
-                    WODTO wodto = objectMapper.readValue(itemObj.toString(), WODTO.class);;
-                    listWO.add(wodto);
+                    WOViewsDTO woviews = objectMapper.readValue(itemObj.toString(), WOViewsDTO.class);
+                    if (woviews.WOVehicle != null) {
+                        sb.append(woviews.WOVehicle.LicenseNo).append(", ")
+                                .append(woviews.WOVehicle.Make).append(" ")
+                                .append(woviews.WOVehicle.Model).append(" ")
+                                .append(woviews.WOVehicle.SubModel).append(", ")
+                                .append(woviews.WOVehicle.VIN).append(" <br />");
+                    }
+
+                    if (woviews.WOVehicle.HolderCustomer != null) {
+                        sb.append(woviews.WOVehicle.HolderCustomer.LName).append(" ")
+                        .append(woviews.WOVehicle.HolderCustomer.FName).append(", ").append("<a href=\"tel:")
+                        .append(woviews.WOVehicle.HolderCustomer.Tel1).append("\">")
+                        .append(woviews.WOVehicle.HolderCustomer.Tel1).append("</a> ")
+                        .append("<a href=\"mailto:").append(woviews.WOVehicle.HolderCustomer.Email)
+                        .append("?Subject=Hello%20again\">").append(woviews.WOVehicle.HolderCustomer.Email)
+                        .append("</a>").append(" <br />");
+                    } else {
+                        sb.append(woviews.WOCustomer.LName).append(" ")
+                                .append(woviews.WOCustomer.FName).append(", ").append("<a href=\"tel:")
+                                .append(woviews.WOCustomer.Tel1).append("\">")
+                                .append(woviews.WOCustomer.Tel1).append("</a> ")
+                                .append("<a href=\"mailto:").append(woviews.WOCustomer.Email)
+                                .append("?Subject=Hello%20again\">").append(woviews.WOCustomer.Email)
+                                .append("</a>").append(" <br />");
+                    }
+                    sb.append(woviews.JobTitle.replaceAll("\r\n", "<br />"));
+                    woviews.html = sb.toString();
+                    listWO.add(woviews);
                 }
             };
            

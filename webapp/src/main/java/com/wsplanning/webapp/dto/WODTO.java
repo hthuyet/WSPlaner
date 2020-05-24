@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class WODTO {
 
     public Integer WorkOrderNo;
@@ -41,6 +43,7 @@ public class WODTO {
     public Integer IsReturnService;
     public String ReturnSmanId;
     public String ReturnNote;
+    public String WorkOrderStatus;
     public String Vehicle;
     public String SubContractorInfo;
     public String PayerInfo;
@@ -51,14 +54,24 @@ public class WODTO {
     public Integer PoolTimeTot;
     public Integer BookedTimeTot;
     public Integer AttachmentFilesCount;
-    public ExternalURLDTO ExternalURL;
+    @JsonIgnore
+    public List<ExternalURLDTO> ExternalURL;
+    @JsonIgnore
     public WOVehicleDTO WOVehicle;
+    @JsonIgnore
     public WOCustomerDTO WOCustomer;
+    @JsonIgnore
     public WOCustomerDTO WOContact;
+    @JsonIgnore
     public List<WOAttachmentDTO> WOAttachments;
+    @JsonIgnore
     public List<WOResourceDTO> BookedResources;
+    @JsonIgnore
     public List<WOResourcePoolDTO> BookedResourcePools;
+    @JsonIgnore
     public List<WOJobDTO> WOJobs;
+    
     public TokenDTO Token;  
+    @JsonIgnore
     public List<MasterDataDTO> WOAddInf; 
 }

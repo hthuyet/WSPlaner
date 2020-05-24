@@ -11,6 +11,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   $scope.externalUrl = [];
   $scope.count_Vehi_Notification = $scope.jobParams.VehicleNotifications.length;
   console.log($scope.jobParams)
+  console.log($scope.WorkOrder)
 
   var lstIndex = [];
   var suppliers = [];

@@ -53,7 +53,7 @@ public class PlanningClient {
     headers.set("Token", token);
 
     HttpEntity entity = new HttpEntity(headers);
-    String url = String.format("%s?SiteId=%s&DayFrom=%s&DayTo=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, DayFrom, DayTo, DeptId, ShiftId);
+    String url = String.format("%s/eserv?SiteId=%s&DayFrom=%s&DayTo=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, DayFrom, DayTo, DeptId, ShiftId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }

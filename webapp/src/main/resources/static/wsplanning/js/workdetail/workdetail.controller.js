@@ -30,8 +30,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.lstShifts = [];
 
     function loadCommon() {
-        // $scope.lstTrans = CommonFactory.getTransactionTypes();
-          
+        
         CommonFactory.getTransactionTypes().then(function (res) {
             $scope.lstTrans = res;
         })
@@ -55,12 +54,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         CommonFactory.getPayers().then(function (res) {
             $scope.lstPayer = res;
         })     
-        
-        // $scope.lstServ = CommonFactory.getServiceAdvisors();
-        // $scope.jobTypes = CommonFactory.getJobTypes();
-        // $scope.jobCats = CommonFactory.getJobCats();
-        // $scope.lstPayer = CommonFactory.getPayers();
-        // $scope.lstShifts = CommonFactory.getShifts();
 
         CommonServices.getDepartments().then(function (data) {
             $scope.lstDepartment = data;
@@ -78,7 +71,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.lstShiftSearch.shift();
             $scope.lstShiftSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
         });
-
 
     }
 

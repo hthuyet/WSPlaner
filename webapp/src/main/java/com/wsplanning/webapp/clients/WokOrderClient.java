@@ -31,12 +31,15 @@ public class WokOrderClient {
 
   private RestTemplate restTemplate;
   private String endpointUrl;
+  private String endpointResourse;
 
   @Autowired
   public WokOrderClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
     this.endpointUrl = apiEndpointUrl + "/api/WorkOrders";
+    this.endpointResourse = apiEndpointUrl + "/api/AvailableResource";
+
   }
 
   private HttpHeaders generateHearderWO(String token,Map<String, String> params){
@@ -177,7 +180,7 @@ public class WokOrderClient {
     // }
     
     HttpEntity entity = new HttpEntity(headers);
-    String url = String.format("%s?SiteId=%s&WorkOrderId=%s", this.endpointUrl, siteId, workOrderId);
+    String url = String.format("%s/wo?SiteId=%s&WorkOrderId=%s", this.endpointUrl, siteId, workOrderId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
@@ -247,7 +250,7 @@ public class WokOrderClient {
     if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
       ShiftId = "";
     }
-    String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, date, DeptId, ShiftId);
+    String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointResourse, siteId, date, DeptId, ShiftId);
     return restTemplate.getForObject(url, String.class);
   }
 
