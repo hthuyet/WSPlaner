@@ -54,24 +54,24 @@ public class WODTO {
     public Integer PoolTimeTot;
     public Integer BookedTimeTot;
     public Integer AttachmentFilesCount;
-    @JsonIgnore
+    // @JsonIgnore
     public List<ExternalURLDTO> ExternalURL;
-    @JsonIgnore
+    // @JsonIgnore
     public WOVehicleDTO WOVehicle;
-    @JsonIgnore
+    // @JsonIgnore
     public WOCustomerDTO WOCustomer;
-    @JsonIgnore
+    // @JsonIgnore
     public WOCustomerDTO WOContact;
-    @JsonIgnore
+    // @JsonIgnore
     public List<WOAttachmentDTO> WOAttachments;
-    @JsonIgnore
+    // @JsonIgnore
     public List<WOResourceDTO> BookedResources;
-    @JsonIgnore
+    // @JsonIgnore
     public List<WOResourcePoolDTO> BookedResourcePools;
-    @JsonIgnore
+    // @JsonIgnore
     public List<WOJobDTO> WOJobs;
     
     public TokenDTO Token;  
-    @JsonIgnore
+    // @JsonIgnore
     public List<MasterDataDTO> WOAddInf; 
 }
