@@ -14,21 +14,21 @@ public class WOVehicleDTO {
     public String Model;
     public String SubModel;
     
-    public Integer Mileage;
-    public String SearchKey;
-    public String VehicleNote;
+    // public Integer Mileage;
+    // public String SearchKey;
+    // public String VehicleNote;
 
     public String WarrantyInfo;
     public String NextMOTDate;
-    public String NextServiceDate;
-    public String PreviousServiceDate;
-    public String VHCLink;
+    // public String NextServiceDate;
+    // public String PreviousServiceDate;
+    // public String VHCLink;
     public WOCustomerDTO PayerCustomer;
     public WOCustomerDTO HolderCustomer;
     public WOCustomerDTO UserCustomer;
-    @JsonIgnore
-    public WODTO OpenWorkOrders;
+    // @JsonIgnore
+    // public WODTO OpenWorkOrders;
     public List<DynamicDataDTO> DynamicDataFields;
-    public List<MasterDataItemDTO> VehicleNotifications;
+    // public List<MasterDataItemDTO> VehicleNotifications;
 
 }

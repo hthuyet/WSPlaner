@@ -4,6 +4,9 @@ public class TaskDTO {
     public String Id;
     public String SiteId ;
     public String SmanId;
+    public String SmanName;
+    public String CreatedBy;
+    public String CreatedByName;
     public String Started ;
     public String TaskSeriesFlag ;
     public String TaskType ;

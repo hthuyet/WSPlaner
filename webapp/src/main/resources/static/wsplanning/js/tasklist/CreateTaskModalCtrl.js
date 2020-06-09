@@ -1,10 +1,11 @@
 angular.module('UserWebApp').controller('CreateTaskModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal,
-                                                                    $uibModalInstance, $timeout, CommonServices,TaskCustomer,WorkOrderNo) {
+                                                                    $uibModalInstance, $timeout, CommonServices,TaskCustomer,WorkOrderNo, SiteId) {
     $scope.data = {};
     $scope.data.Id = "0";
     $scope.data.action = "insert";
     $scope.data.Started = new Date();
     $scope.data.WorkOrderNo = WorkOrderNo;
+    $scope.data.SiteId = SiteId
 
     $scope.lstTaskType = [];
     $scope.lstTaskSeries = [];

@@ -2,8 +2,11 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
     $scope.code = "";
 
     var EmployeeData = $("#EmployeeData").data("employee");
+    console.log(EmployeeData)
     if (EmployeeData) {
         $scope.SmanId = EmployeeData.SmanId;
+        $scope.SmanName = EmployeeData.SmanName;
+        // $scope.SiteId = EmployeeData.SiteId
     }
 
     $scope.toogleOpenTask = function () {
@@ -65,7 +68,10 @@ angular.module('UserWebApp').controller('TaskListCtrl', function ($scope, $rootS
                     return {};
                 },
                 WorkOrderNo: function () {
-                    return null;
+                    return 0;
+                },
+                SiteId: function () {
+                    return $scope.SiteId
                 }
             }
         });

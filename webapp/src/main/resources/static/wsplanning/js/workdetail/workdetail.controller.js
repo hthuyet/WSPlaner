@@ -14,6 +14,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $scope.WorkOrderData = WorkOrder.data;
     $scope.WorkOrder = WorkOrder.data;
+    // $scope.SiteId = WorkOrder.data.SiteId;
 
 
     console.log($scope.WorkOrder);
@@ -408,7 +409,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                     return $scope.WorkOrder.WOCustomer ? $scope.WorkOrder.WOCustomer : {};
                 },
                 WorkOrderNo: function () {
-                    return $scope.WorkOrder.WorkOrderNo ? $scope.WorkOrder.WorkOrderNo : null;
+                    // WorkOrderNo = 0 or WorkOrderNo = $scope.WorkOrder.WorkOrderNo
+                    return $scope.WorkOrder.WorkOrderNo ? $scope.WorkOrder.WorkOrderNo : 0;
                 }
             }
         });

@@ -120,7 +120,7 @@ public class ASMasterClient {
     }
 
     public String jobTab(String SiteId, String CustNo, String VehicleId) {
-        String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s", this.endpointUrl, SiteId, CustNo, VehicleId);
+        String url = String.format("%s/job?SiteId=%s&CustNo=%s&VehiId=%s", this.endpointUrl, SiteId, CustNo, VehicleId);
         return restTemplate.getForObject(url, String.class);
     }
 
@@ -133,7 +133,7 @@ public class ASMasterClient {
         String CustNo = "1";
         String VehiId = "1";
         String GetText = "true";
-        String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&bGetText=%s", this.endpointUrl, SiteId, CustNo,
+        String url = String.format("%s/text?SiteId=%s&CustNo=%s&VehiId=%s&bGetText=%s", this.endpointUrl, SiteId, CustNo,
                 VehiId, GetText);
         return restTemplate.getForObject(url, String.class);
     }

@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,6 +74,7 @@ public class TaskClient {
 
     public String saveTask(String token, String action, TaskDTO data) {
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         if (StringUtils.isNotBlank(token)) {
             headers.set("Token", token);
         }
@@ -78,8 +82,11 @@ public class TaskClient {
             headers.set("PostAction", action);
         }
         HttpEntity<TaskDTO> entity = new HttpEntity<TaskDTO>(data, headers);
+        System.out.print(entity.getBody());
+    
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        // String response = restTemplate.postForObject(url, entity, String.class);
         return response.getBody();
     }
 }

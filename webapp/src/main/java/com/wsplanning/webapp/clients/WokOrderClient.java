@@ -250,6 +250,7 @@ public class WokOrderClient {
     if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
       ShiftId = "";
     }
+    // String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&PoolId=%s", this.endpointResourse, siteId, date, DeptId, ShiftId);
     String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointResourse, siteId, date, DeptId, ShiftId);
     return restTemplate.getForObject(url, String.class);
   }

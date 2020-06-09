@@ -23,11 +23,15 @@ public class WODTO {
     public String StampStatus;
     public String WorkReadyDate;
     public String WorkReadyForInvoiceDate;
+    public String WorkReadyBy;
+    public String SubStatus;
+
     public String ContactLName ;
     public String ContactFName ;
     public String ContactPhone ;
     public String ContactEmail ;
     public Integer IsCustomerWaiting;
+    public Integer IsRework;
     public String TimeBarText;
     public String SiteId;
     public Integer IsTimeReservation;
@@ -45,6 +49,7 @@ public class WODTO {
     public String ReturnNote;
     public String WorkOrderStatus;
     public String Vehicle;
+
     public String SubContractorInfo;
     public String PayerInfo;
     public String CourtesyCarInfo;
@@ -72,6 +77,6 @@ public class WODTO {
     public List<WOJobDTO> WOJobs;
     
     public TokenDTO Token;  
-    // @JsonIgnore
+    // // @JsonIgnore
     public List<MasterDataDTO> WOAddInf; 
 }

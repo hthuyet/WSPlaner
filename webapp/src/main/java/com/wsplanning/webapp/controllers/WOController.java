@@ -197,7 +197,7 @@ public class WOController extends BaseController {
                 if (itemObj.has("ExternalUrl") && !itemObj.get("ExternalUrl").isJsonNull()) {
                     for (JsonElement item : itemObj.get("ExternalUrl").getAsJsonArray()) {
                         ExternalURLDTO ExternalUrl = objectMapper.readValue(item.toString(), ExternalURLDTO.class);
-                        wodto.ExternalURL.add(ExternalUrl);
+                        // wodto.ExternalURL.add(ExternalUrl);
                     }
                 }
                 
@@ -307,6 +307,7 @@ public class WOController extends BaseController {
     public ResponseEntity workOrderTest(@RequestBody WODTO data,
             @RequestHeader(name = "postAction") String postAction) {
         try {
+            data.SiteId = getSiteId();
             String rtn = wokOrderClient.postWO(getToken(), postAction, data);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
