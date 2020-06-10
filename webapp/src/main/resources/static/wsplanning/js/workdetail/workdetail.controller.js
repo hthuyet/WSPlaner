@@ -8,6 +8,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.jobObject = {};
     $scope.actionType = "";
 
+    console.log(WorkOrder)
+
     $scope.WOVehicle = "";
     $scope.WOCustomer = "";
     $scope.WOContact = "";

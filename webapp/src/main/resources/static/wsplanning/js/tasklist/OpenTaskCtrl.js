@@ -79,6 +79,7 @@ angular.module('UserWebApp').controller('OpenTaskCtrl', function ($scope, $rootS
         }
         $scope.lstData.push(value);
       });
+      console.log(response)
       $scope.pageGo = $scope.page;
       common.spinner(false);
     }, function error(response) {

@@ -1,5 +1,7 @@
 package com.wsplanning.webapp.dto;
 
+import java.util.List;
+
 public class TaskDTO {
     public String Id;
     public String SiteId ;
@@ -18,4 +20,5 @@ public class TaskDTO {
     public String Header;
     public String action;
     public WOCustomerDTO TaskCustomer;
+    public List<CallerVehicleDTO> CallerVehicles;
 }
