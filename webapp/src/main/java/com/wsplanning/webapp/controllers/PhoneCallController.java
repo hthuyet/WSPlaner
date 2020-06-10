@@ -88,7 +88,7 @@ public class PhoneCallController extends BaseController {
             String rtn = employeesClient.getPhoneCallEmployee(db, siteId);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e.getMessage(), e);
             return parseException(e);
         }
     }

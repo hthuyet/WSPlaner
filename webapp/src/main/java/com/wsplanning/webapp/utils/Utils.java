@@ -152,7 +152,4 @@ public class Utils {
     return new String(encoded, StandardCharsets.UTF_8);
   }
 
-  public static void main(String[] args) {
-    System.out.println(formateDateAPI("2018-01-17T17:00:00.000Z"));
-  }
 }

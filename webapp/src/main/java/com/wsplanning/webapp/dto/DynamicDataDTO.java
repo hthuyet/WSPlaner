@@ -1,5 +1,8 @@
 package com.wsplanning.webapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DynamicDataDTO {
     public String Id;
     // add column -  update from Mr.Duong

@@ -1,23 +1,23 @@
 package com.wsplanning.webapp.clients;
 
-import com.wsplanning.webapp.dto.PhoneCallTaskDTO;
+import com.google.gson.Gson;
+import com.wsplanning.webapp.LoggingRequestInterceptor;
 import com.wsplanning.webapp.dto.TaskDTO;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +25,7 @@ import java.util.Map;
  */
 @Component
 public class TaskClient {
+    private Logger logger = LoggerFactory.getLogger(TaskClient.class);
     //http://automaster.alliedsoft.hu:9092/api/Task?SiteId=102&SmanId=DUONG&bIsOpen=true&bGetCountOnly=true
     private RestTemplate restTemplate;
     private String endpointUrl;
@@ -81,12 +82,16 @@ public class TaskClient {
         if (StringUtils.isNotBlank(action)) {
             headers.set("PostAction", action);
         }
+        headers.set("Content-Type", "application/json");
         HttpEntity<TaskDTO> entity = new HttpEntity<TaskDTO>(data, headers);
-        System.out.print(entity.getBody());
-    
+        logger.info("--------" + new Gson().toJson(data));
         String url = String.format("%s", this.endpointUrl);
+
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add(new LoggingRequestInterceptor());
+        restTemplate.setInterceptors(interceptors);
+
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-        // String response = restTemplate.postForObject(url, entity, String.class);
         return response.getBody();
     }
 }
