@@ -1,29 +1,20 @@
 package com.wsplanning.webapp.clients;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpSession;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -32,6 +23,8 @@ import java.util.Properties;
  */
 @Component
 public class ASMasterClient {
+
+    private Logger logger = LoggerFactory.getLogger(ASMasterClient.class);
 
     private RestTemplate restTemplate;
     private String endpointUrl;
@@ -277,8 +270,7 @@ public class ASMasterClient {
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
-                System.out.println(e);
+                logger.error(e.getMessage(), e);
             }
         }
         return obj;

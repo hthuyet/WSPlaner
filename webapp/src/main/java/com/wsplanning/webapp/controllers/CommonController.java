@@ -389,7 +389,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.loadProperty().toString();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
       // TODO: handle exception
     }
@@ -401,7 +401,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getCallCenterDB();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -412,7 +412,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getCallCenterSites(db);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -423,7 +423,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getCallCenterTaskType();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -435,7 +435,7 @@ public class CommonController extends BaseController {
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       //TODO: handle exception
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -447,7 +447,7 @@ public class CommonController extends BaseController {
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       //TODO: handle exception
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -458,7 +458,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getTaskTypes(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -469,7 +469,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getTaskSeries(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }
@@ -480,7 +480,7 @@ public class CommonController extends BaseController {
       String rtn = asMasterClient.getSuppliers();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e.getMessage(), e);
       return parseException(e);
     }
   }

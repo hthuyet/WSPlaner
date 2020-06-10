@@ -38,3 +38,9 @@ apiEndpointUrl: https://automaster.alliedsoft.hu:9093
 security:
   require-ssl: true
 
+logging:
+  level:
+    org:
+      apache:
+        http: DEBUG
+

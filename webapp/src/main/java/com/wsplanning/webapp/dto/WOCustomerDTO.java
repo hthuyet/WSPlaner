@@ -1,8 +1,11 @@
 package com.wsplanning.webapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WOCustomerDTO {
 
     public Integer CustNo;
