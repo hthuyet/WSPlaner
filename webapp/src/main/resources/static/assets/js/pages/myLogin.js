@@ -20,7 +20,7 @@ function loadSite() {
     },
     error: function (responseData, textStatus, errorThrown) {
       console.log(responseData);
-      console.log(errorThrown);
+      // console.log(errorThrown);
     }
   });
 }
@@ -31,7 +31,7 @@ function loadAuth() {
     url: '/site/getMenuAuth',
     dataType: 'json',
     success: function (responseData, textStatus, jqXHR) {
-      console.log(responseData);
+      // console.log(responseData);
       var lst_auth = responseData.auth;
       var lst_name = responseData.menu;
       var lst_tab = responseData.tab;
