@@ -82,16 +82,19 @@ public class TaskClient {
         if (StringUtils.isNotBlank(action)) {
             headers.set("PostAction", action);
         }
-        headers.set("Content-Type", "application/json");
+        // headers.set("Content-Type", "application/json");
         HttpEntity<TaskDTO> entity = new HttpEntity<TaskDTO>(data, headers);
-        logger.info("--------" + new Gson().toJson(data));
+        // logger.info("--------" + new Gson().toJson(data));
         String url = String.format("%s", this.endpointUrl);
 
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new LoggingRequestInterceptor());
-        restTemplate.setInterceptors(interceptors);
+        // List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        // interceptors.add(new LoggingRequestInterceptor());
+        // restTemplate.setInterceptors(interceptors);
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        System.out.print(response.getBody());
+        // System.out.print(response);
+
         return response.getBody();
     }
 }

@@ -125,19 +125,8 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "ToDate": $scope.params.to,
     };
 
-    // HttpService.postData('/wo/getWO', params).then(function (response) {
-    //   $scope.lstData = response;
-    //   $scope.pageGo = $scope.page;
-    //   $scope.isShow = false;
-    //   common.spinner(false);
-    // }, function error(response) {
-    //   console.log(response);
-    //   common.spinner(false);
-    // });
-
-     HttpService.postData('/wo/getWorkOrdersByView', params).then(function (response) {
+    HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
-      console.log(response)
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
       common.spinner(false);
@@ -145,6 +134,17 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       console.log(response);
       common.spinner(false);
     });
+
+    //  HttpService.postData('/wo/getWorkOrdersByView', params).then(function (response) {
+    //   $scope.lstData = response;
+    //   console.log(response)
+    //   $scope.pageGo = $scope.page;
+    //   $scope.isShow = false;
+    //   common.spinner(false);
+    // }, function error(response) {
+    //   console.log(response);
+    //   common.spinner(false);
+    // });
 
     if (count) {
       HttpService.postData('/wo/countWO', params).then(function (response) {

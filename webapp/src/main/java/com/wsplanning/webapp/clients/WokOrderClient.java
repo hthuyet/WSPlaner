@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class WokOrderClient {
   private RestTemplate restTemplate;
   private String endpointUrl;
   private String endpointResourse;
+  private Logger logger = LoggerFactory.getLogger(WokOrderClient.class);
 
   @Autowired
   public WokOrderClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
@@ -207,6 +211,7 @@ public class WokOrderClient {
 
   public String postWO(String token, String postAction, WODTO wodto) {
     HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
     if (StringUtils.isNotBlank(token)) {
       headers.set("Token", token);
     }
@@ -218,9 +223,6 @@ public class WokOrderClient {
       }else if (postAction == "createNew") {
 
       }
-      // if(postAction == "saveRows") {
-      //   wodto. = new  ArrayList<>();;
-      // }
     }
 
     if(StringUtils.isEmpty(wodto.ContactPhone)) {
@@ -235,7 +237,7 @@ public class WokOrderClient {
     if(StringUtils.isEmpty(wodto.ContactLName)) {
       wodto.ContactLName = "";
     }
-    
+    logger.info("--------" + new Gson().toJson(wodto));
     HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);

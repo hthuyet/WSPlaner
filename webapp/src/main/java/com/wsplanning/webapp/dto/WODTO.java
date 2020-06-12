@@ -5,16 +5,21 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WODTO {
 
     public Integer WorkOrderNo;
     public Integer WorkOrderId; 
     public String ServiceDate;
+    @JsonIgnore
     public String ExecutionDate;
     public String CheckInDate;
     public String CheckOutDate;
+    @JsonIgnore
     public String BookMOTDate;
+    @JsonIgnore
     public String BookTireDate;
     public String ServiceAdvisorId;
     public String DeliveredBy;
@@ -76,6 +81,7 @@ public class WODTO {
     // @JsonIgnore
     public List<WOJobDTO> WOJobs;
     
+    @JsonIgnore
     public TokenDTO Token;  
     // // @JsonIgnore
     public List<MasterDataDTO> WOAddInf; 

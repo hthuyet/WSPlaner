@@ -92,6 +92,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
         $scope.base64Encode = "";
         common.spinner(true);
         HttpService.postDataWithCache('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
+            console.log(response)
             $scope.lstTemplate = response;
             if ($scope.lstTemplate.length > 0) {
                 $scope.templateSelected = $scope.lstTemplate[0];
@@ -132,6 +133,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
         common.spinner(true);
         if ($scope.templateName != "") {
             HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
+                console.log(response)
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {

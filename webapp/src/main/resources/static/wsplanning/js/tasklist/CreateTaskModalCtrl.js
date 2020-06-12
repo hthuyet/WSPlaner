@@ -37,6 +37,7 @@ angular.module('UserWebApp').controller('CreateTaskModalCtrl', function ($scope,
 
     $scope.ok = function () {
         HttpService.postData('/tasklist/saveTask', $scope.data, $("#btnSaveTask")).then(function (response) {
+            console.log(response)
             if(response == false || response == "false"){
                 common.notifyError($translate.instant('saveError'));
                 return;

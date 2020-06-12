@@ -137,6 +137,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     if ($scope.isNew) {
         var EmployeeData = $("#EmployeeData").data("employee");
+        console.log(EmployeeData);
         $scope.WorkOrder.DeptId = EmployeeData.DeptId;
         $scope.WorkOrder.Token = tokenObject();
         $scope.WorkOrder.Token.EmployeeData = EmployeeData;
@@ -151,29 +152,29 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
 
     if ($scope.WorkOrder.ServiceDate == "" || $scope.WorkOrder.ServiceDate == "0001-01-01T00:00:00") {
-        $scope.WorkOrder.ServiceDate = "";
+        $scope.WorkOrder.ServiceDate = "0001-01-01T00:00:00";
     } else {
         $scope.WorkOrder.ServiceDate = new Date($scope.WorkOrder.ServiceDate);
     }
     if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {
-        $scope.WorkOrder.CheckOutDate = "";
+        $scope.WorkOrder.CheckOutDate = "0001-01-01T00:00:00";
     } else {
         $scope.WorkOrder.CheckOutDate = new Date($scope.WorkOrder.CheckOutDate);
     }
     if ($scope.WorkOrder.CheckInDate == "" || $scope.WorkOrder.CheckInDate == "0001-01-01T00:00:00") {
-        $scope.WorkOrder.CheckInDate = "";
+        $scope.WorkOrder.CheckInDate = "0001-01-01T00:00:00";
     } else {
         $scope.WorkOrder.CheckInDate = new Date($scope.WorkOrder.CheckInDate);
     }
 
     if ($scope.WorkOrder.ExecutionDate == "" || $scope.WorkOrder.ExecutionDate == "0001-01-01T00:00:00") {
-        $scope.WorkOrder.ExecutionDate = "";
+        $scope.WorkOrder.ExecutionDate = "0001-01-01T00:00:00";
     } else {
         $scope.WorkOrder.ExecutionDate = new Date($scope.WorkOrder.ExecutionDate);
     }
 
     if ($scope.WorkOrder.BookMOTDate == "" || $scope.WorkOrder.BookMOTDate == "0001-01-01T00:00:00") {
-        $scope.WorkOrder.BookMOTDate = "";
+        $scope.WorkOrder.BookMOTDate = "0001-01-01T00:00:00";
     } else {
         $scope.WorkOrder.BookMOTDate = new Date($scope.WorkOrder.BookMOTDate);
     }

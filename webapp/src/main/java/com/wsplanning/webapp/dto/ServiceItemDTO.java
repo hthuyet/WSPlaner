@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 
 import org.apache.poi.hpsf.Decimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServiceItemDTO {
     
     public Integer RowId;

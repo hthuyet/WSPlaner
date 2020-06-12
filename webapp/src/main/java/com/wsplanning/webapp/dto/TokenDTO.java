@@ -4,6 +4,10 @@ import java.util.Date;
 
 import org.apache.poi.hpsf.Decimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TokenDTO {
     
     public String Token;

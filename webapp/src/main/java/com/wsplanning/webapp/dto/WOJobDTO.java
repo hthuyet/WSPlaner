@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.apache.poi.hpsf.Decimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WOJobDTO {
     
     public Integer RowId;

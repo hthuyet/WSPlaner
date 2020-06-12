@@ -1,6 +1,10 @@
 package com.wsplanning.webapp.dto;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WOResourceDTO {
     public Integer RowId;
     public Integer Duration;

@@ -792,6 +792,7 @@ function signaturePad($interval, $timeout, $window) {
         restrict: 'EA',
         replace: true,
         template: '<div class="signature" id="{{id}}_ctn" style="width: 100%; max-width:{{width}}px; height: 100%; max-height:{{height}}px;"><canvas id="{{id}}"  style="display: block; margin: 0 auto;" ng-mouseup="onMouseup()" ng-mousedown="notifyDrawing({ drawing: true })"></canvas></div>',
+        // template: '<div class="signature" id="{{id}}_ctn" style="width: 100%;  height: 100%; "><canvas id="{{id}}"  style="display: block; margin: 0 auto; width: 100%;height: 100%" ng-mouseup="onMouseup()" ng-mousedown="notifyDrawing({ drawing: true })"></canvas></div>',
         scope: {
             accept: '=?',
             clear: '=?',
