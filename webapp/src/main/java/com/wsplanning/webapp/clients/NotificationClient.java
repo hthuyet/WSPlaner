@@ -44,7 +44,7 @@ public class NotificationClient {
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     String GetCountOnly = "true";
-    String url = String.format("%s?SmanId=%s&bGetCountOnly=%s", this.endpointUrl, SmanId, GetCountOnly);
+    String url = String.format("%s/count?SmanId=%s&bGetCountOnly=%s", this.endpointUrl, SmanId, GetCountOnly);
     return restTemplate.getForObject(url, String.class);
   }
 

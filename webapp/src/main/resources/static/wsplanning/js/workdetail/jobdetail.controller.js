@@ -550,8 +550,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     modalInstance.result.then(function (selectedItem) {
-
-      console.log(selectedItem);
+      // console.log(selectedItem);
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -579,8 +578,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     modalInstance.result.then(function (selectedItem) {
+      // console.log(selectedItem);
 
-      console.log(selectedItem);
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -1070,11 +1069,17 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
     obj.WorkOrderRowId = data.item.RowId;
 
     HttpService.postData('/site/postNotification', obj).then(function (response) {
-      console.log(response);
+      // console.log(response);
       common.spinner(false);
+      if(response == true) {
+        common.notifySuccess("Success!!!");
+      } else {
+        common.notifyError("Error!!!")
+      }
     }, function error(response) {
-      console.log(response);
+      // console.log(response);
       common.spinner(false);
+      common.notifyError("Error!!!")
     });
 
     $rootScope.$emit('message', { "item": "" })
@@ -1195,11 +1200,17 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
     obj.WorkOrderRowId = data.item.RowId;
 
     HttpService.postData('/site/postNotification', obj).then(function (response) {
-      console.log(response);
+      // console.log(response);
       common.spinner(false);
+      if (response == true){
+        common.notifySuccess("Success!!!")
+      } else {
+        common.notifyError("Error!!!")
+      }
     }, function error(response) {
-      console.log(response);
+      // console.log(response);
       common.spinner(false);
+      common.notifyError("Error!!!")
     });
 
     $rootScope.$emit('message', { "item": "" })
