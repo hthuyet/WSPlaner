@@ -36,7 +36,6 @@ public class CheckinController extends BaseController {
   @ResponseBody
   public ResponseEntity getTemplateType(@RequestBody Map<String, String> params) {
     try {
-      logger.info("#USER_LOG {},{},{},{},{}", session.getId(), session.getAttribute("username"), "test mechanic on test mechanic page", "", "");
       String getVHCTemplates = asMasterClient.getVHCTemplates(getSiteId(),params.get("VehiId"));
       return new ResponseEntity<>(getVHCTemplates, HttpStatus.OK);
     } catch (Exception ex) {
@@ -46,9 +45,8 @@ public class CheckinController extends BaseController {
 
   @PostMapping("/checkin/template")
   @ResponseBody
-  public ResponseEntity test(@RequestBody Map<String, String> params) {
+  public ResponseEntity template(@RequestBody Map<String, String> params) {
     try {
-      logger.info("#USER_LOG {},{},{},{},{}", session.getId(), session.getAttribute("username"), "test mechanic on test mechanic page", "", "");
       JsonObject rtn = new JsonObject();
       String type = params.get("type");
       String fileName = params.get("name");
