@@ -11,7 +11,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
       $scope.lstTrans = data;
-    });wokOrderClient
+    });
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
     });

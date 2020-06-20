@@ -1,3 +1,4 @@
+<link href="/sign.css" rel="stylesheet" type="text/css">
 <!--SEARCH-->
 <div class="panel panel-white" ng-controller="ReplacementCheckInCtrl">
     <div class="panel-body">
@@ -32,7 +33,7 @@
             <!--Row 2-->
             <div class="row">
                 <!--checkinRemark-->
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'checkinRemark' | translate }}</label>
                         <div class="col-xs-8">
@@ -42,7 +43,7 @@
                 </div>
 
                 <!--AttachmentType-->
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'AttachmentType' | translate }}</label>
                         <div class="col-xs-8">
@@ -54,6 +55,109 @@
                 </div>
             </div>
             <!--end row 2-->
+
+            <!--Row checkin-->
+            <div class="row">
+                <div class="col-md-8 col-xs-12" id="checkinTemplate">
+                    <div class="form-group">
+                        <label
+                                class="control-label col-md-4 col-xs-4">{{ 'checkinTemplate' | translate }}</label>
+                        <div class="col-md-8 col-xs-8">
+                            <div class="input-group">
+                                <select ui-select2 ng-model="templateSelected" ng-required="true"
+                                        ng-change="changeTemplate()"
+                                        ng-options="item as item.Name for item in lstTemplate">
+                                </select>
+                                <span class="input-group-btn">
+                                                <button ng-click="clear()" title="{{ 'clear' | translate }}">
+                                                    <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
+                                </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="clear: both;">
+                        <div class="col-md-8 col-xs-8 col-xs-offset-4">
+                            <label class="radio-inline" style='color: green;'><input type="radio"
+                                                                                     value="green" ng-model="color">{{ 'green' | translate }}</label>
+                            <label class="radio-inline" style='color: red;'><input type="radio" value="red"
+                                                                                   ng-model="color">{{ 'red' | translate }}</label>
+                            <label class="radio-inline" style='color: orange;'><input type="radio"
+                                                                                      value="orange" ng-model="color">{{ 'orange' | translate }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col-md-8 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-xs-4"></label>
+                            <div class="col-md-8 col-xs-8">
+                                <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear"
+                                               height="400" width="600" color="{{color}}" dataurl="imgTemplate">
+                                </signature-pad>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-8 col-xs-12">
+                        <div class="form-group">
+                            <label
+                                    class="control-label col-md-4 col-xs-4">Camera</label>
+                            <div class="col-md-8 col-xs-8">
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control"></textarea>
+                                    <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="openImage()">
+                                                    <i class="icon-camera"></i>
+                                                </button>
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+<!--                Chu ky-->
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        <div class="form-group">
+                            <div class="col-md-8 md-offset-4 col-xs-12">
+                                <div class="container"
+                                     ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
+                                    <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
+                                                   ng-model="signature" color="#0000FF"
+                                                   height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
+                                                   dataurl="dataurl"></signature-pad>
+
+
+                                    <div class="sizes">
+                                        <button ng-click="clearSign()" id="clearSign"
+                                                title="{{ 'clear' | translate }}">
+                                            <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                End chu ky-->
+
+            </div>
+            <!--end row checkin-->
         </div>
     </div>
 </div>
