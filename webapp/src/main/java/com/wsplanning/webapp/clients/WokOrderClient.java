@@ -206,9 +206,6 @@ public class WokOrderClient {
     return response.getBody();
   }
 
-
-
-
   public String postWO(String token, String postAction, WODTO wodto) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -237,7 +234,6 @@ public class WokOrderClient {
     if(StringUtils.isEmpty(wodto.ContactLName)) {
       wodto.ContactLName = "";
     }
-    logger.info("--------" + new Gson().toJson(wodto));
     HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
@@ -252,7 +248,6 @@ public class WokOrderClient {
     if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
       ShiftId = "";
     }
-    // String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&PoolId=%s", this.endpointResourse, siteId, date, DeptId, ShiftId);
     String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointResourse, siteId, date, DeptId, ShiftId);
     return restTemplate.getForObject(url, String.class);
   }

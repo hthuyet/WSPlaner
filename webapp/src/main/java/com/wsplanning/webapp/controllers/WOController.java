@@ -73,17 +73,12 @@ public class WOController extends BaseController {
         try {
             long startTime = System.currentTimeMillis();
             String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
-            logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
             startTime = System.currentTimeMillis();
             if (rtn != null && StringUtils.isNotBlank(rtn)) {
                 // JsonParser
-                logger.info("-------wokOrderClient JsonParser: " + (System.currentTimeMillis() - startTime));
-                startTime = System.currentTimeMillis();
                 JsonParser parser = new JsonParser();
                 JsonElement tradeElement = parser.parse(rtn);
                 JsonArray listData = tradeElement.getAsJsonArray();
-                logger.info("-------wokOrderClient end JsonParser: " + (System.currentTimeMillis() - startTime));
-                startTime = System.currentTimeMillis();
 
                 // Init list
                 JsonArray listRtn = new JsonArray();
@@ -97,7 +92,6 @@ public class WOController extends BaseController {
                 StringBuilder sb = new StringBuilder();
                 String jobTitle = "";
 
-                logger.info("-------wokOrderClient start for: " + (System.currentTimeMillis() - startTime));
                 startTime = System.currentTimeMillis();
                 for (JsonElement item : listData) {
                     HolderCustomer = null;
@@ -106,7 +100,6 @@ public class WOController extends BaseController {
 
                     itemObj = item.getAsJsonObject();
                     jobTitle = itemObj.get("JobTitle").getAsString();
-                    // jobTitle = itemObj.get("jobTitle").getAsString();
 
                     if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
                         WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
@@ -150,19 +143,13 @@ public class WOController extends BaseController {
 
                     listRtn.add(itemRtn);
                 }
-
-                logger.info("-------wokOrderClient end for: " + (System.currentTimeMillis() - startTime));
-                startTime = System.currentTimeMillis();
-
                 return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(rtn, HttpStatus.OK);
             }
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
         }
     }
-
 
     @PostMapping("/wo/detail")
     @ResponseBody
@@ -175,7 +162,6 @@ public class WOController extends BaseController {
         }
     }
 
-
     @PostMapping("/wo/detail_mapping")
     @ResponseBody
     public ResponseEntity detail_mapping(@RequestBody Map<String, String> params) {
@@ -185,29 +171,23 @@ public class WOController extends BaseController {
             objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
             objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            long startTime = System.currentTimeMillis();
             WODTO wodto = objectMapper.readValue(rtn, WODTO.class);
-            
-            
+
             if(rtn != null && StringUtils.isNotBlank(rtn)) {
                 JsonParser parser = new JsonParser();
                 JsonElement tradeElement = parser.parse(rtn);
                 JsonObject itemObj = tradeElement.getAsJsonObject();
                
-                if (itemObj.has("ExternalUrl") && !itemObj.get("ExternalUrl").isJsonNull()) {
-                    for (JsonElement item : itemObj.get("ExternalUrl").getAsJsonArray()) {
-                        ExternalURLDTO ExternalUrl = objectMapper.readValue(item.toString(), ExternalURLDTO.class);
-                        // wodto.ExternalURL.add(ExternalUrl);
-                    }
-                }
+//                if (itemObj.has("ExternalUrl") && !itemObj.get("ExternalUrl").isJsonNull()) {
+//                    for (JsonElement item : itemObj.get("ExternalUrl").getAsJsonArray()) {
+//                        ExternalURLDTO ExternalUrl = objectMapper.readValue(item.toString(), ExternalURLDTO.class);
+//                        // wodto.ExternalURL.add(ExternalUrl);
+//                    }
+//                }
                 
                 WOVehicleDTO Vehicle = objectMapper.readValue(itemObj.get("WOVehicle").toString(), WOVehicleDTO.class);
                 WOCustomerDTO Customer = objectMapper.readValue(itemObj.get("WOCustomer").toString(), WOCustomerDTO.class);
                 WOCustomerDTO Contact = objectMapper.readValue(itemObj.get("WOContact").toString(), WOCustomerDTO.class);
-                // WODTO OpenWorkOrders = objectMapper.readValue(itemObj.get("OpenWorkOrders").toString(), WODTO.class);
-                // WOCustomerDTO HolderCustomer = objectMapper.readValue(itemObj.get("HolderCustomer").toString(), WOCustomerDTO.class);
-                // WOCustomerDTO PayerCustomer = objectMapper.readValue(itemObj.get("PayerCustomer").toString(), WOCustomerDTO.class);
-                // WOCustomerDTO UserCustomer = objectMapper.readValue(itemObj.get("UserCustomer").toString(), WOCustomerDTO.class);
                 if(itemObj.has("WOJobs") && !itemObj.get("WOJobs").isJsonNull() ) {
                     for (JsonElement item : itemObj.get("WOJobs").getAsJsonArray()) {
                         WOJobDTO Jobs = objectMapper.readValue(item.toString(), WOJobDTO.class);
@@ -221,8 +201,6 @@ public class WOController extends BaseController {
              
             };
            
-            logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
-            startTime = System.currentTimeMillis();
             return new ResponseEntity<>(wodto, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
@@ -248,7 +226,6 @@ public class WOController extends BaseController {
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
-            // TODO: handle exception
         }
     }
 
@@ -258,11 +235,9 @@ public class WOController extends BaseController {
         try {
             long startTime = System.currentTimeMillis();
             String rtn = searchServiceItemClient.getServiceItem(getToken(), params);
-            logger.info("-------wokOrderClient end for: " + (System.currentTimeMillis() - startTime));
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
-            // TODO: handle exception
         }
     }
 
@@ -271,11 +246,9 @@ public class WOController extends BaseController {
     public ResponseEntity countServiceItem(@RequestBody Map<String, String> params) {
         try {
             String rtn = searchServiceItemClient.getCountServiceItem(getToken(), params);
-
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
-            // TODO: handle exception
         }
     }
 
@@ -287,7 +260,6 @@ public class WOController extends BaseController {
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
-            // TODO: handle exception
         }
     }
 
@@ -315,7 +287,6 @@ public class WOController extends BaseController {
         }
     }
 
-    // test mapping json object with pojo class
     @PostMapping("/wo/getWorkOrdersByView")
     @ResponseBody
     public ResponseEntity getWorkOrders(@RequestBody Map<String, String> params){
@@ -325,7 +296,6 @@ public class WOController extends BaseController {
             objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            long startTime = System.currentTimeMillis();
             String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
             
             List<WOViewsDTO> listWO = new ArrayList<>();
@@ -371,8 +341,6 @@ public class WOController extends BaseController {
                 }
             };
            
-            logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
-            startTime = System.currentTimeMillis();
             return new ResponseEntity<>(listWO, HttpStatus.OK);
         } catch (Exception e) {
             //TODO: handle exception
@@ -414,9 +382,6 @@ public class WOController extends BaseController {
         objWO.JobTitle = "Annual service";
         objWO.CustomerComplaint = "30 tkm service";
         objWO.WOJobs = WOJobs;
-
-        Gson gson = new Gson();
-        logger.info("--------" + gson.toJson(objWO));
         return objWO;
     }
 
@@ -554,10 +519,8 @@ public class WOController extends BaseController {
                 }
 
                 return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(rtn, HttpStatus.OK);
             }
-
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
         }

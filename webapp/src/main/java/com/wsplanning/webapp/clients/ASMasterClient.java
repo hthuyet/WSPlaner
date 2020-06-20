@@ -333,4 +333,10 @@ public class ASMasterClient {
         String url = String.format("%s?command=getSubStatuses&param1=%s", this.endpointUrl, siteId);
         return restTemplate.getForObject(url, String.class);
     }
+
+    // http://automaster.alliedsoft.hu:9092/api/ASMaster/getCourtesyCarGroups
+    public String getCourtesyCarGroups() {
+        String url = String.format("%s/getCourtesyCarGroups", this.endpointUrl);
+        return restTemplate.getForObject(url, String.class);
+    }
 }

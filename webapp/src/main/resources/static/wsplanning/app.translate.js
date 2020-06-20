@@ -416,7 +416,13 @@ var translationsEN = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle",
+  fuel: "Fuel",
+  AttachmentType: "Attachment Type"
 };
 
 
@@ -825,9 +831,12 @@ var translationsDE = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
 
-
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle"
 };
 
 var translationsFR = {
@@ -1225,7 +1234,12 @@ var translationsFR = {
   idVehicleNotification: 'Id VehicleNotification',
   valueVehicleNotification: 'Value VehicleNotification',
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
+
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle"
 };
 
 var translationsIT = {
@@ -1622,8 +1636,12 @@ var translationsIT = {
   idVehicleNotification: 'Id VehicleNotification',
   valueVehicleNotification: 'Value VehicleNotification',
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
 
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle"
 
 };
 
@@ -1872,7 +1890,12 @@ var translationsVI = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
+
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle"
 
 };
 
@@ -2231,7 +2254,12 @@ var translationsHU = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
+
+  //replacementVehicleFrm
+  wo: "WO",
+  group: "Group",
+  vehicle: "Vehicle"
 };
 
 

@@ -1,0 +1,60 @@
+<!--SEARCH-->
+<div class="panel panel-white" ng-controller="ReplacementCheckInCtrl">
+    <div class="panel-body">
+        <div class="form-horizontal formValidate nowhitespace" name="checkinFrm" id="checkinFrm">
+            <!--Row 1-->
+            <div class="row">
+
+                <!--Mileage-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'checkinMileage' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="wo" ng-model="WorkOrder.wo">
+                        </div>
+                    </div>
+                </div>
+
+                <!--fuel-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'fuel' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="WorkOrder.group"
+                                    ng-options="item.Id as item.Name for item in lstGroup">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 1-->
+
+            <!--Row 2-->
+            <div class="row">
+                <!--checkinRemark-->
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'checkinRemark' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="checkinRemark" ng-model="WorkOrder.checkinRemark">
+                        </div>
+                    </div>
+                </div>
+
+                <!--AttachmentType-->
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'AttachmentType' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="WorkOrder.vehicle"
+                                    ng-options="item.Id as item.Name for item in lstVehicle">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 2-->
+        </div>
+    </div>
+</div>
+<!--SEARCH-->
