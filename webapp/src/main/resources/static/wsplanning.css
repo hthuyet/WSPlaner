@@ -665,16 +665,6 @@ table td {
   font-size: 19px;
 }
 
-/* #btnReply { */
-  /* left: 18px;  */
-  /* top: 0px; */
-/* } */
-
-/* #btnMarkRead { */
-  /* left: 100px; */
-  /* top: -41px; */
-/* } */
-
 div .btn-notification.btn-group {
     display: inline-flex;
     text-align: center;
@@ -949,6 +939,13 @@ div .btn-notification.btn-group {
   left: -14px;
 }
 
+.breadcrumb-inline {
+  position: relative;
+  left: 140px;top: -32px;
+  transition: none 0s ease 0s;
+  cursor: move;
+}
+
 
 }
 
@@ -1056,6 +1053,14 @@ div .btn-notification.btn-group {
     cursor: pointer;
 }
 
+.breadcrumb-inline {
+  position: relative;
+  left: 140px;top: -32px;
+  transition: none 0s ease 0s;
+  cursor: move;
+}
+
+
 }
 
 @media (max-width: 1199px) {
@@ -1097,9 +1102,6 @@ div .btn-notification.btn-group {
   padding: 10px;
   margin: 0px 10px !important;
 }
-
-  
-
   
 }
 
@@ -1187,6 +1189,11 @@ div .btn-notification.btn-group {
     top: -45px;
     transition: none 0s ease 0s;
     cursor: pointer;
+
+    /* left: 404px; 
+  top: -112px; 
+  transition: none 0s ease 0s; 
+  cursor: move; */
 }
 
 .campaignCSS {
@@ -1201,6 +1208,29 @@ div .btn-notification.btn-group {
   top: 2px; 
   transition: none 0s ease 0s; cursor: move;
 }
+
+.breadcrumb-inline {
+  position: relative;
+  left: 140px;top: -32px;
+  transition: none 0s ease 0s;
+  cursor: move;
+  z-index: auto;
+}
+
+.inline-vhclink {
+  position: relative;
+  left: 231px; 
+  top: -69px; 
+  transition: none 0s ease 0s; 
+  cursor: move;
+}
+/* 
+.inline-external {
+  left: 404px; 
+  top: -112px; 
+  transition: none 0s ease 0s; 
+  cursor: move;
+} */
 
 }
 
