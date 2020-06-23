@@ -813,6 +813,10 @@ div .btn-notification.btn-group {
     cursor: pointer;
 }
 
+.page-title .breadcrumb.position-right {
+  margin-left: 0px;
+}
+
 
 /* end */
 }
@@ -946,6 +950,9 @@ div .btn-notification.btn-group {
   cursor: move;
 }
 
+.page-title .breadcrumb.position-right {
+  margin-left: 0px;
+}
 
 }
 
@@ -1059,7 +1066,10 @@ div .btn-notification.btn-group {
   transition: none 0s ease 0s;
   cursor: move;
 }
-
+  
+.page-title .breadcrumb.position-right {
+  margin-left: 0px;
+}
 
 }
 
@@ -1102,7 +1112,12 @@ div .btn-notification.btn-group {
   padding: 10px;
   margin: 0px 10px !important;
 }
-  
+
+.page-title .breadcrumb.position-right {
+  margin-left: 0px;
+}
+
+
 }
 
 
@@ -1223,6 +1238,14 @@ div .btn-notification.btn-group {
   top: -69px; 
   transition: none 0s ease 0s; 
   cursor: move;
+}
+
+.page-title .breadcrumb.position-right {
+  margin-left: 0px;
+}
+
+.col-width {
+  width: 20% !important;
 }
 /* 
 .inline-external {

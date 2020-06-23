@@ -3,11 +3,11 @@
     <div class="page-header-content">
         <div class="page-title">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 col-xs-3">
                     <h4><a href="/" class="btn-link"><i class="icon-arrow-left52 position-left"></i></a>
                         <span class="text-semibold">{{ 'breadcrumbWorkDetail' | translate }}</span></h4>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10 col-xs-6">
                     <ul class="breadcrumb breadcrumb-caret position-right ">
                         <li><a href="/">{{ 'breadcrumbHome' | translate }}</a></li>
                         <li ng-if="type == 'allWO'"><a ui-sref="app.main.allwork()">{{ 'breadcrumbWorkOrder' | translate }}</a></li>
@@ -26,7 +26,6 @@
                         <li ng-if="!isNew" class="active">{{cusInfo.lastName}}</li>
                     </ul>
                 </div>
-
             </div>
            
             <!-- <div class="breadcrumb-inline "> -->
