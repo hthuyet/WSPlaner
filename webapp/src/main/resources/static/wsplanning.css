@@ -686,14 +686,6 @@ div .btn-notification.btn-group {
   font-size: 16px !important;
 }
 
-#external {
-	position: relative;
-	left: 191px;
-    top: -45px;
-    transition: none 0s ease 0s;
-    cursor: pointer;
-}
-
 .inline-WO {
   display: inline;
 }
@@ -791,14 +783,18 @@ div .btn-notification.btn-group {
   }
 
   /* icon */
-  [class*="icon-"] {
-    font-size: 20px;
+  .icons-list [class*="icon-"] {
+    font-size: 30px;
   }
 
   /* collapse icon */
-.icons-list a[data-action]:after {
-  font-size: 20px;
-}
+  .panel.panel-flat .panel-heading .icons-list a[data-action]:after {
+    font-size: 30px;
+  }
+  
+  .panel-body .heading-elements .icons-list a[data-action]:after {
+    font-size: 30px;
+  }
 
 div .btn-notification.btn-group {
   display: inline-flex;
@@ -806,11 +802,7 @@ div .btn-notification.btn-group {
 }
 
 #external {
-	position: relative;
-	left: 191px;
-    top: -45px;
-    transition: none 0s ease 0s;
-    cursor: pointer;
+  margin-top: 10px !important;
 }
 
 .page-title .breadcrumb.position-right {
@@ -877,14 +869,19 @@ div .btn-notification.btn-group {
   }
 
   /* icon */
-  [class*="icon-"] {
-    font-size: 20px;
+  .icons-list [class*="icon-"] {
+    font-size: 30px;
   }
 
 /* collapse icon */
-.icons-list a[data-action]:after {
-  font-size: 19px;
+ .panel.panel-flat .panel-heading .icons-list a[data-action]:after {
+  font-size: 30px;
 }
+
+.panel-body .heading-elements .icons-list a[data-action]:after {
+  font-size: 30px;
+}
+
 
 
 
@@ -919,14 +916,6 @@ div .btn-notification.btn-group {
    div .btn-notification.btn-group {
     display: inline-flex;
     text-align: center;
-}
-
-#external {
-	position: relative;
-	left: 191px;
-    top: -45px;
-    transition: none 0s ease 0s;
-    cursor: pointer;
 }
 
 .campaignCSS {
@@ -1018,14 +1007,19 @@ div .btn-notification.btn-group {
   }
 
    /* icon */
-   [class*="icon-"] {
-    font-size: 20px;
+   .icons-list [class*="icon-"] {
+    font-size: 30px;
   }
   
   /* collapse icon */
-.icons-list a[data-action]:after {
-  font-size: 19px;
-}
+  .panel.panel-flat .panel-heading .icons-list a[data-action]:after {
+    font-size: 30px;
+  }
+  
+  .panel-body .heading-elements .icons-list a[data-action]:after {
+    font-size: 30px;
+  }
+
 
 .campaignCSS {
   font-size: 30px; 
@@ -1053,11 +1047,7 @@ div .btn-notification.btn-group {
 }
 
 #external {
-	position: relative;
-	left: 191px;
-    top: -45px;
-    transition: none 0s ease 0s;
-    cursor: pointer;
+  margin-top: 10px !important;
 }
 
 .breadcrumb-inline {
@@ -1199,16 +1189,7 @@ div .btn-notification.btn-group {
 }
 
 #external {
-	position: relative;
-	left: 191px;
-    top: -45px;
-    transition: none 0s ease 0s;
-    cursor: pointer;
-
-    /* left: 404px; 
-  top: -112px; 
-  transition: none 0s ease 0s; 
-  cursor: move; */
+  margin-top: 10px !important;
 }
 
 .campaignCSS {
@@ -1244,9 +1225,12 @@ div .btn-notification.btn-group {
   margin-left: 0px;
 }
 
-.col-width {
+/* .page-title > div[class="row"] > div[class*="col-md-2"] {
+  /* width: 12%; */
+
+/* .col-width {
   width: 20% !important;
-}
+} */
 /* 
 .inline-external {
   left: 404px; 
