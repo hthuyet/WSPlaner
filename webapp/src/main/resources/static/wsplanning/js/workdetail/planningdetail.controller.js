@@ -37,6 +37,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
             },
             resourceOrder: 'title,-id',
             resourceRender: function (renderInfo) {
+                console.log(renderInfo)
                 var info = renderInfo.resource._resource;
                 if (info.breakHours) {
                     console.log(info);
