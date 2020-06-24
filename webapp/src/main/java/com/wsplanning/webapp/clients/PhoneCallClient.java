@@ -51,7 +51,7 @@ public class PhoneCallClient {
 
     String url = "";
     if (bGetCountOnly != null && StringUtils.isNotBlank(bGetCountOnly)) {
-      url = String.format("%s?SmanId=%s&CallType=%s&bGetCountOnly=%s", this.endpointUrl, SmanId,CallType,String.valueOf(bGetCountOnly));
+      url = String.format("%s/count?SmanId=%s&CallType=%s&bGetCountOnly=%s", this.endpointUrl, SmanId,CallType,String.valueOf(bGetCountOnly));
     } else {
       url = String.format("%s?SmanId=%s&CallType=%s", this.endpointUrl, SmanId,CallType);
     }

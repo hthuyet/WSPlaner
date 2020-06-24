@@ -54,6 +54,7 @@ public class PlanningClient {
 
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s/eserv?SiteId=%s&DayFrom=%s&DayTo=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, DayFrom, DayTo, DeptId, ShiftId);
+    // "https://automaster.alliedsoft.hu:9093/api/WSCalendar/eserv?SiteId=102&DayFrom=2020.06.19&DayTo=2020.06.22&DeptId=111&ShiftId=121"
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }

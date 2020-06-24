@@ -55,8 +55,8 @@ public class PlanningController extends BaseController {
     }
   }
 
-
-  private JsonArray convertToResource(String rtn, String DeptId, String ShiftId, HashMap<String, String> hsm, HashMap<String, String> hsmBreak) {
+  private JsonArray convertToResource(String rtn, String DeptId, String ShiftId, HashMap<String, String> hsm,
+      HashMap<String, String> hsmBreak) {
     // Init list
     JsonArray listRtn = new JsonArray();
 
@@ -72,7 +72,6 @@ public class PlanningController extends BaseController {
 
       JsonObject objBusinessHours = null;
 
-
       String businessHoursTmp = "";
       String tmp[] = null;
 
@@ -86,7 +85,7 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
           itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
           itemRtn.addProperty("ResType", itemObj.get("ResType").getAsString());
-//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
+          // itemRtn.addProperty("eventColor", colors[i % colors.length]);
 
           businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
           if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
@@ -128,7 +127,7 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
           itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
           itemRtn.addProperty("ResType", itemObj.get("ResType").getAsString());
-//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
+          // itemRtn.addProperty("eventColor", colors[i % colors.length]);
 
           businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
           if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
@@ -156,7 +155,7 @@ public class PlanningController extends BaseController {
     return listRtn;
   }
 
-  //2019-04-02T08:00:00
+  // 2019-04-02T08:00:00
   private String formatBusinessHours(String s) {
     if (s == null || s.trim().length() <= 0 || !s.contains("T") || !s.contains(":")) {
       return "";
@@ -166,7 +165,8 @@ public class PlanningController extends BaseController {
 
   @GetMapping("/resources")
   @ResponseBody
-  public ResponseEntity resources(@RequestParam String start, @RequestParam String DeptId, @RequestParam String ShiftId) {
+  public ResponseEntity resources(@RequestParam String start, @RequestParam String DeptId,
+      @RequestParam String ShiftId) {
     try {
       start = start.substring(0, start.indexOf("T"));
       String calendar = wsCalendarClient.getCalendar(getSiteId(), start.replaceAll("-", "."), DeptId, ShiftId);
@@ -183,25 +183,30 @@ public class PlanningController extends BaseController {
           itemObj = item.getAsJsonObject();
           if (itemObj.has("Type")) {
             if (itemObj.get("Type").getAsString().equalsIgnoreCase("P")) {
-              hsm.put(itemObj.get("SmanId").getAsString(), formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
+              hsm.put(itemObj.get("SmanId").getAsString(), formatBusinessHours(itemObj.get("Start").getAsString()) + "&"
+                  + formatBusinessHours(itemObj.get("End").getAsString()));
             } else if (itemObj.get("Type").getAsString().equalsIgnoreCase("T")) {
-              //break
+              // break
               if (hsmBreak.get(itemObj.get("SmanId").getAsString()) == null) {
-                hsmBreak.put(itemObj.get("SmanId").getAsString(), formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
+                hsmBreak.put(itemObj.get("SmanId").getAsString(),
+                    formatBusinessHours(itemObj.get("Start").getAsString()) + "&"
+                        + formatBusinessHours(itemObj.get("End").getAsString()));
               } else {
-                hsmBreak.put(itemObj.get("SmanId").getAsString(), hsmBreak.get(itemObj.get("SmanId").getAsString()) + "@" + formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
+                hsmBreak.put(itemObj.get("SmanId").getAsString(),
+                    hsmBreak.get(itemObj.get("SmanId").getAsString()) + "@"
+                        + formatBusinessHours(itemObj.get("Start").getAsString()) + "&"
+                        + formatBusinessHours(itemObj.get("End").getAsString()));
               }
             }
           }
         }
       }
 
-
-      //getMechanics
+      // getMechanics
       String rtn = employeesClient.getMechanics(getSiteId());
       JsonArray listRtn = convertToResource(rtn, DeptId, ShiftId, hsm, hsmBreak);
 
-      //getServiceAdvisors
+      // getServiceAdvisors
       rtn = employeesClient.getServiceAdvisors(getSiteId());
       listRtn.addAll(convertToResource(rtn, DeptId, ShiftId, hsm, hsmBreak));
       return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
@@ -216,7 +221,7 @@ public class PlanningController extends BaseController {
   @ResponseBody
   public ResponseEntity events(@RequestBody Map<String, String> params) {
     try {
-      String start = params.get("start"); //2019-03-21T00:00:00Z
+      String start = params.get("start"); // 2019-03-21T00:00:00Z
       String DeptId = params.get("DeptId");
       String ShiftId = params.get("ShiftId");
 
@@ -235,9 +240,10 @@ public class PlanningController extends BaseController {
   }
 
   @GetMapping("/events2")
-  public ResponseEntity events2(@RequestParam("start") String start, @RequestParam("DeptId") String DeptId, @RequestParam("ShiftId") String ShiftId,@RequestParam("WorkOrderId") String WorkOrderId) {
+  public ResponseEntity events2(@RequestParam("start") String start, @RequestParam("DeptId") String DeptId,
+      @RequestParam("ShiftId") String ShiftId, @RequestParam("WorkOrderId") String WorkOrderId) {
     try {
-      start = start.substring(0, start.indexOf("T")); ////2019-03-21T00:00:00Z
+      start = start.substring(0, start.indexOf("T")); //// 2019-03-21T00:00:00Z
       JsonArray listRtn = new JsonArray();
       String rtn = wokOrderClient.getResource(getSiteId(), start.replaceAll("-", "."), DeptId, ShiftId);
 
@@ -273,10 +279,10 @@ public class PlanningController extends BaseController {
               itemRtn.addProperty("RowId", WOResource.get("RowId").getAsString());
               itemRtn.addProperty("id", id++);
               itemRtn.addProperty("Type", "Booking");
-              if(WorkOrderId.equalsIgnoreCase(WorkOrder.get("WorkOrderId").getAsString())){
+              if (WorkOrderId.equalsIgnoreCase(WorkOrder.get("WorkOrderId").getAsString())) {
                 itemRtn.addProperty("color", "orange");
               }
-//              itemRtn.addProperty("color", "#1cdac6");
+              // itemRtn.addProperty("color", "#1cdac6");
               if (!title.isEmpty()) {
                 itemRtn.addProperty("title", title);
               } else {
@@ -290,7 +296,7 @@ public class PlanningController extends BaseController {
         }
       }
 
-      //Add type P = working hour, type T= break
+      // Add type P = working hour, type T= break
       String calendar = wsCalendarClient.getCalendar(getSiteId(), start.replaceAll("-", "."), DeptId, ShiftId);
       if (calendar != null && StringUtils.isNotBlank(calendar)) {
         JsonParser parser = new JsonParser();
@@ -305,8 +311,10 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("start", itemObj.get("Start").getAsString());
           itemRtn.addProperty("end", itemObj.get("End").getAsString());
 
-//          itemRtn.addProperty("start", itemObj.get("Start").getAsString().replaceAll("T00","T08"));
-//          itemRtn.addProperty("end", itemObj.get("End").getAsString().replaceAll("T00","T09"));
+          // itemRtn.addProperty("start",
+          // itemObj.get("Start").getAsString().replaceAll("T00","T08"));
+          // itemRtn.addProperty("end",
+          // itemObj.get("End").getAsString().replaceAll("T00","T09"));
           if (itemObj.has("Type")) {
             itemRtn.addProperty("Type", itemObj.get("Type").getAsString());
             if (itemObj.get("Type").getAsString().equalsIgnoreCase("P")) {
@@ -315,7 +323,7 @@ public class PlanningController extends BaseController {
               itemRtn.addProperty("color", "#1cdac6");
               listRtn.add(itemRtn);
             } else if (itemObj.get("Type").getAsString().equalsIgnoreCase("T")) {
-              //break
+              // break
               itemRtn.addProperty("title", "T");
               itemRtn.addProperty("color", "#bad0cd");
               itemRtn.addProperty("overlap", false);

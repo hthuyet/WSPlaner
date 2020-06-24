@@ -102,7 +102,7 @@ public class SearchServiceItemClient {
     }
     Integer itemType = Integer.parseInt(itemTypeStr);
     HttpEntity entity = new HttpEntity(headers);
-    String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, itemType, skey);
+    String url = String.format("%s/count?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, itemType, skey);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
