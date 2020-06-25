@@ -35,32 +35,15 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
     loadPhoto(data)
 
     function loadPhoto(data) {
-        if (data.jobAttachments && data.jobAttachments.length > 0 && data.jobAttachments[0].ImageData) {
+        // console.log(data)
+        if (data.jobAttachments && data.jobAttachments.length > 0) {
 
-            common.spinner(true);
-            angular.forEach(data.jobAttachments, function (v, k) {
-                if(v.ImageData) {
-                    var dataUrl = "data:image/webp;base64," + v.ImageData;
-                    $scope.lstphoto.push(dataUrl);
-                }
-            })
-            console.log( $scope.lstphoto);
-            common.spinner(false);
-        }else {
-            var RowId = -1;
+            // common.spinner(true);
             var dto = {
                 workOrderId: data.workOrderId,
-                jobRowId: RowId,
-                LoadWOAttachmentData: ""
+                jobRowId: data.item.RowId,
+                LoadAttachmentData: true
             }
-            if (data.item) {
-                dto.jobRowId = data.item.RowId;
-            } else {
-                dto.LoadWOAttachmentData = "true";
-            }
-
-            common.spinner(true);
-
             WorkOrderService.getPhoto(dto).then(function (res) {
                 // console.log(res);
                 angular.forEach(res.data, function (v, k) {
@@ -75,13 +58,23 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                     $scope.lstphoto.push(obj.dataUrl);
                     $scope.lstAttachment.push(obj);
                 });
-                console.log( $scope.lstphoto);
+                console.log($scope.lstphoto);
                 common.spinner(false)
             }, function (err) {
                 console.log(err);
                 common.spinner(false)
             });
+
+            angular.forEach(data.jobAttachments, function (v, k) {
+                if (v.ImageData) {
+                    var dataUrl = "data:image/webp;base64," + v.ImageData;
+                    $scope.lstphoto.push(dataUrl);
+                }
+            })
+            console.log($scope.lstphoto);
+            common.spinner(false);
         }
+
     }
 
 

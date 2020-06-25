@@ -502,7 +502,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
   $scope.openImage = function (item, id) {
     console.log("--openImage:" + id);
-    console.log(item);
+    // console.log(item);
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/photo-form.html',
@@ -766,13 +766,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       var item = {};
       for (var i = 0; i < $scope.jobTabList.length; i++) {
         item = $scope.jobTabList[i];
-        JsBarcode("#barcode_" + item.RowId, item.JobBarCode, {
-          format: "CODE39",
-          width: 1,
-          height: 70,
-          displayValue: true
-        });
-
+        if (item.JobBarCode != null) {
+          JsBarcode("#barcode_" + item.RowId, item.JobBarCode, {
+            format: "CODE39",
+            width: 1,
+            height: 70,
+            displayValue: true
+          });  
+        }
+       
       }
     }
   }
