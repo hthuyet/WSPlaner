@@ -524,4 +524,14 @@ public class CommonController extends BaseController {
       return parseException(ex);
     }
   }
+
+  @GetMapping("/site/getCourtesyCarAPI")
+  public ResponseEntity getCourtesyCarAPI() {
+    try {
+      String rtn = asMasterClient.getCourtesyCarAPI();
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
 }

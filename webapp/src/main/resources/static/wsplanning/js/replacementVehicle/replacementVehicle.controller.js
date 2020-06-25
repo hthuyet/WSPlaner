@@ -9,11 +9,8 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
   };
 
   function loadCommon() {
-    CommonServices.getTransactionTypes().then(function (data) {
-      $scope.lstTrans = data;
-    });
-    CommonServices.getDepartments().then(function (data) {
-      $scope.lstDepartment = data;
+    CommonServices.getCourtesyCarGroups().then(function (data) {
+      $scope.lstGroup = data;
     });
   }
 
