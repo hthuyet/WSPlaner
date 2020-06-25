@@ -6,6 +6,7 @@ UserWebApp
     this.visitReasons = [];
     this.workOrderStatuses = [];
     this.subStatuses = [];
+    this.courtesyCarGroups = [];
     this.serviceAdvisors = [];
     this.jobTypes = [];
     this.jobCats = [];
@@ -412,6 +413,22 @@ UserWebApp
       return d.promise;
     };
 
+    this.getCourtesyCarGroups = function () {
+      var d = $q.defer();
+      if (!this.courtesyCarGroups || this.courtesyCarGroups.length <= 0) {
+        HttpService.getData('/site/getCourtesyCarGroups', {}).then(function (response) {
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+          this.courtesyCarGroups = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.courtesyCarGroups);
+      }
+      return d.promise;
+    };
+
     this.loadData = function () {
       var d = $q.defer();
       var resolve = true;
@@ -486,6 +503,14 @@ UserWebApp
         this.getChargeCats().then(function (data) {
           resolve = true;
           this.sites = data;
+        });
+      }
+
+      if (!this.courtesyCarGroups || this.courtesyCarGroups.length <= 0) {
+        resolve = false;
+        this.getCourtesyCarGroups().then(function (data) {
+          resolve = true;
+          this.courtesyCarGroups = data;
         });
       }
 

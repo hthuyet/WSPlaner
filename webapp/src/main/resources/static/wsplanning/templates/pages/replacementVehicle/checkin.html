@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'AttachmentType' | translate }}</label>
                         <div class="col-xs-8">
-                            <select class="form-control" ng-model="WorkOrder.vehicle"
+                            <select class="form-control" ng-model="WorkOrder.attachmentType" ng-change="changeAttType()"
                                     ng-options="item.Id as item.Name for item in attachmentTypes">
                             </select>
                         </div>
@@ -168,13 +168,7 @@
                     ng-click="signature = accept();templateDraw = acceptTemplate();onSubmitForm()">
                 <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
             </button>
-            <button type="button" class="btn btn-link" data-ng-click="onCancel()">{{ 'btnCancel' |
-                translate}}
-            </button>
         </div>
-
     </div>
-
-
 </div>
 <!--SEARCH-->

@@ -339,4 +339,9 @@ public class ASMasterClient {
         String url = String.format("%s/getCourtesyCarGroups", this.endpointUrl);
         return restTemplate.getForObject(url, String.class);
     }
+
+    public String getCourtesyCarAPI() {
+        String url = String.format("%s/CourtesyCarAPI", this.url);
+        return restTemplate.getForObject(url, String.class);
+    }
 }

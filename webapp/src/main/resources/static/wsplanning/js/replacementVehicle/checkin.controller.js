@@ -5,7 +5,9 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.WorkOrder = {
     "wo": "",
     "group": "",
-    "vehicle": "",
+    "vehicle": "500372",
+    "custId": "500372",
+    "attachmentType": "CCVEHI"
   };
 
   $scope.fuelList = [
@@ -15,8 +17,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     { "Id": "04", "Name": "4/4" },
       ];
   $scope.attachmentTypes = [
-      { "Id": "01", "Name": "Driver License" },
-      { "Id": "02", "Name": "Vehicle Picture" }
+      { "Id": "LIC", "Name": "Driver License" },
+      { "Id": "CCVEHI", "Name": "Vehicle Picture" }
     ];
 
   function loadCommon() {
@@ -62,40 +64,25 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.listTemplateType();
   //</editor-fold>
 
-  //<editor-fold desc="changeTemplate">
-  $scope.changeTemplate = function () {
-    console.log($scope.templateSelected);
-
-    $scope.templateName = "";
-    if ($scope.templateSelected && $scope.templateSelected.Items && $scope.templateSelected.Items.length > 0) {
-      for (var i = 0; i < $scope.templateSelected.Items.length; i++) {
-        if ($scope.templateSelected.Items[i].Id == "Image") {
-          $scope.templateName = $scope.templateSelected.Items[i].Value;
-        }
-      }
-    }
+  //<editor-fold desc="changeAttType">
+  $scope.changeAttType = function () {
+    console.log($scope.WorkOrder);
     $scope.base64Encode = "";
     common.spinner(true);
-    if ($scope.templateName != "") {
-      HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
-        console.log(response)
-        $scope.imgTemplate = "data:image/png;base64," + response.base64;
-        common.spinner(false);
-      }, function error(response) {
-        $scope.imgTemplate = "";
-        console.log(response);
-        common.spinner(false);
-      });
-    } else {
-      // HttpService.postData('/checkin/template', {type: $scope.template}).then(function (response) {
-      //     $scope.imgTemplate = "data:image/png;base64," + response.base64;
-      //     common.spinner(false);
-      // }, function error(response) {
-      //     $scope.imgTemplate = "";
-      //     console.log(response);
-      //     common.spinner(false);
-      // });
+    var url = '/courtesyCar/downloadVehicleAttachment/' + $scope.WorkOrder.vehicle + "/"+$scope.WorkOrder.attachmentType;
+
+    if($scope.WorkOrder.attachmentType == 'LIC'){
+      url = '/courtesyCar/downloadCustAttachment/' + $scope.WorkOrder.custId + "/"+$scope.WorkOrder.attachmentType;
     }
+    HttpService.postData(url, {}).then(function (response) {
+      console.log(response)
+      $scope.imgTemplate = "data:image/png;base64," + response.base64;
+      common.spinner(false);
+    }, function error(response) {
+      $scope.imgTemplate = "";
+      console.log(response);
+      common.spinner(false);
+    });
   }
   //</editor-fold>
 

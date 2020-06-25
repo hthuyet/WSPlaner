@@ -13,6 +13,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     var customers = [];
     var vehicles = [];
     var sites = [];
+    var courtesyCarGroups = [];
 
     var siteId = "";
     var stamping = "";
@@ -345,7 +346,8 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
 
     function getSubStatuses() {
         if (!subStatuses || subStatuses.length <= 0) {
-            subStatuses = $http.get('/site/getSubStatuses', {})
+            console.log("------subStatuses use http----");
+            subStatuses = $http.get('/site/getSubStatuses', {cache: true})
                 .then(function (data) {
                     data.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
                     return data.data;
@@ -356,19 +358,22 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
         }
 
         return subStatuses;
+    };
 
-        // if (!subStatuses || subStatuses.length <= 0) {
-        //   var deferred = $q.defer();
-        //   $http.get('/site/getSubStatuses', {}).then(function successCallback(response) {
-        //     response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
-        //     subStatuses = response.data;
-        //     deferred.resolve(subStatuses);
-        //   }, function errorCallback(response) {
-        //     console.error(response);
-        //     deferred.reject(subStatuses);
-        //   });
-        // }
-        // return subStatuses;
+    function getCourtesyCarGroups() {
+        if (!courtesyCarGroups || courtesyCarGroups.length <= 0) {
+            console.log("------getCourtesyCarGroups use http----");
+            courtesyCarGroups = $http.get('/site/getCourtesyCarGroups', {cache: true})
+                .then(function (data) {
+                    data.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+                    return data.data;
+                })
+                .catch(function (reason) {
+                    throw new Error(reason.message);
+                });
+        }
+
+        return courtesyCarGroups;
     };
 
 
@@ -383,6 +388,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     getServiceAdvisors();
     getTransactionTypes();
     getDepartments();
+    getCourtesyCarGroups();
 
     return {
         getSite: getSite,
@@ -398,6 +404,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
         getDepartments: getDepartments,
         getWorkOrderStatuses: getWorkOrderStatuses,
         getSubStatuses: getSubStatuses,
+        courtesyCarGroups: getCourtesyCarGroups,
         doQuery: function (type) {
             var d = $q.defer();
 
