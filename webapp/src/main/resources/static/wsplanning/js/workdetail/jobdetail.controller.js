@@ -520,7 +520,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     modalInstance.result.then(function (selectedItem) {
-      // console.log(selectedItem);
+      console.log(selectedItem);
       $scope.jobTabList[id].JobAttachments = selectedItem
       // console.log( $scope.jobTabList[id]);
     }, function () {

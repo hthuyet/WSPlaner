@@ -11,5 +11,5 @@ public class WOAttachmentDTO {
     public String AttachType;
     public String AttachTypeDescription;
     public String ImageData;
-
+    public String dataUrl;
 }

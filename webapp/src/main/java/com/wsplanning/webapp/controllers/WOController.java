@@ -217,14 +217,18 @@ public class WOController extends BaseController {
             objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);        
             String rtn = wokOrderClient.getPhoto(getToken(), getSiteId(), params);
+           
             List<WOAttachmentDTO> attachments = new ArrayList<>();
-            WOAttachmentDTO attachment = new WOAttachmentDTO();
             if(rtn != null && StringUtils.isNotBlank(rtn)) {
-                
+                JsonParser parser = new JsonParser();
+                JsonElement tradeElement = parser.parse(rtn);
+                for (JsonElement item : tradeElement.getAsJsonArray()) {
+                    WOAttachmentDTO attachment = objectMapper.readValue(item.toString(), WOAttachmentDTO.class);
+                    attachment.dataUrl = "data:image/webp;base64," + attachment.ImageData;
+                    attachments.add(attachment);                   
+                }              
             }
-
-
-            return new ResponseEntity<>(rtn, HttpStatus.OK);
+            return new ResponseEntity<>(attachments, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
         }

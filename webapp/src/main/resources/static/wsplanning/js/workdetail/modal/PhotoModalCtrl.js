@@ -36,43 +36,32 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
 
     function loadPhoto(data) {
         // console.log(data)
-        if (data.jobAttachments && data.jobAttachments.length > 0) {
+        if (data.jobAttachments && data.jobAttachments.length > 0 && !data.jobAttachments[0].ImageData) {
 
-            // common.spinner(true);
+            common.spinner(true);
             var dto = {
                 workOrderId: data.workOrderId,
                 jobRowId: data.item.RowId,
                 LoadAttachmentData: true
             }
             WorkOrderService.getPhoto(dto).then(function (res) {
-                // console.log(res);
+
                 angular.forEach(res.data, function (v, k) {
-                    var obj = jobAttachments();
-                    obj.AttachType = v.AttachType;
-                    obj.AttachTypeDescription = v.AttachTypeDescription;
-                    obj.FileDescription = v.AttacFileDescriptionhType;
-                    obj.FileId = v.FileId;
-                    obj.FileName = v.FileName;
-                    obj.ImageData = v.ImageData;
-                    obj.dataUrl = "data:image/webp;base64," + v.ImageData;
-                    $scope.lstphoto.push(obj.dataUrl);
-                    $scope.lstAttachment.push(obj);
+                    $scope.lstphoto.push(v.dataUrl);
+                    $scope.lstAttachment.push(v);
                 });
-                console.log($scope.lstphoto);
                 common.spinner(false)
             }, function (err) {
                 console.log(err);
                 common.spinner(false)
-            });
-
+            });          
+        } else {
+            common.spinner(true);
             angular.forEach(data.jobAttachments, function (v, k) {
-                if (v.ImageData) {
-                    var dataUrl = "data:image/webp;base64," + v.ImageData;
-                    $scope.lstphoto.push(dataUrl);
-                }
-            })
-            console.log($scope.lstphoto);
-            common.spinner(false);
+                $scope.lstphoto.push(v.dataUrl);
+                $scope.lstAttachment.push(v);
+            });
+            common.spinner(false)
         }
 
     }
@@ -177,6 +166,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
 
     $scope.removePhoto = function (id) {
         $scope.lstphoto.splice(id, 1);
+        $scope.lstAttachment.splice(id, 1);
     }
 
 
