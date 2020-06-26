@@ -10,6 +10,7 @@ import com.wsplanning.webapp.clients.SearchServiceItemClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
 import com.wsplanning.webapp.dto.ExternalURLDTO;
+import com.wsplanning.webapp.dto.WOAttachmentDTO;
 import com.wsplanning.webapp.dto.WOCustomerDTO;
 import com.wsplanning.webapp.dto.WODTO;
 import com.wsplanning.webapp.dto.WOJobDTO;
@@ -211,7 +212,18 @@ public class WOController extends BaseController {
     @ResponseBody
     public ResponseEntity getPhoto(@RequestBody Map<String, String> params) {
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);        
             String rtn = wokOrderClient.getPhoto(getToken(), getSiteId(), params);
+            List<WOAttachmentDTO> attachments = new ArrayList<>();
+            WOAttachmentDTO attachment = new WOAttachmentDTO();
+            if(rtn != null && StringUtils.isNotBlank(rtn)) {
+                
+            }
+
+
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);

@@ -1,5 +1,8 @@
 package com.wsplanning.webapp.clients;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.wsplanning.webapp.dto.WODTO;
 import com.wsplanning.webapp.dto.WOJobDTO;
@@ -190,6 +193,7 @@ public class WokOrderClient {
   }
 
   public String getPhoto(String token, String siteId, Map<String, String> params) {
+  
     String workOrderId = params.get("workOrderId");
     String jobRowId = params.get("jobRowId");
     String LoadAttachmentData = params.get("LoadAttachmentData");
@@ -199,9 +203,12 @@ public class WokOrderClient {
     if(StringUtils.isNotBlank(LoadAttachmentData)){
       headers.set("LoadAttachmentData", LoadAttachmentData);
     }
+
+
     
     HttpEntity entity = new HttpEntity(headers);
-    String url = String.format("%s?SiteId=%s&WorkOrderId=%s&JobRowId=%s", this.endpointUrl, siteId, workOrderId, jobRowId);
+    String url = String.format("%s/job/attachment?SiteId=%s&WorkOrderId=%s&JobRowId=%s", this.endpointUrl, siteId, workOrderId, jobRowId);
+
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
