@@ -212,6 +212,7 @@ public class ASMasterClient {
 
                 JSONObject objTimeout = new JSONObject();
                 JSONObject objBarcode = new JSONObject();
+                JSONObject iconSize = new JSONObject();
 
 
                 prop_Auth.forEach((key, value) -> {
@@ -251,6 +252,9 @@ public class ASMasterClient {
                             jsonItem.put("name", subStr[1]);
                             jsonItem.put("value", value.toString());
                             objJobHeader.put(jsonItem);
+                        } else if (StringUtils.startsWith(subStr[0],"icon")) {
+                            iconSize.put("name", subStr[0] + "_" + subStr[1]);
+                            iconSize.put("value", value.toString());
                         }
 
                     }
@@ -267,6 +271,7 @@ public class ASMasterClient {
                 obj.put("iconDetail", arrIconBtnDetail);
                 obj.put("barcode", objBarcode);
                 obj.put("jobHeader", objJobHeader);
+                obj.put("iconSize", iconSize);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -344,4 +349,5 @@ public class ASMasterClient {
         String url = String.format("%s/CourtesyCarAPI", this.url);
         return restTemplate.getForObject(url, String.class);
     }
+
 }

@@ -416,13 +416,16 @@ var translationsEN = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date',
+  receiptionDate: "Receiption date",
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
   fuel: "Fuel",
-  AttachmentType: "Attachment Type"
+  AttachmentType: "Attachment Type",
+
+  //27062020
+  subStatus: "Sub Status"
 };
 
 
@@ -836,7 +839,10 @@ var translationsDE = {
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
-  vehicle: "Vehicle"
+  vehicle: "Vehicle",
+
+  //27062020
+  subStatus: "Unterstatus"
 };
 
 var translationsFR = {
@@ -1239,7 +1245,10 @@ var translationsFR = {
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
-  vehicle: "Vehicle"
+  vehicle: "Vehicle",
+
+   //27062020
+   subStatus: "Sous-statut"
 };
 
 var translationsIT = {
@@ -1636,13 +1645,15 @@ var translationsIT = {
   idVehicleNotification: 'Id VehicleNotification',
   valueVehicleNotification: 'Value VehicleNotification',
   //31082019
-  receiptionDate: 'Receiption date',
+  receiptionDate: "Receiption date",
 
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
-  vehicle: "Vehicle"
+  vehicle: "Vehicle",
 
+   //27062020
+   subStatus: "Stato secondario"
 };
 
 
@@ -1890,12 +1901,15 @@ var translationsVI = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date',
+  receiptionDate: "Receiption date",
 
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
-  vehicle: "Vehicle"
+  vehicle: "Vehicle",
+
+  //27062020
+  subStatus: "Sub status"
 
 };
 
@@ -2259,7 +2273,10 @@ var translationsHU = {
   //replacementVehicleFrm
   wo: "WO",
   group: "Group",
-  vehicle: "Vehicle"
+  vehicle: "Vehicle",
+
+  //27062020
+  subStatus: "Sub státusz"
 };
 
 

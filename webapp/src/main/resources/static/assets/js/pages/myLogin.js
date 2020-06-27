@@ -42,6 +42,7 @@ function loadAuth() {
       var lst_icon_detail = responseData.iconDetail;
       var barcode = responseData.barcode;
       var jobHeader = responseData.jobHeader;
+      // var iconSize = responseData.iconSize;
 
       lst_auth.forEach(function (element) {
         lst_name.forEach(function (item) {
@@ -76,6 +77,8 @@ function loadAuth() {
       localStorage.setItem('info_detail', JSON.stringify(lst_detail));
       localStorage.setItem('info_barcode', JSON.stringify(barcode));
       localStorage.setItem('info_css_jobHeader', JSON.stringify(jobHeader));
+      localStorage.setItem('info_icon_size', JSON.stringify(iconSize));
+
 
     },
     error: function (responseData, textStatus, errorThrown) {

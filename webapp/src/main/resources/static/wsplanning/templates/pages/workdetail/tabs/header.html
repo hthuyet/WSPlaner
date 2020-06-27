@@ -64,6 +64,17 @@
                         </div>
                     </div>
 
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">{{ 'subStatus' | translate }}</label>
+                            <div class="col-xs-8">
+                                <select class="form-control" ng-model="WorkOrder.SubStatus"
+                                    ng-options="item.Id as item.Name for item in lstSubStatuses">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!--end row 2-->
 

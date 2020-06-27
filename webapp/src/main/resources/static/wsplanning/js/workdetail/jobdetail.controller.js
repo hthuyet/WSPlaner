@@ -1,24 +1,31 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope, $window, $timeout, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope, $window, $timeout, WorkOrderService, $uibModal, CommonServices, CommonFactory, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
-  console.log($scope.jobTabList)
+  // console.log($scope.jobTabList)
   $scope.stateParams = $stateParams;
   $scope.lstTextPredict = [];
   $scope.externalUrl = [];
   $scope.count_Vehi_Notification = $scope.jobParams.VehicleNotifications.length;
-  console.log($scope.jobParams)
-  console.log($scope.WorkOrder)
+  $scope.lstDepartment = [];
+  $scope.lstPayers = [];
+  $scope.lstChargeCats = [];
+  $scope.lstJobCats = [];
+  $scope.lstJobTypes = [];
+  $scope.lstSubStatuses = [];
 
-  var lstIndex = [];
+  // console.log($scope.jobParams)
+  // console.log($scope.WorkOrder)
+
   var suppliers = [];
-  var jobsList = [];
-  $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
-  console.log($scope.lstButtonDetail);
+  $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
+  // $scope.iconSize = JSON.parse(localStorage.getItem('info_icon_size'));
+  // console.log($scope.iconSize.value)
+  // console.log($scope.lstButtonDetail);
 
   angular.forEach($scope.lstButtonDetail, function (item) {
     item.translate = $translate.instant(item.name);
@@ -50,12 +57,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     item.collapse = !item.collapse;
   }
 
-  loadCommon();
-  $scope.lstDepartment = [];
-  $scope.lstPayers = [];
-  $scope.lstChargeCats = [];
-  $scope.lstJobCats = [];
-  $scope.lstJobTypes = [];
 
 
   function clearObject() {
@@ -122,25 +123,29 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
   function loadCommon() {
 
-    CommonServices.getChargeCats().then(function (data) {
+    CommonFactory.getChargeCats().then(function (data) {
       $scope.listChargeCats = data;
-      console.log(data)
+      // console.log(data)
     });
-    CommonServices.getPayers().then(function (data) {
+    CommonFactory.getPayers().then(function (data) {
       $scope.lstPayers = data;
       
     })
-    CommonServices.getDepartments().then(function (data) {
+    CommonFactory.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
       
     });
-    CommonServices.getJobCats().then(function (data) {
+    CommonFactory.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-      console.log(data)
+      // console.log(data)
     });
 
-    CommonServices.getJobTypes().then(function (data) {
+    CommonFactory.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
+    });
+
+    CommonFactory.getSubStatuses().then(function (data) {
+      $scope.lstSubStatuses = data;
     });
 
     CommonServices.getSuppliers().then(function (res) {
@@ -148,6 +153,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       suppliers = res;
     });
 
+    loadCommon();
 
     WorkOrderService.getStamping().then(function (res) {
 

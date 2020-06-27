@@ -58,6 +58,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             $scope.lstPayer = res;
         })     
 
+        
+
         CommonServices.getDepartments().then(function (data) {
             $scope.lstDepartment = data;
             console.log(data)
