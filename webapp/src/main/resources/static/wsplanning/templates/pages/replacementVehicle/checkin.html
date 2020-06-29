@@ -117,7 +117,7 @@
                             <div class="container"
                                  ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
                                 <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
-                                               ng-model="signature" color="#0000FF"
+                                               ng-model="signature" color="{{color}}"
                                                height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
                                                dataurl="dataurl"></signature-pad>
 
@@ -138,7 +138,7 @@
         </div>
     </div>
 
-    <button id="btnUpdateColor" style="display: none;" ng-click="templateDraw = acceptTemplate();"></button>
+    <button id="btnUpdateColor" style="display: none;" ng-click="templateDraw = acceptTemplate();signature = accept();"></button>
     <div class="panel-footer">
         <div class="pull-right">
             <button type="button" class="btn btn-icon btn-primary btnSubmit"

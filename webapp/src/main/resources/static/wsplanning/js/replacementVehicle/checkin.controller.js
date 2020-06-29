@@ -86,7 +86,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //Sign
   $scope.boundingBox = {
-    "width": 900,
+    "width": 720,
     "height": 336,
   };
 
