@@ -141,7 +141,6 @@
 
         //ThuyetLV: set all pixels of the image to this color
         this.updateColor = function (color) {
-            console.log("--updateColor 1: " + color);
             this.penColor = color;
             this._ctx.save();
             this._ctx.restore();

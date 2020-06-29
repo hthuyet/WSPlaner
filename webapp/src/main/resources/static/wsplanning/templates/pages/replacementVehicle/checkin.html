@@ -1,6 +1,9 @@
 <link href="/sign.css" rel="stylesheet" type="text/css">
+<div ng-controller="ReplacementCheckInCtrl">
+<div ng-include="'/wsplanning/templates/pages/replacementVehicle/form.html'"></div>
+
 <!--SEARCH-->
-<div class="panel panel-white" ng-controller="ReplacementCheckInCtrl">
+<div class="panel panel-white">
     <div class="panel-body">
         <div class="form-horizontal formValidate nowhitespace" name="checkinFrm" id="checkinFrm">
             <!--Row 1-->
@@ -11,7 +14,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'checkinMileage' | translate }}</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" id="wo" ng-model="WorkOrder.wo">
+                            <input type="text" class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
                         </div>
                     </div>
                 </div>
@@ -21,7 +24,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'fuel' | translate }}</label>
                         <div class="col-xs-8">
-                            <select class="form-control" ng-model="WorkOrder.group"
+                            <select class="form-control" ng-model="WorkOrder.fuel"
                                     ng-options="item.Id as item.Name for item in fuelList">
                             </select>
                         </div>
@@ -47,26 +50,9 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'AttachmentType' | translate }}</label>
                         <div class="col-xs-8">
-                            <select class="form-control" ng-model="WorkOrder.attachmentType" ng-change="changeAttType()"
-                                    ng-options="item.Id as item.Name for item in attachmentTypes">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end row 2-->
-
-            <!--Row checkin-->
-            <div class="row">
-                <div class="col-md-8 col-xs-12" id="checkinTemplate">
-                    <div class="form-group">
-                        <label
-                                class="control-label col-md-4 col-xs-4">{{ 'checkinTemplate' | translate }}</label>
-                        <div class="col-md-8 col-xs-8">
                             <div class="input-group">
-                                <select ui-select2 ng-model="templateSelected" ng-required="true"
-                                        ng-change="changeTemplate()"
-                                        ng-options="item as item.Name for item in lstTemplate">
+                                <select class="form-control" ng-model="WorkOrder.attachmentType" ng-change="changeAttType()"
+                                        ng-options="item.Id as item.Name for item in attachmentTypes">
                                 </select>
                                 <span class="input-group-btn">
                                                 <button ng-click="clear()" title="{{ 'clear' | translate }}">
@@ -76,8 +62,33 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!--end row 2-->
 
+            <!--Row 3-->
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-xs-4">Camera</label>
+                        <div class="col-md-8 col-xs-8">
+                            <div class="input-group">
+                                <textarea type="text" class="form-control"></textarea>
+                                <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="openImage()">
+                                                    <i class="icon-camera"></i>
+                                                </button>
+                                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 3-->
 
+            <!--Row checkin-->
+            <div class="row">
+                <div class="col-md-8 col-xs-12" id="checkinTemplate">
                     <div class="form-group" style="clear: both;">
                         <div class="col-md-8 col-xs-8 col-xs-offset-4">
                             <label class="radio-inline" style='color: green;'><input type="radio"
@@ -92,69 +103,35 @@
 
                 <div class="row">
 
+                    <div class="col-md-12 col-xs-12">
+                        <!-- Anh -->
+                        <div class="col-md-6 col-xs-8">
+                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear"
+                                           height="400" width="600" color="{{color}}" dataurl="imgTemplate">
+                            </signature-pad>
 
-                    <div class="col-md-8 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label col-md-4 col-xs-4"></label>
-                            <div class="col-md-8 col-xs-8">
-                                <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear"
-                                               height="400" width="600" color="{{color}}" dataurl="imgTemplate">
-                                </signature-pad>
-
-                            </div>
                         </div>
-                    </div>
+
+                        <!-- Chu ky -->
+                        <div class="col-md-6 col-xs-8">
+                            <div class="container"
+                                 ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
+                                <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
+                                               ng-model="signature" color="#0000FF"
+                                               height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
+                                               dataurl="dataurl"></signature-pad>
 
 
-                </div>
-
-
-                <div class="row">
-
-                    <div class="col-md-8 col-xs-12">
-                        <div class="form-group">
-                            <label
-                                    class="control-label col-md-4 col-xs-4">Camera</label>
-                            <div class="col-md-8 col-xs-8">
-                                <div class="input-group">
-                                    <textarea type="text" class="form-control"></textarea>
-                                    <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="openImage()">
-                                                    <i class="icon-camera"></i>
-                                                </button>
-                                            </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-<!--                Chu ky-->
-                <div class="row">
-                    <div class="col-md-8 col-xs-12">
-                        <div class="form-group">
-                            <div class="col-md-8 md-offset-4 col-xs-12">
-                                <div class="container"
-                                     ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                                    <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
-                                                   ng-model="signature" color="#0000FF"
-                                                   height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
-                                                   dataurl="dataurl"></signature-pad>
-
-
-                                    <div class="sizes">
-                                        <button ng-click="clearSign()" id="clearSign"
-                                                title="{{ 'clear' | translate }}">
-                                            <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
-                                        </button>
-                                    </div>
+                                <div class="sizes">
+                                    <button ng-click="clearSign()" id="clearSign"
+                                            title="{{ 'clear' | translate }}">
+                                        <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-<!--                End chu ky-->
 
             </div>
             <!--end row checkin-->
@@ -172,3 +149,5 @@
     </div>
 </div>
 <!--SEARCH-->
+
+</div>

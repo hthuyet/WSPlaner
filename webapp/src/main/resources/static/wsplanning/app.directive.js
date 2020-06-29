@@ -905,7 +905,6 @@ function signaturePad($interval, $timeout, $window) {
 
             scope.updateColor = function () {
                 if (scope.color) {
-                    console.log("----scope.color: " + scope.color);
                     scope.signaturePad.updateColor(scope.color);
                 }
             }

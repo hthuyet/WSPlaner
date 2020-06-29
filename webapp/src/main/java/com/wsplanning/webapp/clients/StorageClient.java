@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import com.wsplanning.webapp.RestTemplateResponseErrorHandler;
 import com.wsplanning.webapp.dto.TaskDTO;
 import com.wsplanning.webapp.dto.WOAttachmentDTO;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ public class StorageClient {
     public StorageClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
         this.restTemplate = restTemplate;
         this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+        this.restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
         this.endpointUrl = apiEndpointUrl + "/api/Storage";
     }
 
@@ -65,7 +67,6 @@ public class StorageClient {
     }
 
     public String downloadCustAttachment(String token, String custId, String attachType) {
-
         HttpHeaders headers = new HttpHeaders();
         if (StringUtils.isNotBlank(token)) {
             headers.set("Token", token);
@@ -75,6 +76,9 @@ public class StorageClient {
         logger.info("----------------downloadCustAttachment: " + url);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+        if(HttpStatus.NO_CONTENT == response.getStatusCode()){
+
+        }
         return response.getBody();
     }
 

@@ -1,14 +1,14 @@
-UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $timeout, CommonServices) {
   loadCommon();
   $scope.lstGroup = [];
   $scope.lstVehicle = [];
-  $scope.WorkOrder = {
-    "wo": "",
-    "group": "",
-    "vehicle": "500372",
-    "custId": "500372",
-    "attachmentType": "CCVEHI"
-  };
+  // $scope.WorkOrder = {
+  //   "wo": "",
+  //   "group": "",
+  //   "vehicle": "8329",
+  //   "custId": "8329",
+  //   "attachmentType": "CCVEHI"
+  // };
 
   $scope.fuelList = [
     { "Id": "01", "Name": "1/4" },
@@ -32,51 +32,46 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   $scope.VehiId = 0;
   $scope.template = "1";
-  $scope.templateSelected = { "Id": "01" };
-  $scope.templateName = {};
-  $scope.lstTemplate = [];
   $scope.color = "green";
 
-  //<editor-fold desc="listTemplateType">
-  $scope.listTemplateType = function () {
-    $scope.base64Encode = "";
-    common.spinner(true);
-    HttpService.postDataWithCache('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
-      $scope.lstTemplate = response;
-      if ($scope.lstTemplate.length > 0) {
-        $scope.templateSelected = $scope.lstTemplate[0];
-      }
-      $scope.templateSelected = {};
-      $scope.data.legalText = "";
-      $scope.templateName = "";
-      $scope.changeTemplate();
-      common.spinner(false);
-    }, function error(response) {
-      $scope.lstTemplate = [];
-      $scope.templateSelected = {};
-      $scope.data.legalText = "";
-      $scope.templateName = "";
-      $scope.changeTemplate();
-      console.log(response);
-      common.spinner(false);
-    });
-  }
-  $scope.listTemplateType();
-  //</editor-fold>
-
   //<editor-fold desc="changeAttType">
+  $scope.templateMark = {};
   $scope.changeAttType = function () {
+    console.log("-----changeAttType------");
     console.log($scope.WorkOrder);
     $scope.base64Encode = "";
     common.spinner(true);
-    var url = '/courtesyCar/downloadVehicleAttachment/' + $scope.WorkOrder.vehicle + "/"+$scope.WorkOrder.attachmentType;
+    var url = '/storage/downloadVehicleAttachment/' + $scope.WorkOrder.vehicle + "/"+$scope.WorkOrder.attachmentType;
 
     if($scope.WorkOrder.attachmentType == 'LIC'){
-      url = '/courtesyCar/downloadCustAttachment/' + $scope.WorkOrder.custId + "/"+$scope.WorkOrder.attachmentType;
+      url = '/storage/downloadCustAttachment/' + $scope.WorkOrder.custId + "/"+$scope.WorkOrder.attachmentType;
     }
-    HttpService.postData(url, {}).then(function (response) {
+    HttpService.getData(url, {}).then(function (response) {
       console.log(response)
-      $scope.imgTemplate = "data:image/png;base64," + response.base64;
+      if(response){
+        $scope.imgTemplate = "data:image/png;base64," + response.imageData;
+        $scope.templateMark = {
+          "FileId": response.fileId,
+          "FileName": response.fileName,
+          "dataUrl": "data:image/png;base64," + response.imageData,
+          "ImageData": response.imageData,
+          "AttachType": response.attachType,
+          "AttachTypeDescription": response.attachTypeDescription,
+          "FileDescription": response.fileDescription,
+        };
+      }else{
+        $scope.imgTemplate = "";
+        $scope.templateMark = {
+          "FileId": 0,
+          "FileName": "",
+          "dataUrl": "",
+          "ImageData": "",
+          "AttachType": "",
+          "AttachTypeDescription": "",
+          "FileDescription": "",
+        };
+      }
+
       common.spinner(false);
     }, function error(response) {
       $scope.imgTemplate = "";
@@ -84,6 +79,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       common.spinner(false);
     });
   }
+
+  $scope.changeAttType();
   //</editor-fold>
 
 
@@ -112,6 +109,10 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     );
   });
 
+//   $scope.changeAction = function () {
+// console.log($scope.WorkOrder);
+//   }
+
   function createListWOAttachment() {
     var list = [];
     var i = 0;
@@ -120,13 +121,17 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if (!template.isEmpty) {
       var templateMark = {};
       templateMark.FileId = 0;
-      templateMark.FileName = $scope.templateName;
+      templateMark.FileName = "";
       templateMark.dataUrl = template.dataUrl;
       templateMark.ImageData = template.dataUrl.replace("data:image/png;base64,", "");
-      templateMark.AttachType = "VHC";
+      templateMark.AttachType = $scope.WorkOrder.attachmentType;
       templateMark.AttachTypeDescription = "";
       templateMark.FileDescription = "";
       list[i++] = templateMark;
+    }else{
+      if($scope.imgTemplate){
+        list[i++] = $scope.templateMark;
+      }
     }
 
     var signCanvas = $scope.accept();
@@ -152,11 +157,12 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.onSubmitForm = function (params) {
 
     console.log("-----onSubmitForm---");
+    console.log($scope.WorkOrder);
     var list = createListWOAttachment();
 
     console.log(list);
 
-    common.btnLoading($(".btnSubmit"), true);
+    // common.btnLoading($(".btnSubmit"), true);
     // WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
     //   common.btnLoading($(".btnSubmit"), false);
     //   console.log(res);
