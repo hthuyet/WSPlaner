@@ -121,39 +121,36 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     }
   })
 
+  loadCommon();
+
   function loadCommon() {
 
-    CommonFactory.getChargeCats().then(function (data) {
+    CommonServices.getChargeCats().then(function (data) {
       $scope.listChargeCats = data;
-      // console.log(data)
-    });
-    CommonFactory.getPayers().then(function (data) {
-      $scope.lstPayers = data;
-      
-    })
-    CommonFactory.getDepartments().then(function (data) {
-      $scope.lstDepartment = data;
-      
-    });
-    CommonFactory.getJobCats().then(function (data) {
-      $scope.lstJobCats = data;
-      // console.log(data)
+      console.log(data)
     });
 
-    CommonFactory.getJobTypes().then(function (data) {
+    CommonServices.getPayers().then(function (data) {
+      $scope.lstPayers = data;
+
+    })
+    CommonServices.getDepartments().then(function (data) {
+      $scope.lstDepartment = data;
+
+    });
+    CommonServices.getJobCats().then(function (data) {
+      $scope.lstJobCats = data;
+      console.log(data)
+    });
+
+    CommonServices.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
     });
 
-    CommonFactory.getSubStatuses().then(function (data) {
-      $scope.lstSubStatuses = data;
-    });
-
     CommonServices.getSuppliers().then(function (res) {
-      // console.log(res);
+      console.log(res);
       suppliers = res;
     });
-
-    loadCommon();
 
     WorkOrderService.getStamping().then(function (res) {
 
@@ -177,6 +174,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     }
 
   }
+
 
   $scope.getClass = function (param, mechanicId) {
     switch (param) {
@@ -768,7 +766,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
   //Barcode generate
   function generateBarcode() {
-    if($scope.jobTabList && $scope.jobTabList.length > 0) {
+    if ($scope.jobTabList && $scope.jobTabList.length > 0) {
       var item = {};
       for (var i = 0; i < $scope.jobTabList.length; i++) {
         item = $scope.jobTabList[i];
@@ -778,16 +776,16 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
             width: 1,
             height: 70,
             displayValue: true
-          });  
+          });
         }
-       
+
       }
     }
   }
 
   $timeout(function () {
     generateBarcode();
-  },0);
+  }, 0);
 
 
 });
@@ -1079,7 +1077,7 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
     HttpService.postData('/site/postNotification', obj).then(function (response) {
       // console.log(response);
       common.spinner(false);
-      if(response == true) {
+      if (response == true) {
         common.notifySuccess("Success!!!");
       } else {
         common.notifyError("Error!!!")
@@ -1210,7 +1208,7 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
     HttpService.postData('/site/postNotification', obj).then(function (response) {
       // console.log(response);
       common.spinner(false);
-      if (response == true){
+      if (response == true) {
         common.notifySuccess("Success!!!")
       } else {
         common.notifyError("Error!!!")
