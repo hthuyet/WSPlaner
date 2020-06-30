@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import com.wsplanning.webapp.dto.CommandDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,7 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,8 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by ThuyetLV
@@ -339,6 +347,22 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
+    public String getByCommand(String token, String siteId, String command) {
+        HttpHeaders headers = new HttpHeaders();
+        if (StringUtils.isNotBlank(token)) {
+            headers.set("Token", token);
+        }
+        if (StringUtils.isNotBlank(siteId)) {
+            headers.set("SiteId", siteId);
+        }
+        String url = String.format("%s?command=%s", this.endpointUrl, command);
+
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
     // http://automaster.alliedsoft.hu:9092/api/ASMaster/getCourtesyCarGroups
     public String getCourtesyCarGroups() {
         String url = String.format("%s/getCourtesyCarGroups", this.endpointUrl);
@@ -348,6 +372,27 @@ public class ASMasterClient {
     public String getCourtesyCarAPI() {
         String url = String.format("%s/CourtesyCarAPI", this.url);
         return restTemplate.getForObject(url, String.class);
+    }
+
+    @Async
+    public CompletableFuture<CommandDTO> getByCommandAsync(String token, String siteId, String command) {
+        long startTime = System.currentTimeMillis();
+        HttpHeaders headers = new HttpHeaders();
+        if (StringUtils.isNotBlank(token)) {
+            headers.set("Token", token);
+        }
+        if (StringUtils.isNotBlank(siteId)) {
+            headers.set("SiteId", siteId);
+        }
+        String url = String.format("%s?command=%s", this.endpointUrl, command);
+
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<List> response = restTemplate.exchange(url, HttpMethod.GET, entity, List.class, new HashMap<>());
+        CommandDTO commandDTO = new CommandDTO();
+        commandDTO.key = command;
+        commandDTO.data = response.getBody();
+        logger.info("-----------------Time to getByCommandAsync {" + command + "}: " + (System.currentTimeMillis() - startTime) + " ms");
+        return CompletableFuture.completedFuture(commandDTO);
     }
 
 }

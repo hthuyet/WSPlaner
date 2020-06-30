@@ -22,11 +22,22 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     ];
 
   function loadCommon() {
-    CommonServices.getTransactionTypes().then(function (data) {
-      $scope.lstTrans = data;
-    });
-    CommonServices.getDepartments().then(function (data) {
-      $scope.lstDepartment = data;
+    // HttpService.getData("/site/getByCommand/getCourtesyCarGroups", {}).then(function (response) {
+    //   $scope.lstGroup = response;
+    //   common.spinner(false);
+    // }, function error(response) {
+    //   console.log(response);
+    //   common.spinner(false);
+    // });
+
+    HttpService.getData("/site/listByCommand", {}).then(function (response) {
+      console.log("-----------listByCommand-------");
+      console.log(response);
+      $scope.lstGroup = response.getCourtesyCarGroups;
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
     });
   }
 

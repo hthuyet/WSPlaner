@@ -6,6 +6,7 @@ import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.clients.NotificationClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.VehiclesClient;
+import com.wsplanning.webapp.dto.CommandDTO;
 import com.wsplanning.webapp.dto.NotificationDTO;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,8 +24,11 @@ import org.springframework.web.servlet.LocaleResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 @Controller
 public class CommonController extends BaseController {
@@ -530,6 +534,46 @@ public class CommonController extends BaseController {
     try {
       String rtn = asMasterClient.getCourtesyCarAPI();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getByCommand/{command}")
+  public ResponseEntity getByCommand(@PathVariable("command") String command) {
+    try {
+      String rtn = asMasterClient.getByCommand(getToken(), getSiteId(), command);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/listByCommand")
+//  public ResponseEntity listByCommand(@RequestParam(value="command") List<String> listCmd) {
+  public ResponseEntity listByCommand() {
+    try {
+      String token = getToken();
+      String siteId = getSiteId();
+//      String[] tmp = command.split(",");
+//      List<String> listCmd = Arrays.asList(tmp);
+
+      List<String> listCmd = Arrays.asList("getCourtesyCarGroups","getTransactionTypes","getVisitReasons");
+
+      List<CompletableFuture<CommandDTO>> futures =
+              listCmd.parallelStream()
+                      .map(cmd -> asMasterClient.getByCommandAsync(token, siteId, cmd))
+                      .collect(Collectors.toList());
+
+      List<CommandDTO> result =
+              futures.stream()
+                      .map(CompletableFuture::join)
+                      .collect(Collectors.toList());
+
+      Map<String, List> result1 = result.parallelStream().collect(
+              Collectors.toMap(CommandDTO::getKey, CommandDTO::getData));
+
+      return new ResponseEntity<>(result1, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }

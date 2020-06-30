@@ -10,6 +10,8 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -38,7 +40,12 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
     }
 
     private String getToken() {
-        String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
-        return token;
+        try {
+            String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
+            return token;
+        }catch (Exception ex){
+//            ex.printStackTrace();
+            return null;
+        }
     }
 }
