@@ -25,6 +25,19 @@ public class CourtesyCarController extends BaseController {
     @Autowired
     HttpSession httpSession;
 
+    @GetMapping("/courtesyCar/getCCResByVehicle")
+    @ResponseBody
+    public ResponseEntity getCCResByVehicle(@RequestParam(name = "group", required = false) Integer group) {
+        try {
+            String token = getToken();
+            String rtn = client.getCCResByVehicle(token, group);
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return parseException(ex);
+        }
+    }
+
     @GetMapping("/courtesyCar/getCCResByVehicle/{vehiId}")
     @ResponseBody
     public ResponseEntity getCCResByVehicle(@PathVariable("vehiId") String vehiId,
@@ -40,13 +53,25 @@ public class CourtesyCarController extends BaseController {
         }
     }
 
-    @GetMapping("/courtesyCar/getCCResByWO/{siteId}/{wo}")
+    @GetMapping("/courtesyCar/getCCResByWO/{wo}")
     @ResponseBody
-    public ResponseEntity getCCResByWO(@PathVariable("siteId") String siteId,
-                                       @RequestParam(name = "wo") String wo) {
+    public ResponseEntity getCCResByWO(@PathVariable(name = "wo") String wo) {
         try {
             String token = getToken();
-            String rtn = client.getCCResByWO(token, siteId, wo);
+            String rtn = client.getCCResByWO(token, getSiteId(), wo);
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return parseException(ex);
+        }
+    }
+
+    @PostMapping("/courtesyCar/save")
+    @ResponseBody
+    public ResponseEntity saveCCRes(@RequestBody CourtesyCarResDTO data) {
+        try {
+            String token = getToken();
+            Boolean rtn = client.saveCCRes(token, data);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

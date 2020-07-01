@@ -32,6 +32,24 @@ public class CourtesyCarClient {
         this.endpointUrl = apiEndpointUrl + "/api/CourtesyCar";
     }
 
+    public String getCCResByVehicle(String token, Integer vehiGroup) {
+
+        HttpHeaders headers = new HttpHeaders();
+        if (StringUtils.isNotBlank(token)) {
+            headers.set("Token", token);
+        }
+
+        if (vehiGroup != null && vehiGroup > 0){
+            headers.set("Group", String.valueOf(vehiGroup));
+        }
+
+        String url = String.format("%s", this.endpointUrl);
+        logger.info("----------------getCCResByVehicle: " + url);
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+        return response.getBody();
+    }
+
     public String getCCResByVehicle(String token, String vehiId, String dtFrom, String dtTo) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -40,11 +58,11 @@ public class CourtesyCarClient {
         }
 
         if (StringUtils.isNotBlank(dtFrom)) {
-            headers.set("DateFrom", formateDateAPI(dtFrom));
+            headers.set("DateFrom", dtFrom);
         }
 
         if (StringUtils.isNotBlank(dtTo)) {
-            headers.set("DateTo", formateDateAPI(dtTo));
+            headers.set("DateTo", dtTo);
         }
 
         String url = String.format("%s/%s", this.endpointUrl, vehiId);
@@ -66,6 +84,21 @@ public class CourtesyCarClient {
         logger.info(response.getBody());
         return response.getBody();
     }
+
+    public Boolean saveCCRes(String token, CourtesyCarResDTO data) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        if (StringUtils.isNotBlank(token)) {
+            headers.set("Token", token);
+        }
+        headers.set("PostAction", "insert");
+        HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
+        String url = String.format("%s", this.endpointUrl);
+        ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);
+        logger.info("----saveCCRes: " + response.getBody());
+        return response.getBody();
+    }
+
     public Boolean checkinCCRes(String token, CourtesyCarResDTO data) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -74,7 +107,7 @@ public class CourtesyCarClient {
         }
         headers.set("PostAction", "deliver");
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
-        String url = String.format("%s/cust", this.endpointUrl);
+        String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);
         logger.info("----checkoutCCRes: " + response.getBody());
         return response.getBody();
@@ -88,7 +121,7 @@ public class CourtesyCarClient {
         }
         headers.set("PostAction", "return");
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
-        String url = String.format("%s/cust", this.endpointUrl);
+        String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);
         logger.info("----checkoutCCRes: " + response.getBody());
         return response.getBody();

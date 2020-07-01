@@ -1,5 +1,10 @@
 UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $timeout, CommonServices) {
   loadCommon();
+  $scope.params = {
+    "from": "",
+    "to": "",
+  };
+
   $scope.lstGroup = [];
   $scope.lstVehicle = [];
   // $scope.WorkOrder = {
@@ -44,6 +49,62 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.VehiId = 0;
   $scope.template = "1";
   $scope.color = "green";
+
+  //<editor-fold desc="onChangeGroup">
+  $scope.onChangeGroup = function(){
+    console.log("---------------onChangeGroup: " + $scope.WorkOrder.group);
+    HttpService.getData("/courtesyCar/getCCResByVehicle?group=" + $scope.WorkOrder.group, {}).then(function (response) {
+      $scope.lstVehicle = response;
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      $scope.lstVehicle = [];
+      common.spinner(false);
+    });
+
+  }
+  //</editor-fold>
+
+  //<editor-fold desc="onChangeVehicle">
+  $scope.onChangeVehicle = function(){
+    console.log("---------------onChangeVehicle: " + $scope.WorkOrder.vehicle);
+    var params = {
+      "dtFrom": moment($scope.params.from).format("YYYY.MM.DD"),
+      "dtTo": moment($scope.params.to).format("YYYY.MM.DD")
+    };
+    HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, params).then(function (response) {
+      console.log(response);
+      if(response && response.length > 0) {
+        $scope.WorkOrder.WorkOrderNo = response[0].WorkOrderNo;
+        $scope.WorkOrder.Mileage = response[0].ReturnMileage;
+        $scope.WorkOrder.checkinRemark = response[0].ChargeId;
+        $scope.params.from = new Date(response[0].ReservationFrom);
+        $scope.params.to = new Date(response[0].ReservationTo);
+      }
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+  }
+  //</editor-fold>
+
+  //<editor-fold desc="getCCResByWO">
+  $scope.getCCResByWO = function(){
+    console.log("---------------getCCResByWO: " + $scope.WorkOrder.WorkOrderNo);
+    HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo,{}).then(function (response) {
+      console.log(response);
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+  }
+  //</editor-fold>
+
+
 
   //<editor-fold desc="changeAttType">
   $scope.templateMark = {};
@@ -237,6 +298,32 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
+  };
+  //</editor-fold>
+
+
+  //<editor-fold desc="date picker">
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+
+  $scope.openFromDate = function () {
+    $rootScope.popupFromDate.opened = true;
+  };
+
+  $scope.openToDate = function () {
+    $rootScope.popupToDate.opened = true;
+  };
+
+
+  $rootScope.popupFromDate = {
+    opened: false
+  };
+
+  $rootScope.popupToDate = {
+    opened: false
   };
   //</editor-fold>
 

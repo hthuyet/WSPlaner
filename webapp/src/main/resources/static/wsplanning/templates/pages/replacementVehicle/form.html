@@ -10,7 +10,8 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'wo' | translate }}</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" id="WorkOrderNo" ng-model="WorkOrder.WorkOrderNo">
+                            <input type="text" class="form-control" id="WorkOrderNo" ng-model="WorkOrder.WorkOrderNo"
+                                   code="13" dl-key-code="getCCResByWO();">
                         </div>
                     </div>
                 </div>
@@ -21,7 +22,8 @@
                         <label class="control-label col-xs-4">{{ 'group' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="WorkOrder.group"
-                                    ng-options="item.Id as item.Name for item in lstGroup">
+                                    ng-options="item.Id as item.Name for item in lstGroup"
+                                    ng-change="onChangeGroup()">
                             </select>
                         </div>
                     </div>
@@ -33,13 +35,62 @@
                         <label class="control-label col-xs-4">{{ 'vehicle' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="WorkOrder.vehicle"
-                                    ng-options="item.Id as item.Name for item in lstVehicle">
+                                    ng-options="item.VehiId as item.LicenseNo for item in lstVehicle"
+                                    ng-change="onChangeVehicle()">
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
             <!--end row 1-->
+
+            <!--Row 2-->
+            <div class="row">
+
+                <!--Fromdate-->
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'fromDate' | translate }}</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
+                                       placeholder="Pick a date" is-open="popupFromDate.opened"
+                                       datepicker-options="dateOptions" ng-required="true" show-button-bar="true"
+                                       ng-model="params.from" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openFromDate()">
+
+                                        <i class="icon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--toDate-->
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'toDate' | translate }}</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
+                                       placeholder="Pick a date" is-open="popupToDate.opened"
+                                       datepicker-options="dateOptions" ng-required="true" show-button-bar="false"
+                                       ng-model="params.to" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openToDate()">
+
+                                        <i class="icon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 2-->
 
             <div class="row">
                 <div class="form-group" style="clear: both;">
