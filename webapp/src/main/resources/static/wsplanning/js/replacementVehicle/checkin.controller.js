@@ -7,13 +7,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   $scope.lstGroup = [];
   $scope.lstVehicle = [];
-  // $scope.WorkOrder = {
-  //   "wo": "",
-  //   "group": "",
-  //   "vehicle": "8329",
-  //   "custId": "8329",
-  //   "attachmentType": "CCVEHI"
-  // };
+  $scope.carChoosed = null;
 
   $scope.fuelList = [
     { "Id": "01", "Name": "1/4" },
@@ -52,6 +46,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //<editor-fold desc="onChangeGroup">
   $scope.onChangeGroup = function(){
+    $scope.carChoosed = null;
+    bindingData();
     console.log("---------------onChangeGroup: " + $scope.WorkOrder.group);
     HttpService.getData("/courtesyCar/getCCResByVehicle?group=" + $scope.WorkOrder.group, {}).then(function (response) {
       $scope.lstVehicle = response;
@@ -65,7 +61,39 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
   //</editor-fold>
 
+
   //<editor-fold desc="onChangeVehicle">
+  function bindingData() {
+    if (!$scope.carChoosed) {
+      $scope.WorkOrder.WorkOrderNo = "";
+      $scope.params.from = new Date();
+      $scope.params.to = new Date();
+      $scope.WorkOrder.Mileage = "";
+      $scope.WorkOrder.checkinRemark = "";
+      $scope.WorkOrder.checkinRemark = "";
+    }else{
+      $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
+      $scope.params.from = new Date($scope.carChoosed.ReservationFrom);
+      $scope.params.to = new Date($scope.carChoosed.ReservationTo);
+      if ($scope.WorkOrder.action == "checkin") {
+        console.log("----checkin return-----");
+        $scope.WorkOrder.Mileage = $scope.carChoosed.ReturnMileage;
+        $scope.WorkOrder.checkinRemark = $scope.carChoosed.ChargeId;
+        $scope.WorkOrder.checkinRemark = $scope.carChoosed.ReturnNote;
+      } else if ($scope.WorkOrder.action == "checkout") {
+        console.log("----checkout Delivery-----");
+        $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryMileage;
+        $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryFuelId;
+        $scope.WorkOrder.checkinRemark = $scope.carChoosed.DeliveryNote;
+      }
+    }
+  }
+
+  $scope.changeAction = function(){
+    console.log("--------changeAction: " + $scope.WorkOrder.action);
+    bindingData();
+  }
+
   $scope.onChangeVehicle = function(){
     console.log("---------------onChangeVehicle: " + $scope.WorkOrder.vehicle);
     var params = {
@@ -75,18 +103,18 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, params).then(function (response) {
       console.log(response);
       if(response && response.length > 0) {
-        $scope.WorkOrder.WorkOrderNo = response[0].WorkOrderNo;
-        $scope.WorkOrder.Mileage = response[0].ReturnMileage;
-        $scope.WorkOrder.checkinRemark = response[0].ChargeId;
-        $scope.params.from = new Date(response[0].ReservationFrom);
-        $scope.params.to = new Date(response[0].ReservationTo);
+        if(response.length > 1){
+          $scope.chooseCar(response);
+        }else {
+          $scope.carChoosed = response[0];
+          bindingData();
+        }
       }
       common.spinner(false);
     }, function error(response) {
       console.log(response);
       common.spinner(false);
     });
-
   }
   //</editor-fold>
 
@@ -180,10 +208,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         }
     );
   });
-
-//   $scope.changeAction = function () {
-// console.log($scope.WorkOrder);
-//   }
 
   function createListWOAttachment() {
     var list = [];
@@ -327,4 +351,57 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   };
   //</editor-fold>
 
+
+  //<editor-fold desc="Choose CCcars">
+  $scope.chooseCar = function (listCars) {
+    console.log("------chooseCar----");
+    var modalChooseCar = $uibModal.open({
+      animation: true,
+      templateUrl: '/wsplanning/templates/pages/common/choose-car.html',
+      controller: 'ChooseCarModalCtrl',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        listCars: function () {
+          return listCars;
+        },
+        title: function () {
+          return "Choose Car";
+        }
+      }
+    });
+
+    modalChooseCar.result.then(function (value) {
+      if (value) {
+        console.log(value);
+        $scope.carChoosed = value;
+        bindingData();
+      }
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  }
+  //</editor-fold>
+
+
 });
+
+UserWebApp.controller('ChooseCarModalCtrl', function ($scope, $rootScope, $timeout,
+                                                    $state, $uibModal, $uibModalInstance, CommonServices,
+                                                      listCars, title) {
+
+  var type = '';
+  var $ctrl = this;
+
+  $scope.listCars = listCars;
+  $scope.title = title;
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.doPick = function (selectedItem) {
+    $uibModalInstance.close(selectedItem);
+  }
+
+})

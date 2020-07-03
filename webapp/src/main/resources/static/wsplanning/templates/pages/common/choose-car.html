@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
+    </button>
+    <h4>{{title}}</h4>
+</div>
+
+<div class="modal-body">
+    <!--SEARCH-->
+    <div class="panel panel-flat">
+        <div class="table-responsive tableModal nowhitespace">
+            <table class="table able-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{'ReservationFrom' | translate}}</th>
+                        <th class="text-center">{{'ReservationTo' | translate}}</th>
+                        <th class="text-center">{{'LicenseNo' | translate}}</th>
+                        <th class="text-center">{{'Make' | translate}}</th>
+                        <th class="text-center">{{'Model' | translate}}</th>
+                        <th class="text-center">{{'Customer' | translate}}</th>
+                        <th class="text-center">{{'Pick' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in listCars">
+                        <td>{{item.ReservationFrom}}</td>
+                        <td>{{item.ReservationTo}}</td>
+                        <td class="text-wrap">{{item.ResVehicle.LicenseNo}}</td>
+                        <td class="text-wrap">{{item.ResVehicle.Make}}</td>
+                        <td class="text-wrap">{{item.ResVehicle.Model}}</td>
+                        <td class="text-wrap">{{item.ResVehicle.Model}}</td>
+                        <td class="text-wrap">{{item.ResVehicle.UserCustomer.FName}} {{item.ResVehicle.UserCustomer.LName}}</td>
+                        <td class="text-center">
+                            <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i>
+                                {{'Pick' | translate}}</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer position-right">
+    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+</div>
