@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Map;
 
 public class Utils {
@@ -93,6 +94,9 @@ public class Utils {
   static DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
+  public static String formateDateAPI(LocalDate date) {
+    return formatter.format(date);
+  }
   public static String formateDateAPI(String input) {
     if (input == null || StringUtils.isBlank(input)) {
       return "";

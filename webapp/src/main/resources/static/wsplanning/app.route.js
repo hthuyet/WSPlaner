@@ -187,9 +187,17 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
 
         .state('app.main.replacementvehicle', {
-            url: 'replacementvehicle',
+            url: 'replacementvehicle/:workOrderNo',
+            params: {
+                workOrderNo: null,
+            },
             controller: "ReplacementVehicleCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
+            resolve: {
+                workOrderNo: function ($stateParams) {
+                    return $stateParams.workOrderNo;
+                }
+            }
         })
 
         .state('app.main.newwo', {

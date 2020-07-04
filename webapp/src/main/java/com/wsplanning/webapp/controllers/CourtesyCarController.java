@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
+import static com.wsplanning.webapp.utils.Utils.formateDateAPI;
 
 @Controller
 public class CourtesyCarController extends BaseController {
@@ -40,12 +45,14 @@ public class CourtesyCarController extends BaseController {
 
     @GetMapping("/courtesyCar/getCCResByVehicle/{vehiId}")
     @ResponseBody
-    public ResponseEntity getCCResByVehicle(@PathVariable("vehiId") String vehiId,
-                                            @RequestParam(name = "dtFrom") String dtFrom,
-                                            @RequestParam(name = "dtTo") String dtTo) {
+    public ResponseEntity getCCResByVehicle(@PathVariable("vehiId") String vehiId) {
         try {
+            LocalDate now = LocalDate.now();
+            LocalDate to = LocalDate.now();
+            to = to.plusMonths(1);
+
             String token = getToken();
-            String rtn = client.getCCResByVehicle(token, vehiId, dtFrom, dtTo);
+            String rtn = client.getCCResByVehicle(token, vehiId, formateDateAPI(now), formateDateAPI(to));
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

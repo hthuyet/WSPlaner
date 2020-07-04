@@ -105,11 +105,11 @@ public class CourtesyCarClient {
         if (StringUtils.isNotBlank(token)) {
             headers.set("Token", token);
         }
-        headers.set("PostAction", "deliver");
+        headers.set("PostAction", "return");
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);
-        logger.info("----checkoutCCRes: " + response.getBody());
+        logger.info("----checkinCCRes: " + response.getBody());
         return response.getBody();
     }
 
@@ -119,7 +119,7 @@ public class CourtesyCarClient {
         if (StringUtils.isNotBlank(token)) {
             headers.set("Token", token);
         }
-        headers.set("PostAction", "return");
+        headers.set("PostAction", "deliver");
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);

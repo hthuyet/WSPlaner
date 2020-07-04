@@ -1,4 +1,5 @@
-UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $timeout, CommonServices) {
+UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $timeout, WorkOrderService) {
+  var empltyImage = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
   loadCommon();
   $scope.params = {
     "from": "",
@@ -21,14 +22,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     ];
 
   function loadCommon() {
-    // HttpService.getData("/site/getByCommand/getCourtesyCarGroups", {}).then(function (response) {
-    //   $scope.lstGroup = response;
-    //   common.spinner(false);
-    // }, function error(response) {
-    //   console.log(response);
-    //   common.spinner(false);
-    // });
-
     HttpService.getData("/site/listByCommand", {}).then(function (response) {
       console.log("-----------listByCommand-------");
       console.log(response);
@@ -65,28 +58,40 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   //<editor-fold desc="onChangeVehicle">
   function bindingData() {
     if (!$scope.carChoosed) {
+      $scope.WorkOrder.WorkOrderId = "";
       $scope.WorkOrder.WorkOrderNo = "";
-      $scope.params.from = new Date();
-      $scope.params.to = new Date();
+      $scope.params.from = "0001-01-01T00:00:00";
+      $scope.params.to = "0001-01-01T00:00:00";
       $scope.WorkOrder.Mileage = "";
       $scope.WorkOrder.checkinRemark = "";
-      $scope.WorkOrder.checkinRemark = "";
+      $scope.WorkOrder.fuel = "";
+      $scope.WorkOrder.vehicle = "-1";
+      $scope.WorkOrder.CustNo = "";
+      $scope.WorkOrder.FName = "";
+      $scope.WorkOrder.LName = "";
     }else{
+      $scope.WorkOrder.WorkOrderId = $scope.carChoosed.WorkOrderId;
+      $scope.WorkOrder.vehicle = $scope.carChoosed.ResVehicle.VehiId;
       $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
+      $scope.WorkOrder.CustNo = $scope.carChoosed.ResCustomer.CustNo;
+      $scope.WorkOrder.FName = $scope.carChoosed.ResCustomer.FName;
+      $scope.WorkOrder.LName = $scope.carChoosed.ResCustomer.LName;
       $scope.params.from = new Date($scope.carChoosed.ReservationFrom);
       $scope.params.to = new Date($scope.carChoosed.ReservationTo);
+
       if ($scope.WorkOrder.action == "checkin") {
         console.log("----checkin return-----");
         $scope.WorkOrder.Mileage = $scope.carChoosed.ReturnMileage;
-        $scope.WorkOrder.checkinRemark = $scope.carChoosed.ChargeId;
+        $scope.WorkOrder.fuel = $scope.carChoosed.ReturnFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.ReturnNote;
       } else if ($scope.WorkOrder.action == "checkout") {
         console.log("----checkout Delivery-----");
         $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryMileage;
-        $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryFuelId;
+        $scope.WorkOrder.fuel = $scope.carChoosed.DeliveryFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.DeliveryNote;
       }
     }
+    $scope.changeAttType();
   }
 
   $scope.changeAction = function(){
@@ -96,11 +101,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   $scope.onChangeVehicle = function(){
     console.log("---------------onChangeVehicle: " + $scope.WorkOrder.vehicle);
-    var params = {
-      "dtFrom": moment($scope.params.from).format("YYYY.MM.DD"),
-      "dtTo": moment($scope.params.to).format("YYYY.MM.DD")
-    };
-    HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, params).then(function (response) {
+    HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, {}).then(function (response) {
       console.log(response);
       if(response && response.length > 0) {
         if(response.length > 1){
@@ -109,6 +110,9 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
           $scope.carChoosed = response[0];
           bindingData();
         }
+      }else{
+        $scope.carChoosed = null;
+        bindingData();
       }
       common.spinner(false);
     }, function error(response) {
@@ -121,18 +125,35 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   //<editor-fold desc="getCCResByWO">
   $scope.getCCResByWO = function(){
     console.log("---------------getCCResByWO: " + $scope.WorkOrder.WorkOrderNo);
-    HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo,{}).then(function (response) {
-      console.log(response);
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
-
+    if($scope.WorkOrder.WorkOrderNo != null && $scope.WorkOrder.WorkOrderNo != "") {
+       var tmp =  $scope.WorkOrder.WorkOrderNo;
+      HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo, {}).then(function (response) {
+        console.log(response);
+        if(response && response.length > 0) {
+          if(response.length > 1){
+            $scope.chooseCar(response);
+          }else {
+            $scope.carChoosed = response[0];
+            bindingData();
+          }
+        }else{
+          $scope.carChoosed = null;
+          bindingData();
+          $scope.WorkOrder.WorkOrderNo = tmp;
+        }
+        common.spinner(false);
+      }, function error(response) {
+        console.log(response);
+        $scope.carChoosed = null;
+        bindingData();
+        $scope.WorkOrder.WorkOrderNo = tmp;
+        common.spinner(false);
+      });
+    }
   }
+
+  $scope.getCCResByWO();
   //</editor-fold>
-
-
 
   //<editor-fold desc="changeAttType">
   $scope.templateMark = {};
@@ -149,6 +170,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     HttpService.getData(url, {}).then(function (response) {
       console.log(response)
       if(response){
+        console.log("---data base64--");
         $scope.imgTemplate = "data:image/png;base64," + response.imageData;
         $scope.templateMark = {
           "FileId": response.fileId,
@@ -160,7 +182,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
           "FileDescription": response.fileDescription,
         };
       }else{
-        $scope.imgTemplate = "";
+        console.log("---emplty base64--");
+        $scope.imgTemplate = empltyImage;
         $scope.templateMark = {
           "FileId": 0,
           "FileName": "",
@@ -212,24 +235,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   function createListWOAttachment() {
     var list = [];
     var i = 0;
-    //template da danh dau
-    var template = $scope.acceptTemplate();
-    if (!template.isEmpty) {
-      var templateMark = {};
-      templateMark.FileId = 0;
-      templateMark.FileName = "";
-      templateMark.dataUrl = template.dataUrl;
-      templateMark.ImageData = template.dataUrl.replace("data:image/png;base64,", "");
-      templateMark.AttachType = $scope.WorkOrder.attachmentType;
-      templateMark.AttachTypeDescription = "";
-      templateMark.FileDescription = "";
-      list[i++] = templateMark;
-    }else{
-      if($scope.imgTemplate){
-        list[i++] = $scope.templateMark;
-      }
-    }
-
     var signCanvas = $scope.accept();
     if (!signCanvas.isEmpty) {
       var sign = {};
@@ -254,43 +259,74 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
     console.log("-----onSubmitForm---");
     console.log($scope.WorkOrder);
+    sign();
+  }
+
+  function sign(){
+    common.spinner(true);
+    common.btnLoading($(".btnSubmit"), true);
     var list = createListWOAttachment();
+    if(list && list.length > 0) {
+      var objWo = {
+        "WorkOrderId": $scope.WorkOrder.WorkOrderId,
+        "WOAttachments": list,
+      };
+      var data = JSON.stringify(objWo);
+      var postAction = "checkIn";
 
-    console.log(list);
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        console.log(res);
+        if (res.data.Token && res.data.Token.ErrorDesc) {
+          common.btnLoading($(".btnSubmit"), false);
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+        } else {
+          //TODO: call checkin or checkout
+          save();
+        }
+      }, function (err) {
+        console.log(err);
+        common.btnLoading($(".btnSubmit"), false);
+        common.notifyError("Error!!!", err.status);
+      });
+    }else{
+      save();
+    }
+  }
 
-    // common.btnLoading($(".btnSubmit"), true);
-    // WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-    //   common.btnLoading($(".btnSubmit"), false);
-    //   console.log(res);
-    //   if (res.data.Token && res.data.Token.ErrorDesc) {
-    //     common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
-    //   } else {
-    //     common.notifySuccess("Success!!!");
-    //   }
-    //   console.log($scope.WorkOrder);
-    //
-    //   if (params) {
-    //     $scope.$emit('isSave', {
-    //
-    //           modified: false,
-    //         }
-    //     );
-    //     console.log(params);
-    //     console.log($state.current);
-    //     $state.transitionTo($state.current, params, {
-    //       reload: false, inherit: false, notify: false, location: "replace"
-    //     });
-    //   } else {
-    //     if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-    //       location.reload();
-    //     }
-    //   }
-    //
-    // }, function (err) {
-    //   common.btnLoading($(".btnSubmit"), true);
-    //   console.log(err);
-    //   common.notifyError("Error!!!", err.status);
-    // });
+  function save(){
+    var url = "";
+    if ($scope.WorkOrder.action == "checkin") {
+      url = "/courtesyCar/checkinCCRes";
+      $scope.carChoosed.ReturnMileage = $scope.WorkOrder.Mileage;
+      $scope.carChoosed.ReturnFuelId = $scope.WorkOrder.fuel;
+      $scope.carChoosed.ReturnNote = $scope.WorkOrder.checkinRemark;
+      $scope.carChoosed.isReturned = true;
+    } else if ($scope.WorkOrder.action == "checkout") {
+      url = "/courtesyCar/checkoutCCRes";
+      $scope.carChoosed.DeliveryMileage = $scope.WorkOrder.Mileage;
+      $scope.carChoosed.DeliveryFuelId = $scope.WorkOrder.fuel;
+      $scope.carChoosed.DeliveryNote = $scope.WorkOrder.checkinRemark;
+      $scope.carChoosed.isDelivered = true;
+    }
+
+    if(url != "") {
+      HttpService.postData(url, $scope.carChoosed).then(function (response) {
+        console.log(response)
+        common.btnLoading($(".btnSubmit"), false);
+        common.spinner(false);
+        common.notifySuccess("Success!!!");
+      }, function error(response) {
+        $scope.imgTemplate = "";
+        console.log(response);
+        common.spinner(false);
+        common.btnLoading($(".btnSubmit"), false);
+        common.notifyError("Error!!!", err.status);
+      });
+    }else{
+      common.btnLoading($(".btnSubmit"), false);
+      common.spinner(false);
+      common.notifySuccess("Success!!!");
+    }
   }
 
 
@@ -309,7 +345,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       resolve: {
         data: {
           item: null,
-          workOrderId: 123,
+          workOrderId: $scope.WorkOrder.WorkOrderId,
           jobAttachments: null
         }
       }
@@ -319,10 +355,46 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       console.log(selectedItem);
       Array.prototype.push.apply($scope.listImage, selectedItem);
       console.log($scope.listImage);
+
+      if(selectedItem != null){
+        //Update image
+        $scope.imgTemplate = selectedItem[0].dataUrl;
+        $scope.templateMark = selectedItem[0];
+
+        $scope.uploadImage();
+      }else{
+        $scope.imgTemplate = "";
+        $scope.templateMark = null;
+      }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+  $scope.uploadImage = function () {
+    console.log($scope.WorkOrder.attachmentType);
+    $scope.base64Encode = "";
+    if($scope.imgTemplate != "" && $scope.templateMark != null){
+      //Thuc hien upload anh
+      var url = '/storage/uploadVehicleAttachment/' + $scope.WorkOrder.vehicle;
+
+      if($scope.WorkOrder.attachmentType == 'LIC'){
+        url = '/storage/uploadCustAttachment/' + $scope.WorkOrder.custId;
+      }
+
+      common.spinner(true);
+
+      HttpService.postData(url, $scope.templateMark).then(function (response) {
+        console.log(response)
+        common.spinner(false);
+      }, function error(response) {
+        $scope.imgTemplate = "";
+        console.log(response);
+        common.spinner(false);
+      });
+
+    }
+  }
   //</editor-fold>
 
 

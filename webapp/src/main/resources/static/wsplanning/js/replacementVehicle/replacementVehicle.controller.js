@@ -1,9 +1,11 @@
-UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter,
+                                                          $uibModal, CommonServices, workOrderNo) {
   loadCommon();
   $scope.lstGroup = [];
   $scope.lstVehicle = [];
   $scope.WorkOrder = {
-    "WorkOrderNo": "",
+    "WorkOrderId": "",
+    "WorkOrderNo": workOrderNo,
     "group": "",
     "vehicle": "8329",
     "custId": "8329",
@@ -11,7 +13,10 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     "fuel": "02",
     "checkinRemark": "checkinRemark",
     "attachmentType": "CCVEHI",
-    "action": "checkout"
+    "action": "checkout",
+    "CustNo": "",
+    "FName": "",
+    "LName": ""
   };
 
   $scope.actionList = [{
