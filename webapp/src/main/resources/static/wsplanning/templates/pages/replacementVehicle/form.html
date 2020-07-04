@@ -79,10 +79,9 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
                                                    date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="params.from"
-                                                   is-open="popupFromDate.opened"/>
+                                                   is-open="popupFromDate.opened" disabled/>
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="openFromDate()">
-
+                                                    <button type="button" class="btn btn-default" disabled ng-click="openFromDate()">
                                                         <i class="icon-calendar"></i>
                                                     </button>
                                                 </span>
@@ -99,9 +98,9 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
                                                    date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="params.to"
-                                                   is-open="popupToDate.opened" ng-required="true"/>
+                                                   is-open="popupToDate.opened" ng-required="true" disabled/>
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="openToDate()">
+                                                <button type="button" class="btn btn-default" disabled ng-click="openToDate()">
 
                                                     <i class="icon-calendar"></i>
                                                 </button>

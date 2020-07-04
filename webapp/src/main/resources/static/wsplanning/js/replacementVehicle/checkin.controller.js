@@ -61,6 +61,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if (!$scope.carChoosed) {
       $scope.WorkOrder.WorkOrderId = "";
       $scope.WorkOrder.WorkOrderNo = "";
+      $scope.WorkOrder.custId = "";
       $scope.params.from = "0001-01-01T00:00:00";
       $scope.params.to = "0001-01-01T00:00:00";
       $scope.WorkOrder.Mileage = "";
@@ -74,6 +75,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.WorkOrder.WorkOrderId = $scope.carChoosed.WorkOrderId;
       $scope.WorkOrder.vehicle = $scope.carChoosed.ResVehicle.VehiId;
       $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
+      $scope.WorkOrder.custId = $scope.carChoosed.ResCustomer.CustId;
       $scope.WorkOrder.CustNo = $scope.carChoosed.ResCustomer.CustNo;
       $scope.WorkOrder.FName = $scope.carChoosed.ResCustomer.FName;
       $scope.WorkOrder.LName = $scope.carChoosed.ResCustomer.LName;
@@ -159,6 +161,11 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   //<editor-fold desc="changeAttType">
   $scope.templateMark = {};
   $scope.changeAttType = function () {
+    if(!$scope.WorkOrder.attachmentType
+      || !$scope.WorkOrder.vehicle
+      || !$scope.WorkOrder.custId){
+      return;
+    }
     console.log("-----changeAttType------");
     console.log($scope.WorkOrder);
     $scope.base64Encode = "";
