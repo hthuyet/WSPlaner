@@ -558,7 +558,7 @@ public class CommonController extends BaseController {
 //      String[] tmp = command.split(",");
 //      List<String> listCmd = Arrays.asList(tmp);
 
-      List<String> listCmd = Arrays.asList("getCourtesyCarGroups","getTransactionTypes","getVisitReasons");
+      List<String> listCmd = Arrays.asList("getCourtesyCarGroups","getCourtesyCarFuels");
 
       List<CompletableFuture<CommandDTO>> futures =
               listCmd.parallelStream()

@@ -26,6 +26,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       console.log("-----------listByCommand-------");
       console.log(response);
       $scope.lstGroup = response.getCourtesyCarGroups;
+      $scope.fuelList = response.getCourtesyCarFuels;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
