@@ -127,7 +127,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
 
     CommonServices.getChargeCats().then(function (data) {
       $scope.listChargeCats = data;
-      console.log(data)
+      // console.log(data)
     });
 
     CommonServices.getPayers().then(function (data) {
@@ -140,7 +140,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-      console.log(data)
+      // console.log(data)
     });
 
     CommonServices.getJobTypes().then(function (data) {
@@ -148,7 +148,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     CommonServices.getSuppliers().then(function (res) {
-      console.log(res);
+      // console.log(res);
       suppliers = res;
     });
 
@@ -917,7 +917,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     common.spinner(true);
     WorkOrderService.jobTab(params).then(function (res) {
       var data = res.data;
-      console.log(res.data);
+      // console.log(res.data);
       angular.forEach(data, function (value) {
         var objTree = {};
         objTree.id = value.Id;
@@ -968,7 +968,7 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $uibModalInstance)
     // var file = new File([blob], "image.jpg");
     // $scope.lstphoto.push(file);
     $scope.lstphoto.push(strImg.context.currentSrc);
-    console.log($scope.lstphoto);
+    // console.log($scope.lstphoto);
 
   }
 
@@ -987,7 +987,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
   $scope.colorPhoto = "rgb(255, 0, 0)";
   $scope.$watch("colorPhoto", function (newValue, oldValue) {
     if (newValue != oldValue) {
-      console.log(newValue);
+      // console.log(newValue);
       $timeout(function () {
         angular.element('#btnUpdateColorPhoto').triggerHandler('click');
       });
@@ -995,7 +995,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
   });
 
   var $ctrl = this;
-  console.log(item);
+  // console.log(item);
 
   $scope.photo = item;
 
@@ -1007,7 +1007,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
 
   $ctrl.onSubmit = function () {
     var photoCanvas = $scope.accept();
-    console.log(photoCanvas);
+    // console.log(photoCanvas);
     if (!photoCanvas.isEmpty) {
       $uibModalInstance.close(photoCanvas.dataurl);
     } else {
@@ -1159,7 +1159,7 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
     });
 
     WorkOrderService.getTextLine().then(function (res) {
-      console.log(res);
+      // console.log(res);
       var data = res.data;
       angular.forEach(data, function (value) {
         var objTree = {};

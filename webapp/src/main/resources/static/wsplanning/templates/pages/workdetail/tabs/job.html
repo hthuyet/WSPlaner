@@ -12,11 +12,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-2 col-xs-4">
-                         
+
                             <div class="col-md-8 col-xs-8">
                                 <h3><b>{{ 'WoJob' | translate }}</b></h3><br />
                             </div>
-                        
+
                             <div class="col-md-4 col-xs-4">
                                 <a ng-click="openCampaign()"
                                     ng-show="count_Vehi_Notification != null && actTypeJob != 'new'"
@@ -27,7 +27,7 @@
                                 </a>
                             </div>
 
-                           
+
                         </div>
 
                         <div class="col-md-3 col-xs-4">
@@ -37,30 +37,29 @@
                             </div>
 
                             <div class="col-md-8 col-xs-6">
-                    
 
-                                <select class="form-control" id="external"
-                                    ng-show="externalUrl.length > 0" ng-model="external" ng-init="external = ''"
-                                    ng-change="changeExternalUrl(external)"
+
+                                <select class="form-control" id="external" ng-show="externalUrl.length > 0"
+                                    ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
                                     ng-options="o.Id as o.Name for o in externalUrl"></select>
                             </div>
                         </div>
 
-                        <div class="col-md-7 col-xs-4">                           
-                                <div class="pull-right">
-                                    <div class="heading-elements" >
-                                        <ul class="icons-list">
-                                            <li ng-click="toggleAllJobs()"><a ng-class="{'rotate-180': isShow == true}"
-                                                    data-action="collapse" data-popup="tooltip" title="Collapse" ></a>
-                                            </li>
-                                            <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add"
-                                                    ng-click="addJob()"><span class="icon-plus3"></span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-    
+                        <div class="col-md-7 col-xs-4">
+                            <div class="pull-right">
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li ng-click="toggleAllJobs()"><a ng-class="{'rotate-180': isShow == true}"
+                                                data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                        </li>
+                                        <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add"
+                                                ng-click="addJob()"><span class="icon-plus3"></span></a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -74,31 +73,37 @@
                             style="border-bottom: solid #304047; border-bottom-style:dotted; font-size: 15px !important">
                             <span ng-show="!item.collapse">
                                 <div class="panel-heading">
-                                    <h6 class="panel-title">
-                                        <svg id="barcode_{{item.RowId}}" style="width: 250px;"></svg>
-                                    </h6>
-                                    <div class="heading-elements">
-                                        <ul class="icons-list">
+                                    <div class="row">
+                                        <h6 class="panel-title">
+                                            <svg id="barcode_{{item.RowId}}" style="width: 250px;"></svg>
+                                        </h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12 pull-right">
+                                            <ul class="icons-list pull-right">
 
-                                            <li ng-if="btn.value == 'true'"
-                                                ng-repeat="btn in lstButtonDetail | orderBy:'ordinalNumber' track by $index">
-                                                <a class="btn btn-lg" ng-hide="!item.JobNo && btn.name == 'stamping'"
-                                                    ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
-                                                        data-popup="tooltip" data-placement="top"
-                                                        title="{{btn.translate}}" ng-attr-title=" {{btn.translate}} "
-                                                        ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
-                                                        ng-class="btn.icon"></span></a>
-                                            </li>
+                                                <li ng-if="btn.value == 'true'"
+                                                    ng-repeat="btn in lstButtonDetail | orderBy:'ordinalNumber' track by $index">
+                                                    <a class="btn btn-lg"
+                                                        ng-hide="!item.JobNo && btn.name == 'stamping'"
+                                                        ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
+                                                            data-popup="tooltip" data-placement="top"
+                                                            title="{{btn.translate}}"
+                                                            ng-attr-title=" {{btn.translate}} "
+                                                            ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
+                                                            ng-class="btn.icon"></span></a>
+                                                </li>
 
-                                            <li ng-click="toggleJobRow(item)"><a
-                                                    ng-class="{'rotate-180': item.collapse == true}"
-                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
-                                            </li>
-                                        </ul>
+                                                <li ng-click="toggleJobRow(item)"><a class="btn btn-lg"
+                                                        ng-class="{'rotate-180': item.collapse == true}"
+                                                        data-action="collapse" data-popup="tooltip"
+                                                        title="Collapse"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-body">
-
                                     <div class="form-horizontal">
                                         <div class="row">
 
@@ -189,30 +194,32 @@
 
                             <span ng-show="item.collapse">
                                 <div class="panel-heading">
-                                    <h6 class="panel-title">
-                                        <svg id="barcode_{{item.RowId}}" style="width: 250px;"></svg>
-                                    </h6>
-                                    <div class="heading-elements">
-                                        <ul class="icons-list">
-                                            <li ng-if="btn.value == 'true'"
-                                                ng-repeat="btn in lstButtonDetail | orderBy:'ordinalNumber' track by $index">
-                                                <a class="btn btn-lg" ng-hide="!item.JobNo && btn.name == 'stamping'"
-                                                    ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
-                                                        data-popup="tooltip" data-placement="top"
-                                                        title="{{btn.text | translate}}"
-                                                        ng-attr-title="{{ btn.text | translate }}"
-                                                        ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
-                                                        ng-class="btn.icon"></span></a>
-                                            </li>
+                                    <div class="row">
+                                        <h6 class="panel-title">
+                                            <svg id="barcode_{{item.RowId}}" style="width: 250px;"></svg>
+                                        </h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12 pull-right">
+                                            <ul class="icons-list pull-right">
+                                                <li ng-if="btn.value == 'true'"
+                                                    ng-repeat="btn in lstButtonDetail | orderBy:'ordinalNumber' track by $index">
+                                                    <a class="btn btn-lg"
+                                                        ng-hide="!item.JobNo && btn.name == 'stamping'"
+                                                        ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
+                                                            data-popup="tooltip" data-placement="top"
+                                                            title="{{btn.text | translate}}"
+                                                            ng-attr-title="{{ btn.text | translate }}"
+                                                            ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
+                                                            ng-class="btn.icon"></span></a>
+                                                </li>
 
+                                                <li ng-click="toggleJobRow(item)"><a class="btn btn-lg" ng-class="{'rotate-180': item.collapse == true}"
+                                                        data-action="collapse" data-popup="tooltip" title="Collapse"> </a>
+                                                </li>
 
-
-                                            <li ng-click="toggleJobRow(item)"><a
-                                                    ng-class="{'rotate-180': item.collapse == true}"
-                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
-                                            </li>
-
-                                        </ul>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel-body">

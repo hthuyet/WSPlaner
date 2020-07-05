@@ -178,13 +178,6 @@ public class WOController extends BaseController {
                 JsonParser parser = new JsonParser();
                 JsonElement tradeElement = parser.parse(rtn);
                 JsonObject itemObj = tradeElement.getAsJsonObject();
-               
-//                if (itemObj.has("ExternalUrl") && !itemObj.get("ExternalUrl").isJsonNull()) {
-//                    for (JsonElement item : itemObj.get("ExternalUrl").getAsJsonArray()) {
-//                        ExternalURLDTO ExternalUrl = objectMapper.readValue(item.toString(), ExternalURLDTO.class);
-//                        // wodto.ExternalURL.add(ExternalUrl);
-//                    }
-//                }
                 
                 WOVehicleDTO Vehicle = objectMapper.readValue(itemObj.get("WOVehicle").toString(), WOVehicleDTO.class);
                 WOCustomerDTO Customer = objectMapper.readValue(itemObj.get("WOCustomer").toString(), WOCustomerDTO.class);

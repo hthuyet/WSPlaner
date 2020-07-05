@@ -14,7 +14,6 @@ public class DynamicDataDTO {
     // public String DeptId;
     public Boolean Editable;
     public String Value;
-    public String DBield;
-  
+    public String DBField;
 
 }
