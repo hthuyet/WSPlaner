@@ -243,7 +243,6 @@ public class WOController extends BaseController {
     @ResponseBody
     public ResponseEntity serviceItem(@RequestBody Map<String, String> params) {
         try {
-            long startTime = System.currentTimeMillis();
             String rtn = searchServiceItemClient.getServiceItem(getToken(), params);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
         } catch (Exception ex) {

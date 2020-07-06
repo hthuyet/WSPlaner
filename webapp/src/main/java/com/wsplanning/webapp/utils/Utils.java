@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
@@ -93,6 +94,12 @@ public class Utils {
 
   static DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+  static DateTimeFormatter formatterDatetime = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+
+  public static String formateDateAPI(LocalDateTime date) {
+    return formatterDatetime.format(date);
+  }
 
   public static String formateDateAPI(LocalDate date) {
     return formatter.format(date);

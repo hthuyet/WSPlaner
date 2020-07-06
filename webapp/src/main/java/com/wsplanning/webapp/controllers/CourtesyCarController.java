@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import static com.wsplanning.webapp.utils.Utils.formateDateAPI;
 

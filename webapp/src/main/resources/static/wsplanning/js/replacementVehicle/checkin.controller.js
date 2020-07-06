@@ -263,10 +263,33 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     return list;
   }
 
-  $scope.onSubmitForm = function (params) {
+  function validateFrm(){
+    if(!$scope.WorkOrder.action){
+      common.notifyError("Must choose action!!!");
+      return;
+    }
 
+    if(!$scope.WorkOrder.Mileage){
+      common.notifyError("Must input Mileage!!!");
+      return;
+    }
+
+    if(!$scope.WorkOrder.fuel){
+      common.notifyError("Must input fuel!!!");
+      return;
+    }
+
+    if(!$scope.WorkOrder.checkinRemark){
+      common.notifyError("Must input remark!!!");
+      return;
+    }
+
+  }
+
+  $scope.onSubmitForm = function () {
     console.log("-----onSubmitForm---");
     console.log($scope.WorkOrder);
+    validateFrm();
     sign();
   }
 
@@ -322,7 +345,11 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         console.log(response)
         common.btnLoading($(".btnSubmit"), false);
         common.spinner(false);
-        common.notifySuccess("Success!!!");
+        if(response === true){
+          common.notifySuccess("Success!!!");
+        }else{
+          common.notifyError("Error!!!");
+        }
       }, function error(response) {
         $scope.imgTemplate = "";
         console.log(response);
