@@ -201,6 +201,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       $scope.jobTabList[parentId].Items[id].MechanicId = null;
       console.log("--done--");
     } else {
+      // console.log( $scope.WorkOrder)
       $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
       console.log($scope.jobTabList[parentId].Items[id]);
       console.log("--done--");
