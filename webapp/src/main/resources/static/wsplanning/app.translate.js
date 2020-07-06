@@ -416,16 +416,15 @@ var translationsEN = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: "Receiption date",
-  //replacementVehicleFrm
+  receiptionDate: 'Receiption date',
+    //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
+  subStatus: "Substatus"
 
-  //27062020
-  subStatus: "Sub Status"
 };
 
 
@@ -835,14 +834,15 @@ var translationsDE = {
 
   //31082019
   receiptionDate: 'Receiption date',
-
-  //replacementVehicleFrm
+    //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
+  fuel: "Fuel",
+  AttachmentType: "Attachment Type",
+  subStatus: "Substatus"
 
-  //27062020
-  subStatus: "Unterstatus"
+
 };
 
 var translationsFR = {
@@ -1241,14 +1241,13 @@ var translationsFR = {
   valueVehicleNotification: 'Value VehicleNotification',
   //31082019
   receiptionDate: 'Receiption date',
-
-  //replacementVehicleFrm
+    //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
-
-   //27062020
-   subStatus: "Sous-statut"
+  fuel: "Fuel",
+  AttachmentType: "Attachment Type",
+  subStatus: "Substatus"
 };
 
 var translationsIT = {
@@ -1645,15 +1644,16 @@ var translationsIT = {
   idVehicleNotification: 'Id VehicleNotification',
   valueVehicleNotification: 'Value VehicleNotification',
   //31082019
-  receiptionDate: "Receiption date",
-
-  //replacementVehicleFrm
+  receiptionDate: 'Receiption date',
+    //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
+  fuel: "Fuel",
+  AttachmentType: "Attachment Type",
+  subStatus: "Substatus"
 
-   //27062020
-   subStatus: "Stato secondario"
+
 };
 
 
@@ -1901,27 +1901,19 @@ var translationsVI = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: "Receiption date",
-
-  //replacementVehicleFrm
-  wo: "WO",
-  group: "Group",
-  vehicle: "Vehicle",
-
-  //27062020
-  subStatus: "Sub status"
+  receiptionDate: 'Receiption date'
 
 };
 
 var translationsHU = {
   gridWO: "Grid WO",
-  unscheduledwork: "Nem előjegyzett munkalapok",
-  worksub: "Munkalapok alvállalkozóval",
-  todaywork: "Mai nap munkalapok",
+  unscheduledwork: "Nem előjegyzett ML",
+  worksub: "ML alvállalkozóval",
+  todaywork: "Mai nap ML",
   allwork: "Minden munkalap",
-  workmot: "Munkalapok műszaki vizsgával",
-  worktire: "Munkalapok gumi cserével",
-  workbo: "Munkalapok kiadatlan alkatrésszel",
+  workmot: "ML műszaki vizsgával",
+  worktire: "ML gumi cserével",
+  workbo: "ML kiadatlan alkatrésszel",
   postponedwork: "Átütemezett foglalások",
   tasklist: "Feladat lista",
   calendarview: "Naptár",
@@ -1934,13 +1926,13 @@ var translationsHU = {
   workOrderTitle: "DWP Management",
   todayWorkTitle: "Mai nap",
   allWorkTitle: "Minden munkalap",
-  unscheduledWorkTitle: "Nem előjegyzett munkalapok",
+  unscheduledWorkTitle: "Nem előjegyzett ML",
   callCenter: "Telefon központ",
-  withSubcontractorTitle: "Munkalap alvállalkozói sorral",
-  withMOTTitle: "Workorder with MOT Management",
-  postponedWorkTitle: "Postponed Work Management",
-  withTireChangeTitle: "Workorder With Tire Changes Management",
-  withBOTitle: "Munkalapok kiadatlan alkatrésszel",
+  withSubcontractorTitle: "ML alvállalkozói sorral",
+  withMOTTitle: "ML műszaki vizsga sorral",
+  postponedWorkTitle: "Átütemezett foglalások",
+  withTireChangeTitle: "ML gumi csere sorral",
+  withBOTitle: "ML kiadatlan alkatrész sorral",
   calendarViewTitle: "Naptár",
   taskListTitle: "Feladatok",
   offerTitle: "Ajánlatok",
@@ -2068,7 +2060,7 @@ var translationsHU = {
   all: "--Minden--",
   fromDate: "Dátum-tól",
   toDate: "Dátum-ig",
-  myWo: "Csak munkalapaim",
+  myWo: "Csak munkalapjaim",
   WoHeader: "Fejléc",
   WoJob: "Munkák",
   ServiceDate: "Szerviz dátim",
@@ -2090,8 +2082,8 @@ var translationsHU = {
   NextMOT: "Köv. vizsga",
 
   //Contract
-  FirstRegistrationDate: "First registration date",
-  EngineNumber: "Engine number",
+  FirstRegistrationDate: "Forg.-ba dátuma",
+  EngineNumber: "Motor szám",
 
   //Customer
   Address: "Address",
@@ -2269,21 +2261,448 @@ var translationsHU = {
 
   //31082019
   receiptionDate: 'Receiption date',
+    //replacementVehicleFrm
+  wo: "ML",
+  group: "Csoport",
+  vehicle: "Jármű",
+  fuel: "Fuel",
+  AttachmentType: "Csatolmány típus",
+  subStatus: "Alstátusz"
+};
 
-  //replacementVehicleFrm
+var translationsRO = {
+
+  //Grid
+  gridWO: "Grid WO",
+  WorkOrderStatus: "Status",
+  SubStatus: "Sub status",
+  DeptId: "Departament",
+  DepartmentGrid: "Departament",
+  TransactionType: "Tip tranzactie",
+  WorkOrderNo: "Numar CL",
+  EstimatedTimeTot: "Timp estim",
+  PoolTimeTot: "Timp Pool",
+  BookedTimeTot: "Timp rezervat",
+  ServiceAdvisorId: "Consilier de servicii",
+  ServiceDate: "Data service",
+  SubContractorInfo: "Subcontractant",
+  Mileage: "Kilometraj",
+  Reference: "Referinta",
+  WorkOrderNote: "Note",
+  CheckOutDate: "Estimarea livrarii",
+  DeliveredBy: "Trimis de",
+  VisitReasonGrid: "Motiv de vizita",
+  // WorkReadyDate: "Finalizare comanda",
+  WorkReadyBy: "Finalizare comanda utilizator",
+  AttachmentFilesCount: "Nu exista fisiere atasate",
+  LicenseNo: "Nr. Inmat.",
+  SearchKey: "Cautare",
+  VIN: "VIN",
+  FirstRegDate: "Data prim. inreg.",
+  NextServiceDate: "Urmat. revizie",
+  NextMOTDate_Grid: "Urmat. insp. teh.",
+  PreviousServiceDate: "Service anterior",
+  Model: "Model",
+  SubModel: "SubModel",
+  CustNo: "Nr. Client",
+  Fname: "Prenume Client",
+  Lname: "Nume Client",
+
+
+  PayerInfo: "Platitor",
+  VisitReasonCode: "Motiv de vizita",
+  CourtesyCarInfo: "Masina de curtoazie",
+  VehicleNote:"Note",
+  PlaceOfDamage: "Referinta",
+  Make:"Marca",
+  // ContactFName:"Prenume Client",
+  // ContactLName:"Nume Client",
+  WorkReadyForInvoiceDate: "Finalizare comanda",
+
+
+
+
+
+  //End
+
+  unscheduledwork: "CL neprogramate",
+  worksub: "CL cu subcontractor",
+  todaywork: "Comenzi zi curenta",
+  allwork: "Toate CL",
+  workmot: "CL cu ITP",
+  worktire: "CL cu schimb anvelope",
+  workbo: "CL cu produse BO",
+  postponedwork: "CL amanate",
+  tasklist: "Lista sarcinilor",
+  calendarview: "Vizualizare Calendar",
+  stamping: "Pontaj",
+  offer: "Oferta",
+  replacementvehicle: "Planificarea vehiculului de inlocuire",
+  callcenter: "Call Center",
+
+  workOrderTitle: "Management Comenzi de lucru",
+  todayWorkTitle: "Management Comenzi zi curenta",
+  allWorkTitle: "Manegement Toate CL",
+  unscheduledWorkTitle: "Manegement CL neprogramate",
+  callCenter: "Call Center",
+  withSubcontractorTitle: "Management CL cu subcontractor",
+  withMOTTitle: "Management CL cu ITP",
+  postponedWorkTitle: "Management CL amanate",
+  withTireChangeTitle: "Management CL cu schimb anvelope",
+  withBOTitle: "Management CL cu produse BO",
+  calendarViewTitle: "Management Vizualizare Calendar",
+  taskListTitle: "Management Lista sarcinilor",
+  offerTitle: "Management Oferta",
+  replacementVehicleTitle: "Management Planificarea vehiculului de inlocuire",
+  newWOTitle: "Comanda noua de lucru",
+  stampingTitle: "Pontaj",
+  // new add - 12052019
+  notificationTitle: "Notificare",
+  //
+
+  //breadcrumb
+  // breadcrumbHome: "H's ome",
+  breadcrumbHome: "Home",
+  breadcrumbWorkOrder: "Comenzi de lucru",
+  breadcrumbTodayWork: "Comenzi zi curenta",
+  breadcrumbOffer: "Oferta",
+  breadcrumbPostponedWO: "CL amanate",
+  breadcrumbUnScheduledWO: "CL neprogramate",
+  breadcrumbWithBO: "Cu produse BO",
+  breadcrumbWithMOT: "Cu ITP",
+  breadcrumbWithSubcontractor: "Cu subcontractor",
+  breadcrumbWithTire: "Cu schimb anvelope",
+  breadcrumbWorkDetail: "Detalii CL",
+  breadcrumbWorkNew: "Comanda noua de lucru",
+  breadcrumbAllWork: "Toate CL",
+  breadcrumbUnscheduledWork: "Lucrari neprogramate",
+  breadcrumbTodayWork: "Comenzi zi curenta",
+  breadcrumbWithSubcontractor: "CL cu subcontractor",
+  breadcrumbWithMOT: "CL cu ITP",
+  breadcrumbPostponedWork: "CL amanate",
+  breadcrumbWithTire: "CL cu schimb anvelope",
+  breadcrumbWithBO: "CL cu produse BO",
+  breadcrumbCalendarView: "Vizualizare Calendar",
+  breadcrumbTaskList: "Lista sarcinilor",
+  breadcrumbOffer: "Oferta",
+  breadcrumbPostponedWO: "CL amanate",
+  breadcrumbUnScheduledWO: "CL neprogramate",
+  breadcrumbWithBO: "Cu produse BO",
+  breadcrumbWithMOT: "Cu ITP",
+  breadcrumbWithSubcontractor: "Cu Subcontractor",
+  breadcrumbWithTire: "Cu schimb anvelope",
+  breadcrumbReplacementVehicle: "Planificarea vehiculului de inlocuire",
+  breadcrumbNewWO: "Comanda Noua de lucru",
+  breadcrumbNewOffer: "Oferta noua de pret",
+  breadcrumbNewBooking: "Rezervare noua",
+  breadcrumbNewStamp: "Pontaj",
+  // new add - 12052019
+  breadcrumbNotification: "Notificare",
+  //
+
+  //common
+  btnAdd: "Adauga",
+  btnAddWO: "+Comanda de lucru",
+  btnAddOffer: "+Oferta",
+  btnPackage: "+Pachet",
+  btnAddTask: "Sarcina",
+  btnAddBook: "+Rezervare",
+  btnDelete: "Sterge",
+  btnRefresh: "Reimprospateaza",
+  btnMore: "Mai multe",
+  btnEdit: "Editare",
+  btnAction: "Actiune",
+  commonNoResult: "Nici un rezultat gasit",
+  btnDeleteItem: "Sterge acest articol",
+  btnEditItem: "Editeaza acest articol",
+  item: "Articol",
+  page: "Pagina",
+  go: "Merge",
+  limit: "Limita",
+  btnClose: "Inchidere",
+  btnOk: "Ok",
+  btnSave: "Salveaza",
+  btnCancel: "Anulare",
+  search: "Cautare",
+  pleaseEnter: "Va rugam sa introduceti aici",
+  btnClear: "Sterge",
+  btnSend: "Trimitere",
+
+  //Confirm delete
+  confirmDeleteWorkOder: "Doriti sa stergeti aceasta comanda de lucru?",
+  confirmDeletesWorkOder: "Doriti sa stergti comanda de lucru selectata?",
+
+  //Form
+  mechanicDeptId: "DepartamentID",
+
+  accessDenied: "Access Interzis",
+  actionError: "Eroare in operatiune.",
+  changePasswordFail: "Schimbarea parolei esuata!",
+  changePasswordSuccess: "Parola schimbata cu succes!",
+  currentPasswordWrong: "Parola curenta nu este corecta",
+  dateTime: "Data si ora nu este valabila. <br>Timpul de incepere > timpul incheiat, va rog sa schimbati datele.",
+  deleteError: "Eroare la stergere!",
+  deleteSuccessfully: "Stergere cu succes!.",
+  placeholderSelect: "- Selectati optiunea -",
+  recoverPasswordError: "Recuperarea parolei a esuat!",
+  recoverPasswordSuccess: "Recuperarea parolei cu succes!",
+  requestTimeout: "Request timeout!",
+  requestParamError: "Solicitarea parametrului limita este invalid.",
+  saveSuccessfully: "Salvare cu succes.",
+  startDateError: "Data de incepere trebuie sa fie mai mica decat data de incheiere",
+  success: "Success!",
+  total: ", Total ",
+  warning: "AVERTIZARE ",
+  saveError: "Eroare la salvare.",
+  validatorExisted: "Aceasta valoare este deja in folosinta.",
+  validatorRequired: "Acest camp este obligatoriu.",
+  validatorEmail: "Va rugam sa introduceti o adresa de email valida.",
+  validatorUrl: "Va rugam sa introduceti o adresa URL valida.",
+  validatorDate: "Va rugam sa introduceti o data valida.",
+  validatorDateISO: "Va rugam sa introduceti o data valabila (ISO).",
+  validatorNumber: "Va rugam sa introduceti un numar valid.",
+  validatorEqualTo: "Va rugam sa introduceti aceeasi valoare din nou.",
+  validatorAccept: "Va rugam sa introduceti o valoare cu o extensie valida.",
+  validatorMaxlength: "Va rugam sa introduceti nu mai mult de {0} caractere.",
+  validatorMinlength: "Va rugam sa introduceti nu mai putin de {0} caractere.",
+  validatorRangelength: "Va rugam sa introduceti o valoare intre {0} si {1} caractere.",
+  validatorRange: "Va rugam sa introduceti o valoare intre {0} si {1}.",
+  validatorMax: "Va rugam sa introduceti o valoare mai mica sau egala cu  {0}.",
+  validatorMin: "Va rugam sa introduceti o valoare mai mare sau egala cu{0}.",
+  formInvalid: "Format incorect.",
+  invalidNumberIn: "Valoarea contine caractere speciale.",
+  invalidNumberBetween: "Valoarea trebuie sa fie mai mica decat valoarea",
+  editMechanic: "Edit mecanic",
+  addMechanic: "Adauga mecanic",
+  trans: "Tip Tranzactie",
+  department: "Departament",
+  serv: "Serv. advisor",
+  shiftId: "Schimbare ID",
+  visitReason: "Motiv de vizita",
+  searchWo: "Cautare CL",
+  search: "Cautare",
+  pleaseSelect: "--Selectati--",
+  all: "--Toate--",
+  fromDate: "De la data",
+  toDate: "Pana la data",
+  myWo: "Doar comenzile mele de lucru",
+  WoHeader: "Antet Comenzi de lucru",
+  WoJob: "Job",
+  // ServiceDate: "Data Service",
+  ExpectedDelivery: "Livrare preconizata",
+  CheckInDate: "Ora de primire",
+  ExecutionDate: "Timpul de Executie",
+  ChargeCats: "Categorie plata",
+  JobCategory: "Categorie Job",
+  Payer: "Platitor",
+  JobDepartment: "Job Departament",
+  JobType: "Tip Job",
+  JobTitle: "Titlu Job",
+  CustomerComplaint: "Plangere client",
+  BookTireChangeLot: "Rezervare schimbare anvelope Lot",
+  BookMOTlot: "Rezervare ITP Lot",
+  CustWaiting: "Client in asteptare",
+  Rework: "Refacere",
+  Mileage: "Kilometraj curent",
+  NextMOT: "Urmatorul ITP",
+
+  //Contract
+  FirstRegistrationDate: "Data Prim. Inreg.",
+  EngineNumber: "Numar Motor",
+
+  //Customer
+  Address: "Adresa",
+  Phone: "Telefon",
+  CustomerGroup: "Grup client",
+  AccountGroup: "Grup client",
+
+  // Title in Job Tab
+  Spare: "Piese de schimb",
+  Labour: "Operatiune de munca",
+  TextRows: " Linii de text",
+  SubContractors: "Subcontractanti",
+  recentSaleTitle: "Vanzari recente de la acest tip de Job",
+  JobQuickSelection: "Selectie rapida de Job",
+  SelectedItem: "Articolul selectat",
+  AdditionalData: "Date Aditionale",
+  NonStockItems: "Produse nestocate",
+  totalTime: "Timp Total",
+  mechanic: "Resurse",
+  workload: "Volumul de munca",
+  previous: "Anterior",
+  today: "Azi",
+  next: "Urmator",
+  ConfirmTitle: "Confirma",
+  PhotoTitle: "Mapa Poze",
+  btnPhoto: "Poze",
+  btnCam: "Aparat foto",
+  btnMark: "Totul este gata",
+  VHCLink: "VHC",
+  //
+
+  // info user
+  infoUser: "Informatii Angajati",
+  email: "Email",
+  phone: "Telefon",
+  restype: "ResType",
+  shift: "Schimb",
+  shortname: "Nume Scurt",
+  site: "Locatie",
+  sman: "SmanId",
+  subsys: "SubSys",
+  checkin: "Receptie",
+  checkinTemplate: "Sablon",
+  checkinMileage: "Kilometraj",
+  checkinRemark: "Observatie",
+  sign: "Semnatura",
+  activeCall: "Apel Active",
+  recentCall: "Apel Recent",
+  phoneNumber: "Numar de Telefon",
+  customerData: "Informatii Client",
+  vehicleData: "Informatii Vehicul",
+  recentTrans: "Data Recenta",
+
+  addBookPool: "Adaugati Rezervari Pool",
+  editBookPool: "Editati Rezervari Pool",
+  duration: "Durata",
+  startTimeBookPool: "Timpul de incepere",
+  endTimeBookPool: "Sfrasitul timpului",
+  addBookResource: "Adaugati Rezervarea Resurselor",
+  editBookResource: "Editati Rezervarea Resurselor",
+
+  //notification
+  employee: "Angajat",
+  message: "Mesaj text",
+  notification: "Notificare",
+  //tab
+  header: "Antet",
+  job: "Lucrare",
+  planning: "Planificare",
+
+  call: "Apel",
+  Customer: "Client",
+  Vehicle: "Vehicul",
+  event: "Eveniment",
+  Created: "Creata",
+  CallerId: "ID-ul apelantului",
+  Trunk: "Trunk",
+  db: "Db",
+  CustomerName: "Nume Client",
+  Email: "Email",
+  PostalCode: "Cod Postal",
+  Make: "Marca",
+  LicenseNo: "Numar Inmatriculare",
+  NextMOTDate: "Urmat. insp. teh.",
+  WarrantyInfo: "Informatii Garantii",
+  site: "Locatie",
+  subject: "Subiect",
+  CustomerPhone: "Telefon Client",
+  SeriNo: "VIN",
+  Employee: "Angajat",
+  TimeSchedule: "Orar",
+  IsClose: "Este Inchis",
+  Text: "Text",
+  createTask: "Creati o noua sarcina",
+
+
+  //the additional text
+  Name: "Nume",
+  StampToWorkorder: "Pontaj pe CL",
+  JobNo: "Lucrare",
+  CustNo: "Numar Client",
+  LName: "Nume",
+  FName: "Prenume",
+  Action: "Actiune",
+  Pick: "Alegere",
+
+  ItemNo: "Numar articol",
+  Quantity: "Cantitate",
+
+  LicenseNo: "Numar Inmatriculare",
+  VIN: "VIN",
+  Model: "Model",
+  StampingCode: "Coduri de pontaj",
+  NA: "N/A",
+  No: "Nr.",
+  CodeName: "Cod-Nume",
+  Code: "Cod",
+  Job_No: "Nr Job",
+  EstimatedTime: "Timp Estim",
+  Complaint: "Plangere",
+  Diagnotisc: "Diagnostic",
+  Solution: "Rezolvare",
+  ChargeCategory: "Categoria de taxare",
+  Template_1: "Sablon 1",
+  Template_2: "Sablon 2",
+  Reset: "Reseteaza",
+  TakeScreenshot: "Faceti captura de ecran",
+  DoYouSave: ' Doriti sa salvati modificarile',
+  //Notification-page
+  recentNotification: "Notificare Recenta",
+  unreadNotification: "Notificare Necitita",
+  btnReply: "Raspuns",
+  timestamp: "Timestamp",
+  from: "Din",
+  workOrder: "Comanda de lucru",
+  message: "Mesaj",
+  action: "Actiune",
+
+  //workorder header-page
+  ContactFName: "Prenume",
+  ContactLName: "Nume",
+  ContactPhone: "Telefon",
+  ContactEmail: "Email",
+
+  //TaskList
+  taskList: "Lista Sarcinilor",
+  taskOpen: "Sarcini Deschise",
+  taskClose: "Sarcini Inchise",
+  taskStarted: "Datorat",
+  taskHeader: "Subiect",
+  taskType: "Tip",
+  taskCustomer: "Client",
+  taskPhone: "Telefon",
+  taskEmail: "Email",
+  taskWO: "Comanda de lucru",
+  taskBody: "Continutul sarcinei",
+  taskSeries: "Serie de sarcini",
+  taskStarted2: "Inceput",
+  markDone: "Marcheaza Terminat",
+  markSeriesDone: "Marcheaza seriile terminate",
+  green: "Verde",
+  red: "Rosu",
+  orange: "Portocaliu",
+  clear: "Sterge",
+  AssignedMe: "Atribuit pentru mine",
+  AssignedByMe: "Atribuit de mine",
+
+  //04062019
+  reference: 'Reference',
+  resetSearch: 'Clear Search',
+  toogleSearch: 'Toogle search',
+
+  //28072019
+  isCustomerWaiting: 'Client in asteptare',
+  VehicleNotifications: 'Notificari Vehicul',
+  idVehicleNotification: 'Identificare Notificari Vehicul',
+  valueVehicleNotification: 'Valoare Notificari Vehicul',
+
+  //31082019
+  receiptionDate: 'Data receptiei',
+    //replacementVehicleFrm
   wo: "WO",
   group: "Group",
   vehicle: "Vehicle",
-
-  //27062020
-  subStatus: "Sub státusz"
+  fuel: "Fuel",
+  AttachmentType: "Attachment Type",
+  subStatus: "Substatus"
 };
 
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {
   // Declare multi language"
   $translateProvider.translations("en", translationsEN);
-  $translateProvider.translations("vi", translationsVI);
+  $translateProvider.translations("ro", translationsRO);
   $translateProvider.translations("de", translationsDE);
   $translateProvider.translations("fr", translationsFR);
   $translateProvider.translations("it", translationsIT);
