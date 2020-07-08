@@ -77,7 +77,7 @@ function loadAuth() {
       localStorage.setItem('info_detail', JSON.stringify(lst_detail));
       localStorage.setItem('info_barcode', JSON.stringify(barcode));
       localStorage.setItem('info_css_jobHeader', JSON.stringify(jobHeader));
-      localStorage.setItem('info_icon_size', JSON.stringify(iconSize));
+      // localStorage.setItem('info_icon_size', JSON.stringify(iconSize));
 
 
     },
