@@ -37,6 +37,12 @@
 
         <div class="heading-elements">
             <div class="heading-btn-group">
+                <button class="btn btn-icon btn-primary" ng-show="WorkOrder.WorkOrderNo" ng-click="replacementVehicle()">
+                    <i class="icon-car2"></i><span>
+                        <!-- {{ 'btnReplacement' | translate }} -->
+                    </span>
+                </button>
+
                 <button class="btn btn-icon btn-danger" ng-show="WorkOrder.WorkOrderId" ng-click="openModalTasklist()">
                     <i class="icon-plus2"></i><span>{{ 'btnAddTask' | translate }}</span>
                 </button>

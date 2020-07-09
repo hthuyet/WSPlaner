@@ -8,7 +8,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.jobObject = {};
     $scope.actionType = "";
 
-    console.log(WorkOrder)
+    // console.log(WorkOrder)
 
     $scope.WOVehicle = "";
     $scope.WOCustomer = "";
@@ -402,6 +402,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $scope.afterRender = function () {
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+    }
+
+    $scope.replacementVehicle() = function () {
+        $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo });
     }
 
 
