@@ -21,14 +21,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
 
   $scope.params = {
-    "department": EmployeeData.depId,
+    "department": EmployeeData.DeptId,
     "trans": "",
     "visitReason": "",
     "receiver": "",
     "from": "",
     "to": "",
     "myWo": false,
-    "shiftId": EmployeeData.shiftId,
+    "shiftId": EmployeeData.ShiftId,
     "skey": "",
   };
 
@@ -37,14 +37,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   function reset() {
     $scope.params = {
-      "department": EmployeeData.deptId,
+      "department": EmployeeData.DeptId,
       "trans": "",
       "visitReason": "",
       "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": EmployeeData.shiftId,
+      "shiftId": EmployeeData.ShiftId,
       "skey": "",
     };
     $scope.limit = 20;
@@ -126,6 +126,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     };
 
     HttpService.postData('/wo/getWO', params).then(function (response) {
+      console.log(response);
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
@@ -253,14 +254,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   $scope.resetSearch = function () {
     $scope.params = {
-      "department": EmployeeData.deptId,
+      "department": EmployeeData.DeptId,
       "trans": "",
       "visitReason": "",
       "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": EmployeeData.shiftId,
+      "shiftId": EmployeeData.ShiftId,
       "skey": "",
     };
     $scope.page = 1;

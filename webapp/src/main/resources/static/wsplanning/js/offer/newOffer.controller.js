@@ -1,201 +1,201 @@
-UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window, CommonServices) {
+// UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window, CommonServices) {
 
 
 
-  console.log($scope.typeWO);
+//   console.log($scope.typeWO);
 
-  $scope.lstDepartment = [];
-  $scope.lstVisitReason = [];
-  $scope.lstChargeCats = [];
-  $scope.lstJobCats = [];
-  $scope.lstPayers = [];
-  $scope.lstJobTypes = [];
+//   $scope.lstDepartment = [];
+//   $scope.lstVisitReason = [];
+//   $scope.lstChargeCats = [];
+//   $scope.lstJobCats = [];
+//   $scope.lstPayers = [];
+//   $scope.lstJobTypes = [];
 
-  $scope.target = {};
-  $scope.WOVehicle = "";
-  $scope.WOCustomer = "";
-  $scope.WOContact = "";
+//   $scope.target = {};
+//   $scope.WOVehicle = "";
+//   $scope.WOCustomer = "";
+//   $scope.WOContact = "";
 
-  // datepicker-vutt
+//   // datepicker-vutt
 
-  var $ctrl = this;
-  $ctrl.animationsEnabled = true;
+//   var $ctrl = this;
+//   $ctrl.animationsEnabled = true;
 
-  $ctrl.vehicle = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/vehicle-form.html',
-      controller: 'VehicleModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.typeWO;
-          // return $scope.WOVehicle;
-        }
-        // typeWO: function (params) {
-        //   return $scope.typeWO;
-        // }
-      }
-    });
+//   $ctrl.vehicle = function (size, item) {
+//     var modalInstance = $uibModal.open({
+//       animation: $ctrl.animationsEnabled,
+//       templateUrl: '/wsplanning/templates/pages/newWO/modal/vehicle-form.html',
+//       controller: 'VehicleModalCtrl',
+//       controllerAs: '$ctrl',
+//       size: size,
+//       backdrop: 'static',
+//       resolve: {
+//         item: function () {
+//           return $scope.typeWO;
+//           // return $scope.WOVehicle;
+//         }
+//         // typeWO: function (params) {
+//         //   return $scope.typeWO;
+//         // }
+//       }
+//     });
 
-    modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      $scope.WOVehicle = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
+//     modalInstance.result.then(function (selectedItem) {
+//       console.log(selectedItem);
+//       $scope.WOVehicle = selectedItem;
+//     }, function () {
+//       console.log('Modal dismissed at: ' + new Date());
+//     });
+//   };
 
-  $ctrl.customer = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
-      controller: 'CustomerModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.WOCustomer;
-        }
-      }
-    });
+//   $ctrl.customer = function (size, item) {
+//     var modalInstance = $uibModal.open({
+//       animation: $ctrl.animationsEnabled,
+//       templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
+//       controller: 'CustomerModalCtrl',
+//       controllerAs: '$ctrl',
+//       size: size,
+//       backdrop: 'static',
+//       resolve: {
+//         item: function () {
+//           return $scope.WOCustomer;
+//         }
+//       }
+//     });
 
-    modalInstance.rendered.then(function () {
-      $rootScope.$broadcast("openSearchCustomer", {});
-    });
+//     modalInstance.rendered.then(function () {
+//       $rootScope.$broadcast("openSearchCustomer", {});
+//     });
 
-    modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      $scope.WOCustomer = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
+//     modalInstance.result.then(function (selectedItem) {
+//       console.log(selectedItem);
+//       $scope.WOCustomer = selectedItem;
+//     }, function () {
+//       console.log('Modal dismissed at: ' + new Date());
+//     });
+//   };
 
-  $ctrl.contact = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
-      controller: 'ContactModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.WOContact;
-        }
-      }
-    });
+//   $ctrl.contact = function (size, item) {
+//     var modalInstance = $uibModal.open({
+//       animation: $ctrl.animationsEnabled,
+//       templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
+//       controller: 'ContactModalCtrl',
+//       controllerAs: '$ctrl',
+//       size: size,
+//       backdrop: 'static',
+//       resolve: {
+//         item: function () {
+//           return $scope.WOContact;
+//         }
+//       }
+//     });
 
-    modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      $scope.WOContact = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
-
-
-
-  console.log($locale);
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.toggleVehicle = function () {
-    $scope.isShowVehicle = !$scope.isShowVehicle;
-  }
-
-
-  $scope.toggleCustomer = function () {
-    $scope.isShowCustomer = !$scope.isShowCustomer;
-  }
-
-  $scope.toggleContact = function () {
-    $scope.isShowContact = !$scope.isShowContact;
-  }
+//     modalInstance.result.then(function (selectedItem) {
+//       console.log(selectedItem);
+//       $scope.WOContact = selectedItem;
+//     }, function () {
+//       console.log('Modal dismissed at: ' + new Date());
+//     });
+//   };
 
 
 
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'dd-MMMM-yyyy HH:mm:ss'];
-  $scope.format = $scope.formats[4];
-  console.log($scope.format);
 
-  $scope.openServiceDate = function () {
-    $rootScope.popupServiceDate.opened = true;
-  };
+//   console.log($locale);
 
-  $scope.openExDeliveryDate = function () {
-    $rootScope.popupExDeliveryDate.opened = true;
-  };
+//   $scope.dateOptions = {
+//     formatYear: 'yy',
+//     startingDay: 1
+//   };
 
-  $scope.openCheckInTime = function () {
-    $rootScope.popupCheckInTime.opened = true;
-  };
+//   $scope.toggleVehicle = function () {
+//     $scope.isShowVehicle = !$scope.isShowVehicle;
+//   }
 
-  $scope.openExcutionTime = function () {
-    $rootScope.popupExcutionTime.opened = true;
-  };
 
-  $rootScope.popupServiceDate = {
-    opened: false
-  };
+//   $scope.toggleCustomer = function () {
+//     $scope.isShowCustomer = !$scope.isShowCustomer;
+//   }
 
-  $rootScope.popupCheckInTime = {
-    opened: false
-  };
-
-  $rootScope.popupExcutionTime = {
-    opened: false
-  };
-
-  $rootScope.popupExDeliveryDate = {
-    opened: false
-  };
-
-  loadCombo();
+//   $scope.toggleContact = function () {
+//     $scope.isShowContact = !$scope.isShowContact;
+//   }
 
 
 
-  function loadCombo() {
-    CommonServices.getDepartments().then(function (data) {
-      $scope.lstDepartment = data
-      $scope.target.department = data[0].Id;
-    });
-    CommonServices.getVisitReasons().then(function (data) {
-      $scope.lstVisitReason = data;
-      $scope.target.visitreason = data[0].Id;
-    });
-    CommonServices.getChargeCats().then(function (data) {
-      $scope.lstChargeCats = data;
-      $scope.target.chargeCats = data[0].Id;
-    });
-    CommonServices.getPayers().then(function (data) {
-      $scope.lstPayers = data;
-      $scope.target.payer = data[0].Id;
-    });
-    CommonServices.getJobCats().then(function (data) {
-      $scope.lstJobCats = data;
-      $scope.target.jobcats = data[0].Id;
-    });
-    CommonServices.getJobTypes().then(function (data) {
-      $scope.lstJobTypes = data;
-      $scope.target.jobtype = data[0].Id;
-    });
+//   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'dd-MMMM-yyyy HH:mm:ss'];
+//   $scope.format = $scope.formats[4];
+//   console.log($scope.format);
 
-  }
+//   $scope.openServiceDate = function () {
+//     $rootScope.popupServiceDate.opened = true;
+//   };
 
-  $scope.goBack = function () {
-    $window.history.back();
-  }
+//   $scope.openExDeliveryDate = function () {
+//     $rootScope.popupExDeliveryDate.opened = true;
+//   };
 
-});
+//   $scope.openCheckInTime = function () {
+//     $rootScope.popupCheckInTime.opened = true;
+//   };
+
+//   $scope.openExcutionTime = function () {
+//     $rootScope.popupExcutionTime.opened = true;
+//   };
+
+//   $rootScope.popupServiceDate = {
+//     opened: false
+//   };
+
+//   $rootScope.popupCheckInTime = {
+//     opened: false
+//   };
+
+//   $rootScope.popupExcutionTime = {
+//     opened: false
+//   };
+
+//   $rootScope.popupExDeliveryDate = {
+//     opened: false
+//   };
+
+//   loadCombo();
+
+
+
+//   function loadCombo() {
+//     CommonServices.getDepartments().then(function (data) {
+//       $scope.lstDepartment = data
+//       $scope.target.department = data[0].Id;
+//     });
+//     CommonServices.getVisitReasons().then(function (data) {
+//       $scope.lstVisitReason = data;
+//       $scope.target.visitreason = data[0].Id;
+//     });
+//     CommonServices.getChargeCats().then(function (data) {
+//       $scope.lstChargeCats = data;
+//       $scope.target.chargeCats = data[0].Id;
+//     });
+//     CommonServices.getPayers().then(function (data) {
+//       $scope.lstPayers = data;
+//       $scope.target.payer = data[0].Id;
+//     });
+//     CommonServices.getJobCats().then(function (data) {
+//       $scope.lstJobCats = data;
+//       $scope.target.jobcats = data[0].Id;
+//     });
+//     CommonServices.getJobTypes().then(function (data) {
+//       $scope.lstJobTypes = data;
+//       $scope.target.jobtype = data[0].Id;
+//     });
+
+//   }
+
+//   $scope.goBack = function () {
+//     $window.history.back();
+//   }
+
+// });
 
 
 UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout,
@@ -289,7 +289,7 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
       modalInstance.result.then(function (obj) {
         console.log(obj);
 
-        if(obj.scanner){
+        if (obj.scanner) {
           obj.scanner.stop();
         }
 
@@ -408,7 +408,12 @@ UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale,
 
   function loadCustomer(item) {
     common.spinner(true);
-    WorkOrderService.customer(item).then(function (res) {
+    var params = {
+      VehiId: item.VehiId,
+      CustNo: item.CustNo
+    }
+    WorkOrderService.customer(params).then(function (res) {
+      // console.log(res)
       $scope.lstCustomers = res.data;
       common.spinner(false);
     })

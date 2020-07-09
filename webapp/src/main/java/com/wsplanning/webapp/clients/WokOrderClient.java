@@ -59,7 +59,7 @@ public class WokOrderClient {
     String LoadAttachmentData = params.get("LoadAttachmentData");
     String ServDateFrom = params.get("FromDate");
     String ServDateTo = params.get("ToDate");
-    String shiftId = params.get("shiftId");
+    String shiftId = params.get("ShiftId");
     String sortByField = params.get("SortByField");
     String sortDesc = params.get("SortDesc");
 

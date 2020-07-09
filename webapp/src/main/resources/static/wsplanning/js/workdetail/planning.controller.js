@@ -49,6 +49,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     }
 
     var EmployeeData = $("#EmployeeData").data("employee");
+    console.log(EmployeeData)
     $scope.DeptId = EmployeeData.DeptId;
     $scope.ShiftId = EmployeeData.ShiftId;
 

@@ -51,7 +51,7 @@ public class CustomerClient {
   {
     String VehiId = params.get("VehiId");
     String CustNo = params.get("CustNo");
-    String url = String.format("%s?VehiId=%s&CustNo=%s", this.endpointUrl, VehiId, CustNo);
+    String url = String.format("%s/contact?VehiId=%s&CustNo=%s", this.endpointUrl, VehiId, CustNo);
     return restTemplate.getForObject(url, String.class);
   }
 

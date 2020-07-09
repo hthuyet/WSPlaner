@@ -404,7 +404,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
 
-    $scope.replacementVehicle() = function () {
+    $scope.replacementVehicle = function () {
         $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo });
     }
 
