@@ -32,7 +32,7 @@ var translationsEN = {
   PreviousServiceDate: "P. Service",
   Model: "Model",
   SubModel: "SubModel",
-  CustNo: "Cust Nr.",
+  CustNoCustNo: "Cust Nr.",
   Fname: "Cust Name",
   Lname: "Cust Lastname",
 
@@ -279,6 +279,7 @@ var translationsEN = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Check in",
+  checkout: "Check out",
   checkinTemplate: "Template",
   checkinMileage: "Mileage",
   checkinRemark: "Remark",
@@ -423,7 +424,8 @@ var translationsEN = {
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
-  subStatus: "Substatus"
+  subStatus: "Substatus",
+  contactInfo: "Contact Info"
 
 };
 
@@ -697,6 +699,7 @@ var translationsDE = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Empfang",
+  checkout: "Check out",
   checkinTemplate: "Vorlage",
   sign: "Unterschrift",
   activeCall: "Aktives Gespräch",
@@ -840,7 +843,8 @@ var translationsDE = {
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
-  subStatus: "Substatus"
+  subStatus: "Substatus",
+  contactInfo: "Contact Info"
 
 
 };
@@ -1104,6 +1108,7 @@ var translationsFR = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Réception",
+  checkout: "Check out",
   checkinTemplate: "Matrice",
   sign: "Signature",
   activeCall: "Appel en cours",
@@ -1247,7 +1252,8 @@ var translationsFR = {
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
-  subStatus: "Substatus"
+  subStatus: "Substatus",
+  contactInfo: "Contact Info"
 };
 
 var translationsIT = {
@@ -1509,6 +1515,7 @@ var translationsIT = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Ricezione",
+  checkout: "Check out",
   checkinTemplate: "Template",
   sign: "Firma",
   activeCall: "Chiamata attiva",
@@ -1651,8 +1658,8 @@ var translationsIT = {
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
-  subStatus: "Substatus"
-
+  subStatus: "Substatus",
+  contactInfo: "Contact Info"
 
 };
 
@@ -1843,6 +1850,7 @@ var translationsVI = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Check in",
+  checkout: "Check out",
   checkinTemplate: "Template",
   checkinMileage: "Mileage",
   checkinRemark: "Remark",
@@ -1901,7 +1909,8 @@ var translationsVI = {
   valueVehicleNotification: 'Value VehicleNotification',
 
   //31082019
-  receiptionDate: 'Receiption date'
+  receiptionDate: 'Receiption date',
+  contactInfo: "Contact Info"
 
 };
 
@@ -2126,6 +2135,7 @@ var translationsHU = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Check in",
+  checkout: "Check out",
   checkinTemplate: "Template",
   sign: "Signature",
   activeCall: "Folyamatban levő hívások",
@@ -2267,7 +2277,8 @@ var translationsHU = {
   vehicle: "Jármű",
   fuel: "Fuel",
   AttachmentType: "Csatolmány típus",
-  subStatus: "Alstátusz"
+  subStatus: "Alstátusz",
+  contactInfo: "Contact Info"
 };
 
 var translationsRO = {
@@ -2551,6 +2562,7 @@ var translationsRO = {
   sman: "SmanId",
   subsys: "SubSys",
   checkin: "Receptie",
+  checkout: "Check out",
   checkinTemplate: "Sablon",
   checkinMileage: "Kilometraj",
   checkinRemark: "Observatie",
@@ -2695,7 +2707,8 @@ var translationsRO = {
   vehicle: "Vehicle",
   fuel: "Fuel",
   AttachmentType: "Attachment Type",
-  subStatus: "Substatus"
+  subStatus: "Substatus",
+  contactInfo: "Contact Info"
 };
 
 

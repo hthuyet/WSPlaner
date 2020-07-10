@@ -58,9 +58,6 @@
                                     <button type="button" class="btn btn-default" ng-click="openImage()">
                                         <i class="icon-camera"></i>
                                     </button>
-                                    <button ng-click="clear()" title="{{ 'clear' | translate }}">
-                                        <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
-                                    </button>
                                 </span>
                             </div>
                         </div>
@@ -71,28 +68,25 @@
 
             <!--Row checkin-->
             <div class="row">
-                <div class="col-md-8 col-xs-12" id="checkinTemplate">
-                    <div class="form-group" style="clear: both;">
-                        <div class="col-md-8 col-xs-8 col-xs-offset-4">
-                            <label class="radio-inline" style='color: green;'>
-                                <input type="radio" value="green" ng-model="color">{{ 'green' | translate }}</label>
-                            <label class="radio-inline" style='color: red;'>
-                                <input type="radio" value="red" ng-model="color">{{ 'red' | translate }}</label>
-                            <label class="radio-inline" style='color: orange;'>
-                                <input type="radio" value="orange" ng-model="color">{{ 'orange' | translate }}</label>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-md-8 col-xs-12" id="checkinTemplate">-->
+<!--                    <div class="form-group" style="clear: both;">-->
+<!--                        <div class="col-md-8 col-xs-8 col-xs-offset-4">-->
+<!--                            <label class="radio-inline" style='color: green;'>-->
+<!--                                <input type="radio" value="green" ng-model="color">{{ 'green' | translate }}</label>-->
+<!--                            <label class="radio-inline" style='color: red;'>-->
+<!--                                <input type="radio" value="red" ng-model="color">{{ 'red' | translate }}</label>-->
+<!--                            <label class="radio-inline" style='color: orange;'>-->
+<!--                                <input type="radio" value="orange" ng-model="color">{{ 'orange' | translate }}</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="row">
 
                     <div class="col-md-12 col-xs-12">
                         <!-- Anh -->
                         <div class="col-md-6 col-xs-8">
-                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear"
-                                           height="400" width="600" color="{{color}}" dataurl="imgTemplate">
-                            </signature-pad>
-
+                            <img class="canvas" style="max-height: 400px;max-width: 600px;" ng-src="{{imgTemplate}}">
                         </div>
 
                         <!-- Chu ky -->

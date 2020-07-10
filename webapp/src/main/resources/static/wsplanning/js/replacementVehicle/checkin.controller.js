@@ -23,8 +23,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   function loadCommon() {
     HttpService.getData("/site/listByCommand", {}).then(function (response) {
-      console.log("-----------listByCommand-------");
-      console.log(response);
       $scope.lstGroup = response.getCourtesyCarGroups;
       $scope.fuelList = response.getCourtesyCarFuels;
       common.spinner(false);
@@ -84,6 +82,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.WorkOrder.vehicle = "" + $scope.carChoosed.ResVehicle.VehiId;
       $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
       $scope.WorkOrder.custId = $scope.carChoosed.ResCustomer.CustId;
+      $scope.WorkOrder.Mileage = $scope.carChoosed.ResVehicle.Mileage;
       $scope.WorkOrder.CustNo = $scope.carChoosed.ResCustomer.CustNo;
       $scope.WorkOrder.FName = $scope.carChoosed.ResCustomer.FName;
       $scope.WorkOrder.LName = $scope.carChoosed.ResCustomer.LName;
@@ -103,11 +102,9 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
 
       if ($scope.WorkOrder.action == "checkin") {
-        $scope.WorkOrder.Mileage = $scope.carChoosed.ReturnMileage;
         $scope.WorkOrder.fuel = $scope.carChoosed.ReturnFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.ReturnNote;
       } else if ($scope.WorkOrder.action == "checkout") {
-        $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryMileage;
         $scope.WorkOrder.fuel = $scope.carChoosed.DeliveryFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.DeliveryNote;
       }
@@ -116,7 +113,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
 
   $scope.changeAction = function(){
-    console.log("--------changeAction: " + $scope.WorkOrder.action);
     bindingData();
   }
 
@@ -126,7 +122,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       bindingData();
       return;
     }
-    console.log("---------------onChangeVehicle: " + $scope.WorkOrder.vehicle);
     HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, {}).then(function (response) {
       console.log(response);
       if(response && response.length > 0) {
@@ -150,7 +145,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //<editor-fold desc="getCCResByWO">
   $scope.getCCResByWO = function(){
-    console.log("---------------getCCResByWO: " + $scope.WorkOrder.WorkOrderNo);
     if($scope.WorkOrder.WorkOrderNo != null && $scope.WorkOrder.WorkOrderNo != "") {
        var tmp =  $scope.WorkOrder.WorkOrderNo;
       HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo, {}).then(function (response) {
@@ -189,8 +183,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       || !$scope.WorkOrder.custId){
       return;
     }
-    console.log("-----changeAttType------");
-    console.log($scope.WorkOrder);
     $scope.base64Encode = "";
     common.spinner(true);
     var url = '/storage/downloadVehicleAttachment/' + $scope.WorkOrder.vehicle + "/"+$scope.WorkOrder.attachmentType;
@@ -199,16 +191,14 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       url = '/storage/downloadCustAttachment/' + $scope.WorkOrder.custId + "/"+$scope.WorkOrder.attachmentType;
     }
     HttpService.getData(url, {}).then(function (response) {
-      console.log(response)
       if(response){
-        console.log("---data base64--");
         $scope.imgTemplate = "data:image/png;base64," + response.imageData;
         $scope.templateMark = {
           "FileId": response.fileId,
           "FileName": response.fileName,
           "dataUrl": "data:image/png;base64," + response.imageData,
           "ImageData": response.imageData,
-          "AttachType": response.attachType,
+          "AttachType": $scope.WorkOrder.attachmentType,
           "AttachTypeDescription": response.attachTypeDescription,
           "FileDescription": response.fileDescription,
         };
@@ -310,21 +300,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
 
   $scope.onSubmitForm = function () {
-    console.log("-----transitionTo---");
-
-    // var params = {
-    //   locale: $stateParams.locale
-    // };
-    //
-    // $state.transitionTo("app.main.replacementvehicle", params, {
-    //   reload: false, inherit: false, notify: false, location: "replace"
-    // });
-    // return;
-
-
-    $state.go("app.main.replacementvehicle", { locale: $rootScope.lang });
-    return;
-
     validateFrm();
     sign();
   }
@@ -364,13 +339,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   function save(){
 
-
-
-    $state.transitionTo("app.main.replacementvehicle", params, {
-      reload: false, inherit: false, notify: false, location: "replace"
-    });
-    return;
-
     var url = "";
     if ($scope.WorkOrder.action == "checkin") {
       url = "/courtesyCar/checkinCCRes";
@@ -401,7 +369,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
           //Redirecgt
           $timeout(function () {
             console.log("-------go--------");
-            $state.go('app.main.replacementvehicle',{});
+            $state.go('app.main.replacementvehicle', { 'workOrderNo': null,locale: $rootScope.lang });
           });
 
         }else{
@@ -425,7 +393,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   //<editor-fold desc="openImage">
   $scope.listImage = [];
   $scope.openImage = function () {
-    console.log("------openImage----");
     $scope.listImage = [];
     var modalInstance = $uibModal.open({
       animation: true,
@@ -464,7 +431,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   };
 
   $scope.uploadImage = function () {
-    console.log($scope.WorkOrder.attachmentType);
     $scope.base64Encode = "";
     if($scope.imgTemplate != "" && $scope.templateMark != null){
       //Thuc hien upload anh
@@ -477,12 +443,13 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       common.spinner(true);
 
       HttpService.postData(url, $scope.templateMark).then(function (response) {
-        console.log(response)
         common.spinner(false);
+        common.notifySuccess("Upload success!!!");
       }, function error(response) {
         $scope.imgTemplate = "";
         console.log(response);
         common.spinner(false);
+        common.notifyError("Upload fail!!!");
       });
 
     }
@@ -518,7 +485,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //<editor-fold desc="Choose CCcars">
   $scope.chooseCar = function (listCars) {
-    console.log("------chooseCar----");
     var modalChooseCar = $uibModal.open({
       animation: true,
       templateUrl: '/wsplanning/templates/pages/common/choose-car.html',
@@ -537,7 +503,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
     modalChooseCar.result.then(function (value) {
       if (value) {
-        console.log(value);
         $scope.carChoosed = value;
         bindingData();
       }

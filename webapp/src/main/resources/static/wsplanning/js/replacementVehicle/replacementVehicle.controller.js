@@ -20,12 +20,13 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     "LName": ""
   };
 
+  //checkin
   $scope.actionList = [{
     "action": "checkin",
-    "name": "checkin"
+    "name": $translate.instant('checkin')
   }, {
     "action": "checkout",
-    "name": "checkout"
+    "name": $translate.instant('checkout')
   }];
   $scope.action = "checkout";
 
