@@ -1,4 +1,4 @@
-UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $timeout, WorkOrderService) {
+UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $locale, HttpService, $stateParams, $translate, $location, $state, $filter, $uibModal, $timeout, WorkOrderService) {
   var empltyImage = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
   loadCommon();
   $scope.params = {
@@ -42,7 +42,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.onChangeGroup = function(){
     $scope.carChoosed = null;
     bindingData();
-    console.log("---------------onChangeGroup: " + $scope.WorkOrder.group);
     HttpService.getData("/courtesyCar/getCCResByVehicle?group=" + $scope.WorkOrder.group, {}).then(function (response) {
       $scope.lstVehicle = response;
       common.spinner(false);
@@ -55,25 +54,34 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
   //</editor-fold>
 
+  function resetFrm(resetInput) {
+    $scope.WorkOrder.WorkOrderId = "";
+    $scope.WorkOrder.WorkOrderNo = "";
+    $scope.WorkOrder.custId = "";
+    $scope.params.from = "0001-01-01T00:00:00";
+    $scope.params.to = "0001-01-01T00:00:00";
+    $scope.WorkOrder.Mileage = "";
+    $scope.WorkOrder.checkinRemark = "";
+    $scope.WorkOrder.fuel = "";
+    $scope.WorkOrder.CustNo = "";
+    $scope.WorkOrder.FName = "";
+    $scope.WorkOrder.LName = "";
+    $scope.WorkOrder.action = "";
+    $scope.WorkOrder.actionDisable = true;
+    if(resetInput === true){
+      $scope.WorkOrder.group = "";
+      $scope.WorkOrder.vehicle = "";
+    }
+  }
+
 
   //<editor-fold desc="onChangeVehicle">
   function bindingData() {
     if (!$scope.carChoosed) {
-      $scope.WorkOrder.WorkOrderId = "";
-      $scope.WorkOrder.WorkOrderNo = "";
-      $scope.WorkOrder.custId = "";
-      $scope.params.from = "0001-01-01T00:00:00";
-      $scope.params.to = "0001-01-01T00:00:00";
-      $scope.WorkOrder.Mileage = "";
-      $scope.WorkOrder.checkinRemark = "";
-      $scope.WorkOrder.fuel = "";
-      $scope.WorkOrder.vehicle = "-1";
-      $scope.WorkOrder.CustNo = "";
-      $scope.WorkOrder.FName = "";
-      $scope.WorkOrder.LName = "";
+      resetFrm(false);
     }else{
       $scope.WorkOrder.WorkOrderId = $scope.carChoosed.WorkOrderId;
-      $scope.WorkOrder.vehicle = $scope.carChoosed.ResVehicle.VehiId;
+      $scope.WorkOrder.vehicle = "" + $scope.carChoosed.ResVehicle.VehiId;
       $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
       $scope.WorkOrder.custId = $scope.carChoosed.ResCustomer.CustId;
       $scope.WorkOrder.CustNo = $scope.carChoosed.ResCustomer.CustNo;
@@ -82,13 +90,23 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.params.from = new Date($scope.carChoosed.ReservationFrom);
       $scope.params.to = new Date($scope.carChoosed.ReservationTo);
 
+      if($scope.carChoosed.isDelivered === false){
+        //Chua Checkout
+        //if the reservation is not yet checked out, then checkout radio box is selected by default, and user cannot change it (disable)
+        $scope.WorkOrder.action = "checkout";
+        $scope.WorkOrder.actionDisable = true;
+      }else{
+        //if the reservatio is checked out (and not yet checked in), then checkin radio box is selected by default, and user cannot change it (disable)
+        $scope.WorkOrder.action = "checkin";
+        $scope.WorkOrder.actionDisable = true;
+      }
+
+
       if ($scope.WorkOrder.action == "checkin") {
-        console.log("----checkin return-----");
         $scope.WorkOrder.Mileage = $scope.carChoosed.ReturnMileage;
         $scope.WorkOrder.fuel = $scope.carChoosed.ReturnFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.ReturnNote;
       } else if ($scope.WorkOrder.action == "checkout") {
-        console.log("----checkout Delivery-----");
         $scope.WorkOrder.Mileage = $scope.carChoosed.DeliveryMileage;
         $scope.WorkOrder.fuel = $scope.carChoosed.DeliveryFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.DeliveryNote;
@@ -103,6 +121,11 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
 
   $scope.onChangeVehicle = function(){
+    if(!$scope.WorkOrder.vehicle){
+      $scope.carChoosed = null;
+      bindingData();
+      return;
+    }
     console.log("---------------onChangeVehicle: " + $scope.WorkOrder.vehicle);
     HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, {}).then(function (response) {
       console.log(response);
@@ -287,8 +310,21 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
 
   $scope.onSubmitForm = function () {
-    console.log("-----onSubmitForm---");
-    console.log($scope.WorkOrder);
+    console.log("-----transitionTo---");
+
+    // var params = {
+    //   locale: $stateParams.locale
+    // };
+    //
+    // $state.transitionTo("app.main.replacementvehicle", params, {
+    //   reload: false, inherit: false, notify: false, location: "replace"
+    // });
+    // return;
+
+
+    $state.go("app.main.replacementvehicle", { locale: $rootScope.lang });
+    return;
+
     validateFrm();
     sign();
   }
@@ -309,7 +345,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         console.log(res);
         if (res.data.Token && res.data.Token.ErrorDesc) {
           common.btnLoading($(".btnSubmit"), false);
-          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc);
+          common.spinner(false);
         } else {
           //TODO: call checkin or checkout
           save();
@@ -317,6 +354,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       }, function (err) {
         console.log(err);
         common.btnLoading($(".btnSubmit"), false);
+        common.spinner(false);
         common.notifyError("Error!!!", err.status);
       });
     }else{
@@ -325,19 +363,31 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   }
 
   function save(){
+
+
+
+    $state.transitionTo("app.main.replacementvehicle", params, {
+      reload: false, inherit: false, notify: false, location: "replace"
+    });
+    return;
+
     var url = "";
     if ($scope.WorkOrder.action == "checkin") {
       url = "/courtesyCar/checkinCCRes";
-      $scope.carChoosed.ReturnMileage = $scope.WorkOrder.Mileage;
-      $scope.carChoosed.ReturnFuelId = $scope.WorkOrder.fuel;
-      $scope.carChoosed.ReturnNote = $scope.WorkOrder.checkinRemark;
-      $scope.carChoosed.isReturned = true;
+      $scope.carChoosed = {
+        "ReturnMileage": $scope.WorkOrder.Mileage,
+        "ReturnFuelId": $scope.WorkOrder.fuel,
+        "ReturnNote": $scope.WorkOrder.checkinRemark,
+        "isReturned": true
+      };
     } else if ($scope.WorkOrder.action == "checkout") {
       url = "/courtesyCar/checkoutCCRes";
-      $scope.carChoosed.DeliveryMileage = $scope.WorkOrder.Mileage;
-      $scope.carChoosed.DeliveryFuelId = $scope.WorkOrder.fuel;
-      $scope.carChoosed.DeliveryNote = $scope.WorkOrder.checkinRemark;
-      $scope.carChoosed.isDelivered = true;
+      $scope.carChoosed = {
+        "DeliveryMileage": $scope.WorkOrder.Mileage,
+        "DeliveryFuelId": $scope.WorkOrder.fuel,
+        "DeliveryNote": $scope.WorkOrder.checkinRemark,
+        "isDelivered": true
+      };
     }
 
     if(url != "") {
@@ -347,6 +397,13 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.spinner(false);
         if(response === true){
           common.notifySuccess("Success!!!");
+
+          //Redirecgt
+          $timeout(function () {
+            console.log("-------go--------");
+            $state.go('app.main.replacementvehicle',{});
+          });
+
         }else{
           common.notifyError("Error!!!");
         }

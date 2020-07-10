@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import static com.wsplanning.webapp.utils.Utils.formateDateAPI;
@@ -107,7 +108,7 @@ public class CourtesyCarClient {
             headers.set("Token", token);
         }
         headers.set("PostAction", "return");
-        data.CheckInTime = formateDateAPI(LocalDate.now());
+        data.CheckInTime = formateDateAPI(LocalDateTime.now());
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);
@@ -122,7 +123,7 @@ public class CourtesyCarClient {
             headers.set("Token", token);
         }
         headers.set("PostAction", "deliver");
-        data.CheckOutTime = formateDateAPI(LocalDate.now());
+        data.CheckOutTime = formateDateAPI(LocalDateTime.now());
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);

@@ -35,8 +35,9 @@
                         <label class="control-label col-xs-4">{{ 'vehicle' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="WorkOrder.vehicle"
-                                    ng-options="item.VehiId as item.LicenseNo for item in lstVehicle"
                                     ng-change="onChangeVehicle()">
+                                <option ng-repeat="item in lstVehicle" value="{{item.VehiId}}">{{item.Make}} - {{item.Model}}</option>
+
                             </select>
                         </div>
                     </div>
@@ -121,7 +122,9 @@
                     <div class="col-md-8 col-xs-8 col-xs-offset-4">
                         <span ng-repeat="item in actionList">
                             <label class="radio-inline" style='color: green;'>
-                            <input type="radio" value="{{item.action}}" ng-model="WorkOrder.action" ng-change="changeAction()">{{ item.name }}</label>
+                            <input type="radio" value="{{item.action}}" ng-model="WorkOrder.action"
+                                   ng-disabled="WorkOrder.actionDisable"
+                                   ng-change="changeAction()">{{ item.name }}</label>
                         </span>
                     </div>
                 </div>

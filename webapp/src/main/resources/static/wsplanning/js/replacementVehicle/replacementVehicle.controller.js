@@ -14,6 +14,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     "checkinRemark": "",
     "attachmentType": "",
     "action": "",
+    "actionDisable": true,
     "CustNo": "",
     "FName": "",
     "LName": ""
