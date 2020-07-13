@@ -324,7 +324,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
           common.spinner(false);
         } else {
           //TODO: call checkin or checkout
-          save();
+          // save();
         }
       }, function (err) {
         console.log(err);
@@ -333,29 +333,27 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.notifyError("Error!!!", err.status);
       });
     }else{
-      save();
+      // save();
     }
   }
 
   function save(){
-
+    if(!$scope.carChoosed){
+      return;
+    }
     var url = "";
     if ($scope.WorkOrder.action == "checkin") {
       url = "/courtesyCar/checkinCCRes";
-      $scope.carChoosed = {
-        "ReturnMileage": $scope.WorkOrder.Mileage,
-        "ReturnFuelId": $scope.WorkOrder.fuel,
-        "ReturnNote": $scope.WorkOrder.checkinRemark,
-        "isReturned": true
-      };
+      $scope.carChoosed.ReturnMileage = $scope.WorkOrder.Mileage;
+      $scope.carChoosed.ReturnFuelId = $scope.WorkOrder.fuel;
+      $scope.carChoosed.ReturnNote = $scope.WorkOrder.checkinRemark;
+      $scope.carChoosed.isReturned = true;
     } else if ($scope.WorkOrder.action == "checkout") {
       url = "/courtesyCar/checkoutCCRes";
-      $scope.carChoosed = {
-        "DeliveryMileage": $scope.WorkOrder.Mileage,
-        "DeliveryFuelId": $scope.WorkOrder.fuel,
-        "DeliveryNote": $scope.WorkOrder.checkinRemark,
-        "isDelivered": true
-      };
+      $scope.carChoosed.DeliveryMileage = $scope.WorkOrder.Mileage;
+      $scope.carChoosed.DeliveryFuelId = $scope.WorkOrder.fuel;
+      $scope.carChoosed.DeliveryNote = $scope.WorkOrder.checkinRemark;
+      $scope.carChoosed.isDelivered = true;
     }
 
     if(url != "") {
@@ -435,9 +433,14 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if($scope.imgTemplate != "" && $scope.templateMark != null){
       //Thuc hien upload anh
       var url = '/storage/uploadVehicleAttachment/' + $scope.WorkOrder.vehicle;
+      $scope.templateMark.AttachType = "VHC";
+      $scope.templateMark.AttachTypeDescription = "Vehicle VHC";
+      $scope.templateMark.FileDescription = $scope.templateMark.FileName;
 
       if($scope.WorkOrder.attachmentType == 'LIC'){
         url = '/storage/uploadCustAttachment/' + $scope.WorkOrder.custId;
+        $scope.templateMark.AttachType = "LIC";
+        $scope.templateMark.AttachTypeDescription = "Driving license";
       }
 
       common.spinner(true);
