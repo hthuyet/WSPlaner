@@ -302,13 +302,14 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if(list && list.length > 0) {
       var url = '/storage/storageJob/' + $scope.WorkOrder.WorkOrderNo + "/0";
       HttpService.postData(url, list[0]).then(function (res) {
-        console.log(res);
-        if (res.data.Token && res.data.Token.ErrorDesc) {
-          common.btnLoading($(".btnSubmit"), false);
-          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc);
-          common.spinner(false);
+        if (res === true) {
+            console.log("--------save 111-----");
+            save();
         } else {
-          save();
+            console.log("--------ErrorDesc-----");
+            common.btnLoading($(".btnSubmit"), false);
+            common.notifyWithMessage("Warning!!!", res.status, res.data);
+            common.spinner(false);
         }
       }, function error(response) {
         $scope.imgTemplate = "";
@@ -318,6 +319,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.notifyError("Error!!!", err.status);
       });
     }else{
+        console.log("--------save 222-----");
       save();
     }
   }
@@ -348,13 +350,11 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.spinner(false);
         if(response === true){
           common.notifySuccess("Success!!!");
-
           //Redirecgt
           $timeout(function () {
             console.log("-------go--------");
             $state.go('app.main.replacementvehicle', { 'workOrderNo': null,locale: $rootScope.lang });
-          });
-
+          }, 3000);
         }else{
           common.notifyError("Error!!!");
         }
