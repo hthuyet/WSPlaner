@@ -309,31 +309,25 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     common.btnLoading($(".btnSubmit"), true);
     var list = createListWOAttachment();
     if(list && list.length > 0) {
-      var objWo = {
-        "WorkOrderId": $scope.WorkOrder.WorkOrderId,
-        "WOAttachments": list,
-      };
-      var data = JSON.stringify(objWo);
-      var postAction = "checkIn";
-
-      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+      var url = '/storage/storageJob/' + $scope.WorkOrder.WorkOrderNo + "/0";
+      HttpService.postData(url, list[0]).then(function (res) {
         console.log(res);
         if (res.data.Token && res.data.Token.ErrorDesc) {
           common.btnLoading($(".btnSubmit"), false);
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc);
           common.spinner(false);
         } else {
-          //TODO: call checkin or checkout
-          // save();
+          save();
         }
-      }, function (err) {
-        console.log(err);
+      }, function error(response) {
+        $scope.imgTemplate = "";
+        console.log(response);
         common.btnLoading($(".btnSubmit"), false);
         common.spinner(false);
         common.notifyError("Error!!!", err.status);
       });
     }else{
-      // save();
+      save();
     }
   }
 

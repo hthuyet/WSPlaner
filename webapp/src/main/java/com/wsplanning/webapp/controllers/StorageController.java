@@ -80,4 +80,19 @@ public class StorageController extends BaseController {
             return parseException(ex);
         }
     }
+
+    @PostMapping("/storage/storageJob/{workOrderNo}/{jobNo}")
+    @ResponseBody
+    public ResponseEntity storageJob(@PathVariable("workOrderNo") Integer workOrderNo,
+                                               @PathVariable("jobNo") Integer jobNo,
+                                               @RequestBody WOAttachmentDTO data) {
+        try {
+            String token = getToken();
+            String rtn = client.storageJob(token, workOrderNo, jobNo, data);
+            return new ResponseEntity<>(rtn, HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return parseException(ex);
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.wsplanning.webapp.clients;
 
 import com.wsplanning.webapp.RestTemplateResponseErrorHandler;
-import com.wsplanning.webapp.dto.TaskDTO;
 import com.wsplanning.webapp.dto.WOAttachmentDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -58,7 +57,7 @@ public class StorageClient {
         if (StringUtils.isNotBlank(vehiId)) {
             headers.set("VehiId", vehiId);
         }
-         headers.set("Content-Type", "application/json");
+        headers.set("Content-Type", "application/json");
         HttpEntity<WOAttachmentDTO> entity = new HttpEntity<WOAttachmentDTO>(data, headers);
         String url = String.format("%s/ccar", this.endpointUrl);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
@@ -76,7 +75,7 @@ public class StorageClient {
         logger.info("----------------downloadCustAttachment: " + url);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
-        if(HttpStatus.NO_CONTENT == response.getStatusCode()){
+        if (HttpStatus.NO_CONTENT == response.getStatusCode()) {
 
         }
         return response.getBody();
@@ -95,8 +94,19 @@ public class StorageClient {
         HttpEntity<WOAttachmentDTO> entity = new HttpEntity<WOAttachmentDTO>(data, headers);
         String url = String.format("%s/cust", this.endpointUrl);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-        System.out.print(response.getBody());
         return response.getBody();
     }
 
+    public String storageJob(String token, Integer workOrderNo, Integer jobNo, WOAttachmentDTO data) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        if (StringUtils.isNotBlank(token)) {
+            headers.set("Token", token);
+        }
+        headers.set("Content-Type", "application/json");
+        HttpEntity<WOAttachmentDTO> entity = new HttpEntity<WOAttachmentDTO>(data, headers);
+        String url = String.format("%s/job?WorkOrderNo=%s&JobNo=%s", this.endpointUrl, workOrderNo, jobNo);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        return response.getBody();
+    }
 }
