@@ -303,10 +303,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       var url = '/storage/storageJob/' + $scope.WorkOrder.WorkOrderNo + "/0";
       HttpService.postData(url, list[0]).then(function (res) {
         if (res === true) {
-            console.log("--------save 111-----");
             save();
         } else {
-            console.log("--------ErrorDesc-----");
             common.btnLoading($(".btnSubmit"), false);
             common.notifyWithMessage("Warning!!!", res.status, res.data);
             common.spinner(false);
@@ -319,7 +317,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.notifyError("Error!!!", err.status);
       });
     }else{
-        console.log("--------save 222-----");
       save();
     }
   }
