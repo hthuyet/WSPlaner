@@ -11,10 +11,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   $scope.carChoosed = null;
 
   $scope.fuelList = [
-    { "Id": "01", "Name": "1/4" },
-    { "Id": "02", "Name": "2/4" },
-    { "Id": "03", "Name": "3/4" },
-    { "Id": "04", "Name": "4/4" },
       ];
   $scope.attachmentTypes = [
       { "Id": "LIC", "Name": "Driver License" },
@@ -48,7 +44,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.lstVehicle = [];
       common.spinner(false);
     });
-
   }
   //</editor-fold>
 
@@ -71,7 +66,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.WorkOrder.vehicle = "";
     }
   }
-
 
   //<editor-fold desc="onChangeVehicle">
   function bindingData() {
@@ -99,7 +93,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         $scope.WorkOrder.action = "checkin";
         $scope.WorkOrder.actionDisable = true;
       }
-
 
       if ($scope.WorkOrder.action == "checkin") {
         $scope.WorkOrder.fuel = $scope.carChoosed.ReturnFuelId;
@@ -215,7 +208,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
           "FileDescription": "",
         };
       }
-
       common.spinner(false);
     }, function error(response) {
       $scope.imgTemplate = "";
@@ -296,7 +288,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       common.notifyError("Must input remark!!!");
       return;
     }
-
   }
 
   $scope.onSubmitForm = function () {
