@@ -142,13 +142,14 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //<editor-fold desc="getCCResByWO">
   $scope.getCCResByWO = function () {
+    if ($stateParams.type == "clear") {
+      $scope.WorkOrder.WorkOrderNo = ""
+    }
     if ($scope.WorkOrder.WorkOrderNo != null && $scope.WorkOrder.WorkOrderNo != "") {
       var tmp = $scope.WorkOrder.WorkOrderNo;
       HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo, {}).then(function (response) {
         console.log(response);
-        if ($stateParams.type == "clear") {
-          $scope.WorkOrder.WorkOrderNo = ""
-        }
+       
         if (response && response.length > 0) {
           if (response.length > 1) {
             $scope.chooseCar(response);
@@ -164,9 +165,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         common.spinner(false);
       }, function error(response) {
         console.log(response);
-        if ($stateParams.type == "clear") {
-          $scope.WorkOrder.WorkOrderNo = ""
-        }
         $scope.carChoosed = null;
         bindingData();
         $scope.WorkOrder.WorkOrderNo = tmp;
