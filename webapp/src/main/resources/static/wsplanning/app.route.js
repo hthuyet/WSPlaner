@@ -190,15 +190,31 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             url: 'replacementvehicle/:workOrderNo',
             params: {
                 workOrderNo: null,
+                type: null,
             },
             controller: "ReplacementVehicleCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
             resolve: {
                 workOrderNo: function ($stateParams) {
                     return $stateParams.workOrderNo;
+                }, 
+                typeReplace: function ($stateParams){ 
+                    return $stateParams.type
                 }
             }
         })
+
+        // .state('app.main.replacementvehicle_clear', {
+        //     url: 'replacementvehicle/clear',
+        //     controller: "ReplacementVehicleCtrl as $ctrl",
+        //     templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
+        //     resolve: {
+        //         typeReplace: function ($stateParams) {
+        //             data = "clear"
+        //             return data;
+        //         }
+        //     }
+        // })
 
         .state('app.main.newwo', {
             url: 'workdetail/newwo/:type/:action/:tab',

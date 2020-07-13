@@ -405,7 +405,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
     $scope.replacementVehicle = function () {
-        $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo });
+        $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo, 'type': null });
     }
 
 
