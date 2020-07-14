@@ -94,6 +94,7 @@ public class CourtesyCarClient {
             headers.set("Token", token);
         }
         headers.set("PostAction", "insert");
+        String checkOutTime = formateDateAPI(LocalDateTime.now());
         HttpEntity<CourtesyCarResDTO> entity = new HttpEntity<CourtesyCarResDTO>(data, headers);
         String url = String.format("%s", this.endpointUrl);
         ResponseEntity<Boolean> response = restTemplate.exchange(url, HttpMethod.POST, entity, Boolean.class);

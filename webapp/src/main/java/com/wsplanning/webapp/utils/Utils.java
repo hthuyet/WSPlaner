@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
@@ -95,10 +98,12 @@ public class Utils {
   static DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
   static DateTimeFormatter formatterDatetime = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-
+  
   public static String formateDateAPI(LocalDateTime date) {
-    return formatterDatetime.format(date);
+    ZonedDateTime ldtZoned = date.atZone(ZoneId.systemDefault());
+    ZonedDateTime zonedDateTime = ldtZoned.withZoneSameInstant(ZoneId.of("UTC+02"));
+    System.out.print(zonedDateTime.toLocalDateTime());
+    return formatterDatetime.format(zonedDateTime.toLocalDateTime());
   }
 
   public static String formateDateAPI(LocalDate date) {
