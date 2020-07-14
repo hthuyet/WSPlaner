@@ -9,7 +9,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
   console.log($scope.WorkOrder.WorkOrderNo)
   console.log($stateParams)
 
-
   $scope.lstGroup = [];
   $scope.lstVehicle = [];
   $scope.carChoosed = null;
@@ -147,7 +146,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     }
     if ($scope.WorkOrder.WorkOrderNo != null && $scope.WorkOrder.WorkOrderNo != "") {
       var tmp = $scope.WorkOrder.WorkOrderNo;
-      HttpService.getData("/courtesyCar/getCCResByWO/" + $scope.WorkOrder.WorkOrderNo, {}).then(function (response) {
+      HttpService.getData("/courtesyCar/getCCResByWO/" + $stateParams.workOrderId, {}).then(function (response) {
         console.log(response);
        
         if (response && response.length > 0) {
@@ -440,6 +439,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       common.spinner(true);
 
       HttpService.postData(url, $scope.templateMark).then(function (response) {
+        console.log(response)
         common.spinner(false);
         common.notifySuccess("Upload success!!!");
       }, function error(response) {
@@ -499,6 +499,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     });
 
     modalChooseCar.result.then(function (value) {
+      console.log(value)
       if (value) {
         $scope.carChoosed = value;
         bindingData();

@@ -8,7 +8,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.jobObject = {};
     $scope.actionType = "";
 
-    // console.log(WorkOrder)
+    console.log(WorkOrder)
+    console.log($scope.WorkOrderId)
 
     $scope.WOVehicle = "";
     $scope.WOCustomer = "";
@@ -405,7 +406,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
     $scope.replacementVehicle = function () {
-        $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo, 'type': null });
+        $state.go('app.main.replacementvehicle', { 'workOrderNo': WorkOrder.data.WorkOrderNo, 
+                                            'type': null, 'workOrderId': WorkOrder.data.WorkOrderId });
     }
 
 

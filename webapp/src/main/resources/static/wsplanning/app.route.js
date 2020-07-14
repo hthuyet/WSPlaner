@@ -191,6 +191,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             params: {
                 workOrderNo: null,
                 type: null,
+                workOrderId: null
             },
             controller: "ReplacementVehicleCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
@@ -198,8 +199,11 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
                 workOrderNo: function ($stateParams) {
                     return $stateParams.workOrderNo;
                 }, 
-                typeReplace: function ($stateParams){ 
+                type: function ($stateParams){ 
                     return $stateParams.type
+                },
+                workOrderId: function ($stateParams) {
+                    return $stateParams.workOrderId
                 }
             }
         })

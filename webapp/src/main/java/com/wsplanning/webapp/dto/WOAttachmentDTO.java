@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
@@ -11,5 +12,6 @@ public class WOAttachmentDTO {
     public String AttachType;
     public String AttachTypeDescription;
     public String ImageData;
+    @JsonIgnore
     public String dataUrl;
 }
