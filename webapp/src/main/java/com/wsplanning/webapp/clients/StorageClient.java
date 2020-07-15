@@ -103,9 +103,11 @@ public class StorageClient {
         if (StringUtils.isNotBlank(token)) {
             headers.set("Token", token);
         }
+        headers.set("WorkOrderNo", String.valueOf(workOrderNo));
+        headers.set("JobNo", String.valueOf(jobNo));
         headers.set("Content-Type", "application/json");
         HttpEntity<WOAttachmentDTO> entity = new HttpEntity<WOAttachmentDTO>(data, headers);
-        String url = String.format("%s/job?WorkOrderNo=%s&JobNo=%s", this.endpointUrl, workOrderNo, jobNo);
+        String url = String.format("%s/job", this.endpointUrl);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         return response.getBody();
     }
