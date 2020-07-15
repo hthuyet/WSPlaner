@@ -351,16 +351,16 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.carChoosed.isDelivered = true;
     }
 
-    common.btnLoading($(".btnSubmit"), false);
-    common.spinner(false);
-    common.notifySuccess("Success!!!");
-    //Redirecgt
-    $timeout(function () {
-      console.log("-------go--------");
-      $state.go('app.main.replacementvehicle', { 'workOrderNo': null, 'type': "clear" });
-    }, 3000);
-
-    return;
+    // common.btnLoading($(".btnSubmit"), false);
+    // common.spinner(false);
+    // common.notifySuccess("Success!!!");
+    // //Redirecgt
+    // $timeout(function () {
+    //   console.log("-------go--------");
+    //   $state.go('app.main.replacementvehicle', { 'workOrderNo': null, 'type': "clear" });
+    // }, 3000);
+    //
+    // return;
 
     if(url != "") {
       HttpService.postData(url, $scope.carChoosed).then(function (response) {
