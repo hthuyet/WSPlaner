@@ -437,7 +437,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if ($scope.imgTemplate != "" && $scope.templateMark != null) {
       //Thuc hien upload anh
       var url = '/storage/uploadVehicleAttachment/' + $scope.WorkOrder.vehicle;
-      $scope.templateMark.AttachType = "VHC";
+      $scope.templateMark.AttachType = "CCVEHI";
       $scope.templateMark.AttachTypeDescription = "Vehicle VHC";
       $scope.templateMark.FileDescription = $scope.templateMark.FileName;
 
