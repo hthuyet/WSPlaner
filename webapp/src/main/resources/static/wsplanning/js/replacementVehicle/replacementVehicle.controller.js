@@ -17,7 +17,12 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     "actionDisable": true,
     "CustNo": "",
     "FName": "",
-    "LName": ""
+    "LName": "",
+    "Disclaimer": "",
+    "LicenseNo": "",
+    "Make": "",
+    "Model": "",
+    "SubModel": ""
   };
 
   //checkin

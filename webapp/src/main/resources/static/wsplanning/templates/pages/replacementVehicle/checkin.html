@@ -44,7 +44,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--end row 2-->
 
+            <div class="row">
                 <!--AttachmentType-->
                 <div class="col-xs-6">
                     <div class="form-group">
@@ -63,8 +66,18 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Disclaimer-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'Disclaimer' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="Disclaimer" ng-model="WorkOrder.checkinRemark">
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <!--end row 2-->
 
             <!--Row checkin-->
             <div class="row">
@@ -85,7 +98,7 @@
 
                     <div class="col-md-12 col-xs-12">
                         <!-- Anh -->
-                        <div class="col-md-6 col-xs-8">
+                        <div class="col-md-6 col-xs-8" id="attachmentTmp">
                             <img class="canvas" style="max-height: 400px;max-width: 600px;" ng-src="{{imgTemplate}}">
                         </div>
 
@@ -125,3 +138,13 @@
 <!--SEARCH-->
 
 </div>
+
+<style type="text/css">
+    #attachmentTmp{
+        max-width: 720px;
+        max-height: 336px;
+        border: 1px;
+        height: 316px;
+        border: 1px solid #999;
+    }
+</style>

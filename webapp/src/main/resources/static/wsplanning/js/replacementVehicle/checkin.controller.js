@@ -63,6 +63,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     $scope.WorkOrder.FName = "";
     $scope.WorkOrder.LName = "";
     $scope.WorkOrder.action = "";
+    $scope.WorkOrder.Disclaimer = "";
     $scope.WorkOrder.actionDisable = true;
     if (resetInput === true) {
       $scope.WorkOrder.group = "";
@@ -77,6 +78,7 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     } else {
       $scope.WorkOrder.WorkOrderId = $scope.carChoosed.WorkOrderId;
       $scope.WorkOrder.vehicle = "" + $scope.carChoosed.ResVehicle.VehiId;
+      $scope.WorkOrder.Disclaimer = $scope.carChoosed.ResVehicle.Disclaimer;
       $scope.WorkOrder.WorkOrderNo = $scope.carChoosed.WorkOrderNo;
       $scope.WorkOrder.custId = $scope.carChoosed.ResCustomer.CustId;
       $scope.WorkOrder.Mileage = $scope.carChoosed.ResVehicle.Mileage;
@@ -85,6 +87,11 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       $scope.WorkOrder.LName = $scope.carChoosed.ResCustomer.LName;
       $scope.params.from = new Date($scope.carChoosed.ReservationFrom);
       $scope.params.to = new Date($scope.carChoosed.ReservationTo);
+
+      $scope.WorkOrder.LicenseNo = $scope.carChoosed.ResVehicle.LicenseNo;
+      $scope.WorkOrder.Make = $scope.carChoosed.ResVehicle.Make;
+      $scope.WorkOrder.Model = $scope.carChoosed.ResVehicle.Model;
+      $scope.WorkOrder.SubModel = $scope.carChoosed.ResVehicle.SubModel;
 
       if ($scope.carChoosed.isDelivered === false) {
         //Chua Checkout
@@ -104,6 +111,9 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
         $scope.WorkOrder.fuel = $scope.carChoosed.DeliveryFuelId;
         $scope.WorkOrder.checkinRemark = $scope.carChoosed.DeliveryNote;
       }
+
+      //-	When the transaction is loaded for checkin/checkout, please automatically (by default) select the AttachmentType Vehicle, so that the photo from the vehicle is immediately displayed
+      $scope.WorkOrder.attachmentType = 'CCVEHI';
     }
     $scope.changeAttType();
   }
