@@ -184,7 +184,6 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
 
                 //Set Lang
                 HttpService.postData('/language', {"lang": newLange}).then(function (response) {
-                    console.log(response);
                     $translate.use(newLange);
 
                     $rootScope.$broadcast("changeLanguage", {

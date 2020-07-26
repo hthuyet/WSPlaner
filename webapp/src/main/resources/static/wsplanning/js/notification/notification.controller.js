@@ -106,7 +106,6 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, Wo
     }
     if (count) {
       WorkOrderService.getCountNotificationType(dataUnRead).then(function (res) {
-        console.log(res);
         $scope.CountRead = res.data;
         $scope.totalElements = res.data;
         $scope.isNoData = ($scope.totalElements <= 0);
@@ -119,7 +118,6 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, Wo
     }
 
     WorkOrderService.getNotificationType(dataUnRead).then(function (res) {
-      console.log(res);
       $scope.UnRead = res.data;
       common.spinner(false);
     }, function (err) {
@@ -177,7 +175,6 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, $rootScope, Wo
       obj.WorkOrderRowId = item.WorkOrderRowId;
 
       HttpService.postData('/site/postNotification', obj).then(function (response) {
-        console.log(response);
         common.spinner(false);
       }, function error(response) {
         console.log(response);
@@ -256,7 +253,6 @@ UserWebApp.controller('NotificatioRecentReadCtrl', function ($scope, WorkOrderSe
     }
     if (count) {
       WorkOrderService.getCountNotificationType(dataRead).then(function (res) {
-        console.log(res);
         $scope.CountRead = res.data;
         $scope.totalElements = res.data;
         $scope.isNoData = ($scope.totalElements <= 0);
@@ -268,7 +264,6 @@ UserWebApp.controller('NotificatioRecentReadCtrl', function ($scope, WorkOrderSe
     }
 
     WorkOrderService.getNotificationType(dataRead).then(function (res) {
-      console.log(res);
       $scope.Read = res.data;
       common.spinner(false);
     }, function (err) {

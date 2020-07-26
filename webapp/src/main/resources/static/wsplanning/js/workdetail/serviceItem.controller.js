@@ -213,7 +213,6 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, supp
   function loadDataTree() {
     common.spinner(true);
     WorkOrderService.getTextLine().then(function (res) {
-      console.log(res);
       var data = res.data;
       angular.forEach(data, function (value) {
         var objTree = {};

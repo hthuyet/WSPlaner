@@ -61,7 +61,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
     });
 
     function compareValue(newValue, oldValue, originalValue) {
-        console.log(typeof newValue);
         var modified = false;
         if (angular.equals(newValue, {}) && !angular.equals(newValue, originalValue)) {
             modified = false;
@@ -92,7 +91,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
         $scope.base64Encode = "";
         common.spinner(true);
         HttpService.postDataWithCache('/checkin/template-type', { VehiId: $scope.VehiId }).then(function (response) {
-            console.log(response)
             $scope.lstTemplate = response;
             if ($scope.lstTemplate.length > 0) {
                 $scope.templateSelected = $scope.lstTemplate[0];
@@ -117,8 +115,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
 
     //<editor-fold desc="changeTemplate">
     $scope.changeTemplate = function () {
-        console.log($scope.templateSelected);
-
         $scope.templateName = "";
         if ($scope.templateSelected && $scope.templateSelected.Items && $scope.templateSelected.Items.length > 0) {
             for (var i = 0; i < $scope.templateSelected.Items.length; i++) {
@@ -133,7 +129,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
         common.spinner(true);
         if ($scope.templateName != "") {
             HttpService.postData('/checkin/template', { name: $scope.templateName }).then(function (response) {
-                console.log(response)
                 $scope.imgTemplate = "data:image/png;base64," + response.base64;
                 common.spinner(false);
             }, function error(response) {
@@ -202,19 +197,16 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $state, $rootScope, WorkO
         $scope.WorkOrder.CustomerComplaint = $scope.data.Remark;
         $scope.WorkOrder.Mileage = $scope.data.Mileage;
 
-        console.log($scope.WorkOrder);
         var data = JSON.stringify($scope.WorkOrder);
 
         common.btnLoading($(".btnSubmit"), true);
         WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
             common.btnLoading($(".btnSubmit"), false);
-            console.log(res);
             if (res.data.Token && res.data.Token.ErrorDesc) {
                 common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
             } else {
                 common.notifySuccess("Success!!!");
             }
-            console.log($scope.WorkOrder);
 
             if (params) {
                 $scope.$emit('isSave', {

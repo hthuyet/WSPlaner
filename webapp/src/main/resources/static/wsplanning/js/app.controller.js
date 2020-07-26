@@ -70,7 +70,6 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
 
   function loadNotification(SmanId) {
     WorkOrderService.getCountNotification(SmanId).then(function (res) {
-      console.log(res)
       $scope.count = res.data;
       // console.log($scope.count);
     }, function (err) {

@@ -287,8 +287,6 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
       });
 
       modalInstance.result.then(function (obj) {
-        console.log(obj);
-
         if (obj.scanner) {
           obj.scanner.stop();
         }
@@ -355,7 +353,6 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 
   function loadData(skey, custNo) {
     CommonServices.getCustomers(skey, custNo).then(function (data) {
-      console.log(data);
       $scope.lstCustomers = data;
     })
   }

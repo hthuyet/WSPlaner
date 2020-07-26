@@ -255,7 +255,6 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
 
     function getTransactionTypes() {
         if (!transactionTypes || transactionTypes.length <= 0) {
-            console.log("------getTransactionTypes use http----");
             transactionTypes = $http.get('/site/getTransactionTypes', {cache: true})
                 .then(function (data) {
                     data.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
@@ -346,7 +345,6 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
 
     function getSubStatuses() {
         if (!subStatuses || subStatuses.length <= 0) {
-            console.log("------subStatuses use http----");
             subStatuses = $http.get('/site/getSubStatuses', {cache: true})
                 .then(function (data) {
                     data.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
@@ -362,7 +360,6 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
 
     function getCourtesyCarGroups() {
         if (!courtesyCarGroups || courtesyCarGroups.length <= 0) {
-            console.log("------getCourtesyCarGroups use http----");
             courtesyCarGroups = $http.get('/site/getCourtesyCarGroups', {cache: true})
                 .then(function (data) {
                     data.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});

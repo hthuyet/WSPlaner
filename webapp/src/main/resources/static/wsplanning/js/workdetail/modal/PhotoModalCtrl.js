@@ -2,8 +2,6 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
 
     var $ctrl = this;
 
-    console.log(data);
-
     $scope.isGrid = true;
 
 
@@ -47,6 +45,8 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
             WorkOrderService.getPhoto(dto).then(function (res) {
 
                 angular.forEach(res.data, function (v, k) {
+                    console.log(v);
+                    v.dataUrl = "data:image/jpeg;base64," + v.ImageData;
                     $scope.lstphoto.push(v.dataUrl);
                     $scope.lstAttachment.push(v);
                 });

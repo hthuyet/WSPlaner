@@ -10,7 +10,6 @@ UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $locale, Wor
 
   function loadData() {
     WorkOrderService.getStamping().then(function (res) {
-      console.log(res);
       res.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
       res.data = res.data.filter(x => { return x.Id !== "040" });
       $scope.stampingCodes = res.data;

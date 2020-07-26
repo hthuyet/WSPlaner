@@ -64,7 +64,6 @@ angular.module('UserWebApp').controller('CloseTaskCtrl', function ($scope, $root
         };
 
         HttpService.postData('/tasklist/getdata', params).then(function (response) {
-            console.log(response);
             $scope.lstData = [];
             angular.forEach(response, function (value) {
                 if (value.CallerVehicles == null || value.CallerVehicles.length <= 0) {

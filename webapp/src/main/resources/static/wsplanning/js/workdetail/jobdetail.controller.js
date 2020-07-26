@@ -165,11 +165,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       })
         ;
     }
-    console.log($scope.jobTabList);
 
     if ($scope.WorkOrder.ExternalURL) {
       $scope.externalUrl = $scope.WorkOrder.ExternalURL;
-      console.log($scope.externalUrl);
       $scope.externalUrl.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
     }
 
@@ -354,8 +352,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log($scope.jobTabList);
-      console.log(id);
       var reference = "";
       $scope.$on('reference', function (event, obj) {
         reference = obj.item;
@@ -595,7 +591,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
   // get headerData
   $rootScope.$on("headerData", function (evt, obj) {
     headerData = obj;
-    console.log(obj);
   });
 
   $scope.pristine = false;
@@ -655,7 +650,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        console.log(res);
         if (res.data.Token && res.data.Token.ErrorDesc) {
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
         } else {
@@ -696,7 +690,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
       var data = JSON.stringify($scope.WorkOrder)
       common.btnLoading($(".btnSubmit"), true);
-      console.log($scope.WorkOrder);
       // return;
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
@@ -742,11 +735,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
       var data = JSON.stringify($scope.WorkOrder)
       common.btnLoading($(".btnSubmit"), true);
-      console.log($scope.WorkOrder);
 
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        console.log(res);
         if (res.data.Token && res.data.Token.ErrorDesc) {
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
         } else {
@@ -771,13 +762,16 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $translate, $rootScope,
       var item = {};
       for (var i = 0; i < $scope.jobTabList.length; i++) {
         item = $scope.jobTabList[i];
-        if (item.JobBarCode != null) {
+        if (item.JobBarCode != null && "" != item.JobBarCode) {
+          item.classBarcode = "";
           JsBarcode("#barcode_" + item.RowId, item.JobBarCode, {
             format: "CODE39",
             width: 1,
             height: 70,
             displayValue: true
           });
+        }else{
+          item.classBarcode = "hidden";
         }
 
       }

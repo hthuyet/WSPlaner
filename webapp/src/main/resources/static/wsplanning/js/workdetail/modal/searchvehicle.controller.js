@@ -32,8 +32,6 @@ UserWebApp.controller('SearchVehicleModalCtrl', function ($scope, $rootScope, Ht
       });
 
       modalInstance.result.then(function (obj) {
-        console.log(obj);
-
         if(obj.scanner){
           obj.scanner.stop();
         }

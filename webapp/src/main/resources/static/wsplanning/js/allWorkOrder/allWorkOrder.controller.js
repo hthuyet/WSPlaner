@@ -2,7 +2,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.typeWO = typeWO;
   
   var EmployeeData = $("#EmployeeData").data("employee");
-  console.log(EmployeeData)
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -126,7 +125,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     };
 
     HttpService.postData('/wo/getWO', params).then(function (response) {
-      console.log(response);
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
@@ -322,8 +320,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       });
 
       modalInstance.result.then(function (obj) {
-        console.log(obj);
-
         if(obj.scanner){
           obj.scanner.stop();
         }

@@ -1,15 +1,11 @@
 UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, CommonFactory, $stateParams, $state, WorkOrder, lstMonth, WorkOrderService) {
 
-    console.log("--------WorkDetailCtrl-----------");
     $scope.WorkOrderId = $stateParams.id;
     $scope.type = $stateParams.type;
     $scope.WOJobs = WorkOrder.data.WOJobs;
     $scope.lstMonth = lstMonth.data;
     $scope.jobObject = {};
     $scope.actionType = "";
-
-    console.log(WorkOrder)
-    console.log($scope.WorkOrderId)
 
     $scope.WOVehicle = "";
     $scope.WOCustomer = "";
@@ -19,8 +15,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.WorkOrder = WorkOrder.data;
     // $scope.SiteId = WorkOrder.data.SiteId;
 
-
-    console.log($scope.WorkOrder);
 
     loadCommon();
     $scope.lstTrans = [];
@@ -60,7 +54,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         })
 
         CommonFactory.getSubStatuses().then(function (data) {
-            console.log(data)
             $scope.lstSubStatuses = data;
         });
 
@@ -139,11 +132,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     // $scope.isNew = angular.equals($scope.WorkOrder, {});
     $scope.isNew = $stateParams.action;
-    console.log($scope.WorkOrder);
 
     if ($scope.isNew) {
         var EmployeeData = $("#EmployeeData").data("employee");
-        console.log(EmployeeData);
         $scope.WorkOrder.DeptId = EmployeeData.DeptId;
         $scope.WorkOrder.Token = tokenObject();
         $scope.WorkOrder.Token.EmployeeData = EmployeeData;
@@ -197,9 +188,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $scope.tabActive = $stateParams.tab;
 
-
-    console.log($stateParams);
-
     loadTab($stateParams.id);
 
     // load job tab with workorderId
@@ -218,7 +206,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     var isSave = false;
 
     $scope.$on("isSave", function (evt, obj) {
-        console.log(obj);
         isSave = obj.modified;
     })
 

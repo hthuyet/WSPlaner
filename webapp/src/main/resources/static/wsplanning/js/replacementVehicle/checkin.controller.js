@@ -119,7 +119,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       return;
     }
     HttpService.getData("/courtesyCar/getCCResByVehicle/" + $scope.WorkOrder.vehicle, {}).then(function (response) {
-      console.log(response);
       if (response && response.length > 0) {
         if (response.length > 1) {
           $scope.chooseCar(response);
@@ -147,8 +146,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if ($scope.WorkOrder.WorkOrderNo != null && $scope.WorkOrder.WorkOrderNo != "") {
       var tmp = $scope.WorkOrder.WorkOrderNo;
       HttpService.getData("/courtesyCar/getCCResByWO/" + $stateParams.workOrderId, {}).then(function (response) {
-        console.log(response);
-       
         if (response && response.length > 0) {
           if (response.length > 1) {
             $scope.chooseCar(response);
@@ -364,7 +361,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
     if(url != "") {
       HttpService.postData(url, $scope.carChoosed).then(function (response) {
-        console.log(response)
         common.btnLoading($(".btnSubmit"), false);
         common.spinner(false);
         if(response === true){
@@ -450,7 +446,6 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
       common.spinner(true);
 
       HttpService.postData(url, $scope.templateMark).then(function (response) {
-        console.log(response)
         common.spinner(false);
         common.notifySuccess("Upload success!!!");
       }, function error(response) {

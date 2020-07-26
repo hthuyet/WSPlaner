@@ -125,7 +125,6 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        console.log(res);
         if (res.data.Token && res.data.Token.ErrorDesc) {
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
         } else {
