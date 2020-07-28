@@ -56,6 +56,12 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     $scope.WorkOrder.custId = "";
     $scope.params.from = "0001-01-01T00:00:00";
     $scope.params.to = "0001-01-01T00:00:00";
+
+    $scope.WorkOrder.LicenseNo = "";
+    $scope.WorkOrder.Make = "";
+    $scope.WorkOrder.Model = "";
+    $scope.WorkOrder.SubModel = "";
+
     $scope.WorkOrder.Mileage = "";
     $scope.WorkOrder.checkinRemark = "";
     $scope.WorkOrder.fuel = "";
@@ -236,8 +242,8 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
 
   //Sign
   $scope.boundingBox = {
-    "width": 720,
-    "height": 336,
+    "width": 760,
+    "height": 400,
   };
 
   $scope.$watch("color", function (newValue, oldValue) {

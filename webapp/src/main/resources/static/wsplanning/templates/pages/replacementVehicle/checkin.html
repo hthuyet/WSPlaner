@@ -80,7 +80,7 @@
             </div>
 
             <!--Row checkin-->
-            <div class="row">
+            <div class="row row-eq-height2">
 <!--                <div class="col-md-8 col-xs-12" id="checkinTemplate">-->
 <!--                    <div class="form-group" style="clear: both;">-->
 <!--                        <div class="col-md-8 col-xs-8 col-xs-offset-4">-->
@@ -94,34 +94,29 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                <div class="row">
+                    <!-- Anh -->
+                    <div class="col-md-6 col-xs-12" id="attachmentTmp">
+                        <img class="canvas" style="max-height: 400px;max-width: 600px;" ng-src="{{imgTemplate}}">
+                    </div>
 
-                    <div class="col-md-12 col-xs-12">
-                        <!-- Anh -->
-                        <div class="col-md-6 col-xs-8" id="attachmentTmp">
-                            <img class="canvas" style="max-height: 400px;max-width: 600px;" ng-src="{{imgTemplate}}">
-                        </div>
-
-                        <!-- Chu ky -->
-                        <div class="col-md-6 col-xs-8">
-                            <div class="container"
-                                 ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                                <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
-                                               ng-model="signature" color="{{color}}"
-                                               height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
-                                               dataurl="dataurl"></signature-pad>
+                    <!-- Chu ky -->
+                    <div class="col-md-6 col-xs-12">
+                        <div class="container"
+                             ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
+                            <signature-pad id="signature-canvas" accept="accept" clear="clearSign"
+                                           ng-model="signature" color="{{color}}"
+                                           height="{{boundingBox.height - 20 }}" width="{{boundingBox.width - 30}}"
+                                           dataurl="dataurl"></signature-pad>
 
 
-                                <div class="sizes">
-                                    <button ng-click="clearSign()" id="clearSign"
-                                            title="{{ 'clear' | translate }}">
-                                        <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
-                                    </button>
-                                </div>
+                            <div class="sizes">
+                                <button ng-click="clearSign()" id="clearSign"
+                                        title="{{ 'clear' | translate }}">
+                                    <i class="icon-paint-format"></i>{{ 'clear' | translate }}</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
             <!--end row checkin-->
         </div>
@@ -141,10 +136,11 @@
 
 <style type="text/css">
     #attachmentTmp{
-        max-width: 720px;
-        max-height: 336px;
+        text-align: center;
+        max-height: 400px;
+        min-height: 316px;
         border: 1px;
-        height: 316px;
         border: 1px solid #999;
+        padding: 20px;
     }
 </style>
