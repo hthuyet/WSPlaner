@@ -272,12 +272,12 @@ UserWebApp.controller('ReplacementCheckInCtrl', function ($scope, $rootScope, $l
     if (!signCanvas.isEmpty) {
       var sign = {};
       sign.FileId = 0;
-      sign.FileName = "Signature_of_customer.png";
+      sign.FileName = "CourtesyCarSignature.png";
       sign.dataUrl = signCanvas.dataUrl;
       sign.ImageData = signCanvas.dataUrl.replace("data:image/png;base64,", "");
-      sign.AttachType = "SIGNATUREP";
-      sign.AttachTypeDescription = "Signature_of_customer";
-      sign.FileDescription = "Signature_of_customer.png";
+      sign.AttachType = "SIGNCC";
+      sign.AttachTypeDescription = "Courtesy car rent signature";
+      sign.FileDescription = "CourtesyCarSignature.png";
       list[i++] = sign;
     }
 
