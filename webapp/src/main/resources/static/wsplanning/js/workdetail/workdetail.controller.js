@@ -397,12 +397,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                                             'type': null, 'workOrderId': WorkOrder.data.WorkOrderId });
     }
 
-
     $scope.openModalTasklist = function () {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/wsplanning/templates/pages/common/create-task.html',
+            templateUrl: '/wsplanning/templates/pages/common/create-task-2.html',
             controller: 'CreateTaskModalCtrl',
+            backdrop: 'static',
             controllerAs: '$ctrl',
             size: "full",
             resolve: {
@@ -410,8 +410,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                     return $scope.WorkOrder.WOCustomer ? $scope.WorkOrder.WOCustomer : {};
                 },
                 WorkOrderNo: function () {
-                    // WorkOrderNo = 0 or WorkOrderNo = $scope.WorkOrder.WorkOrderNo
                     return $scope.WorkOrder.WorkOrderNo ? $scope.WorkOrder.WorkOrderNo : 0;
+                },
+                SiteId: function () {
+                    return $scope.WorkOrder.SiteId;
                 }
             }
         });
@@ -422,7 +424,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             console.log('Modal dismissed at: ' + new Date());
         });
     }
-
 });
 
 UserWebApp.controller('ConfirmSaveTabCtrl', function ($scope, $uibModalInstance) {

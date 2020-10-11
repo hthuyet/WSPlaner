@@ -258,7 +258,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
                 loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(["workorderDetail", "modaltasklist"]);
+                    return $ocLazyLoad.load(["workorderDetail"]);
                 }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     common.spinnerFirstLoad(true);

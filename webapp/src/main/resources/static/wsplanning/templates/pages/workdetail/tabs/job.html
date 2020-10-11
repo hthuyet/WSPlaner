@@ -86,7 +86,8 @@
                                                     ng-repeat="btn in lstButtonDetail | orderBy:'ordinalNumber' track by $index">
                                                     <a class="btn btn-lg"
                                                         ng-hide="!item.JobNo && btn.name == 'stamping'"
-                                                        ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)"><span
+                                                        ng-click="openTypeModal(btn.name, item, $parent.$parent.$index)">
+                                                        <span
                                                             data-popup="tooltip" data-placement="top"
                                                             title="{{btn.translate}}"
                                                             ng-attr-title=" {{btn.translate}} "

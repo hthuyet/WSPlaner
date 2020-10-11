@@ -338,6 +338,7 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $timeout
 UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
   $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
 
+  console.log("---CustomerModalCtrl---");
 
 
   var $ctrl = this;
@@ -438,4 +439,98 @@ UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale,
   });
 
 })
+
+UserWebApp.controller('CreateTaskModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal,
+                                                       $uibModalInstance, $timeout, CommonServices,TaskCustomer,WorkOrderNo, SiteId) {
+  $scope.data = {};
+  $scope.data.Id = "0";
+  $scope.data.action = "insert";
+  $scope.data.Started = new Date();
+  $scope.data.WorkOrderNo = WorkOrderNo;
+  $scope.data.SiteId = SiteId
+
+  $scope.lstTaskType = [];
+  $scope.lstTaskSeries = [];
+  $scope.lstEmployees = [];
+
+  $scope.isShow = false;
+  $scope.toogleShow = function () {
+    $scope.isShow = !$scope.isShow;
+  }
+
+  function loadCommon() {
+    CommonServices.getTaskTypes().then(function (data) {
+      $scope.lstTaskType = data;
+    });
+
+    CommonServices.getTaskSeries().then(function (data) {
+      $scope.lstTaskSeries = data;
+    });
+
+    CommonServices.getEmployees().then(function (data) {
+      $scope.lstEmployees = data;
+    });
+
+
+  }
+
+  loadCommon();
+
+
+  $scope.ok = function () {
+    HttpService.postData('/tasklist/saveTask', $scope.data, $("#btnSaveTask")).then(function (response) {
+      if(response == false || response == "false"){
+        common.notifyError($translate.instant('saveError'));
+        return;
+      }
+      $uibModalInstance.close($scope.data);
+      common.notifySuccess($translate.instant('saveSuccessfully'));
+    }, function error(response) {
+      common.notifyError($translate.instant('saveError'), err.status);
+    });
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+
+  $scope.isOpenDate = false;
+  $scope.openDate = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $scope.isOpenDate = true;
+  };
+
+
+
+  //Modal
+  var $ctrl = this;
+  $ctrl.TaskCustomer = TaskCustomer;
+  $scope.data.TaskCustomer = $ctrl.TaskCustomer ;
+  $ctrl.animationsEnabled = true;
+
+  $ctrl.openSearchCustomer = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/customer-form.html',
+      controller: 'CustomerModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+    });
+
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openSearchCustomer", {});
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $ctrl.TaskCustomer = selectedItem;
+      $scope.data.TaskCustomer = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+});
 
