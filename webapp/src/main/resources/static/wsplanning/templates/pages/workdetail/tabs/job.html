@@ -18,9 +18,7 @@
                             </div>
 
                             <div class="col-md-4 col-xs-4">
-                                <a ng-click="openCampaign()"
-                                    ng-show="count_Vehi_Notification != null && actTypeJob != 'new'"
-                                    data-popup="tooltip" data-placement="top" title="Campaign">
+                                <a ng-click="openCampaign()" ng-show="count_Vehi_Notification != null && actTypeJob != 'new'" data-popup="tooltip" data-placement="top" title="Campaign">
                                     <i class="icon-warning campaignCSS"></i>
                                     <span class="visible-xs-inline-block position-right"></span>
                                     <span class="badge bg-warning-400 badge_campaign">{{count_Vehi_Notification}}</span>
@@ -39,9 +37,7 @@
                             <div class="col-md-8 col-xs-6">
 
 
-                                <select class="form-control" id="external" ng-show="externalUrl.length > 0"
-                                    ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)"
-                                    ng-options="o.Id as o.Name for o in externalUrl"></select>
+                                <select class="form-control" id="external" ng-show="externalUrl.length > 0" ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)" ng-options="o.Id as o.Name for o in externalUrl"></select>
                             </div>
                         </div>
 
@@ -49,11 +45,10 @@
                             <div class="pull-right">
                                 <div class="heading-elements">
                                     <ul class="icons-list">
-                                        <li ng-click="toggleAllJobs()"><a ng-class="{'rotate-180': isShow == true}"
-                                                data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                        <li ng-click="toggleAllJobs()">
+                                            <a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a>
                                         </li>
-                                        <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add"
-                                                ng-click="addJob()"><span class="icon-plus3"></span></a>
+                                        <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add" ng-click="addJob()"><span class="icon-plus3"></span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -69,8 +64,7 @@
             <div class="panel-body">
                 <form name="jobTabFrm">
                     <div class="table-responsive main-content">
-                        <div ng-repeat="item in jobTabList track by $index"
-                            style="border-bottom: solid #304047; border-bottom-style:dotted; font-size: 15px !important">
+                        <div ng-repeat="item in jobTabList track by $index" style="border-bottom: solid #304047; border-bottom-style:dotted; font-size: 15px !important">
                             <span ng-show="!item.collapse">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -93,108 +87,94 @@
                                                             ng-attr-title=" {{btn.translate}} "
                                                             ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
                                                             ng-class="btn.icon"></span></a>
-                                                </li>
+                            </li>
 
-                                                <li ng-click="toggleJobRow(item)">
-                                                    <a class="btn btn-lg" style="margin-left: 50px;"
-                                                        ng-class="{'rotate-180': item.collapse == true}"
-                                                        data-action="collapse" data-popup="tooltip"
-                                                        title="Collapse"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="row">
+                            <li ng-click="toggleJobRow(item)">
+                                <a class="btn btn-lg" style="margin-left: 50px;" ng-class="{'rotate-180': item.collapse == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="row">
 
-                                            <div class="col-xs-1">
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-8">{{'Job_No'| translate}}:
+                        <div class="col-xs-1">
+                            <div class="form-group">
+                                <label class="control-label col-xs-8">{{'Job_No'| translate}}:
                                                     </label>
-                                                    <div class="col-xs-4">
-                                                        <input type="text" class="form-control" ng-model="item.JobNo"
-                                                            readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-9">
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-2">{{'JobTitle'| translate}}:
-                                                    </label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control" ng-model="item.Note">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
-                                                    <div class="col-xs-4">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime" format-number-decimal>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <auto-complete ng-model="item.Complaint" string="item.Complaint"
-                                                            index="$index">
-                                                        </auto-complete>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-4">{{'JobType' | translate}}:</label>
-                                                    <div class="col-xs-8">
-                                                        <select ng-model="item.JobType" class="form-control"
-                                                            ng-options="o.Id as o.Name for o in lstJobTypes"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.DiagnosticInfo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Solution' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.SolutionInfo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" ng-model="item.JobNo" readonly>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div class="form-group">
+                                <label class="control-label col-xs-2">{{'JobTitle'| translate}}:
+                                                    </label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" ng-model="item.Note">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" ng-model="item.EstimatedTime" format-number-decimal>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            </span>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <label class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
+                                <div class="col-xs-10">
+                                    <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{'JobType' | translate}}:</label>
+                                <div class="col-xs-8">
+                                    <select ng-model="item.JobType" class="form-control" ng-options="o.Id as o.Name for o in lstJobTypes"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <span ng-show="item.collapse">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" ng-model="item.DiagnosticInfo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-2">{{'Solution' | translate}}:</label>
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" ng-model="item.SolutionInfo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            </span>
+
+            <span ng-show="item.collapse">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <h6 class="panel-title">
@@ -214,269 +194,240 @@
                                                             ng-attr-title="{{ btn.text | translate }}"
                                                             ng-style="{'background-color': (item.JobAttachments.length > 0 && btn.name == 'photo') ? 'red' :'white'}"
                                                             ng-class="btn.icon"></span></a>
-                                                </li>
+            </li>
 
-                                                <li ng-click="toggleJobRow(item)"><a class="btn btn-lg" ng-class="{'rotate-180': item.collapse == true}"
-                                                        data-action="collapse" data-popup="tooltip" title="Collapse"> </a>
-                                                </li>
+            <li ng-click="toggleJobRow(item)">
+                <a class="btn btn-lg" ng-class="{'rotate-180': item.collapse == true}" data-action="collapse" data-popup="tooltip" title="Collapse"> </a>
+            </li>
 
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="row">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel-body">
+    <div class="form-horizontal">
+        <div class="row">
 
-                                            <div class="col-xs-1">
+            <div class="col-xs-1">
 
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-8">{{'Job_No' | translate}}:
+                <div class="form-group">
+                    <label class="control-label col-xs-8">{{'Job_No' | translate}}:
                                                     </label>
-                                                    <div class="col-xs-4">
-                                                        <input type="text" class="form-control" ng-model="item.JobNo"
-                                                            readonly>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="col-xs-9">
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-2">{{'JobTitle' | translate}}:
-                                                    </label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control" ng-model="item.Note">
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
-                                                    <div class="col-xs-4">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime" format-number-decimal>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <auto-complete ng-model="item.Complaint" string="item.Complaint"
-                                                            index="$index">
-                                                        </auto-complete>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label  col-xs-4">{{'JobType' | translate}}:</label>
-                                                    <div class="col-xs-8">
-
-                                                        <select class="form-control" ng-model="item.JobType"
-                                                            class="form-control"
-                                                            ng-options="o.Id as o.Name for o in lstJobTypes">
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.DiagnosticInfo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-2">{{'Solution' | translate}}:</label>
-                                                    <div class="col-xs-10">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.SolutionInfo">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xs-3">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-4">{{'ChargeCategory' | translate}}:</label>
-                                                    <div class="col-xs-8">
-                                                        <select class="form-control" ng-model="item.ChargeCategoryId"
-                                                            ng-options="o.Id as o.Name for o in listChargeCats">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-4">{{'department' | translate}}:</label>
-                                                    <div class="col-xs-8">
-                                                        <select class="form-control" ng-model="item.DeptId"
-                                                            ng-options="o.Id as o.Name for o in lstDepartment">
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xs-3">
-
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label  col-xs-4">{{'JobCategory' | translate}}:</label>
-                                                    <div class="col-xs-8">
-                                                        <select class="form-control" ng-model="item.JobCategory"
-                                                            ng-options="o.Id as o.Name for o in lstJobCats">
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-xs-3">
-
-                                                <div class="form-group">
-                                                    <label
-                                                        class="control-label col-xs-4">{{'Payer' | translate}}:</label>
-                                                    <div class="col-xs-8">
-
-                                                        <select class="form-control" ng-model="item.Payer"
-                                                            ng-options="o.Id as o.Name for o in lstPayers">
-                                                        </select>
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <div class="row">
-                                            <form class="formValidate" name="contractFrm">
-                                                <div class="table-responsive tableIndex nowhitespace"
-                                                    ng-hide="item.Items == null">
-                                                    <table class="table table-striped table-bordered table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center" style="width: 5%">
-                                                                    {{'No' | translate}}</th>
-                                                                <th class="text-center" style="width: 5%"></th>
-                                                                <th class="text-center" style="width: 10%">
-                                                                    {{'Code' | translate}}</th>
-                                                                <th class="text-center">{{'Name' | translate}}</th>
-                                                                <th class="text-center" style="width: 5%">
-                                                                    {{'Quantity' | translate}}
-                                                                </th>
-                                                                <th class="text-center" style="width: 10%"><button
-                                                                        type="button" class="btn btn-primary"
-                                                                        ng-click="markAll($index)">{{'btnMark' | translate}}</button>
-                                                                </th>
-                                                                <th class="text-center" style="width: 10%">
-                                                                    {{'Action' | translate}}
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <!--BODY-->
-                                                        <tbody>
-                                                            <tr ng-repeat="obj in item.Items track by $index"
-                                                                ng-show="obj.RowId >= 0">
-                                                                <td class="text-center" style="width: 5%">
-                                                                    <span>{{$index+1}}</span>
-                                                                </td>
-                                                                <td class="text-center" style="width: 5%">
-                                                                    <span ng-class="getClass(obj.ItemType)"></span>
-                                                                </td>
-                                                                <td class="text-center text-nowrap" style="width: 10%">
-                                                                    <span>{{obj.ItemNo}}</span>
-                                                                </td>
-                                                                <td class="text-left">
-                                                                    <span>{{obj.Name}}</span>
-                                                                </td>
-                                                                <td class="text-center" style="width: 5%">
-                                                                    <span ng-hide="obj.ItemType === 8">
-                                                                        {{obj.Quantity}}
-                                                                    </span>
-                                                                </td>
-                                                                <td class="text-center" style="width: 10%">
-                                                                    <span
-                                                                        ng-hide="obj.ItemType === 1">{{obj.MechanicId}}</span>
-                                                                    <checkbox-directive has-Mechanic-Id="obj.MechanicId"
-                                                                        type="obj.ItemType">
-                                                                    </checkbox-directive>
-                                                                </td>
-                                                                <td class="text-center" style="width: 10%">
-                                                                    <span>
-                                                                        <a class="btn btn-primary"
-                                                                            ng-click="removeItem($parent.$index, $index)">{{'btnDelete' | translate}}</a>
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </span>
-                            <hr />
-                        </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="item.JobNo" readonly>
                     </div>
+                </div>
 
-                    <div class="panel-footer">
-                        <div class="pull-right">
-                            <button type="button" ng-disabled="jobTabList == null"
-                                class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
-                                <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
-                            </button>
-                            <button type="button" class="btn btn-link "
-                                data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
-                            </button>
-                        </div>
+
+            </div>
+            <div class="col-xs-9">
+
+                <div class="form-group">
+                    <label class="control-label col-xs-2">{{'JobTitle' | translate}}:
+                                                    </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" ng-model="item.Note">
 
                     </div>
-                </form>
+                </div>
+
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="item.EstimatedTime" format-number-decimal>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <!-- /main content -->
 
+
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
+                    <div class="col-xs-10">
+                        <auto-complete ng-model="item.Complaint" string="item.Complaint" index="$index">
+                        </auto-complete>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label  col-xs-4">{{'JobType' | translate}}:</label>
+                    <div class="col-xs-8">
+
+                        <select class="form-control" ng-model="item.JobType" class="form-control" ng-options="o.Id as o.Name for o in lstJobTypes">
+                                                        </select>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" ng-model="item.DiagnosticInfo">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label col-xs-2">{{'Solution' | translate}}:</label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" ng-model="item.SolutionInfo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label class="control-label col-xs-4">{{'ChargeCategory' | translate}}:</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" ng-model="item.ChargeCategoryId" ng-options="o.Id as o.Name for o in listChargeCats">
+                                                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label class="control-label col-xs-4">{{'department' | translate}}:</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" ng-model="item.DeptId" ng-options="o.Id as o.Name for o in lstDepartment">
+                                                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xs-3">
+
+                <div class="form-group">
+                    <label class="control-label  col-xs-4">{{'JobCategory' | translate}}:</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" ng-model="item.JobCategory" ng-options="o.Id as o.Name for o in lstJobCats">
+                                                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-3">
+
+                <div class="form-group">
+                    <label class="control-label col-xs-4">{{'Payer' | translate}}:</label>
+                    <div class="col-xs-8">
+
+                        <select class="form-control" ng-model="item.Payer" ng-options="o.Id as o.Name for o in lstPayers">
+                                                        </select>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="row">
+            <form class="formValidate" name="contractFrm">
+                <div class="table-responsive tableIndex nowhitespace" ng-hide="item.Items == null">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 5%">
+                                    {{'No' | translate}}</th>
+                                <th class="text-center" style="width: 5%"></th>
+                                <th class="text-center" style="width: 10%">
+                                    {{'Code' | translate}}</th>
+                                <th class="text-center">{{'Name' | translate}}</th>
+                                <th class="text-center" style="width: 5%">
+                                    {{'Quantity' | translate}}
+                                </th>
+                                <th class="text-center" style="width: 10%"><button type="button" class="btn btn-primary" ng-click="markAll($index)">{{'btnMark' | translate}}</button>
+                                </th>
+                                <th class="text-center" style="width: 10%">
+                                    {{'Action' | translate}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--BODY-->
+                        <tbody>
+                            <tr ng-repeat="obj in item.Items track by $index" id="itemsOfJob" ng-class="{'isSelectedRow':IdSelectedRow == $index}" ng-click="isSelectedRow($index)" ng-show="obj.RowId >= 0">
+                                <td class="text-center" style="width: 5%">
+                                    <span>{{$index+1}}</span>
+                                </td>
+                                <td class="text-center" style="width: 5%">
+                                    <span ng-class="getClass(obj.ItemType)"></span>
+                                </td>
+                                <td class="text-center text-nowrap" style="width: 10%">
+                                    <span>{{obj.ItemNo}}</span>
+                                </td>
+                                <td class="text-left">
+                                    <span>{{obj.Name}}</span>
+                                </td>
+                                <td class="text-center" style="width: 5%">
+                                    <span ng-hide="obj.ItemType === 8">
+                                                                        {{obj.Quantity}}
+                                                                    </span>
+                                </td>
+                                <td class="text-center" style="width: 10%">
+                                    <span ng-hide="obj.ItemType === 1">{{obj.MechanicId}}</span>
+                                    <checkbox-directive has-Mechanic-Id="obj.MechanicId" type="obj.ItemType">
+                                    </checkbox-directive>
+                                </td>
+                                <td class="text-center" style="width: 10%">
+                                    <span>
+                                        <a class="btn btn-primary" ng-click="removeItem($parent.$index, $index)">{{'btnDelete' | translate}}</a>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </form>
+        </div>
 
     </div>
-    <!-- /page content -->
+</div>
+</span>
+<hr />
+</div>
+</div>
+
+<div class="panel-footer">
+    <div class="pull-right">
+        <button type="button" ng-disabled="jobTabList == null" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
+                                <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                            </button>
+        <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
+                            </button>
+    </div>
+
+</div>
+</form>
+</div>
+</div>
+<!-- /main content -->
+
+
+</div>
+<!-- /page content -->
 
 </div>
 <!-- /page container -->
