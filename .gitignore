@@ -1,0 +1,14 @@
+.idea/
+target
+*.iml
+.settings/
+.classpath
+.project
+.vscode/
+bower_components
+bower_components/
+node_modules
+node_modules/
+.DS_Store
+webapp/bower_components
+webapp/node_modules
