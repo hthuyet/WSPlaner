@@ -10,9 +10,27 @@
             <!-- Panel content -->
             <div class="panel panel-flat" style="margin-bottom: 0px;">
                 <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-md-2 col-xs-4">
+                    <div class="row" ng-show="collapseJobDetail">
+                        <div class="col-md-7 col-xs-4 col-md-offset-5 col-xs-offset-8">
+                            <div class="pull-right">
+                                <div class="heading-elements">
+                                    <ul class="icons-list">
+                                        <li ng-click="toggleJobDetail()">
+                                            <a class="rotate-180" data-action="collapse" data-popup="tooltip" title="Collapse Detail 22222"></a>
+                                        </li>
+                                        <li ng-click="toggleAllJobs()">
+                                            <a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                        </li>
+                                        <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add" ng-click="addJob()"><span class="icon-plus3"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-2 col-xs-4" ng-show="!collapseJobDetail">
                             <div class="col-md-8 col-xs-8">
                                 <h3><b>{{ 'WoJob' | translate }}</b></h3><br />
                             </div>
@@ -28,23 +46,25 @@
 
                         </div>
 
-                        <div class="col-md-3 col-xs-4">
+                        <div class="col-md-3 col-xs-4" ng-show="!collapseJobDetail">
                             <div class="col-md-4 col-xs-6">
                                 <h3 ng-show="jobParams.VHCLink"><b><a
                                             ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h3>
                             </div>
 
                             <div class="col-md-8 col-xs-6">
-
-
                                 <select class="form-control" id="external" ng-show="externalUrl.length > 0" ng-model="external" ng-init="external = ''" ng-change="changeExternalUrl(external)" ng-options="o.Id as o.Name for o in externalUrl"></select>
                             </div>
                         </div>
 
-                        <div class="col-md-7 col-xs-4">
+                        <div class="col-md-7 col-xs-4" ng-show="!collapseJobDetail">
                             <div class="pull-right">
                                 <div class="heading-elements">
                                     <ul class="icons-list">
+                                        <li ng-click="toggleJobDetail()">
+                                            <a data-action="collapse" data-popup="tooltip" title="Collapse Detail"></a>
+                                        </li>
+
                                         <li ng-click="toggleAllJobs()">
                                             <a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a>
                                         </li>
@@ -52,11 +72,8 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -410,24 +427,18 @@
 </div>
 </div>
 
-<div class="panel-footer">
-    <div class="pull-right">
-        <button type="button" ng-disabled="jobTabList == null" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
-                                <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
-                            </button>
-        <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
-                            </button>
-    </div>
+                    <div class="panel-footer">
+                        <div class="pull-right">
+                            <button type="button" ng-disabled="jobTabList == null" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
+                                                    <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                                                </button>
+                            <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
+                                                </button>
+                        </div>
 
-</div>
-</form>
-</div>
-</div>
-<!-- /main content -->
-
-
-</div>
-<!-- /page content -->
-
-</div>
-<!-- /page container -->
+                    </div>
+                </form>
+            </div>
+        </div><!-- /main content -->
+    </div><!-- /page content -->
+</div><!-- /page container -->

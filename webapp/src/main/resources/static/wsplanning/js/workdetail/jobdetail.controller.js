@@ -58,6 +58,11 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     }
 
 
+    $scope.collapseJobDetail = false;
+    $scope.toggleJobDetail = function() {
+        $scope.collapseJobDetail = !$scope.collapseJobDetail;
+    }
+
     $scope.IdSelectedRow = null;
     $scope.isSelectedRow = function(id) {
         $scope.IdSelectedRow = id;
