@@ -390,7 +390,9 @@
                                 </td>
                                 <td class="text-center" style="width: 10%">
                                     <span>
-                                        <a class="btn btn-primary" ng-click="removeItem($parent.$index, $index)">{{'btnDelete' | translate}}</a>
+                                        <a class="btn btn-lg" ng-click="editItem($parent.$index, $index, obj.Name )" data-popup="tooltip" data-placement="top" title="Delete"><i class="icon-pencil5"></i></a>
+                                        <a class="btn btn-lg" ng-click="removeItem($parent.$index, $index)" data-popup="tooltip" data-placement="top" title="Delete"><i class=" icon-trash"></i></a>
+
                                     </span>
                                 </td>
                             </tr>
