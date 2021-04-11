@@ -64,6 +64,12 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     }
 
 
+    $scope.collapseJobDetail = false;
+    $scope.toggleJobDetail = function() {
+        $scope.collapseJobDetail = !$scope.collapseJobDetail;
+    }
+
+
     function clearObject() {
         var jobObjectFirst = {
             AdditionalData: null,
