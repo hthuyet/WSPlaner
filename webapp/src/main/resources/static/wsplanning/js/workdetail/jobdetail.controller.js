@@ -1,5 +1,6 @@
 UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, $window, $timeout, WorkOrderService, $uibModal, CommonServices, CommonFactory, $stateParams, $state) {
 
+    // common params, function
     var $ctrl = this;
     var stampingCode = {};
     $scope.jobParams = $scope.$parent.jobObject;
@@ -18,9 +19,14 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     $scope.lstSubStatuses = [];
 
     console.log("--JobDetailController--")
-        // console.log($scope.WorkOrder)
+    console.log($scope.jobParams.VehicleNotifications)
+
+    console.log($scope.WorkOrder)
 
     var suppliers = [];
+
+    $ctrl.animationsEnabled = true;
+
 
     $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
     // $scope.iconSize = JSON.parse(localStorage.getItem('info_icon_size'));
@@ -61,12 +67,6 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     $scope.collapseJobDetail = false;
     $scope.toggleJobDetail = function() {
         $scope.collapseJobDetail = !$scope.collapseJobDetail;
-    }
-
-    $scope.IdSelectedRow = null;
-    $scope.isSelectedRow = function(id) {
-        $scope.IdSelectedRow = id;
-        console.log(id)
     }
 
 
@@ -183,6 +183,17 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     }
 
 
+    //end common params, function
+
+    // row item - manipulation
+
+    $scope.IdSelectedRow = null;
+    $scope.isSelectedRow = function(id) {
+        $scope.IdSelectedRow = id;
+        console.log(id)
+    }
+
+
     $scope.getClass = function(param, mechanicId) {
         switch (param) {
             case 1:
@@ -233,6 +244,31 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         console.log($scope.jobTabList[parentId].Items);
     }
 
+
+    $scope.editItem = function(parentId, childrenId, value) {
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            templateUrl: '/wsplanning/templates/pages/workdetail/modal/editVehicleNotification-form.html',
+            controller: 'EditVehicleNotificationCtrl',
+            backdrop: 'static',
+            controllerAs: '$ctrl',
+            size: 'lg',
+            resolve: {
+                item: function() {
+                    return value;
+                }
+            }
+        });
+
+        modalInstance.result.then(function(valueChanged) {
+            console.log(valueChanged)
+            $scope.jobTabList[parentId].Items[childrenId].Name = valueChanged;
+
+        }, function() {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    }
+
     $scope.markAll = function(jobId) {
         var data = $scope.jobTabList[jobId].Items;
         angular.forEach(data, function(v, k) {
@@ -252,6 +288,10 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
             return checked;
         }
     }
+
+    // end row item - manipulation
+
+
 
     $scope.changeExternalUrl = function(v) {
         if ($window.confirm('Do you really want to leave ?')) {
@@ -274,7 +314,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     // end
 
 
-
+    // action in job row: open model for the actions such as : create job, create item,...
     $scope.openTypeModal = function(name, item, id) {
         switch (name) {
             case "notifyteam":
@@ -342,8 +382,6 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     }
 
 
-    // modal
-    $ctrl.animationsEnabled = true;
 
     $scope.openServiceItem = function(item, id) {
         var modalInstance = $uibModal.open({
@@ -620,6 +658,9 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         });
     };
 
+    //end action in job row: open model for the actions such as : create job, create item,...
+
+
 
     var headerData = {};
     // get headerData
@@ -669,6 +710,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         }
     });
 
+    //submit form
 
     $scope.onSubmitForm = function(params) {
         if ($scope.actTypeJob === "new") {
@@ -754,6 +796,9 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         }
     }
 
+    //end submit form
+
+
     //Save from button header
     $scope.$on('saveJob', function(event, obj) {
         $scope.onSubmitForm(obj.item);
@@ -767,33 +812,35 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
 
     $scope.postponed = function(item, id) {
 
-        console.log("-------post----");
-        if (item.PostPoned == false) {
-            var postAction = "postPoneJob";
-            $scope.jobTabList[id].PostPoned = true;
-            $scope.WorkOrder.WOJobs = $scope.jobTabList;
-            var data = JSON.stringify($scope.WorkOrder)
-            common.btnLoading($(".btnSubmit"), true);
+            console.log("-------post----");
+            if (item.PostPoned == false) {
+                var postAction = "postPoneJob";
+                $scope.jobTabList[id].PostPoned = true;
+                $scope.WorkOrder.WOJobs = $scope.jobTabList;
+                var data = JSON.stringify($scope.WorkOrder)
+                common.btnLoading($(".btnSubmit"), true);
 
-            WorkOrderService.postWorkOrder(data, postAction).then(function(res) {
-                common.btnLoading($(".btnSubmit"), false);
-                if (res.data.Token && res.data.Token.ErrorDesc) {
-                    common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
-                } else {
-                    common.notifySuccess("Success!!!");
-                }
-                // $state.reload();
+                WorkOrderService.postWorkOrder(data, postAction).then(function(res) {
+                    common.btnLoading($(".btnSubmit"), false);
+                    if (res.data.Token && res.data.Token.ErrorDesc) {
+                        common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+                    } else {
+                        common.notifySuccess("Success!!!");
+                    }
+                    // $state.reload();
 
-            }, function(err) {
-                common.btnLoading($(".btnSubmit"), false);
-                console.log(err);
-                common.notifyError("Error!!!", err.status);
-            });
-        } else {
-            common.notifyWithMessage("This job was updated!!!")
+                }, function(err) {
+                    common.btnLoading($(".btnSubmit"), false);
+                    console.log(err);
+                    common.notifyError("Error!!!", err.status);
+                });
+            } else {
+                common.notifyWithMessage("This job was updated!!!")
+            }
+
         }
+        // end save from button header
 
-    }
 
     //Barcode generate
     function generateBarcode() {
