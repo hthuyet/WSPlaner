@@ -1,4 +1,4 @@
-UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO) {
+UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO, $cookies) {
   $scope.typeWO = typeWO;
   
   var EmployeeData = $("#EmployeeData").data("employee");
@@ -29,6 +29,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     "myWo": false,
     "shiftId": EmployeeData.ShiftId,
     "skey": "",
+    "SubStatus": ""
   };
 
   $scope.limit = 20;
@@ -45,6 +46,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "myWo": false,
       "shiftId": EmployeeData.ShiftId,
       "skey": "",
+      "SubStatus": "",
     };
     $scope.limit = 20;
     $scope.page = 1;
@@ -75,16 +77,13 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     opened: false
   };
 
-
-  //
-
-
   loadCommon();
   $scope.lstTrans = [];
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
   $scope.lstShift = [];
+  $scope.lstSubStatuses = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -103,6 +102,32 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     CommonServices.getShifts().then(function (data) {
       $scope.lstShift = data;
     });
+
+    CommonServices.getSubStatuses().then(function (data) {
+      $scope.lstSubStatuses = data;
+    });
+
+    //Fill from cookies
+    var dataCookie = $cookies.get("searchCookies", JSON.stringify($scope.params));
+    console.log("dataCookie: " + dataCookie);
+    if(dataCookie){
+      var dataCookieObj = JSON.parse(dataCookie);
+      //Remove Cookies except the text search field (the first field: Search workorders)
+      $scope.params.skey = "";
+      $scope.params.trans = dataCookieObj.trans;
+      $scope.params.visitReason = dataCookieObj.visitReason;
+      $scope.params.shiftId = dataCookieObj.shiftId;
+      $scope.params.receiver = dataCookieObj.receiver;
+      $scope.params.myWo = dataCookieObj.myWo;
+      if(dataCookieObj.from){
+        $scope.params.from = new Date(dataCookieObj.from);
+      }
+      if(dataCookieObj.to){
+        $scope.params.to = new Date(dataCookieObj.to);
+      }
+      $scope.params.SubStatus = dataCookieObj.SubStatus;
+    }
+
   }
 
   function loadData(count) {
@@ -122,7 +147,11 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "MyWO": $scope.params.myWo,
       "FromDate": $scope.params.from,
       "ToDate": $scope.params.to,
+      "SubStatus": $scope.params.SubStatus,
     };
+
+    //Save to cookies
+    $cookies.put("searchCookies", JSON.stringify($scope.params));
 
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
@@ -261,6 +290,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "myWo": false,
       "shiftId": EmployeeData.ShiftId,
       "skey": "",
+      "SubStatus": "",
     };
     $scope.page = 1;
     $scope.pageGo = 1;

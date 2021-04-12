@@ -3,6 +3,7 @@ keytool -genkey -alias tomcat -keystore /opt/apache-tomcat-8.5.41/bin/keystore -
 
 2. Cấu hình server.xml	
 	   
+
 <Connector port="8443" 
 maxThreads="150" 
 scheme="https" 

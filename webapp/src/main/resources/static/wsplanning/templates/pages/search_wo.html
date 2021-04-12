@@ -150,11 +150,24 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="row">
+
+                <!--Sub Status-->
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'subStatus' | translate }}</label>
+
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.SubStatus"
+                                    ng-options="item.Id as item.Name for item in lstSubStatuses">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-xs-2 col-md-2">
                     <div class="form-group">
                         <label style="padding-top: 12px;padding-left: 10px;">
