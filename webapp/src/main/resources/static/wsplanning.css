@@ -915,7 +915,6 @@ div .btn-notification.btn-group {
         display: inline-flex;
         text-align: center;
     }
-
     #external {
         margin-top: 10px !important;
     }
@@ -1228,7 +1227,18 @@ div .btn-notification.btn-group {
         top: 2px;
         transition: none 0s ease 0s;
         cursor: move; */
-        position: relative; left: 29px; top: -26px; transition: none 0s ease 0s; cursor: move;
+        position: relative;
+        left: -7px;
+        top: -3px;
+        transition: none 0s ease 0s;
+        cursor: move;
+    }
+    .badge_campaign_green {
+        position: relative;
+        left: 2px;
+        top: 13px;
+        transition: none 0s ease 0s;
+        cursor: move;
     }
     .breadcrumb-inline {
         position: relative;

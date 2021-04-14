@@ -39,8 +39,8 @@
                                 <a ng-click="openCampaign()" ng-show="count_Vehi_Notification != null && actTypeJob != 'new'" data-popup="tooltip" data-placement="top" title="Campaign">
                                     <i class="icon-warning campaignCSS"></i>
                                     <span class="visible-xs-inline-block position-right"></span>
-                                    <span class="badge bg-warning-400 badge_campaign">{{count_Vehi_Notification}}</span>
-                                    <span class="badge bg-warning-400 badge_campaign">{{count_Vehi_Notification}}</span>
+                                    <span ng-if="priority == 1" class="badge bg-warning-400 badge_campaign">{{count_Vehi_Notification}}</span>
+                                    <span ng-if="priority == 0" class="badge bg-success-800 badge_campaign_green">{{count_Vehi_Notification}}</span>
 
                                 </a>
                             </div>
@@ -431,18 +431,21 @@
 </div>
 </div>
 
-                    <div class="panel-footer">
-                        <div class="pull-right">
-                            <button type="button" ng-disabled="jobTabList == null" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
+<div class="panel-footer">
+    <div class="pull-right">
+        <button type="button" ng-disabled="jobTabList == null" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
                                                     <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                                                 </button>
-                            <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
+        <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
                                                 </button>
-                        </div>
+    </div>
 
-                    </div>
-                </form>
-            </div>
-        </div><!-- /main content -->
-    </div><!-- /page content -->
-</div><!-- /page container -->
+</div>
+</form>
+</div>
+</div>
+<!-- /main content -->
+</div>
+<!-- /page content -->
+</div>
+<!-- /page container -->

@@ -11,6 +11,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     $scope.lstTextPredict = [];
     $scope.externalUrl = [];
     $scope.count_Vehi_Notification = $scope.jobParams.VehicleNotifications.length;
+    $scope.priority = false;
     $scope.lstDepartment = [];
     $scope.lstPayers = [];
     $scope.lstChargeCats = [];
@@ -180,12 +181,27 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
             $scope.externalUrl.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         }
 
+        // check priority for badge
+        if ($scope.jobParams.VehicleNotifications) {
+            var num = 0;
+            angular.forEach($scope.jobParams.VehicleNotifications, function(v, k) {
+                if (v.NValue == 1) {
+                    num += 1;
+                }
+            })
+            if (num > 0) {
+                $scope.priority = true;
+            }
+        }
+
     }
 
 
     //end common params, function
 
     // row item - manipulation
+
+
 
     $scope.IdSelectedRow = null;
     $scope.isSelectedRow = function(id) {
@@ -690,6 +706,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
             $scope.$on('inputModified.formChanged', function(event, modified, formCtrl) {
                 console.log(formCtrl.$name);
                 emitData(modified);
+                console.log("done - new")
             });
         } else {
             if (newValue && oldValue && newValue.length > oldValue.length) {
@@ -702,9 +719,13 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
                 $scope.$on('inputModified.formChanged', function(event, modified, formCtrl) {
                     console.log(formCtrl.$name);
                     emitData(modified);
+                    console.log("done ")
+
                 });
             } else {
                 $scope.pristine = false;
+                console.log("none of them")
+
             }
 
         }
