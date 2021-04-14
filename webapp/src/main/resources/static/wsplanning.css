@@ -915,6 +915,7 @@ div .btn-notification.btn-group {
         display: inline-flex;
         text-align: center;
     }
+
     #external {
         margin-top: 10px !important;
     }
@@ -1028,7 +1029,7 @@ div .btn-notification.btn-group {
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     table[class*=table-grid]>tbody>tr>td {
         padding: 4px 10px;
     }
@@ -1222,11 +1223,12 @@ div .btn-notification.btn-group {
         top: 16px;
     }
     .badge_campaign {
-        position: relative;
+        /* position: relative;
         left: -1px;
         top: 2px;
         transition: none 0s ease 0s;
-        cursor: move;
+        cursor: move; */
+        position: relative; left: 29px; top: -26px; transition: none 0s ease 0s; cursor: move;
     }
     .breadcrumb-inline {
         position: relative;
