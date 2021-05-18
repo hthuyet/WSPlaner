@@ -459,22 +459,22 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
                 }
 
             } else {
+                // selectedItem is array/list
+        
                 if ($scope.jobTabList[id].Items == null) {
                     $scope.jobTabList[id].Items = [];
-                    $scope.jobTabList[id].Items.push(selectedItem)
-                        // angular.forEach(selectedItem, function(v) {
-                        //     $scope.jobTabList[id].Items.push(v);
-                        // })
+                    $scope.jobTabList[id].Items = $scope.jobTabList[id].Items.concat(selectedItem)
+                    
                 } else {
                     // checking id (selectedRow) to splice object into list items
                     if (idSelectedRow != null) {
-                        $scope.jobTabList[id].Items.splice(idSelectedRow, 0, selectedItem);
+                        var length_of_Items = $scope.jobTabList[id].Items.length;
+                        var array_const = $scope.jobTabList[id].Items.splice(idSelectedRow, length_of_Items - idSelectedRow);
+                        $scope.jobTabList[id].Items = $scope.jobTabList[id].Items.concat(selectedItem, array_const);
+
                     } else {
-                        $scope.jobTabList[id].Items.push(charactersObject);
+                        $scope.jobTabList[id].Items = $scope.jobTabList[id].Items.concat(selectedItem);
                     }
-                    // angular.forEach(selectedItem, function(v) {
-                    //     $scope.jobTabList[id].Items.push(v);
-                    // })
                 }
 
             }
