@@ -35,7 +35,7 @@ public class WODTO {
     public String ContactFName ;
     public String ContactPhone ;
     public String ContactEmail ;
-    public Integer IsCustomerWaiting;
+    public boolean IsCustomerWaiting;
     public Integer IsRework;
     public String TimeBarText;
     public String SiteId;
