@@ -20,9 +20,9 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     $scope.lstSubStatuses = [];
 
     console.log("--JobDetailController--")
-    console.log($scope.jobParams.VehicleNotifications)
+    // console.log($scope.jobParams.VehicleNotifications)
 
-    console.log($scope.WorkOrder)
+    // console.log($scope.WorkOrder)
 
     var suppliers = [];
 
@@ -44,9 +44,9 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         if ($scope.isShow == true) {
             $scope.isShow = false;
             angular.forEach($scope.jobTabList, function(v, k) {
-                console.log(k);
+                // console.log(k);
                 v.collapse = false;
-                console.log(v.collapse)
+                // console.log(v.collapse)
                     // $scope.toggleJobRow(v);
             });
         } else {
@@ -206,7 +206,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
     $scope.IdSelectedRow = null;
     $scope.isSelectedRow = function(id) {
         $scope.IdSelectedRow = id;
-        console.log(id)
+        // console.log(id)
     }
 
 
@@ -237,7 +237,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         } else {
             // console.log( $scope.WorkOrder)
             $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
-            console.log($scope.jobTabList[parentId].Items[id]);
+            // console.log($scope.jobTabList[parentId].Items[id]);
             console.log("--done--");
         }
     }
@@ -257,7 +257,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
             $scope.jobTabList[parentId].Items[childrenId].RowId = $scope.jobTabList[parentId].Items[childrenId].RowId * (-1);
         }
 
-        console.log($scope.jobTabList[parentId].Items);
+        // console.log($scope.jobTabList[parentId].Items);
     }
 
 
@@ -277,7 +277,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         });
 
         modalInstance.result.then(function(valueChanged) {
-            console.log(valueChanged)
+            // console.log(valueChanged)
             $scope.jobTabList[parentId].Items[childrenId].Name = valueChanged;
 
         }, function() {
@@ -391,7 +391,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         });
 
         modalInstance.result.then(function(selectedItem) {
-            console.log(selectedItem)
+            // console.log(selectedItem)
         }, function() {
             console.log('Modal dismissed at: ' + new Date());
         });
@@ -450,7 +450,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
                     charactersObject.Reference = reference;
 
                     // checking id (selectedRow) to splice object into list items
-                    console.log(idSelectedRow)
+                    // console.log(idSelectedRow)
                     if (idSelectedRow != null) {
                         $scope.jobTabList[id].Items.splice(idSelectedRow, 0, charactersObject);
                     } else {

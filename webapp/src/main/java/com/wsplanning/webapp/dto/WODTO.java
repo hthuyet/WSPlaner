@@ -54,6 +54,7 @@ public class WODTO {
     public String ReturnNote;
     public String WorkOrderStatus;
     public String Vehicle;
+    public String ParkingLot;
 
     public String SubContractorInfo;
     public String PayerInfo;

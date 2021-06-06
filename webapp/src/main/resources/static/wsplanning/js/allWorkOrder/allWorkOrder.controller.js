@@ -109,7 +109,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
     //Fill from cookies
     var dataCookie = $cookies.get("searchCookies", JSON.stringify($scope.params));
-    console.log("dataCookie: " + dataCookie);
+    // console.log("dataCookie: " + dataCookie);
     if(dataCookie){
       var dataCookieObj = JSON.parse(dataCookie);
       //Remove Cookies except the text search field (the first field: Search workorders)
