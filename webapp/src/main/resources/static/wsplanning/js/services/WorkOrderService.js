@@ -3,7 +3,7 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
   WorkOrderService.detail = function (WorkOrderId,LoadRows,LoadAttachment,LoadAttachmentData) {
     return $http({
       method: 'POST',
-      url: '/wo/detail_mapping',
+      url: '/wo/detail',
       data: {
         "WorkOrderId": WorkOrderId,
         "LoadRows": LoadRows,

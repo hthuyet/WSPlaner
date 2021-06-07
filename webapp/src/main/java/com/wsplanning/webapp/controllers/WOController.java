@@ -163,6 +163,7 @@ public class WOController extends BaseController {
         }
     }
 
+    //object mapping
     @PostMapping("/wo/detail_mapping")
     @ResponseBody
     public ResponseEntity detail_mapping(@RequestBody Map<String, String> params) {
@@ -173,34 +174,14 @@ public class WOController extends BaseController {
             objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             WODTO wodto = objectMapper.readValue(rtn, WODTO.class);
-
-            if(rtn != null && StringUtils.isNotBlank(rtn)) {
-                JsonParser parser = new JsonParser();
-                JsonElement tradeElement = parser.parse(rtn);
-                JsonObject itemObj = tradeElement.getAsJsonObject();
-                
-                WOVehicleDTO Vehicle = objectMapper.readValue(itemObj.get("WOVehicle").toString(), WOVehicleDTO.class);
-                WOCustomerDTO Customer = objectMapper.readValue(itemObj.get("WOCustomer").toString(), WOCustomerDTO.class);
-                WOCustomerDTO Contact = objectMapper.readValue(itemObj.get("WOContact").toString(), WOCustomerDTO.class);
-                if(itemObj.has("WOJobs") && !itemObj.get("WOJobs").isJsonNull() ) {
-                    for (JsonElement item : itemObj.get("WOJobs").getAsJsonArray()) {
-                        WOJobDTO Jobs = objectMapper.readValue(item.toString(), WOJobDTO.class);
-                        wodto.WOJobs.add(Jobs);
-                    }
-                }
-            
-
-                wodto.WOVehicle = Vehicle;
-                wodto.WOCustomer = Customer;
-                wodto.WOContact = Contact;
-             
-            };
            
             return new ResponseEntity<>(wodto, HttpStatus.OK);
         } catch (Exception ex) {
             return parseException(ex);
         }
     }
+    //end object mapping
+
 
     @PostMapping("/wo/getPhoto")
     @ResponseBody
