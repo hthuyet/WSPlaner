@@ -60,6 +60,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
         $scope.pristine = false;
       }
     }
+    console.log($scope.pristine)
   });
 
   $scope.$watch('WorkOrder.WOCustomer', function (newValue, oldValue) {
@@ -74,6 +75,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
         }
       }
     }
+    console.log($scope.pristine)
   });
 
   $scope.$watch('WorkOrder.WOContact', function (newValue, oldValue) {
@@ -87,7 +89,9 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
           $scope.pristine = true;
         }
       }
+      console.log($scope.pristine)
     }
+    console.log($scope.pristine)
   });
 
 
@@ -99,6 +103,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       modified: modified,
     }
     );
+    console.log($scope.WorkOrder)
   });
 
   //get jobdata

@@ -115,16 +115,7 @@ public class WOController extends BaseController {
                     }
 
                     WOCustomer = itemObj.get("WOCustomer").getAsJsonObject();
-
-                    if (HolderCustomer != null) {
-                        sb.append(HolderCustomer.get("LName").getAsString()).append(" ")
-                                .append(HolderCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
-                                .append(HolderCustomer.get("Tel1").getAsString()).append("\">")
-                                .append(HolderCustomer.get("Tel1").getAsString()).append("</a> ")
-                                .append("<a href=\"mailto:").append(HolderCustomer.get("Email").getAsString())
-                                .append("?Subject=Hello%20again\">").append(HolderCustomer.get("Email").getAsString())
-                                .append("</a>").append(" <br />");
-                    } else {
+                    if(WOCustomer != null) {
                         sb.append(WOCustomer.get("LName").getAsString()).append(" ")
                                 .append(WOCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
                                 .append(WOCustomer.get("Tel1").getAsString()).append("\">")
@@ -133,6 +124,24 @@ public class WOController extends BaseController {
                                 .append("?Subject=Hello%20again\">").append(WOCustomer.get("Email").getAsString())
                                 .append("</a>").append(" <br />");
                     }
+
+                    // if (HolderCustomer != null) {
+                    //     sb.append(HolderCustomer.get("LName").getAsString()).append(" ")
+                    //             .append(HolderCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
+                    //             .append(HolderCustomer.get("Tel1").getAsString()).append("\">")
+                    //             .append(HolderCustomer.get("Tel1").getAsString()).append("</a> ")
+                    //             .append("<a href=\"mailto:").append(HolderCustomer.get("Email").getAsString())
+                    //             .append("?Subject=Hello%20again\">").append(HolderCustomer.get("Email").getAsString())
+                    //             .append("</a>").append(" <br />");
+                    // } else {
+                    //     sb.append(WOCustomer.get("LName").getAsString()).append(" ")
+                    //             .append(WOCustomer.get("FName").getAsString()).append(", ").append("<a href=\"tel:")
+                    //             .append(WOCustomer.get("Tel1").getAsString()).append("\">")
+                    //             .append(WOCustomer.get("Tel1").getAsString()).append("</a> ")
+                    //             .append("<a href=\"mailto:").append(WOCustomer.get("Email").getAsString())
+                    //             .append("?Subject=Hello%20again\">").append(WOCustomer.get("Email").getAsString())
+                    //             .append("</a>").append(" <br />");
+                    // }
                     sb.append(jobTitle.replaceAll("\r\n", "<br />"));
 
                     itemRtn = new JsonObject();

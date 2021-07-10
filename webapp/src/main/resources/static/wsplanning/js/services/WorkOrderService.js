@@ -1,22 +1,9 @@
 UserWebApp.service('WorkOrderService', function ($http, $q) {
   var WorkOrderService = {};
-  WorkOrderService.detail = function (WorkOrderId,LoadRows,LoadAttachment,LoadAttachmentData) {
-    return $http({
-      method: 'POST',
-      url: '/wo/detail',
-      data: {
-        "WorkOrderId": WorkOrderId,
-        "LoadRows": LoadRows,
-        "LoadAttachment": LoadAttachment,
-        "LoadAttachmentData": LoadAttachmentData
-      }
-    });
-  }
-
   // WorkOrderService.detail = function (WorkOrderId,LoadRows,LoadAttachment,LoadAttachmentData) {
   //   return $http({
   //     method: 'POST',
-  //     url: '/wo/detail_mapping',
+  //     url: '/wo/detail',
   //     data: {
   //       "WorkOrderId": WorkOrderId,
   //       "LoadRows": LoadRows,
@@ -25,6 +12,19 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
   //     }
   //   });
   // }
+
+  WorkOrderService.detail = function (WorkOrderId,LoadRows,LoadAttachment,LoadAttachmentData) {
+    return $http({
+      method: 'POST',
+      url: '/wo/detail_mapping',
+      data: {
+        "WorkOrderId": WorkOrderId,
+        "LoadRows": LoadRows,
+        "LoadAttachment": LoadAttachment,
+        "LoadAttachmentData": LoadAttachmentData
+      }
+    });
+  }
 
   WorkOrderService.jobTab = function (data) {
     return $http({

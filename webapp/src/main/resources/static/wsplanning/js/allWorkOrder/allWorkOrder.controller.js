@@ -155,6 +155,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
+      console.log(response)
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
       common.spinner(false);

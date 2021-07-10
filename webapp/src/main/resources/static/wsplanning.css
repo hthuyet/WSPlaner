@@ -882,6 +882,8 @@ div .btn-notification.btn-group {
     background-color: #e08833;
 } */
 
+
+
 @media (min-width: 769px) {
     table[class*=table-grid]>tbody>tr>td {
         padding: 4px 10px;
@@ -904,6 +906,11 @@ div .btn-notification.btn-group {
     .icons-list [class*="icon-"] {
         font-size: 30px;
     }
+
+    .panel-height {
+        height: 70px !important;
+    }
+
     /* collapse icon */
     .panel.panel-flat .panel-heading .icons-list a[data-action]:after {
         font-size: 30px;
