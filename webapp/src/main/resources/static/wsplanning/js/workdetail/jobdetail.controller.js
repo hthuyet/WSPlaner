@@ -230,6 +230,8 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
         }
     }
 
+    var EmployeeData = $("#EmployeeData").data("employee");
+    // console.log(EmployeeData);
 
     $scope.getCheckRow = function(parentId, id, checked) {
         if (checked == false) {
@@ -237,7 +239,7 @@ UserWebApp.controller('JobDetailCtrl', function($scope, $translate, $rootScope, 
             console.log("--done--");
         } else {
             // console.log( $scope.WorkOrder)
-            $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
+            $scope.jobTabList[parentId].Items[id].MechanicId = EmployeeData.SmanId;
             // console.log($scope.jobTabList[parentId].Items[id]);
             console.log("--done--");
         }

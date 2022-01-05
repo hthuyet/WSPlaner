@@ -199,7 +199,7 @@ public class WOController extends BaseController {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
             objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);        
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);       
             String rtn = wokOrderClient.getPhoto(getToken(), getSiteId(), params);
            
             List<WOAttachmentDTO> attachments = new ArrayList<>();

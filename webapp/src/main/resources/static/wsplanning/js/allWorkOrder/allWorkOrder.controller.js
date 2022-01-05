@@ -7,12 +7,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.lstSearch = [];
   $scope.totalElements = 0;
   $scope.lstbtnCommon = JSON.parse(localStorage.getItem('info_common'));
-  // $scope.params = {
-  //   "department": "300",
-  //   "trans": "W",
-  //   "visitReason": "03",
-  //   "serv": "",
-  // };
+  
 
   $scope.buttonType = function (name) {
     var string = "app.main." + name;

@@ -236,7 +236,9 @@ public class WokOrderClient {
     }
     HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
+    // System.out.println(url);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+    // System.out.println(response);
     return response.getBody();
   }
 
